@@ -2,7 +2,8 @@
 # Full project: https://gitlab.com/pages/plain-html
 pages:
   stage: deploy
-  # script:
+  script:
+  - echo 'Nothing to do...'
   # - mkdir .public
   # - cp -r * .public
   # - mv .public public
