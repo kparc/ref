@@ -141,10 +141,10 @@ t~x</pre>
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    pages = ["enum", "key", "table"]
+    links = ["enum", "key", "table"]
 
-    for (let i in pages) {
-        const w = pages[i]
+    for (let i in links) {
+        const w = links[i]
         raw_elem.innerHTML = raw_elem.innerHTML.replace(w, makeLink(w))
     }
     

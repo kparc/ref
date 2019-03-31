@@ -11,7 +11,7 @@ The docs are a clickable version of the k7 quickref, accessible in k7 with `\`.
 To add a page:
 
 1. Select a word that you'd like to contribute docs for in the quickref
-2. Add it to the `pages` array in `index.html`
+2. Add it to the `links` array in `index.html`
 3. Search for the string 'template' in `index.html` and fill in the `<pre>`.
 
 Edit the docs by editing `index.html`.
