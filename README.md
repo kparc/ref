@@ -16,3 +16,8 @@ To add a page:
     2.  add it to the `pages` array in `index.html`.
 
 Edit pages by editing the corresponding '.k' file in the public folder.
+
+TODO:
+
+* ...write...more...docs?
+* Figure out how to sync `index.html` with changes to the quickref (may need Shakti's help)
