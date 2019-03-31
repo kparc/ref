@@ -1,0 +1,66 @@
+<html>
+
+<body>
+
+<pre id="raw">$k [-p 1234] [f.k]                         / .z.i(pid) .z.x(arg) .z.e(env)
+
+Verb                       Adverb                Noun              Atom List
+:  set                     '  each               char  " ab"       `c   `C
++  plus        flip        /  over               name  ``a`b       `n   `N
+-  minus       negate      \  scan               int   Ø 0 2       `i   `I
+*  times       first       ': eachprior peach    float ø 2.3 π ∞   `f   `F
+%  divide      inverse     /: eachright join|sv  date 2019.06.28   `d   `D .z.d
+&  min|and     where       \: eachleft split|vs  time 12:34:56.789 `t   `T .z.t
+|  max|or      reverse
+<  less        up          System(1:""1:"prompt")
+>  more        down        0: read/write line    list (2;3.4;`c)   `
+=  equal       group       1: read/write byte    dict [a:2;b:`c]   `a   `A table
+~  match       not         2: read/write data    expr :32+9*f%5    `0
+!  dict|mod    key|enum    3: conn/set (.z.ms)   func {(+/x)%#x}   `1      .z.f
+,  concat      enlist      4: http/get (.z.mg)
+^  except      null
+$  pad|cast    string      $[c;t;f] cond         \l f.k load
+#  take|select count       #[t;c;b[;a]] select   \v [d] vars    \t[:n] x time milli
+_  drop|delete floor       _[t;c;b[;a]] update   \f [d] fns     \u[:n] x trace micro
+?  find|rand   uniq|rand   ?[x;i;f[;y]] splice   (\d [d] get[set]d)
+@  index       type        @[x;i;f[;y]] amend    \cd [d] get[set]dir
+.  apply       value       .[x;i;f[;y]] dmend    \lf [x] files \lc chars \ll lines
+
+while[c;..];if[c;..];  
+
+generate: !i(enum) ?i(uniform) ?-i(normal) i?(draw) -i?(deal)
+datetime: ymdhrstuv 2019.06.28+2m; monday:7*-7!2018.07.04; bar5:5*-5!12:34
+`year`month`day`hour`minute`second`millisecond`microsecond`nanosecond
+
+ksql: select delete update; by from where;   [x]key [x]asc [x]dsc
+aggr: count first last min max [x]sum [x]avg [x]var [x]dev [x]med
+math: abs sin cos log exp sqrt prm cmb
+util: in within bin like find
+
+2way: ``j`k`b64`hex`csv`aes  e.g. json: `j?`j@`a`b!2 3
+1way:  `p`m`crc`sha`rip`bad  e.g. hash: `sha@"crypto"
+
+K:key k:key`k1     / public private
+K key k key"hi"    / verify sign
+
+\\ exit</pre>
+
+<script>
+
+    const raw_elem = document.getElementById("raw")
+    function makeLink(word) {
+        return "<a href=\"" + word + ".html\">" + word + "</a>"
+    }
+
+    pages = ["table"]
+
+    for (let i in pages) {
+        const w = pages[i]
+        raw_elem.innerHTML = raw_elem.innerHTML.replace(w, makeLink(w))
+    }
+
+</script>
+
+</body>
+
+</html>
