@@ -28,9 +28,11 @@ _  drop|delete floor       _[t;c;b[;a]] update   \f [d] fns     \u[:n] x trace m
 
 while[c;..];if[c;..];  
 
-generate: !i(enum) ?i(uniform) ?-i(normal) i?(draw) -i?(deal)
-datetime: ymdhrstuv 2019.06.28+2m; monday:7*-7!2018.07.04; bar5:5*-5!12:34
+generate: i?(draw) -i?(deal) ?i(uniform) ?-i(normal) !i(enum) 
+datetime: ymdhrstuv 2019.06.28+2m; day:7!; month:12!; bar5:5*-5!12:34
 `year`month`day`hour`minute`second`millisecond`microsecond`nanosecond
+0\:.z.d
+0/:2024 1 1
 
 ksql: select delete update; by from where;   [x]key [x]asc [x]dsc
 aggr: count first last min max [x]sum [x]avg [x]var [x]dev [x]med
