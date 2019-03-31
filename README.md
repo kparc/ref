@@ -6,7 +6,7 @@ Trial versions of k7 for macOS and Linux can be downloaded from anaconda:
 
 https://anaconda.org/shaktidb
 
-The docs are a clickable version of the k7 quickref, accessable in k7 with `\`.
+The docs are a clickable version of the k7 quickref, accessible in k7 with `\`.
 
 To add a page:
 
