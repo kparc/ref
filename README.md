@@ -14,7 +14,7 @@ To add a page:
 2. Add it to the `pages` array in `index.html`
 3. Search for the string 'template' in `index.html` and fill in the `<pre>`.
 
-Edit pages by editing `index.html`.
+Edit the docs by editing `index.html`.
 
 TODO:
 
