@@ -1,12 +1,14 @@
 # docs
 
-Community docs for Shakti's k7.
+Community docs for Shakti's k7. 
+
+The docs are a clickable version of the k7 quickref, accessible in k7 with `\`.
+
+It provides examples, short recipes, dev progress notes, and links to other resources.
 
 Trial versions of k7 for macOS and Linux can be downloaded from anaconda:
 
 https://anaconda.org/shaktidb
-
-The docs are a clickable version of the k7 quickref, accessible in k7 with `\`.
 
 To add a page:
 
@@ -18,5 +20,5 @@ Edit the docs by editing `index.html`.
 
 TODO:
 
-* ...write...more...docs
+* Write more docs
 * Figure out how to sync `index.html` with changes to the quickref (may need Shakti's help)
