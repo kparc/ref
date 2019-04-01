@@ -11,6 +11,7 @@
             display: inline-block;
             border: 1px solid black;
             padding: 0.5em;
+            margin: 0;
             background-color: #9e9e9e1c;
         }
         h3 {
@@ -133,6 +134,10 @@ x: `a`b!/:(1 2
            3 4)
 
 t~x</pre>
+    <h3 id=".z.f">.z.f (recursion)</h3>
+    <p>Use in a function definition to refer to the current function. Useful for recursion.</p>
+    <pre>factorial: {$[x<2;1;x*.z.f[x-1]]} / fact 4: 24
+/ Better: {*/1+!x}</pre>
 
 <script>
 
@@ -141,7 +146,7 @@ t~x</pre>
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["enum", "key", "table"]
+    links = ["enum", "key", "table", ".z.f"]
 
     for (let i in links) {
         const w = links[i]
