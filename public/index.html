@@ -120,6 +120,7 @@ K key k key"hi"    / verify sign
 u: +`a`b !    (1 3;2 4)    / Col-wise ('+' at front for +able)
 v:  `a`b ! /: (1 2;3 4)    / Row-wise, but de-duplicate headers
 
+/ The tables match:
 t~u
 t~v
 
@@ -129,7 +130,7 @@ w: ([a:1;b:2]
 
 t~w
 
-/ Break col-wise over multiple lines:
+/ Break row-wise (condensed row format) over multiple lines:
 x: `a`b!/:(1 2
            3 4)
 
