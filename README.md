@@ -12,7 +12,7 @@ To add a page:
 
 1. Select a word that you'd like to contribute docs for in the quickref
 2. Add it to the `links` array in `index.html`
-3. Search for the string 'template' in `index.html` and fill in the `<pre>`.
+3. Search for the string 'template' in `index.html`, and copy it. Add the word as an id to the `h3` and fill in content beneath it.
 
 Edit the docs by editing `index.html`.
 
