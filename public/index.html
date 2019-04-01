@@ -135,6 +135,10 @@ x: `a`b!/:(1 2
            3 4)
 
 t~x</pre>
+
+    <h3 id="expr">exprs</h3>
+    <p>WIP. See <a href="https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ">this forum post</a>.</p>
+
     <h3 id=".z.f">.z.f (recursion)</h3>
     <p>Use in a function definition to refer to the current function. Useful for recursion.</p>
     <pre>factorial: {$[x<2;1;x*.z.f[x-1]]} / fact 4: 24
@@ -147,7 +151,7 @@ t~x</pre>
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["enum", "key", "table", ".z.f"]
+    links = ["enum", "key", "table", ".z.f", "expr"]
 
     for (let i in links) {
         const w = links[i]
