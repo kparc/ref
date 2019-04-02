@@ -17,9 +17,14 @@
             margin-bottom: 1em;
             background-color: #9e9e9e1c;
         }
-        h3 {
-            margin-top: 0.5em;
+        code {
+            background-color: #9e9e9e1c;
+            border: 1px solid black;
+            padding-left: 0.2em;
+            padding-right: 0.2em;
         }
+        h3 {margin-top: 0.5em}
+        h4 {margin-top: 0.5em}
         ul {
             padding-left: 1.5em;
         }
@@ -103,7 +108,7 @@ K key k key"hi"    / verify sign
 <p>Communities:</p>
 <ul>
     <li><a href="https://groups.google.com/forum/#!forum/shaktidb">shakti google group</a> (official - for 'how to' queries)</li>
-    <li><a href="https://chat.stackexchange.com/rooms/90748/the-k-tree">the k tree</a> <br>  (write access: email ".@acegiklmnort"@7 13 12 4 4 0 10 5 10 1 5 9 2 6 8 0 3 11 9)</li>
+    <li><a href="https://chat.stackexchange.com/rooms/90748/the-k-tree">the k tree</a> <br>  (write access: email <code>".@acegiklmnort"@7 13 12 4 4 0 10 5 10 1 5 9 2 6 8 0 3 11 9)</code></li>
     <li><a href="https://www.reddit.com/r/apljk/">r/apljk</a></li>
 </ul>
 
@@ -148,6 +153,45 @@ t~x</pre>
     <pre>factorial: {$[x<2;1;x*.z.f[x-1]]} / fact 4: 24
 / Better: {*/1+!x}</pre>
 
+    <h3 id="2way">Two-way conversions</h3>
+
+    <p>Convert to with <code>`x@data</code> or <code>`x data</code>, where `x is the relevant name.</p>
+
+    <p>Convert from with <code>`x?serialdata</code>.</p>
+
+    <h4>Binary <code>`</code></h4>
+    <pre>` "a" / 0x0161
+` `a  / 0x0f6100
+` 10  / 0x070a000000</pre>
+
+    <h4>JSON <code>`j</code></h4>
+
+    <pre>`j ([a:1;b:2];[a:"x";b:`z])
+/ "[{\"a\":1,\"b\":2},{\"a\":\"x\",\"b\":\"z\"}]"</pre>
+
+    <h4>KSON <code>`k</code></h4>
+
+    <pre>`k 2*!3 / "0 2 4"
+`k ([a:1;b:2];[a:"x";b:`z]) / "+[a:(1;\"x\");b:(2;`z)]"</pre>
+
+    <h3 id="1way">One-way conversions</h3>
+
+    <h4>Parse <code>`p</code></h4>
+    <pre>`p "5*!3"
+/ *     
+/ 5     
+/ (!:;3)</pre>
+
+    <h4>Matrix display <code>`m</code></h4>
+
+    <pre>d: 1 2 3
+d
+/ 1 2 3
+`m d
+/ 1
+/ 2
+/ 3</pre>
+
 <script>
 
     const raw_elem = document.getElementById("index")
@@ -155,7 +199,7 @@ t~x</pre>
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["enum", "key", "table", ".z.f", "expr"]
+    links = ["enum", "key", "table", ".z.f", "expr", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
