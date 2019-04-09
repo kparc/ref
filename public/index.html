@@ -130,10 +130,16 @@ r|2 9</pre>
 1 0 0
 0 1 0
 0 0 1</pre>
-    <h3 id="enum">Enum</h3><pre>!3   / 0 1 2
-!2 3 / (0 0 0 1 1 1;0 1 2 0 1 2)</pre>
+    <h3 id="enum">Enum</h3><pre> !3
+0 1 2
+ !2 3
+(0 0 0 1 1 1;0 1 2 0 1 2)</pre>
     <h3 id="key">Key</h3>
-    <pre>! [a:1;b:2] / `a`b</pre>
+    <pre> ! [a:1;b:2]
+`a`b</pre>
+    <h3 id="join">Join</h3>
+    <pre> "-"/:("abc";"def")
+"abc-def"</pre>
     
     <h3 id=".z.d">Current date <code>.z.d</code></h3>
     <pre>.z.d / 2019.04.02</pre>
@@ -169,7 +175,9 @@ t~x</pre>
 
     <h3 id=".z.f">Recursion <code>.z.f</code></h3>
     <p>Use in a function definition to refer to the current function.</p>
-    <pre>factorial: {$[x<2;1;x*.z.f[x-1]]} / fact 4: 24
+    <pre> factorial: {$[x<2;1;x*.z.f[x-1]]}
+         factorial 4
+24
 / Better: {*/1+!x}</pre>
 
     <h3 id="2way">Two-way conversions</h3>
@@ -179,37 +187,42 @@ t~x</pre>
     <p>Convert from with <code>`x?serialdata</code>.</p>
 
     <h4>Binary <code>`</code></h4>
-    <pre>` "a" / 0x0161
-` `a  / 0x0f6100
-` 10  / 0x070a000000</pre>
+    <pre> ` "a"
+0x0161
+ ` `a
+0x0f6100
+ ` 10
+0x070a000000</pre>
 
     <h4>JSON <code>`j</code></h4>
 
-    <pre>`j ([a:1;b:2];[a:"x";b:`z])
-/ "[{\"a\":1,\"b\":2},{\"a\":\"x\",\"b\":\"z\"}]"</pre>
+    <pre> `j ([a:1;b:2];[a:"x";b:`z])
+"[{\"a\":1,\"b\":2},{\"a\":\"x\",\"b\":\"z\"}]"</pre>
 
     <h4>KSON <code>`k</code></h4>
 
-    <pre>`k 2*!3 / "0 2 4"
-`k ([a:1;b:2];[a:"x";b:`z]) / "+[a:(1;\"x\");b:(2;`z)]"</pre>
+    <pre> `k 2*!3
+"0 2 4"
+ `k ([a:1;b:2];[a:"x";b:`z])
+"+[a:(1;\"x\");b:(2;`z)]"</pre>
 
     <h3 id="1way">One-way conversions</h3>
 
     <h4>Parse <code>`p</code></h4>
-    <pre>`p "5*!3"
-/ *     
-/ 5     
-/ (!:;3)</pre>
+    <pre> `p "5*!3"
+*     
+5     
+(!:;3)</pre>
 
     <h4>Matrix display <code>`m</code></h4>
 
     <pre>d: 1 2 3
-d
-/ 1 2 3
-`m d
-/ 1
-/ 2
-/ 3</pre>
+ d
+1 2 3
+ `m d
+1
+2
+3</pre>
 
 <script>
 
@@ -218,7 +231,7 @@ d
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enum", "key", "table", ".z.d", ".z.t", ".z.f", "expr", "1way", "2way"]
+    links = ["group", "enum", "key", "join", "table", ".z.d", ".z.t", ".z.f", "expr", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
