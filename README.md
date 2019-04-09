@@ -22,3 +22,5 @@ TODO:
 
 * Write more docs
 * Figure out how to sync `index.html` with changes to the quickref (may need Shakti's help)
+* Tempted to switch to [MkDocs/Material](https://squidfunk.github.io/mkdocs-material/), but want to keep it simple for now
+* Consider [Zig's docs approach](https://ziglang.org/documentation/master/#Introduction) - easily downloaded single file + code samples form part of the test suite

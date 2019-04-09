@@ -105,7 +105,7 @@ K key k key"hi"    / verify sign
 <p>Communities:</p>
 <ul>
     <li><a href="https://groups.google.com/forum/#!forum/shaktidb">shakti google group</a> (official - for 'how to' queries)</li>
-    <li><a href="https://chat.stackexchange.com/rooms/90748/the-k-tree">the k tree</a> <br>  (write access: email <code>".@acegiklmnort"@7 13 12 4 4 0 10 5 10 1 5 9 2 6 8 0 3 11 9)</code></li>
+    <li><a href="https://chat.stackexchange.com/rooms/90748/the-k-tree">the k tree</a> <br>  write access: email <code>".@acegiklmnort"@7 13 12 4 4 0 10 5 10 1 5 9 2 6 8 0 3 11 9</code></li>
     <li><a href="https://www.reddit.com/r/apljk/">r/apljk</a></li>
 </ul>
 
@@ -134,6 +134,15 @@ r|2 9</pre>
 !2 3 / (0 0 0 1 1 1;0 1 2 0 1 2)</pre>
     <h3 id="key">Key</h3>
     <pre>! [a:1;b:2] / `a`b</pre>
+    
+    <h3 id=".z.d">Current date <code>.z.d</code></h3>
+    <pre>.z.d / 2019.04.02</pre>
+    
+    <h3 id=".z.t">Current time <code>.z.t</code></h3>
+    <p>Greenwich Mean Time.</p>
+    
+    <pre>.z.t / 11:18:14.857</pre>
+    
     <h3 id="table">Tables</h3>
     <pre>t: ([a:1;b:2];[a:3;b:4])   / Row-wise
 u: +`a`b !    (1 3;2 4)    / Col-wise (flipped dict)
@@ -158,8 +167,8 @@ t~x</pre>
     <h3 id="expr">exprs</h3>
     <p>WIP. See <a href="https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ">this forum post</a>.</p>
 
-    <h3 id=".z.f">.z.f (recursion)</h3>
-    <p>Use in a function definition to refer to the current function. Useful for recursion.</p>
+    <h3 id=".z.f">Recursion <code>.z.f</code></h3>
+    <p>Use in a function definition to refer to the current function.</p>
     <pre>factorial: {$[x<2;1;x*.z.f[x-1]]} / fact 4: 24
 / Better: {*/1+!x}</pre>
 
@@ -209,7 +218,7 @@ d
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enum", "key", "table", ".z.f", "expr", "1way", "2way"]
+    links = ["group", "enum", "key", "table", ".z.d", ".z.t", ".z.f", "expr", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
