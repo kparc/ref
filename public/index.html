@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <title>k7 docs (unofficial)</title>
     <style>
         body {
             font-family: Consolas, monospace;
@@ -57,19 +58,19 @@
 
         <pre>$k [-p 1234] [f.k]                         / .z.i(pid) .z.x(arg) .z.e(env)
 
-Verb                       Adverb                Noun              Atom List
-:  set                     '  each               char  " ab"       `c   `C
-+  plus        flip        /  over               name  ``a`b       `n   `N
--  minus       negate      \  scan               int   Ø 0 2       `i   `I
-*  times       first       ': eachprior peach    float ø 2.3 π ∞   `f   `F
-%  divide      inverse     /: eachright join|sv  date 2019.06.28   `d   `D .z.d
-&  min|and     where       \: eachleft split|vs  time 12:34:56.789 `t   `T .z.t
+Verb                       Adverb                Noun            Atom List
+:  set                     '  each               char  " ab"       `c `C
++  plus        flip        /  over               name  ``a`b       `n `N
+-  minus       negate      \  scan               int   Ø 0 2       `i `I
+*  times       first       ': eachprior peach    float ø 2.3 π ∞   `f `F
+%  divide      inverse     /: eachright join|sv  date 2019-06-28   `D .z.D(YMDHRSTUV)
+&  min|and     where       \: eachleft split|vs  time 12:34:56.789 `t .z.t(ymdhrstuv)
 |  max|or      reverse
 <  less        up          System(1:""1:"prompt")
 >  more        down        0: read/write line    list (2;3.4;`c)   `
-=  equal       group       1: read/write byte    dict [a:2;b:`c]   `a   `A table
+=  equal       group       1: read/write byte    dict [a:2;b:`c]   `a `A table
 ~  match       not         2: read/write data    expr :32+9*f%5    `0
-!  dict|mod    key|enum    3: conn/set (.z.ms)   func {(+/x)%#x}   `1      .z.f
+!  dict|mod    key|enum    3: conn/set (.z.ms)   func {(+/x)%#x}   `1  .z.f
 ,  concat      enlist      4: http/get (.z.mg)
 ^  except      null
 $  pad|cast    string      $[c;t;f] cond         \l f.k load
@@ -79,13 +80,11 @@ _  drop|delete floor       _[t;c;b[;a]] update   \f [d] fns     \u[:n] x trace m
 @  index       type        @[x;i;f[;y]] amend    \cd [d] get[set]dir
 .  apply       value       .[x;i;f[;y]] dmend    \lf [x] files \lc chars \ll lines
 
-while[c;..];if[c;..];  
+if[c;..];while[c;..]
 
 generate: i?(draw) -i?(deal) ?i(uniform) ?-i(normal) !i(enum) 
-datetime: ymdhrstuv 2019.06.28+2m; day:7!; month:12!; bar5:5*-5!12:34
+datetime: 2019-06-28+2m; day:7!.z.d; bar5:5*-5!12:34; 
 `year`month`day`hour`minute`second`millisecond`microsecond`nanosecond
-0\:.z.d
-0/:2024 1 1
 
 ksql: select delete update; by from where;   [x]key [x]asc [x]dsc
 aggr: count first last min max [x]sum [x]avg [x]var [x]dev [x]med
@@ -141,8 +140,8 @@ r|2 9</pre>
     <pre> "-"/:("abc";"def")
 "abc-def"</pre>
     
-    <h3 id=".z.d">Current date <code>.z.d</code></h3>
-    <pre>.z.d / 2019.04.02</pre>
+    <h3 id="z.D">Current date <code>.z.D</code></h3>
+    <pre>.z.D / 2019-04-02</pre>
     
     <h3 id=".z.t">Current time <code>.z.t</code></h3>
     <p>Greenwich Mean Time.</p>
@@ -194,6 +193,11 @@ a c| b
 
     <pre> asc "abracadabra"
 "aaaaabbcdrr"</pre>
+
+    <h3>Sort descending <code>dsc</code></h3>
+
+    <pre> dsc "abracadabra"
+"rrdcbbaaaaa"</pre>
 
     <h3 id="within">Within</h3>
 
@@ -253,7 +257,7 @@ a c| b
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enum", "key", "join", "table", ".z.d", ".z.t", ".z.f", "expr", "asc", "within", "1way", "2way"]
+    links = ["group", "enum", "key", "join", "table", ".z.D", ".z.t", ".z.f", "expr", "asc", "dsc", "within", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
