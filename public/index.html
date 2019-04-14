@@ -56,48 +56,45 @@
 
     <div id="index">
 
-        <pre>$k [-p 1234] [f.k]                         / .z.i(pid) .z.x(arg) .z.e(env)
-
-Verb                       Adverb                Noun            Atom List
-:  set                     '  each               char  " ab"       `c `C
-+  plus        flip        /  over               name  ``a`b       `n `N
--  minus       negate      \  scan               int   Ø 0 2       `i `I
-*  times       first       ': eachprior peach    float ø 2.3 π ∞   `f `F
-%  divide      inverse     /: eachright join|sv  date 2019-06-28   `D .z.D(YMDHRSTUV)
-&  min|and     where       \: eachleft split|vs  time 12:34:56.789 `t .z.t(ymdhrstuv)
-|  max|or      reverse
-<  less        up          System(1:""1:"prompt")
->  more        down        0: read/write line    list (2;3.4;`c)   `
-=  equal       group       1: read/write byte    dict [a:2;b:`c]   `a `A table
-~  match       not         2: read/write data    expr :32+9*f%5    `0
-!  dict|mod    key|enum    3: conn/set (.z.ms)   func {(+/x)%#x}   `1  .z.f
-,  concat      enlist      4: http/get (.z.mg)
-^  except      null
-$  pad|cast    string      $[c;t;f] cond         \l f.k load
-#  take|select count       #[t;c;b[;a]] select   \v [d] vars    \t[:n] x time milli
-_  drop|delete floor       _[t;c;b[;a]] update   \f [d] fns     \u[:n] x trace micro
-?  find|rand   uniq|rand   ?[x;i;f[;y]] splice   (\d [d] get[set]d)
-@  index       type        @[x;i;f[;y]] amend    \cd [d] get[set]dir
-.  apply       value       .[x;i;f[;y]] dmend    \lf [x] files \lc chars \ll lines
-
-if[c;..];while[c;..]
-
-generate: i?(draw) -i?(deal) ?i(uniform) ?-i(normal) !i(enum) 
-datetime: 2019-06-28+2m; day:7!.z.d; bar5:5*-5!12:34; 
-`year`month`day`hour`minute`second`millisecond`microsecond`nanosecond
-
-ksql: select delete update; by from where;   [x]key [x]asc [x]dsc
-aggr: count first last min max [x]sum [x]avg [x]var [x]dev [x]med
-math: abs sin cos log exp sqrt prm cmb
-util: in within bin like find
-
-2way: ``j`k`b64`hex`csv`aes  e.g. json: `j?`j@`a`b!2 3
-1way:  `p`m`crc`sha`rip`bad  e.g. hash: `sha@"crypto"
-
-K:key k:key`k1     / public private
-K key k key"hi"    / verify sign
-
-\\ exit</pre>
+        <pre>$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)         
+                                                                                   
+Verb                       Adverb                Noun            Atom List         
+:  assign                  '  each               char  " ab"       `c `C           
++  add         flip        /  over               name  ``a`b       `n `N           
+-  subtract    negate      \  scan               int   Ø 0 2       `i `I          
+*  multiply    first       ': eachprior peach    float ø 2.3 π ∞   `f `F       
+%  divide      inverse     /: eachright join|sv  time 12:34:56.789 `t .z.t         
+&  min|and     where       \: eachleft split|vs  date 2019-06-28   `D .z.D         
+|  max|or      reverse                                                             
+<  less        up          System                list (2;3.4;`c)   `               
+>  more        down        0: read/write line    dict [a:2;b:`c]   `a `A table     
+=  equal       group       1: read/write byte    expr :32+9*f%5    `0              
+~  match       not         2: read/write data    func {(+/x)%#x}   `1..9           
+!  mod|dict    key|enum    3: conn/set (.z.ms)                                     
+,  catenate    enlist      4: http/get (.z.mg)   \\       exit                     
+^  except      null                              \l f.k   load                     
+#  take        count       #[t;c;b[;a]] select   \t[:n] x time/milli               
+_  drop        floor       _[t;c;b[;a]] update   \u[:n] x trace/micro              
+?  draw|find   rand|uniq   ?[x;i;f[;y]] splice   \v [d]   vars                     
+@  index       type        @[x;i;f[;y]] amend    \f [d]   fns                      
+.  apply       value       .[x;i;f[;y]] dmend    \cd [d]  get[set]dir              
+$  pad|cast    string      $[c;t;f] conditional  \lf [x]  files \lc chars \ll lines
+if[c;..];while[c;..]                                                               
+                                                                                   
+generate: !i i? -i?(deal) ?i ?-i(normal)                                           
+datetime:YMDHRSTUV + duration:ymdhrstuv; T:.z.D+.z.t; 2019-06-28+2m; dayofweek:7!  
+`year`month`date`hour`minute`second`millisecond`microsecond`nanosecond             
+                                                                                   
+table: select delete update; by from where; [x]key [x]asc [x]dsc                   
+aggr: count first last min max [x]sum [x]avg [x]var [x]dev [x]med                  
+math: abs [x]log [x]exp sqrt sin cos                                               
+util: in within bin like find [x]prm                                               
+                                                                                   
+2way: ``j`k`csv`b64`hex`aes  e.g. json: `j?`j@`a`b!2 3                             
+1way:  `p`m`crc`sha`rip`bad  e.g. hash: `sha@"crypto"                              
+                                                                                   
+K:key k:key`k1     / public private                                                
+K key k key"hi"    / verify sign</pre>
 
 <hr>
 
