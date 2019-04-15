@@ -98,6 +98,8 @@ K key k key"hi"    / verify sign</pre>
 
 <hr>
 
+<p><a href="#shakti-python">Notes on shakti-python</a></p>
+
 <p>Communities:</p>
 <ul>
     <li><a href="https://groups.google.com/forum/#!forum/shaktidb">shakti google group</a> (official - for 'how to' queries)</li>
@@ -246,6 +248,65 @@ a c| b
 1
 2
 3</pre>
+
+<h3 id="shakti-python">shakti-python</h3>
+
+<pre>(base) chris@chris-VirtualBox:~$ python
+Python 3.7.1 (default, Dec 14 2018, 19:28:38) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import shakti
+>>> a = shakti.k("!3")
+>>> a
+k('!3')
+>>> dir(a)
+['_A', '_D', '_F', '_I', '_K', '_S', '_T', '__abstractmethods__',
+'__and__', '__call__', '__class__', '__contains__', '__del__',
+'__delattr__', '__delitem__', '__dict__', '__dir__', '__doc__',
+'__eq__', '__floor__', '__format__', '__ge__', '__getattribute__',
+'__getitem__', '__gt__', '__hash__', '__iadd__', '__init__',
+'__init_subclass__', '__invert__', '__iter__', '__le__', '__len__',
+'__lt__', '__matmul__', '__module__', '__mul__', '__ne__', '__neg__',
+'__new__', '__or__', '__pos__', '__rand__', '__reduce__',
+'__reduce_ex__', '__repr__', '__reversed__', '__rmatmul__', '__ror__',
+'__rxor__', '__setattr__', '__setitem__', '__sizeof__', '__slots__',
+'__str__', '__subclasshook__', '__weakref__', '__xor__', '_a', '_a1',
+'_a2', '_a4', '_abc_impl', '_at', '_b2', '_c0', '_cat', '_cc', '_drp',
+'_eq', '_exs', '_f', '_ft', '_h', '_i', '_k', '_k0', '_kf', '_kp',
+'_kv', '_m', '_meta', '_n', '_np', '_o', '_pn', '_q', '_r', '_s',
+'_s0', '_t', '_ti', '_tn', '_ui', '_uj', '_vk', '_vv', '_x', '_xF',
+'_xI', '_xK', '_xx', '_xy', 'append', 'apply', 'asc', 'cat', 'clear',
+'count', 'distinct', 'dsc', 'enlist', 'eq', 'eval', 'extend', 'first',
+'flip', 'floor', 'group', 'iasc', 'idesc', 'index', 'insert', 'last',
+'match', 'max', 'min', 'neg', 'null', 'parse', 'pop', 'remove',
+'reverse', 'string', 'type', 'where']
+>>>
+>>> a.cat((1, 2, 3))
+k('0 1 2 1 2 3')
+>>> b = a.cat((1, 2, 3)).where
+>>> b
+k('1 2 2 3 4 4 5 5 5')
+>>> sum(b)
+k('31')
+>>>
+>>> dir(shakti)
+['C', 'D', 'F', 'I', 'K', 'N', 'O', 'T', 'X1', 'X2', 'X3', 'XF', 'XM',
+'_O', '__all__', '__builtins__', '__cached__', '__doc__', '__file__',
+'__loader__', '__name__', '__package__', '__path__', '__spec__', '_a',
+'_abc', '_b2', '_key', '_nbs', '_num', '_o', '_os', '_part', '_repl',
+'_str2k', '_subtype', '_sys', '_v', 'abstractmethod', 'apply', 'asc',
+'at', 'avg', 'c', 'c_', 'cast', 'cat', 'cos', 'count', 'csv', 'cut',
+'displayhook', 'distinct', 'drop', 'dsc', 'enlist', 'enum', 'eq',
+'error', 'eval_', 'excepthook', 'exp', 'f', 'find', 'first', 'flip',
+'floor', 'group', 'i', 'iasc', 'idesc', 'inf', 'json', 'k', 'k_repl',
+'last', 'log', 'match', 'max', 'mc', 'meta', 'min', 'n', 'neg', 'net',
+'not_', 'null', 'o', 'over', 'parse', 'q', 'r', 'rand', 'reverse',
+'scan', 'shape', 'show', 'sin', 'sqrt', 'string', 'struct', 'sum',
+'take', 'text', 'type_', 'var', 'where', 'Ø', 'ø']
+>>>
+>>> shakti.k_repl()
+    +/ 1 2 3
+6</pre>
 
 <script>
 
