@@ -280,6 +280,9 @@ k('31')
 >>> # Convert Python objects to k:
 ... shakti.o(range(10))
 k('!10')
+>>> # o is equivalent to k's identity function:
+... shakti.o == shakti.k('::')
+True
 >>>
 >>> # Add globals to k:
 ... shakti.q.a = [1,2,3]
