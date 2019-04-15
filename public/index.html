@@ -251,13 +251,15 @@ a c| b
 
 <h3 id="shakti-python">shakti-python</h3>
 
-<!--<p>Install instructions for Ubuntu 18.04:</p>
+<h4>Install instructions</h4>
 
+<p>Generic instructions are <a href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">here</a>. For Ubuntu 18.04:</p>
 <ul>
-    <li>Get Miniconda</li>
-    <li>Run <code>conda install -c shaktidb shakti-python</code></li>
-    <li>Press 'Python' at the prompt</li>
-</ul>-->
+    <li>Download the Miniconda installer (<a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh">direct link</a>)</li>
+    <li>In a terminal in your download directory, run:<br><code>bash Miniconda3-latest-Linux-x86_64.sh</code>. <br>Make sure you choose to have your .bashrc updated
+    <li>Open a new terminal and run <code>conda install -c shaktidb shakti-python</code></li>
+    <li>At the prompt, run <code>python</code>.</li>
+</ul>
 
 <p>Type <code>help('shakti')</code> at the Python prompt to view the package help.</p>
 
@@ -267,10 +269,12 @@ a c| b
 ... a = shakti.k("!3")
 >>> a
 k('!3')
+>>> 
 >>> a.  # press tab twice for auto-completion (have truncated output)
 a.append(    a.cat(       a.distinct(  a.eq(        a.first(     a.group( ...
 a.apply(     a.clear(     a.dsc(       a.eval(      a.flip(      a.iasc(  ...
 a.asc(       a.count(     a.enlist(    a.extend(    a.floor(     a.idesc( ...
+>>> 
 >>> # shakti module functions can take Python objects directly:
 ... a.cat((1, 2, 3))
 k('0 1 2 1 2 3')
