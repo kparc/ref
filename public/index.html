@@ -17,8 +17,7 @@
             background-color: #9e9e9e1c;
         }
         code {
-            background-color: #9e9e9e1c;
-            border: 1px solid black;
+            background-color: #5f5f5f1c;
             padding-left: 0.2em;
             padding-right: 0.2em;
         }
@@ -253,13 +252,16 @@ a c| b
 
 <h4>Install</h4>
 
-<p>Generic instructions are <a href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">here</a>. For Ubuntu 18.04:</p>
+<p>One way to install shakti-python is to use <a href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">Miniconda</a>.</p>
+
+<p>To install Miniconda under Ubuntu 18.04:</p>
 <ul>
-    <li>Download the Miniconda installer (<a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh">direct link</a>)</li>
-    <li>In a terminal in your download directory, run:<br><code>bash Miniconda3-latest-Linux-x86_64.sh</code>. <br>Make sure you choose to have your .bashrc updated
-    <li>Open a new terminal and run <code>conda install -c shaktidb shakti-python</code></li>
-    <li>At the prompt, run <code>python</code>.</li>
+    <li>Download the Miniconda installer for Python 3, 64-bit (<a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh">direct link</a>)</li>
+    <li>In a terminal in your download directory, run:<br><code>bash Miniconda3-latest-Linux-x86_64.sh</code>
 </ul>
+
+<p>Once Miniconda is installed, open a new terminal and run:<br><code>conda install -c shaktidb shakti-python</code>.</p>
+<p>Then to get to shakti-python, at the prompt, run <code>python</code> <br>(or if you chose to not update your .bashrc, <code>~/miniconda3/bin/python</code>).</p>
 
 <p>Type <code>help('shakti')</code> at the Python prompt to view the package help.</p>
 
