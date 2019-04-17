@@ -148,6 +148,11 @@ r|2 9</pre>
     <pre>.z.t / 11:18:14.857</pre>
     
     <h3 id="table">Tables</h3>
+
+    <p>A table is a list of dicts where each dict has the same keys in the same order.</p>
+    
+    <p>A table can also be considered as a flipped dict of lists, where each list is of equal length.</p>
+
     <pre>t: ([a:1;b:2];[a:3;b:4])   / Row-wise
 u: +`a`b !    (1 3;2 4)    / Col-wise (flipped dict)
 v:  `a`b ! /: (1 2;3 4)    / Row-wise, but de-duplicate headers using eachright
@@ -168,15 +173,29 @@ x: `a`b!/:(1 2
 
 t~x</pre>
 
-<p>Make one or more columns key columns:</p>
+<p>You can access rows or columns of the table by indexing using the row number or column key:</p>
+
+<pre>t[1]   / [a:3;b:4]
+t[`b]  / 2 4</pre>
+
+<p>Key tables are dictionaries where the rows of one table map to the rows of another table.</p>
+
+<pre>k: ([a:1;c:3]
+    [a:4;c:6])
+v: ([b:2];[b:5])
+kt: k!v
+kt   / (+[a:1 4;c:3 6])!+[b:2 5]
+@kt  / `a</pre>
+
+<p>You can also use <code>key</code> to set the key columns after creation:</p>
 
 <pre> t: ([a:1;b:2;c:3];[a:4;b:5;c:6])
  tk: `a`c key t
- tk
-a c| b
-- -| -
-1 3| 2
-4 6| 5</pre>
+ tk~kt  / 1</pre>
+
+<p>Access rows of the value table by indexing into the keytable:</p>
+
+<pre>t[[a:4;c:6]]  / [b:5]</pre>
 
     <h3 id="expr">exprs</h3>
     <p>WIP. See <a href="https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ">this forum post</a>.</p>
