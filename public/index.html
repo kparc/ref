@@ -175,8 +175,9 @@ t~x</pre>
 
 <p>You can access rows or columns of the table by indexing using the row number or column key:</p>
 
-<pre>t[1]   / [a:3;b:4]
-t[`b]  / 2 4</pre>
+<pre>t[1]    / [a:3;b:4]
+t[`b]    / 2 4
+t[1;`a]  / 3</pre>
 
 <p>Key tables are dictionaries where the rows of one table map to the rows of another table.</p>
 
@@ -195,7 +196,7 @@ kt   / (+[a:1 4;c:3 6])!+[b:2 5]
 
 <p>Access rows of the value table by indexing into the keytable:</p>
 
-<pre>t[[a:4;c:6]]  / [b:5]</pre>
+<pre>kt[[a:4;c:6]]  / [b:5]</pre>
 
     <h3 id="expr">exprs</h3>
     <p>WIP. See <a href="https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ">this forum post</a>.</p>
