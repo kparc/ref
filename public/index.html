@@ -213,6 +213,22 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
  `p within `A`Z
 0</pre>
 
+    <h3 id="`ascii"><code>`ascii</code></h4>
+
+    <p>Are all characters in the string in the ASCII set?</p>
+    <pre> `ascii @ "123"
+1
+ `ascii @ "∞"
+0</pre>
+
+<h3 id="`print"><code>`print</code></h4>
+
+<p>Are all characters in the string printable?</p>
+<pre> `print @ "123"
+1
+ `print @ "123\n"
+0</pre>
+
     <h3 id="2way">Two-way conversions</h3>
 
     <p>Convert to with <code>`x@data</code> or <code>`x data</code>, where `x is the relevant name.</p>
@@ -343,7 +359,7 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enumerate", "key", "join", "table", ".z.D", ".z.t", "expr", "[f]asc", "[f]desc", "within", "1way", "2way"]
+    links = ["group", "enumerate", "key", "join", "table", ".z.D", ".z.t", "expr", "[f]asc", "[f]desc", "within", "`ascii", "`print", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
