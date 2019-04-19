@@ -56,45 +56,45 @@
 
     <div id="index">
 
-        <pre>$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)         
-                                                                                   
-Verb                       Adverb                Noun            Atom List         
-:  assign                  '  each               char  " ab"       `c `C           
-+  add         flip        /  over               name  ``a`b       `n `N           
--  subtract    negate      \  scan               int   Ø 0 2       `i `I          
-*  multiply    first       ': eachprior peach    float ø 2.3 π ∞   `f `F       
-%  divide      inverse     /: eachright join|sv  time 12:34:56.789 `t .z.t         
-&  min|and     where       \: eachleft split|vs  date 2019-06-28   `D .z.D         
-|  max|or      reverse                                                             
-<  less        up          System                list (2;3.4;`c)   `               
->  more        down        0: read/write line    dict [a:2;b:`c]   `a `A table     
-=  equal       group       1: read/write byte    expr :32+9*f%5    `0              
-~  match       not         2: read/write data    func {(+/x)%#x}   `1..9           
-!  mod|dict    key|enum    3: conn/set (.z.ms)                                     
-,  catenate    enlist      4: http/get (.z.mg)   \\       exit                     
-^  except      null                              \l f.k   load                     
-#  take        count       #[t;c;b[;a]] select   \t[:n] x time/milli               
-_  drop        floor       _[t;c;b[;a]] update   \u[:n] x trace/micro              
-?  draw|find   rand|uniq   ?[x;i;f[;y]] splice   \v [d]   vars                     
-@  index       type        @[x;i;f[;y]] amend    \f [d]   fns                      
-.  apply       value       .[x;i;f[;y]] dmend    \cd [d]  get[set]dir              
-$  pad|cast    string      $[c;t;f] conditional  \lf [x]  files \lc chars \ll lines
-if[c;..];while[c;..]                                                               
-                                                                                   
-generate: !i i? -i?(deal) ?i ?-i(normal)                                           
-datetime:YMDHRSTUV + duration:ymdhrstuv; T:.z.D+.z.t; 2019-06-28+2m; dayofweek:7!  
-`year`month`date`hour`minute`second`millisecond`microsecond`nanosecond             
-                                                                                   
-table: select delete update; by from where; [x]key [x]asc [x]dsc                   
-aggr: count first last min max [x]sum [x]avg [x]var [x]dev [x]med                  
-math: abs [x]log [x]exp sqrt sin cos                                               
-util: in within bin like find [x]prm                                               
-                                                                                   
-2way: ``j`k`csv`b64`hex`aes  e.g. json: `j?`j@`a`b!2 3                             
-1way:  `p`m`crc`sha`rip`bad  e.g. hash: `sha@"crypto"                              
-                                                                                   
-K:key k:key`k1     / public private                                                
-K key k key"hi"    / verify sign</pre>
+        <pre>$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)     
+                                                                
+Verb                       Adverb                Noun            Atom List     
+:  assign                  '  each               char  " ab"       `c `C       
++  add         flip        /  over               name  ``a`b       `n `N       
+-  subtract    negate      \  scan               int   Ø 0 2       `i `I      
+*  multiply    first       ': eachprior          float ø 2.3 π ∞   `f `F   
+%  divideby    inverse     /: eachright join|sv  time 12:34:56.789 `t `T   .z.t
+&  min|and     where       \: eachleft split|vs  date 2019-06-28   `D `D   .z.D
+|  max|or      reverse                                                         
+<  less        ascend      System                list (2;3.4;`c)   `           
+>  more        descend     0: read/write line    dict {a:2;b:`c}   `a `A(table)
+=  equal       group       1: read/write byte    func {(+/x)%#x}   `1..9       
+~  match       not         2: read/write data    expr  :32+9*f%5   `0          
+!  key         enumerate   3: conn/set (.z.ms)                                 
+,  catenate    list        4: http/get (.z.mg)   \h      help          \l log  
+^  except      null                              \l f.k  load                  
+#  take        count       #[t;c;b[;a]] select   \t[:n]x time                  
+_  drop        floor       _[t;c;b[;a]] update   \u[:n]x trace                 
+?  find        distinct    ?[x;i;f[;y]] splice   \v [d]  vars                  
+@  index       type        @[x;i;f[;y]] amend    \f [d]  fns                   
+.  apply       eval        .[x;i;f[;y]] dmend    \cd [d] get[set]dir   \gr grep
+$  pad|cast    string      $[c;t;f]     cond     \lf [x] file \lc char \ll line
+                                                                                
+util: in within bin like find [f]asc [f]desc [f]key                            
+math: sqrt sin cos abs prm cmb [n]log [n]exp [n]rand mod div                   
+aggr: count first last min max sum avg var dev med                             
+sql: [select|update|delete] a.. by b.. from t.. where c..                      
+                                                                                
+datetime:YMDHRSTUV+duration:ymdhrstuv; T:.z.D+.z.t; 2019-06-28+2m; day:7 mod   
+`year`month`date`hour`minute`second`millisecond`microsecond`nanosecond         
+                                                                                
+bool: `utf8`ascii`print                                                        
+1way: `p`m`crc`sha`rip`bad   e.g. hash:  `sha@"crypto"                         
+2way:``j`k`csv`b64`hex`aes   e.g. json: `j?`j@{a:2;b:`c}                       
+                                                                                
+if[c;..];while[c;..]                                                           
+                                                                                
+\\ exit</pre>
 
 <hr>
 
@@ -128,12 +128,12 @@ r|2 9</pre>
 1 0 0
 0 1 0
 0 0 1</pre>
-    <h3 id="enum">Enum</h3><pre> !3
+    <h3 id="enumerate">Enumerate</h3><pre> !3
 0 1 2
  !2 3
 (0 0 0 1 1 1;0 1 2 0 1 2)</pre>
     <h3 id="key">Key</h3>
-    <pre> ! [a:1;b:2]
+    <pre> ! {a:1;b:2}
 `a`b</pre>
     <h3 id="join">Join</h3>
     <pre> "-"/:("abc";"def")
@@ -153,7 +153,7 @@ r|2 9</pre>
     
     <p>A table can also be considered as a flipped dict of lists, where each list is of equal length.</p>
 
-    <pre>t: ([a:1;b:2];[a:3;b:4])   / Row-wise
+    <pre>t: ({a:1;b:2};{a:3;b:4})   / Row-wise
 u: +`a`b !    (1 3;2 4)    / Col-wise (flipped dict)
 v:  `a`b ! /: (1 2;3 4)    / Row-wise, but de-duplicate headers using eachright
 
@@ -162,8 +162,8 @@ t~u
 t~v
 
 / Break row-wise over multiple lines:
-w: ([a:1;b:2]
-    [a:3;b:4])
+w: ({a:1;b:2}
+    {a:3;b:4})
 
 t~w
 
@@ -175,47 +175,40 @@ t~x</pre>
 
 <p>You can access rows or columns of the table by indexing using the row number or column key:</p>
 
-<pre>t[1]    / [a:3;b:4]
+<pre>t[1]    / {a:3;b:4}
 t[`b]    / 2 4
 t[1;`a]  / 3</pre>
 
 <p>Key tables are dictionaries where the rows of one table map to the rows of another table.</p>
 
-<pre>k: ([a:1;c:3]
-    [a:4;c:6])
-v: ([b:2];[b:5])
+<pre>k: ({a:1;c:3}
+    {a:4;c:6})
+v: ({b:2};{b:5})
 kt: k!v
-kt   / (+[a:1 4;c:3 6])!+[b:2 5]
+kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 @kt  / `a</pre>
 
 <p>You can also use <code>key</code> to set the key columns after creation:</p>
 
-<pre> t: ([a:1;b:2;c:3];[a:4;b:5;c:6])
+<pre> t: ({a:1;b:2;c:3};{a:4;b:5;c:6})
  tk: `a`c key t
  tk~kt  / 1</pre>
 
 <p>Access rows of the value table by indexing into the keytable:</p>
 
-<pre>kt[[a:4;c:6]]  / [b:5]</pre>
+<pre>kt[{a:4;c:6}]  / {b:5}</pre>
 
     <h3 id="expr">exprs</h3>
     <p>WIP. See <a href="https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ">this forum post</a>.</p>
 
-    <h3 id=".z.f">Recursion <code>.z.f</code></h3>
-    <p>Use in a function definition to refer to the current function.</p>
-    <pre> factorial: {$[x<2;1;x*.z.f[x-1]]}
- factorial 4
-24
-/ Better: {*/1+!x}</pre>
-
-    <h3 id="asc">Sort ascending <code>asc</code></h3>
+    <h3 id="[f]asc">Sort ascending <code>asc</code></h3>
 
     <pre> asc "abracadabra"
 "aaaaabbcdrr"</pre>
 
-    <h3 id="dsc">Sort descending <code>dsc</code></h3>
+    <h3 id="[f]desc">Sort descending <code>desc</code></h3>
 
-    <pre> dsc "abracadabra"
+    <pre> desc "abracadabra"
 "rrdcbbaaaaa"</pre>
 
     <h3 id="within">Within</h3>
@@ -241,15 +234,15 @@ kt   / (+[a:1 4;c:3 6])!+[b:2 5]
 
     <h4>JSON <code>`j</code></h4>
 
-    <pre> `j ([a:1;b:2];[a:"x";b:`z])
+    <pre> `j ({a:1;b:2};{a:"x";b:`z})
 "[{\"a\":1,\"b\":2},{\"a\":\"x\",\"b\":\"z\"}]"</pre>
 
     <h4>KSON <code>`k</code></h4>
 
     <pre> `k 2*!3
 "0 2 4"
- `k ([a:1;b:2];[a:"x";b:`z])
-"+[a:(1;\"x\");b:(2;`z)]"</pre>
+ `k ({a:1;b:2};{a:"x";b:`z})
+"+{a:(1;\"x\");b:(2;`z)}"</pre>
 
     <h3 id="1way">One-way conversions</h3>
 
@@ -355,7 +348,7 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enum", "key", "join", "table", ".z.D", ".z.t", ".z.f", "expr", "asc", "dsc", "within", "1way", "2way"]
+    links = ["group", "enumerate", "key", "join", "table", ".z.D", ".z.t", <!--".z.f"-->, "expr", "[f]asc", "[f]desc", "within", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
@@ -363,6 +356,21 @@ k('2 4 6')
     }
     
 </script>
+
+<!-- misc notes
+table generation:
+select a:x,b:1+2*x from +[!3]
+{;[a:x;b:1+2*x]}' !3
+-->
+
+<!--
+<h3 id=".z.f">Recursion <code>.z.f</code></h3>
+<p>Use in a function definition to refer to the current function.</p>
+<pre> factorial: {$[x<2;1;x*.z.f[x-1]]}
+factorial 4
+24
+/ Better: {*/1+!x}</pre>
+-->
 
 </body>
 
