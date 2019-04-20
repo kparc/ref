@@ -6,8 +6,31 @@
         body {
             font-family: Consolas, monospace;
             font-size: 13px;
+            margin: 0;
         }
         pre {font-family: Consolas, monospace}
+        header {
+            background: grey;
+            color: white;
+            width: 100%;
+            padding-top: 0.1em;
+            padding-bottom: 0.1em;
+        }
+        header h1 {
+            margin-left: 8px;
+            font-size: 13px;
+            margin-top: 0;
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        #index {
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+        #detail {
+            padding-left: 1em;
+            padding-right: 1em;
+        }
         #detail pre {
             display: inline-block;
             border: 1px solid black;
@@ -27,17 +50,18 @@
 
         @media screen and (min-width: 800px) {
             body {
-                display: flex;
                 height: 100%;
-                margin: 0;
+                display: flex;
+                flex-direction: column;
+            }
+            #container {
+                display: flex;
+                overflow: auto;
             }
             #index {
-                padding-left: 1em;
-                padding-right: 1em;
                 overflow-y: scroll;
             }
             #detail {
-                margin-left: 1em;
                 overflow-y: scroll;
                 flex-grow: 1;
                 flex-basis: 0;
@@ -53,6 +77,10 @@
 </head>
 
 <body>
+
+    <header><h1>k7 - clickable help (unofficial)</h1></header>
+
+    <div id="container">
 
     <div id="index">
 
@@ -215,7 +243,7 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 
     <h3 id="`ascii"><code>`ascii</code></h4>
 
-    <p>Are all characters in the string in the ASCII set?</p>
+    <p>Are all characters in the string in the <a href="https://en.wikipedia.org/wiki/ASCII#Character_set">ASCII set</a>?</p>
     <pre> `ascii @ "123"
 1
  `ascii @ "∞"
@@ -352,6 +380,8 @@ k('2 4 6')
     <li><a href="https://groups.google.com/d/msg/shaktidb/lQ3XSvFPDhw/DOlmmFgHDAAJ">Catch errors</a></li>
 </ul>
 
+</div>
+
 <script>
 
     const raw_elem = document.getElementById("index")
@@ -369,6 +399,10 @@ k('2 4 6')
 </script>
 
 <!-- misc notes
+
+bad is bitcoin address:
+https://groups.google.com/d/msg/shaktidb/0yq21rHOacU/QqgeStO-CgAJ
+
 table generation:
 select a:x,b:1+2*x from +[!3]
 {;[a:x;b:1+2*x]}' !3
