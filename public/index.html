@@ -48,7 +48,7 @@
         h4 {margin-top: 0.5em}
         ul {padding-left: 1.5em}
 
-        @media screen and (min-device-width: 480px) {
+        @media screen and (min-device-width: 480px) and (min-width: 800px) {
             body {
                 height: 100%;
                 display: flex;
@@ -65,11 +65,6 @@
                 overflow-y: scroll;
                 flex-grow: 1;
                 flex-basis: 0;
-            }
-        }
-        @media screen and (max-device-width: 480px) {
-            #index {
-                border-bottom: 1px solid black;
             }
         }
 
