@@ -5,7 +5,7 @@
     <style>
         body {
             font-family: Consolas, monospace;
-            font-size: 13px;
+            font-size: 12px;
             margin: 0;
         }
         pre {font-family: Consolas, monospace}
@@ -18,10 +18,18 @@
         }
         header h1 {
             margin-left: 8px;
-            font-size: 13px;
+            font-size: 12px;
             margin-top: 0;
             margin-bottom: 0;
             font-weight: normal;
+        }
+        header p {
+            float: right;
+            margin: 0;
+            margin-right: 8px;
+        }
+        header a {
+            color: white;
         }
         #index {
             padding-left: 1em;
@@ -73,7 +81,15 @@
 
 <body>
 
-    <header><h1>k7 - clickable help (unofficial)</h1></header>
+    <header>
+        <h1 style="display: inline-block">k7 - clickable help (unofficial)</h1>
+        <p>
+            <a href="#shakti-python">shakti-python</a>
+            <a href="https://shakti.com/tutorial">tutorial</a>
+            <a href="https://gitlab.com/k7contrib/docs/">contribute</a>
+        </p>
+    </header>
+    
 
     <div id="container">
 
@@ -121,18 +137,12 @@ if[c;..];while[c;..]
 
 <hr>
 
-<p><a href="#shakti-python">Notes on shakti-python</a></p>
-
 <p>Communities:</p>
 <ul>
     <li><a href="https://groups.google.com/forum/#!forum/shaktidb">shakti google group</a> (official - for 'how to' queries)</li>
     <li><a href="https://chat.stackexchange.com/rooms/90748/the-k-tree">the k tree</a> <br>  write access: email <code>".@acegiklmnort"@7 13 12 4 4 0 10 5 10 1 5 9 2 6 8 0 3 11 9</code></li>
     <li><a href="https://www.reddit.com/r/apljk/">r/apljk</a></li>
 </ul>
-
-<p><a href="https://shakti.com/tutorial">Official k7 tutorial</a></p>
-
-<p><a href="https://gitlab.com/k7contrib/docs/">Contribute to these docs</a></p>
 
 </div>
 
