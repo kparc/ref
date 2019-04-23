@@ -328,10 +328,43 @@ a b
 <h3 id="1way">One-way conversions</h3>
 
 <h4>Parse <code>`p</code></h4>
-<pre> `p "5*!3"
+
+<pre> `p @ "5*!3"
 *     
 5     
 (!:;3)</pre>
+
+<p>A parse tree can be executed with <code>.</code>:</p>
+
+<pre> . `p @ "5*!3"
+0 5 10</pre>
+
+<p>The parser enlists names (and lists of names) to indicate they should not be evaluated.</p>
+
+<p>Examples:</p>
+
+<pre> e: ("1;.1;`n;\"c\";1 2;1. 2.;`n`o;\"chars\";v;1+2;+/1 2;{x+2y};a:1;:a+2b;/comment;\\h")
+ {{string: x; parsetree: `p x; type: @ `p x}}' ";"\: e
+string   parsetree    type
+-------- ------------ ----
+1        1            i   
+.1       0.1          f   
+`n       ,`n          N   
+"c"      "c"          c   
+1 2      1 2          I   
+1. 2.    1 2f         F   
+`n`o     ,`n`o            
+"chars"  "chars"      C   
+v        `v           n   
+1+2      (+;1;2)          
++/1 2    ((/;+);1 2)      
+{x+2y}   {x+2y}       1   
+a:1      (::;`a;1)        
+:a+2b    :a+2b        0   
+/comment (/;`comment)     
+\h       (\;`h)</pre>
+
+<!-- TODO: add IO functions like 0: -->
 
 <h4>Matrix display <code>`m</code></h4>
 
