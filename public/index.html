@@ -242,6 +242,35 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
     <pre> desc "abracadabra"
 "rrdcbbaaaaa"</pre>
 
+    <h3 id="splice">Splice</h3>
+
+    <p>Insert <code>y</code> into <code>x</code> at index <code>i</code>.</p>
+    
+    <p>If an element was at that index before, move it right.</p>
+
+    <pre> ?[!3;2;`abc]
+0   
+1   
+`abc
+2  
+ ?[!3;2;"abc"]
+0  
+1  
+"a"
+"b"
+"c"
+2  
+</pre>
+
+    <h3 id="amend">Amend</h3>
+
+    <p>Replace the element at <code>i</code> in <code>x</code> with <code>y</code>.</p>
+
+    <pre> @[!3;2;`abc]
+0   
+1   
+`abc</pre>
+
     <h3 id="within">Within</h3>
 
     <pre> `p within `A`z
@@ -409,7 +438,7 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enumerate", "key", "join", "table", ".z.D", ".z.t", "expr", "[f]asc", "[f]desc", "within", "`ascii", "`print", "1way", "2way"]
+    links = ["group", "enumerate", "key", "join", "table", ".z.D", ".z.t", "expr", "[f]asc", "[f]desc", "splice", "amend", "within", "`ascii", "`print", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
