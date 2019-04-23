@@ -311,6 +311,36 @@ a b
  `print @ "123\n"
 0</pre>
 
+<h3 id="datetime">Datetimes</h3>
+
+<p>Dates start from <code>2024-01-01</code>:</p>
+
+<pre>`D $ 0
+2024-01-01</pre>
+
+<p>'0' is Monday. Get the day of the week with <code>7 mod</code>.</p>
+
+<pre> `Mon`Tue`Wed`Thu`Fri`Sat`Sun @ 7 mod 2024-01-01
+`Mon</pre>
+
+<h3 id="1way">One-way conversions</h3>
+
+<h4>Parse <code>`p</code></h4>
+<pre> `p "5*!3"
+*     
+5     
+(!:;3)</pre>
+
+<h4>Matrix display <code>`m</code></h4>
+
+<pre>d: 1 2 3
+d
+1 2 3
+`m d
+1
+2
+3</pre>
+
     <h3 id="2way">Two-way conversions</h3>
 
     <p>Convert to with <code>`x@data</code> or <code>`x data</code>, where `x is the relevant name.</p>
@@ -336,24 +366,6 @@ a b
 "0 2 4"
  `k ({a:1;b:2};{a:"x";b:`z})
 "+{a:(1;\"x\");b:(2;`z)}"</pre>
-
-    <h3 id="1way">One-way conversions</h3>
-
-    <h4>Parse <code>`p</code></h4>
-    <pre> `p "5*!3"
-*     
-5     
-(!:;3)</pre>
-
-    <h4>Matrix display <code>`m</code></h4>
-
-    <pre>d: 1 2 3
- d
-1 2 3
- `m d
-1
-2
-3</pre>
 
 <h3 id="faq">FAQ</h3>
 
@@ -387,7 +399,7 @@ a b
  #!.0
 0</pre>
 
-<p>For other types, take 0 elements from a list of that type (may be a better way?). For example, names:</p>
+<p>For other types, take 0 elements from a list of that type (may be a better way?). For names:</p>
 
 <pre> 0#(,`)
 
@@ -398,6 +410,9 @@ a b
 
 <!-- TODO suggestions: summary of date handling, maybe some crypto examples would be interesting, differences from q (a complex subject) -->
 <!-- TODO https://groups.google.com/d/msg/shaktidb/UKZcbwN-qiA/i3LtReSPCwAJ -->
+<!-- TODO file and network i/o would be cool too :) -->
+<!-- TODO bringing in typed cols from CSVs -->
+<!-- TODO stuff from changelog that's not in help -->
 
 <h3 id="shakti-python">shakti-python</h3>
 
@@ -487,7 +502,7 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enumerate", "key", "join", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]desc", "select", "splice", "amend", "within", "`ascii", "`print", "1way", "2way"]
+    links = ["group", "enumerate", "key", "join", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]desc", "select", "splice", "amend", "within", "`ascii", "`print", "datetime", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
