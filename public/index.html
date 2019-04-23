@@ -267,13 +267,24 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 `ABC`DEF    
 1.23 4567.89</pre>
 
+    <h4 id="byte">Read/write bytes <code>1:</code></h4>
+
+    <pre> "testfile" 1: 0x0123456789abcdef
+ 1: "testfile"
+0x0123456789abcdef</pre>
+
+    <p><code>testfile</code> looks like this (shown in hex):</p>
+ 
+    <pre>$ xxd testfile
+00000000: 0123 4567 89ab cdef                      .#Eg....</pre>
+
     <h4 id="data">Read/write data <code>2:</code></h4>
 
     <pre> "testfile" 2: (1 2 3 4)
  2: "testfile"
 1 2 3 4</pre>
 
-    <p>Internally the file looks like this (shown in hex):</p>
+    <p><code>testfile</code> looks like this (shown in hex):</p>
 
     <pre>$ xxd testfile
 00000000: 0000 0007 0400 0000 0100 0000 0200 0000  ................
@@ -572,7 +583,7 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enumerate", "key", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]desc", "line", "data", "select", "splice", "amend", "within", "`ascii", "`print", "datetime", "1way", "2way"]
+    links = ["group", "enumerate", "key", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]desc", "line", "byte", "data", "select", "splice", "amend", "within", "`ascii", "`print", "datetime", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
