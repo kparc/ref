@@ -84,6 +84,7 @@
     <header>
         <h1 style="display: inline-block">k7 community docs (unofficial)</h1>
         <p>
+            <a href="#faq">faq</a>
             <a href="#shakti-python">shakti-python</a>
             <a href="https://shakti.com/tutorial">tutorial</a>
             <a href="https://gitlab.com/k7contrib/docs/">contribute</a>
@@ -307,6 +308,18 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 1
 2
 3</pre>
+
+<h3 id="faq">FAQ</h3>
+
+<h4>How do I see the output of an assignment expression?</h4>
+
+<p>Use the identity function, <code>::</code>:</p>
+
+<pre> a:1+2  / no output
+ :: a:1+2
+3
+ @(::)
+`1</pre>
 
 <h3 id="shakti-python">shakti-python</h3>
 
