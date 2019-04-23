@@ -169,6 +169,14 @@ r|2 9</pre>
     <h3 id="join">Join</h3>
     <pre> "-"/:("abc";"def")
 "abc-def"</pre>
+
+    <h3 id="split">Split</h3>
+    <pre> "-"\:"who-what-when-where-why"
+who  
+what 
+when 
+where
+why</pre>
     
     <h3 id=".z.D">Current date <code>.z.D</code></h3>
     <pre>.z.D / 2019-04-02</pre>
@@ -539,7 +547,7 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enumerate", "key", "join", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]desc", "select", "splice", "amend", "within", "`ascii", "`print", "datetime", "1way", "2way"]
+    links = ["group", "enumerate", "key", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]desc", "select", "splice", "amend", "within", "`ascii", "`print", "datetime", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
