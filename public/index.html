@@ -293,6 +293,18 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 00000000: 0000 0007 0400 0000 0100 0000 0200 0000  ................
 00000010: 0300 0000 0400 0000                      ........</pre>
 
+    <h4 id="conn">Inter-process communication <code>3:</code> and <code>4:</code></h4>
+
+    <p>Start a k process running with port 1234 (that's <code>k -p 1234</code>).</p>
+
+    <p>Then in another k process, set up a connection to the first k process, send it commands, and get responses:</p>
+
+    <pre>2019-04-18 15:45:55 2core 1gb avx2 © shakti l2.0 test
+ conn: 3: 1234
+ conn 4: "life: 42"
+ conn 4: "life"
+42</pre>
+
     <h3 id="select">Select <code>#[t;c;b[;a]]</code></h3>
 
     <p>Get all rows of <code>t</code> where <code>c</code> is true.</p>
@@ -588,7 +600,7 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enumerate", "key", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]desc", "line", "byte", "data", "select", "splice", "amend", "within", "`ascii", "`print", "datetime", "1way", "2way"]
+    links = ["group", "enumerate", "key", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]desc", "line", "byte", "data", "conn", "select", "splice", "amend", "within", "`ascii", "`print", "datetime", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
