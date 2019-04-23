@@ -98,7 +98,7 @@
 
         <!-- Clickable help. These words are linked to detailed explanations via JavaScript at the bottom of this page. -->
 
-        <pre>$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)     
+        <pre id="official-help">$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)     
                                                                 
 Verb                       Adverb                Noun            Atom List     
 :  assign                  '  each               char  " ab"       `c `C       
@@ -232,6 +232,10 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
     <h3 id="expr">exprs</h3>
     <p>WIP. See <a href="https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ">this forum post</a>.</p>
 
+    <h3 id="help">Help <code>\h</code></h3>
+
+    <p>The official help included in the k binary. It's the navigation to this site!</p>
+
     <h3 id="[f]asc">Sort ascending <code>asc</code></h3>
 
     <pre> asc "abracadabra"
@@ -242,7 +246,20 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
     <pre> desc "abracadabra"
 "rrdcbbaaaaa"</pre>
 
-    <h3 id="splice">Splice</h3>
+    <h3 id="select">Select <code>#[t;c;b[;a]]</code></h3>
+
+    <pre> t: +`a`b!(1 2 3;4 5 6)
+ #[t; :a>1]
+a b
+- -
+2 5
+3 6
+ #[t; :(a>1)&(b<6)]
+,{a:2;b:5}
+ #[t; :(a>1)&(b<5)]
++{a:!0;b:!0}</pre>
+
+    <h3 id="splice">Splice <code>?[x;i;f[;y]]</code></h3>
 
     <p>Insert <code>y</code> into <code>x</code> at index <code>i</code>.</p>
     
@@ -262,7 +279,7 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 2  
 </pre>
 
-    <h3 id="amend">Amend</h3>
+    <h3 id="amend">Amend <code>@[x;i;f[;y]]</code></h3>
 
     <p>Replace the element at <code>i</code> in <code>x</code> with <code>y</code>.</p>
 
@@ -350,6 +367,38 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
  @(::)
 `1</pre>
 
+<h4>How do I make an empty typed list?</h4>
+
+<p>For characters, it's just <code>""</code>:</p>
+
+<pre> #""
+0
+ @""
+`C</pre>
+
+<p>For integers and floats, use <code>!</code>:</p>
+
+<pre> @!0
+`I
+ #!0
+0
+ @!.0
+`F
+ #!.0
+0</pre>
+
+<p>For other types, take 0 elements from a list of that type (may be a better way?). For example, names:</p>
+
+<pre> 0#(,`)
+
+ @0#(,`)
+`N
+ #0#(,`)
+0</pre>
+
+<!-- TODO suggestions: summary of date handling, maybe some crypto examples would be interesting, differences from q (a complex subject) -->
+<!-- TODO https://groups.google.com/d/msg/shaktidb/UKZcbwN-qiA/i3LtReSPCwAJ -->
+
 <h3 id="shakti-python">shakti-python</h3>
 
 <h4>Install</h4>
@@ -433,12 +482,12 @@ k('2 4 6')
 
 <script>
 
-    const raw_elem = document.getElementById("index")
+    const raw_elem = document.getElementById("official-help")
     function makeLink(word) {
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enumerate", "key", "join", "table", ".z.D", ".z.t", "expr", "[f]asc", "[f]desc", "splice", "amend", "within", "`ascii", "`print", "1way", "2way"]
+    links = ["group", "enumerate", "key", "join", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]desc", "select", "splice", "amend", "within", "`ascii", "`print", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
