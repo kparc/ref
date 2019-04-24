@@ -314,7 +314,7 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
  1: "testfile"
 0x0123456789abcdef</pre>
 
-    <p><code>testfile</code> looks like this (shown in hex):</p>
+    <p>You can verify <code>1:</code> works with raw bytes using an external tool:</p>
  
     <pre>$ hexdump -C testfile
 00000000  01 23 45 67 89 ab cd ef                           |.#Eg....|
@@ -326,12 +326,10 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
  2: "testfile"
 1 2 3 4</pre>
 
-    <p><code>testfile</code> looks like this (shown in hex):</p>
+    <p>You can see what <code>testfile</code> looks like in bytes with <code>1:</code>:</p>
 
-    <pre>$ hexdump -C testfile
-00000000  00 00 00 07 04 00 00 00  01 00 00 00 02 00 00 00  |................|
-00000010  03 00 00 00 04 00 00 00                           |........|
-00000018</pre>
+    <pre> 1: "testfile"
+0x000000070400000001000000020000000300000004000000</pre>
 
     <h3 id="conn">Inter-process communication <code>3:</code> and <code>4:</code></h3>
 
