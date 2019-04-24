@@ -34,9 +34,23 @@
         #index {
             padding-left: 1em;
             padding-right: 1em;
+            display: none;
         }
         #index a {
             /* color: rgb(75, 75, 75); */
+        }
+        #small-nav {
+            display: flex;
+            margin: 0;
+            padding: 0.5em;
+            font-size: 2em;
+            border-bottom: 1px solid black;
+            background-color: lightgrey;
+        }
+        #small-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
         #detail {
             padding-left: 1em;
@@ -65,11 +79,13 @@
                 display: flex;
                 flex-direction: column;
             }
+            #small-nav {display: none}
             #container {
                 display: flex;
                 overflow: auto;
             }
             #index {
+                display: block;
                 overflow-y: scroll;
             }
             #detail {
@@ -96,6 +112,20 @@
     
 
     <div id="container">
+
+    <div id="small-nav">
+        <ul>
+            <li><a href="#verbs">Verbs</a></li>
+            <li><a href="#adverbs">Adverbs</a></li>
+            <li><a href="#multi-args">3+ args</a></li>
+            <li><a href="#datetimes">Datetimes</a></li>
+            <li><a href="#tables-KSQL">Tables &amp; KSQL</a></li>
+            <li><a href="#util-math-aggr">Util, math, aggr</a></li>
+            <li><a href="#IO-IPC">IO and IPC</a></li>
+            <li><a href="#commands">Commands</a></li>
+            <li><a href="#converters">Converters</a></li>
+        </ul>
+    </div>
 
     <div id="index">
 
@@ -153,6 +183,9 @@ if[c;..];while[c;..]
 </div>
 
 <div id="detail">
+
+    <h2 id="verbs">Verbs</h2>
+
     <!-- <h3 id="template"></h3><pre></pre> -->
     <h3 id="group">Group</h3>
     <p>With a list, get back the indices at which each unique element appears:
@@ -173,6 +206,8 @@ r|2 9</pre>
     <pre> "-"/:("abc";"def")
 "abc-def"</pre>
 
+    <h2 id="adverbs">Adverbs</h2>
+
     <h3 id="split">Split</h3>
     <pre> "-"\:"who-what-when-where-why"
 who  
@@ -180,14 +215,20 @@ what
 when 
 where
 why</pre>
-    
-    <h3 id=".z.D">Current date <code>.z.D</code></h3>
-    <pre>.z.D / 2019-04-02</pre>
-    
-    <h3 id=".z.t">Current time <code>.z.t</code></h3>
-    <p>Greenwich Mean Time.</p>
-    
-    <pre>.z.t / 11:18:14.857</pre>
+
+    <h2 id="util-math-aggr">Util, math, aggr</h2>
+
+    <h3 id="[f]asc">Sort ascending <code>asc</code></h3>
+
+    <pre> asc "abracadabra"
+"aaaaabbcdrr"</pre>
+
+    <h3 id="[f]desc">Sort descending <code>desc</code></h3>
+
+    <pre> desc "abracadabra"
+"rrdcbbaaaaa"</pre>
+
+    <h2 id="tables-KSQL">Tables and KSQL</h2>
     
     <h3 id="table">Tables</h3>
 
@@ -243,22 +284,15 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
     <h3 id="expr">exprs</h3>
     <p>WIP. See <a href="https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ">this forum post</a>.</p>
 
+    <h2 id="commands">Commands</h2>
+
     <h3 id="help">Help <code>\h</code></h3>
 
     <p>The official help included in the k binary. It's the navigation to this site!</p>
 
-    <h3 id="[f]asc">Sort ascending <code>asc</code></h3>
+    <h2 id="IO-IPC">IO and IPC</h2>
 
-    <pre> asc "abracadabra"
-"aaaaabbcdrr"</pre>
-
-    <h3 id="[f]desc">Sort descending <code>desc</code></h3>
-
-    <pre> desc "abracadabra"
-"rrdcbbaaaaa"</pre>
-
-    <h3>System</h3>
-    <h4 id="line">Read/write line <code>0:</code></h4>
+    <h3 id="line">Read/write line <code>0:</code></h3>
     <p>Given the following in <code>test.csv</code>:</p>
     <pre>1,ABC,1.23
 3,DEF,4567.89</pre>
@@ -270,7 +304,7 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 `ABC`DEF    
 1.23 4567.89</pre>
 
-    <h4 id="byte">Read/write bytes <code>1:</code></h4>
+    <h3 id="byte">Read/write bytes <code>1:</code></h3>
 
     <pre> "testfile" 1: 0x0123456789abcdef
  1: "testfile"
@@ -281,7 +315,7 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
     <pre>$ xxd testfile
 00000000: 0123 4567 89ab cdef                      .#Eg....</pre>
 
-    <h4 id="data">Read/write data <code>2:</code></h4>
+    <h3 id="data">Read/write data <code>2:</code></h3>
 
     <pre> "testfile" 2: (1 2 3 4)
  2: "testfile"
@@ -293,7 +327,7 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 00000000: 0000 0007 0400 0000 0100 0000 0200 0000  ................
 00000010: 0300 0000 0400 0000                      ........</pre>
 
-    <h4 id="conn">Inter-process communication <code>3:</code> and <code>4:</code></h4>
+    <h3 id="conn">Inter-process communication <code>3:</code> and <code>4:</code></h3>
 
     <p>Start a k process running with port 1234 (that's <code>k -p 1234</code>).</p>
 
@@ -304,6 +338,8 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
  conn 4: "life: 42"
  conn 4: "life"
 42</pre>
+
+    <h2 id="multi-args">3+ arguments</h2>
 
     <h3 id="select">Select <code>#[t;c;b[;a]]</code></h3>
 
@@ -374,7 +410,7 @@ a b
  `print @ "∞"
 1</pre>
 
-<h3 id="datetime">Datetimes</h3>
+<h2 id="datetimes">Datetimes</h2>
 
 <p>Dates start from <code>2024-01-01</code>:</p>
 
@@ -385,6 +421,16 @@ a b
 
 <pre> `Mon`Tue`Wed`Thu`Fri`Sat`Sun @ 7 mod 2024-01-01
 `Mon</pre>
+
+<h3 id=".z.D">Current date <code>.z.D</code></h3>
+<pre>.z.D / 2019-04-02</pre>
+
+<h3 id=".z.t">Current time <code>.z.t</code></h3>
+<p>Greenwich Mean Time.</p>
+
+<pre>.z.t / 11:18:14.857</pre>
+
+<h2 id="converters">Converters</h2>
 
 <h3 id="1way">One-way conversions</h3>
 
