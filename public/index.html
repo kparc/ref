@@ -18,8 +18,12 @@
             padding-bottom: 0.1em;
             font-size: 1em;
             position: fixed;
+            top: 0;
+            height: 1.8em;
         }
         header #hamburger {
+            margin-top: 0.1em;
+            margin-bottom: 0.1em;
             margin-left: 8px;
             background-color: grey;
             border: 1px solid white;
@@ -28,19 +32,13 @@
         header h1 {
             display: inline-block;
             margin-left: 8px;
-            margin-top: 0;
-            margin-bottom: 0;
+            margin-top: 0.1em;
+            margin-bottom: 0.1em;
             font-weight: normal;
             font-size: 12px
         }
-        header p {
-            display: inline-block;
-            text-align: right;
-            margin: 0;
-            margin-right: 8px;
-        }
-        header a {
-            color: white;
+        #container {
+            margin-top: 2em;
         }
         #index {
             padding-left: 1em;
@@ -56,6 +54,9 @@
             padding: 0.5em;
             font-size: 1.5em;
             border-bottom: 1px solid black;
+            position: fixed;
+            background-color: rgb(240, 240, 240);
+            border-right: 1px solid black;
         }
         #small-nav ul {
             list-style: none;
@@ -108,6 +109,7 @@
                 background-color: none;
                 font-size: 1em;
                 padding-top: 0.5em;
+                position: inherit
             }
             #index {
                 display: block;
@@ -139,7 +141,11 @@
     <header>
         <!-- fix at top for mobile + desktop? make font bigger for mobile? -->
         <button id="hamburger" onclick="toggle_menu()">&equiv;</button><h1>k7 community docs (unofficial)</h1>
-        <div id="small-nav">
+    </header>
+    
+    <div id="container">
+
+        <nav id="small-nav">
             <ul>
                 <li><a href="#verbs">Verbs</a></li>
                 <li><a href="#adverbs">Adverbs</a></li>
@@ -164,10 +170,11 @@
 
             <!-- in desktop, move bar to LHS instead of top. in mobile, make the jumps let you see the heading jumped to, and fix the bar at the top, and make the bar disappear when a link is clicked. -->
             <!-- add 'cut' (_) -->
+            <!-- add how to install k itself (miniconda, rlwrap) -->
 
-            ---EXTERNAL SITES---
+        ---EXTERNAL SITES---
 
-            <br><br>
+        <br><br>
 
             John Earnest's docs:
             <ul>
@@ -183,11 +190,7 @@
                 <li><a href="https://gitlab.com/k7contrib/docs/">Contribute to these docs</a></li>
             </ul>
 
-        </div>
-    </header>
-    
-
-    <div id="container">
+        </nav>
 
     <div id="index">
 
@@ -622,9 +625,9 @@ d
 <!-- TODO bringing in typed cols from CSVs -->
 <!-- TODO stuff from changelog that's not in help -->
 
-<h3 id="shakti-python">shakti-python</h3>
+<h2 id="shakti-python">shakti-python</h2>
 
-<h4>Install</h4>
+<h3>Install</h3>
 
 <p>One way to install shakti-python is to use <a href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">Miniconda</a>.</p>
 
@@ -638,6 +641,8 @@ d
 <p>Then to get to shakti-python, at the prompt, run <code>python</code> <br>(or if you chose to not update your .bashrc, <code>~/miniconda3/bin/python</code>).</p>
 
 <p>Type <code>help('shakti')</code> at the Python prompt to view the package help.</p>
+
+<h3>Examples</h3>
 
 <pre>(base) chris@chris-VirtualBox:~$ python
 Python 3.7.1 (default, Dec 14 2018, 19:28:38) 
