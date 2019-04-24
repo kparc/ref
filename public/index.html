@@ -101,6 +101,7 @@
 <body>
 
     <header>
+        <!-- fix at top for mobile + desktop? make font bigger for mobile? -->
         <h1 style="display: inline-block">k7 community docs (unofficial)</h1>
         <p>
             <a href="#faq">faq</a>
@@ -293,6 +294,8 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
     <h2 id="IO-IPC">IO and IPC</h2>
 
     <h3 id="line">Read/write line <code>0:</code></h3>
+
+    <!-- TODO what about writing to CSV? -->
     <p>Given the following in <code>test.csv</code>:</p>
     <pre>1,ABC,1.23
 3,DEF,4567.89</pre>
@@ -312,8 +315,9 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 
     <p><code>testfile</code> looks like this (shown in hex):</p>
  
-    <pre>$ xxd testfile
-00000000: 0123 4567 89ab cdef                      .#Eg....</pre>
+    <pre>$ hexdump -C testfile
+00000000  01 23 45 67 89 ab cd ef                           |.#Eg....|
+00000008</pre>
 
     <h3 id="data">Read/write data <code>2:</code></h3>
 
@@ -323,9 +327,10 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 
     <p><code>testfile</code> looks like this (shown in hex):</p>
 
-    <pre>$ xxd testfile
-00000000: 0000 0007 0400 0000 0100 0000 0200 0000  ................
-00000010: 0300 0000 0400 0000                      ........</pre>
+    <pre>$ hexdump -C testfile
+00000000  00 00 00 07 04 00 00 00  01 00 00 00 02 00 00 00  |................|
+00000010  03 00 00 00 04 00 00 00                           |........|
+00000018</pre>
 
     <h3 id="conn">Inter-process communication <code>3:</code> and <code>4:</code></h3>
 
