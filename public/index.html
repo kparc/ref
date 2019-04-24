@@ -163,6 +163,7 @@
             <br>
 
             <!-- in desktop, move bar to LHS instead of top. in mobile, make the jumps let you see the heading jumped to, and fix the bar at the top, and make the bar disappear when a link is clicked. -->
+            <!-- add 'cut' (_) -->
 
             ---EXTERNAL SITES---
 
@@ -405,9 +406,18 @@ a b
 - -
 2 5
 3 6
- #[t; :(a>1)&(b<6)]
+
+ / But since there are just two arguments, we can use # as an infix verb:
+
+ t # :a>1
+a b
+- -
+2 5
+3 6
+
+ t # :(a>1)&(b<6)
 ,{a:2;b:5}
- #[t; :(a>1)&(b<5)]
+ t # :(a>1)&(b<5)
 +{a:!0;b:!0}</pre>
 
     <h3 id="splice">Splice <code>?[x;i;f[;y]]</code></h3>
