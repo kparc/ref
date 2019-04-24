@@ -16,16 +16,26 @@
             width: 100%;
             padding-top: 0.1em;
             padding-bottom: 0.1em;
+            font-size: 1em;
+            position: fixed;
+        }
+        header #hamburger {
+            margin-left: 8px;
+            background-color: grey;
+            border: 1px solid white;
+            color: white;
         }
         header h1 {
+            display: inline-block;
             margin-left: 8px;
-            font-size: 12px;
             margin-top: 0;
             margin-bottom: 0;
             font-weight: normal;
+            font-size: 12px
         }
         header p {
-            float: right;
+            display: inline-block;
+            text-align: right;
             margin: 0;
             margin-right: 8px;
         }
@@ -41,12 +51,11 @@
             /* color: rgb(75, 75, 75); */
         }
         #small-nav {
-            display: flex;
+            display: none;
             margin: 0;
             padding: 0.5em;
-            font-size: 2em;
+            font-size: 1.5em;
             border-bottom: 1px solid black;
-            background-color: lightgrey;
         }
         #small-nav ul {
             list-style: none;
@@ -56,6 +65,9 @@
         #detail {
             padding-left: 1em;
             padding-right: 1em;
+        }
+        #detail h2 {
+            padding-top: 0.5em;
         }
         #detail pre {
             display: inline-block;
@@ -80,10 +92,21 @@
                 display: flex;
                 flex-direction: column;
             }
-            #small-nav {display: none}
+            header {
+                position: inherit;
+            }
             #container {
+                margin-top: 0;
                 display: flex;
                 overflow: auto;
+            }
+            #small-nav {
+                margin-top: 0;
+                border-right: 1px solid black;
+                border-bottom: 0;
+                background-color: none;
+                font-size: 1em;
+                padding-top: 0.5em;
             }
             #index {
                 display: block;
@@ -101,33 +124,47 @@
 
 <body>
 
+    <script>
+    function toggle_menu () {
+        const h = document.getElementById("small-nav")
+        if (h.getAttribute("style")) {
+            h.removeAttribute("style")
+        } else {
+            h.setAttribute("style", "display: block")
+        }
+    }
+    </script>
+
     <header>
         <!-- fix at top for mobile + desktop? make font bigger for mobile? -->
-        <h1 style="display: inline-block">k7 community docs (unofficial)</h1>
-        <p>
-            <a href="#faq">faq</a>
-            <a href="#shakti-python">shakti-python</a>
-            <a href="https://shakti.com/tutorial">tutorial</a>
-            <a href="https://gitlab.com/k7contrib/docs/">contribute</a>
-        </p>
+        <button id="hamburger" onclick="toggle_menu()">&equiv;</button><h1>k7 community docs (unofficial)</h1>
+        <div id="small-nav">
+            <ul>
+                <li><a href="#verbs">Verbs</a></li>
+                <li><a href="#adverbs">Adverbs</a></li>
+                <li><a href="#multi-args">3+ args</a></li>
+                <li><a href="#datetimes">Datetimes</a></li>
+                <li><a href="#tables-KSQL">Tables &amp; KSQL</a></li>
+                <li><a href="#util-math-aggr">Util, math, aggr</a></li>
+                <li><a href="#IO-IPC">IO and IPC</a></li>
+                <li><a href="#commands">Commands</a></li>
+                <li><a href="#converters">Converters</a></li>
+            </ul>
+    
+            <br>
+    
+            <ul>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#shakti-python">shakti-python</a></li>
+                <li><a href="https://shakti.com/tutorial">Tutorial</a></li>
+                <li><a href="#communities">Communities</a></li>
+                <li><a href="https://gitlab.com/k7contrib/docs/">Contribute</a></li>
+            </ul>
+        </div>
     </header>
     
 
     <div id="container">
-
-    <div id="small-nav">
-        <ul>
-            <li><a href="#verbs">Verbs</a></li>
-            <li><a href="#adverbs">Adverbs</a></li>
-            <li><a href="#multi-args">3+ args</a></li>
-            <li><a href="#datetimes">Datetimes</a></li>
-            <li><a href="#tables-KSQL">Tables &amp; KSQL</a></li>
-            <li><a href="#util-math-aggr">Util, math, aggr</a></li>
-            <li><a href="#IO-IPC">IO and IPC</a></li>
-            <li><a href="#commands">Commands</a></li>
-            <li><a href="#converters">Converters</a></li>
-        </ul>
-    </div>
 
     <div id="index">
 
@@ -172,15 +209,6 @@ bool: `utf8`ascii`print
 if[c;..];while[c;..]                                                           
                                                                                 
 \\ exit</pre>
-
-<hr>
-
-<p>Communities:</p>
-<ul>
-    <li><a href="https://groups.google.com/forum/#!forum/shaktidb">shakti google group</a> (official - for 'how to' queries)</li>
-    <li><a href="https://chat.stackexchange.com/rooms/90748/the-k-tree">the k tree</a> <br>  write access: email <code>".@acegiklmnort"@7 13 12 4 4 0 10 5 10 1 5 9 2 6 8 0 3 11 9</code></li>
-    <li><a href="https://www.reddit.com/r/apljk/">r/apljk</a></li>
-</ul>
 
 </div>
 
@@ -639,6 +667,13 @@ k('2 4 6')
 <ul>
     <li><a href="https://groups.google.com/d/msg/shaktidb/etsXDI9J4o4/HmefTXyBAwAJ">Delete globals</a> (at your peril!)</li>
     <li><a href="https://groups.google.com/d/msg/shaktidb/lQ3XSvFPDhw/DOlmmFgHDAAJ">Catch errors</a></li>
+</ul>
+
+<h2 id="communities">Communities</h2>
+<ul>
+    <li><a href="https://groups.google.com/forum/#!forum/shaktidb">shakti google group</a> (official - for 'how to' queries)</li>
+    <li><a href="https://chat.stackexchange.com/rooms/90748/the-k-tree">the k tree</a> <br>  write access: email <code>".@acegiklmnort"@7 13 12 4 4 0 10 5 10 1 5 9 2 6 8 0 3 11 9</code></li>
+    <li><a href="https://www.reddit.com/r/apljk/">r/apljk</a></li>
 </ul>
 
 </div>
