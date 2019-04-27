@@ -216,7 +216,7 @@ _  drop        floor       _[t;c;b[;a]] update   \u[:n]x trace
 .  apply       eval        .[x;i;f[;y]] dmend    \cd [d] get[set]dir   \gr grep
 $  pad|cast    string      $[c;t;f]     cond     \lf [x] file \lc char \ll line
                                                                                 
-util: in within bin like find [f]asc [f]desc [f]key                            
+util: in within bin like find [f]asc [f]dsc [f]key                             
 math: sqrt sin cos abs prm cmb [n]log [n]exp [n]rand mod div                   
 aggr: count first last min max sum avg var dev med                             
 sql: [select|update|delete] a.. by b.. from t.. where c..                      
@@ -224,13 +224,16 @@ sql: [select|update|delete] a.. by b.. from t.. where c..
 datetime:YMDHRSTUV+duration:ymdhrstuv; T:.z.D+.z.t; 2019-06-28+2m; day:7 mod   
 `year`month`date`hour`minute`second`millisecond`microsecond`nanosecond         
                                                                                 
-bool: `utf8`ascii`print                                                        
+bool: `ascii`utf8                                                              
 1way: `p`m`crc`sha`rip`bad   e.g. hash:  `sha@"crypto"                         
 2way:``j`k`csv`b64`hex`aes   e.g. json: `j?`j@{a:2;b:`c}                       
                                                                                 
 if[c;..];while[c;..]                                                           
                                                                                 
-\\ exit</pre>
+K:key k:key`k1  /public private                                                
+K key k key"hi" /verify sign                                                   
+                                                                                
+\\ exit </pre>
 
 </div>
 
@@ -275,9 +278,9 @@ why</pre>
     <pre> asc "abracadabra"
 "aaaaabbcdrr"</pre>
 
-    <h3 id="[f]desc">Sort descending <code>desc</code></h3>
+    <h3 id="[f]dsc">Sort descending <code>dsc</code></h3>
 
-    <pre> desc "abracadabra"
+    <pre> dsc "abracadabra"
 "rrdcbbaaaaa"</pre>
 
     <h2 id="tables-KSQL">Tables and KSQL</h2>
@@ -455,6 +458,8 @@ a b
  `p within `A`Z
 0</pre>
 
+    <h2 id="bool">Boolean checks</h2>
+
     <h3 id="`ascii"><code>`ascii</code></h4>
 
     <p>Are all characters in the string in the <a href="https://en.wikipedia.org/wiki/ASCII#Character_set">ASCII set</a>?</p>
@@ -462,16 +467,6 @@ a b
 1
  `ascii @ "∞"
 0</pre>
-
-<h3 id="`print"><code>`print</code></h4>
-
-<p>Are all characters in the string printable?</p>
-<pre> `print @ "123"
-1
- `print @ "123\n"
-0
- `print @ "∞"
-1</pre>
 
 <h2 id="datetime">Datetimes</h2>
 
@@ -718,7 +713,7 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enumerate", "key", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]desc", "line", "byte", "data", "conn", "select", "splice", "amend", "within", "`ascii", "`print", "datetime", "1way", "2way"]
+    links = ["group", "enumerate", "key", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]dsc", "line", "byte", "data", "conn", "select", "splice", "amend", "within", "bool", "`ascii", "datetime", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
@@ -752,6 +747,22 @@ factorial 4
 1 0 0
 0 1 0
 0 0 1</pre>
+
+
+
+"`print",
+
+<h3 id="`print"><code>`print</code></h4>
+
+<p>Are all characters in the string printable?</p>
+<pre> `print @ "123"
+1
+ `print @ "123\n"
+0
+ `print @ "∞"
+1</pre>
+
+
 -->
 
 </body>
