@@ -156,6 +156,7 @@
                 <li><a href="#IO-IPC">IO and IPC</a></li>
                 <li><a href="#commands">Commands</a></li>
                 <li><a href="#converters">Converters</a></li>
+                <li><a href="#.z"><code>.z</code> namespace</a></li>
             </ul>
     
             <br>
@@ -610,6 +611,36 @@ d
  #0#(,`)
 0</pre>
 
+
+<h2 id=".z"><code>.z</code> namespace</h2>
+
+<h3 id=".z.x"><code>.z.x</code></h3>
+
+<p>In the REPL, contains an empty list by default:</p>
+
+<pre>(base) chris@chris-VirtualBox:~/sheet$ k
+2019-04-28 15:03:42 2core 1gb avx2 © shakti l2.0 test
+.z.x
+()</pre>
+
+<p>But in a file, it lists the filename and any args after it. If <code>testarg.k</code> comprises the line <code>.z.x</code>:</p>
+
+<pre>(base) chris@chris-VirtualBox:~/sheet$ k testarg.k not.a.real.file
+2019-04-28 15:03:42 2core 1gb avx2 © shakti l2.0 test
+testarg.k      
+not.a.real.file</pre>
+
+<p>Therefore, <code>.z.x</code> can be used to pass arguments to a k script.</p>
+
+<p>Also, note those arguments won't appear if we load <code>testarg.k</code> in another k process:</p>
+
+<pre>(base) chris@chris-VirtualBox:~/sheet$ k
+2019-04-28 15:03:42 2core 1gb avx2 © shakti l2.0 test
+\l testarg.k
+()</pre>
+
+<p>So you can also use <code>.z.x</code> to identify whether a script was run in its own right, or merely <code>\l</code>-ed into another k process.</p>
+
 <!-- TODO suggestions: summary of date handling, maybe some crypto examples would be interesting, differences from q (a complex subject) -->
 <!-- TODO https://groups.google.com/d/msg/shaktidb/UKZcbwN-qiA/i3LtReSPCwAJ -->
 <!-- TODO file and network i/o would be cool too :) -->
@@ -713,7 +744,7 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = ["group", "enumerate", "key", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]dsc", "line", "byte", "data", "conn", "select", "splice", "amend", "within", "bool", "`ascii", "datetime", "1way", "2way"]
+    links = [".z.x", "group", "enumerate", "key", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]dsc", "line", "byte", "data", "conn", "select", "splice", "amend", "within", "bool", "`ascii", "datetime", "1way", "2way"]
 
     for (let i in links) {
         const w = links[i]
