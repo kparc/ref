@@ -136,10 +136,14 @@
                 h.setAttribute("style", "display: block")
             }
         }
+        window.onload = function() {
+            const links = document.getElementById("small-nav").querySelectorAll("a");
+            links.forEach(function(link) {link.onclick = toggle_menu})
+        }
     </script>
 
     <header>
-        <!-- fix at top for mobile + desktop? make font bigger for mobile? -->
+        <!-- TODO make font bigger for mobile? figure out why font size changes for code boxes on mobile? -->
         <button id="hamburger" onclick="toggle_menu()">&equiv;</button><h1>k7 community docs (unofficial)</h1>
     </header>
     
