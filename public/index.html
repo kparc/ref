@@ -381,7 +381,18 @@ lo</pre>
 
     <h2 id="aggr">Aggregations</h2>
 
-    <p>TODO...</p>
+    <h3 id="med">Median <code>med</code></h3>
+
+    <p>The value in the middle if the data was sorted.</p>
+    
+    <p>If the count of the data is even, return the value on the right of the middle.</p>
+
+    <pre> med !3
+1
+ med !4
+2
+ med 2 3 1
+2</pre>
 
     <h2 id="tables-KSQL">Tables and KSQL</h2>
     
@@ -855,7 +866,7 @@ k('2 4 6')
         ["help"],
         ["util", "within", "[f]asc", "[f]dsc"],
         ["math", "abs", "prm", "[n]rand"],
-        ["aggr"],
+        ["aggr", "med"],
         ["line", "byte", "data", "conn"],
         ["select", "splice", "amend"],
         ["bool", "`ascii"],
