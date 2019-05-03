@@ -290,6 +290,13 @@ r|2 9</pre>
  "abracadabra" ^ "bc"
 "araadara"</pre>
 
+    <h3 id="take">Take</h3>
+
+    <pre> 3#"abracadabra"
+"abr"             
+ (2 mod)#!9
+1 3 5 7</pre>
+
     <h3 id="floor">Floor <code>_</code></h3>
 
     <pre> _ 1.23 -1.23 0
@@ -526,6 +533,8 @@ a|b
     <p>The official help included in the k binary. It's the navigation to this site!</p>
 
     <h3 id="log">Changelog <code>\l</code></h3>
+
+    <!-- TODO how will we update this? -->
 
     <p>As at 2019-05-03:</p>
 
@@ -994,7 +1003,7 @@ k('2 4 6')
 
     links = [].concat( 
         [".z.x"],
-        ["Verb", "up", "group", "enumerate", "key", "except", "floor", "find", "distinct"],
+        ["Verb", "up", "group", "enumerate", "key", "take", "except", "floor", "find", "distinct"],
         ["Adverb", "eachprior", "join", "split"],
         ["Noun", "func", "expr"],
         ["table"],
