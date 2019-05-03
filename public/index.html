@@ -156,7 +156,9 @@
                 <li><a href="#multi-args">3+ args</a></li>
                 <li><a href="#datetime">Datetimes</a></li>
                 <li><a href="#tables-KSQL">Tables &amp; KSQL</a></li>
-                <li><a href="#util-math-aggr">Util, math, aggr</a></li>
+                <li><a href="#util">Utilities</a></li>
+                <li><a href="#math">Math</a></li>
+                <li><a href="#aggr">Aggregations</a></li>
                 <li><a href="#IO-IPC">IO and IPC</a></li>
                 <li><a href="#commands">Commands</a></li>
                 <li><a href="#converters">Converters</a></li>
@@ -246,6 +248,14 @@ K key k key"hi" /verify sign
 
     <h2 id="verbs">Verbs</h2>
 
+    <h3 id="up">Up <code>&lt;</code></h3>
+
+    <pre> &lt; "abracadabra"
+0 3 5 7 10 1 8 4 6 2 9
+ s@&lt;s: "abracadabra"
+"aaaaabbcdrr"</pre>
+
+
     <!-- <h3 id="template"></h3><pre></pre> -->
     <h3 id="group">Group</h3>
     <p>With a list, get back the indices at which each unique element appears:
@@ -276,6 +286,30 @@ r|2 9</pre>
 0 2 3
  (!4)^1 3
 0 2</pre>
+
+    <h3 id="floor">Floor <code>_</code></h3>
+
+    <pre> _ 1.23 -1.23 0
+1 -2 0</pre>
+
+    <h3 id="find">Find <code>?</code></h3>
+
+    <pre> 2 3 1 4 0 ? 3 1 0
+1 2 4
+ 2 3 1 4 0 ? 3
+1</pre>
+
+    <h3 id="distinct">Distinct <code>?</code></h3>
+
+    <pre> ? "abracadabra"
+"abrcd"
+ ? ("hi"; 1 2 3; `a`b; 0; "hi"; `a`b; 1 2; 0)
+"hi" 
+1 2 3
+`a`b 
+0    
+1 2</pre>
+
     <h3 id="join">Join</h3>
     <pre> "-"/:("la";"li";"lu";"le";"lo")
 "la-li-lu-le-lo"</pre>
@@ -291,7 +325,20 @@ lu
 le
 lo</pre>            
 
-    <h2 id="util-math-aggr">Util, math, aggr</h2>
+    <h2 id="util">Utilities</h2>
+
+    <h3 id="within">Within</h3>
+
+    <pre> `p within `A`z
+1
+ `p within `A`Z
+0</pre>
+    
+    <h3 id="find"><code>find</code></h3>
+
+    <pre> "abracadabra" find "bra"
+1 3
+8 3</pre>
 
     <h3 id="[f]asc">Sort ascending <code>asc</code></h3>
 
@@ -302,6 +349,8 @@ lo</pre>
 
     <pre> dsc "abracadabra"
 "rrdcbbaaaaa"</pre>
+
+    <h2 id="math">Math</h2>
 
     <h3 id="abs">Absolute value <code>abs</code></h3>
 
@@ -328,6 +377,10 @@ lo</pre>
 0.7502717 0.8107001 0.8145892
  3 rand 10
 7 3 9</pre>
+
+    <h2 id="aggr">Aggregations</h2>
+
+    <p>TODO...</p>
 
     <h2 id="tables-KSQL">Tables and KSQL</h2>
     
@@ -496,13 +549,6 @@ a b
 0   
 1   
 `abc</pre>
-
-    <h3 id="within">Within</h3>
-
-    <pre> `p within `A`z
-1
- `p within `A`Z
-0</pre>
 
     <h2 id="bool">Boolean checks</h2>
 
@@ -791,8 +837,9 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = [".z.x", "group", "enumerate", "key", "except", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "[f]asc", "[f]dsc", "abs", "prm", "[n]rand", "line", "byte", "data", "conn", "select", "splice", "amend", "within", "bool", "`ascii", "datetime", "1way", "2way"]
+    links = [".z.x", "up", "group", "enumerate", "key", "except", "floor", "find", "distinct", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "util", "within", "[f]asc", "[f]dsc", "abs", "prm", "math", "[n]rand", "aggr", "line", "byte", "data", "conn", "select", "splice", "amend", "bool", "`ascii", "datetime", "1way", "2way"]
 
+    // TODO figure out to add doubles like `find`
     for (let i in links) {
         const w = links[i]
         raw_elem.innerHTML = raw_elem.innerHTML.replace(w, makeLink(w))
