@@ -546,10 +546,17 @@ a b
 
     <p>Replace the element at <code>i</code> in <code>x</code> with <code>y</code>.</p>
 
-    <pre> @[!3;2;`abc]
-0   
-1   
-`abc</pre>
+    <p>To do the update in-place, use the data's name symbol instead of the name directly (<code>`name</code> vs <code>name</code>).</p>
+
+    <pre>v:!3
+ @[v;1;7]
+0 7 2
+ v
+!3   / original assignment unchanged
+ @[`v;1;7]
+`v
+ v
+0 7 2</pre>
 
     <h2 id="bool">Boolean checks</h2>
 
