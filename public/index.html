@@ -838,7 +838,23 @@ k('2 4 6')
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
 
-    links = [".z.x", "up", "group", "enumerate", "key", "except", "floor", "find", "distinct", "join", "split", "table", ".z.D", ".z.t", "expr", "help", "util", "within", "[f]asc", "[f]dsc", "abs", "prm", "math", "[n]rand", "aggr", "line", "byte", "data", "conn", "select", "splice", "amend", "bool", "`ascii", "datetime", "1way", "2way"]
+    links = [].concat( 
+        [".z.x"],
+        ["up", "group", "enumerate", "key", "except", "floor", "find", "distinct"],
+        ["join", "split"],
+        ["table"],
+        [".z.D", ".z.t"],
+        ["expr"],
+        ["help"],
+        ["util", "within", "[f]asc", "[f]dsc"],
+        ["math", "abs", "prm", "[n]rand"],
+        ["aggr"],
+        ["line", "byte", "data", "conn"],
+        ["select", "splice", "amend"],
+        ["bool", "`ascii"],
+        ["datetime"],
+        ["1way", "2way"],
+    )
 
     // TODO figure out to add doubles like `find`
     for (let i in links) {
