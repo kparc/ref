@@ -314,6 +314,23 @@ r|2 9</pre>
     
     <h2 id="adverbs">Adverbs</h2>
 
+    <h3 id="eachprior">Each prior</h3>
+
+    <p>The null chosen for the first pairing is of the type of the first member of the list.</p>
+    
+    <pre> {y,x}': !3
+Ø 0
+0 1 
+1 2  
+ {y,x}': 1.0 2.1 4.7
+ø 1   
+1 2.1  
+2.1 4.7
+ {y,x}': ("a";1;`ok)
+" a"   
+("a";1)
+(1;`ok)</pre>
+
     <h3 id="join">Join</h3>
     <pre> "-"/:("la";"li";"lu";"le";"lo")
 "la-li-lu-le-lo"</pre>
@@ -859,7 +876,7 @@ k('2 4 6')
     links = [].concat( 
         [".z.x"],
         ["up", "group", "enumerate", "key", "except", "floor", "find", "distinct"],
-        ["join", "split"],
+        ["eachprior", "join", "split"],
         ["table"],
         [".z.D", ".z.t"],
         ["expr"],
