@@ -151,8 +151,9 @@
 
         <nav id="small-nav">
             <ul>
-                <li><a href="#verbs">Verbs</a></li>
-                <li><a href="#adverbs">Adverbs</a></li>
+                <li><a href="#Verb">Verbs</a></li>
+                <li><a href="#Adverb">Adverbs</a></li>
+                <li><a href="#Noun">Nouns</a></li>
                 <li><a href="#multi-args">3+ args</a></li>
                 <li><a href="#datetime">Datetimes</a></li>
                 <li><a href="#tables-KSQL">Tables &amp; KSQL</a></li>
@@ -246,7 +247,7 @@ K key k key"hi" /verify sign
 
 <div id="detail">
 
-    <h2 id="verbs">Verbs</h2>
+    <h2 id="Verb">Verbs</h2>
 
     <h3 id="up">Up <code>&lt;</code></h3>
 
@@ -312,7 +313,7 @@ r|2 9</pre>
 0    
 1 2</pre>
     
-    <h2 id="adverbs">Adverbs</h2>
+    <h2 id="Adverb">Adverbs</h2>
 
     <h3 id="eachprior">Each prior</h3>
 
@@ -341,7 +342,21 @@ la
 li
 lu
 le
-lo</pre>            
+lo</pre>    
+
+    <h2 id="Noun">Nouns</h2>
+
+    <h3 id="func">Functions</h3>
+
+    <p>A function with implicit <code>x</code>, <code>y</code>, <code>z</code> args can be distinguished from a dict by ensuring the first expression is not an assignment:</p>
+
+    <pre> @{a:1;a*x}
+value error: a
+ @{;a:1;a*x}   / in scripts, can also be a newline instead of a semicolon
+`1</pre>
+
+    <h3 id="expr">exprs</h3>
+    <p>WIP. See <a href="https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ">this forum post</a>.</p>
 
     <h2 id="util">Utilities</h2>
 
@@ -503,9 +518,6 @@ a|b
 -|-
 1|6
 2|3</pre>
-
-    <h3 id="expr">exprs</h3>
-    <p>WIP. See <a href="https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ">this forum post</a>.</p>
 
     <h2 id="commands">Commands</h2>
 
@@ -915,11 +927,11 @@ k('2 4 6')
 
     links = [].concat( 
         [".z.x"],
-        ["up", "group", "enumerate", "key", "except", "floor", "find", "distinct"],
-        ["eachprior", "join", "split"],
+        ["Verb", "up", "group", "enumerate", "key", "except", "floor", "find", "distinct"],
+        ["Adverb", "eachprior", "join", "split"],
+        ["Noun", "func", "expr"],
         ["table"],
         [".z.D", ".z.t"],
-        ["expr"],
         ["help"],
         ["util", "within", "[f]asc", "[f]dsc"],
         ["math", "abs", "prm", "[n]rand"],
