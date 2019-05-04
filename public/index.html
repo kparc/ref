@@ -330,17 +330,31 @@ r|2 9</pre>
 (1;`ok)</pre>
 
     <h3 id="join">Join</h3>
-    <pre> "-"/:("la";"li";"lu";"le";"lo")
+    <pre> "-"/: ("la";"li";"lu";"le";"lo")
 "la-li-lu-le-lo"</pre>
 
+    <p>With empty symbol as 'separator', appends a newline to each string and joins:</p>
+
+    <pre> `/: ("ab";"cd")
+"ab\ncd\n"</pre>
+
     <h3 id="split">Split</h3>
-    <pre>  "-"\:"la-li-lu-le-lo"
+    <pre> "-"\: "la-li-lu-le-lo"
 la
 li
 lu
 le
 lo</pre>
 
+<p>With empty symbol as 'separator', splits on newlines, including (if present) at the end of the last word:</p>
+
+<pre> `\: "ab\ncd\n"
+ab
+cd
+ `\: "ab\ncd"
+ab
+cd</pre>
+        
     <h3 id="sv">Scalar from vector (sv) <code>/:</code></h3>
 
     <p>Mnemonic tip: read 'sv' in k evaluation order, ie right to left.</p>
@@ -351,6 +365,10 @@ lo</pre>
 10</pre>
 
     <p>You can also turn a vector in (year, month, day) form into a k date (see under <a href="#datetime">datetime</a>).</p>
+
+    <!-- TODO document?  `/: ("ok";"well";"then")
+"ok\nwell\nthen\n"
+-->
 
     <h3 id="vs">Vector from scalar (vs) <code>\:</code></h3>
 
