@@ -339,7 +339,31 @@ la
 li
 lu
 le
-lo</pre>    
+lo</pre>
+
+    <h3 id="sv">Scalar from vector (sv) <code>/:</code></h3>
+
+    <p>Mnemonic tip: read 'sv' in k evaluation order, ie right to left.</p>
+
+    <p>Convert a vector of numbers from a specified base into base 10:</p>
+
+    <pre> 2 /: 1 0 1 0
+10</pre>
+
+    <p>You can also turn a vector in (year, month, day) form into a k date (see under <a href="#datetime">datetime</a>).</p>
+
+    <h3 id="vs">Vector from scalar (vs) <code>\:</code></h3>
+
+    <p>Mnemonic tip: read 'vs' in k evaluation order, ie right to left.</p>
+
+    <p>Convert a number from base 10 into a specified base:</p>
+
+    <pre> 10 \: 1000
+1 0 0 0
+ 2 \: 10
+1 0 1 0</pre>
+
+    <p>You can also turn a k date into a (year, month, day) vector (see under <a href="#datetime">datetime</a>).</p>
 
     <h2 id="Noun">Nouns</h2>
 
@@ -740,6 +764,13 @@ a b
 <pre> `Mon`Tue`Wed`Thu`Fri`Sat`Sun @ 7 mod 2024-01-01
 `Mon</pre>
 
+<p>Split a date into its year, month and date digits using <code>`\:</code>. Turn digits into a date using <code>`/:</code>.</p>
+
+<pre> `\: .z.d
+2019 5 4
+ `/: 2019 5 4
+2019-05-04</pre>
+
 <h3 id=".z.D">Current date <code>.z.D</code></h3>
 <pre>.z.D / 2019-04-02</pre>
 
@@ -1008,7 +1039,7 @@ k('2 4 6')
     links = [].concat( 
         [".z.x"],
         ["Verb", "up", "group", "enumerate", "key", "take", "except", "floor", "find", "distinct"],
-        ["Adverb", "eachprior", "join", "split"],
+        ["Adverb", "eachprior", "join", "split", "sv", "vs"],
         ["Noun", "func", "expr"],
         ["table"],
         [".z.D", ".z.t"],
