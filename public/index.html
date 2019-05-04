@@ -40,6 +40,7 @@
         #container {
             height: 100%;
             display: flex;
+            overflow-y: hidden;
         }
         #index {
             height: 100%;
@@ -47,6 +48,8 @@
             padding-right: 1em;
             display: none;
             overflow-y: auto;
+            overflow-x: hidden; /* TODO can we deal with this another way? */
+            overscroll-behavior: contain;
         }
         #index a {
             /* color: rgb(75, 75, 75); */
@@ -73,6 +76,7 @@
             overflow-y: auto;
             flex-grow: 1;
             flex-basis: 0;
+            overscroll-behavior: contain;
         }
         #detail h2 {
             padding-top: 0.5em;
