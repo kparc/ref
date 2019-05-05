@@ -1,6 +1,9 @@
 <html>
 
 <!-- TODO maybe hamburger button switches between simple and detailed navigation? -->
+<!-- TODO click on symbol to copy to clipboard -->
+<!-- TODO feedback: table of contents, search results (if any), cross-reference pages ("i/o verbs"), "see also" on topic pages, stuff like that -->
+<!-- https://chat.stackexchange.com/transcript/message/50039343#50039343 -->
 
 <head>
     <title>k7 docs</title>
@@ -76,7 +79,6 @@
         }
         #detail {
             height: 100%;
-            width: 100%;
             padding-left: 1em;
             padding-right: 1em;
             overflow-y: scroll;
@@ -85,16 +87,11 @@
             overscroll-behavior: contain;
             -webkit-overflow-scrolling: touch;
         }
-        #detail h2 {
-            padding-top: 0.5em;
-            margin: 0;
-        }
         #detail pre {
             display: inline-block;
             border: 1px solid black;
             padding: 0.25em;
             margin: 0;
-            margin-bottom: 0.5em;
             background-color: #9e9e9e1c;
         }
         code {
@@ -102,8 +99,6 @@
             padding-left: 0.2em;
             padding-right: 0.2em;
         }
-        h3 {padding-top: 0.5em; margin-top: 0.5em}
-        h4 {margin-top: 0.5em}
         ul {padding-left: 1.5em}
         table {border-collapse: collapse; font-size: 12px}
         th {border: 1px solid black; padding: 0.25em;}
