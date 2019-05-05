@@ -1,9 +1,12 @@
 <html>
 
+<!-- TODO maybe hamburger button switches between simple and detailed navigation? -->
+
 <head>
     <title>k7 docs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        /* TODO: fix smooth scrolling on mobile */
         body {
             font-family: Consolas, monospace;
             font-size: 12px;
@@ -98,6 +101,9 @@
         h3 {padding-top: 0.5em; margin-top: 0.5em}
         h4 {margin-top: 0.5em}
         ul {padding-left: 1.5em}
+        table {border-collapse: collapse; font-size: 12px}
+        th {border: 1px solid black; padding: 0.25em;}
+        td {border: 1px solid black; padding: 0.25em;}
 
         @media screen and (min-device-width: 480px) and (min-width: 800px) {
             #small-nav {
@@ -333,7 +339,10 @@ r|2 9</pre>
 ("a";1)
 (1;`ok)</pre>
 
-    <h3 id="join">Join</h3>
+    <h3 id="join">Join <code>/:</code></h3>
+
+    <p>Prepend the separator to <code>/:</code>, <a href="https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ">without a space in between</a>.</p>
+
     <pre> "-"/: ("la";"li";"lu";"le";"lo")
 "la-li-lu-le-lo"</pre>
 
@@ -342,7 +351,10 @@ r|2 9</pre>
     <pre> `/: ("ab";"cd")
 "ab\ncd\n"</pre>
 
-    <h3 id="split">Split</h3>
+    <h3 id="split">Split <code>\:</code></h3>
+
+    <p>Prepend the separator to <code>\:</code>, <a href="https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ">without a space in between</a>.</p>
+
     <pre> "-"\: "la-li-lu-le-lo"
 la
 li
@@ -368,7 +380,10 @@ cd</pre>
     <pre> 2 /: 1 0 1 0
 10</pre>
 
-    <p>You can also turn a vector in (year, month, day) form into a k date (see under <a href="#datetime">datetime</a>).</p>
+    <p>You can also turn a vector in (year, month, day) form into a k date:</p>
+
+<pre> `/: 2019 5 4
+2019-05-04</pre>
 
     <!-- TODO document?  `/: ("ok";"well";"then")
 "ok\nwell\nthen\n"
@@ -385,7 +400,10 @@ cd</pre>
  2 \: 10
 1 0 1 0</pre>
 
-    <p>You can also turn a k date into a (year, month, day) vector (see under <a href="#datetime">datetime</a>).</p>
+    <p>You can also turn a k date into a (year, month, day) vector:</p>
+
+<pre> `\: .z.d
+2019 5 4</pre>
 
     <h2 id="Noun">Nouns</h2>
 
@@ -776,9 +794,16 @@ a b
 
 <h2 id="datetime">Datetimes</h2>
 
+<p>A datetime looks like this:</p>
+
+<pre> .z.T
+2019-05-04T13:13:12.313</pre>
+
+<p>Datetime literals are <a href="https://groups.google.com/forum/#!topic/shaktidb/184DnAJrwKU">designed</a> to match <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.</p>
+
 <p>Dates start from <code>2024-01-01</code>:</p>
 
-<pre>`D $ 0
+<pre> `D $ 0
 2024-01-01</pre>
 
 <p>'0' is Monday. Get the day of the week with <code>7 mod</code>.</p>
@@ -786,12 +811,37 @@ a b
 <pre> `Mon`Tue`Wed`Thu`Fri`Sat`Sun @ 7 mod 2024-01-01
 `Mon</pre>
 
-<p>Split a date into its year, month and date digits using <code>`\:</code>. Turn digits into a date using <code>`/:</code>.</p>
+<p>You can also use duration literals (requires short-form code), and do date arithmetic:</p>
 
-<pre> `\: .z.d
-2019 5 4
- `/: 2019 5 4
-2019-05-04</pre>
+<pre> .z.d
+2019-05-04
+ .z.d + 2m
+2019-07-04</pre>
+
+<p>Datetime and duration names:</p>
+<table>
+    <tr><th>Long-form duration</th><th>Short-form duration</th><th>Datetime</th></tr>
+    <tr><td>`year</td><td>`y</td><td>`Y</td></tr>
+    <tr><td>`month</td><td>`m</td><td>`M</td></tr>
+    <tr><td>`date</td><td>`d</td><td>`D</td></tr>
+    <tr><td>`hour</td><td>`h</td><td>`H</td></tr>
+    <tr><td>`minute</td><td>`r</td><td>`R</td></tr>
+    <tr><td>`second</td><td>`s</td><td>`S</td></tr>
+    <tr><td>`millisecond</td><td>`t</td><td>`T</td></tr>
+    <tr><td>`microsecond</td><td>`u</td><td>`U</td></tr>
+    <tr><td>`nanosecond</td><td>`v</td><td>`V</td></tr>
+</table>
+
+<p>Convert to/from/between datetimes and durations using <code>$</code>. It takes a name or string (short version only):</p>
+
+<pre> `year $ .z.t
+2019y
+ `y  $ 2019
+2019y
+ "y" $ 2019
+2019y</pre>
+
+<p>Convert between dates and year, month date digits using <a href="#sv"><code>`/:</code></a> and <a href="#vs"><code>`\:</code></a>.</p>
 
 <h3 id=".z.D">Current date <code>.z.D</code></h3>
 <pre>.z.D / 2019-04-02</pre>
@@ -806,6 +856,8 @@ a b
 <h3 id="1way">One-way conversions</h3>
 
 <p>Convert to with <code>`x@data</code> or <code>`x data</code>, where <code>`x</code> is the relevant name.</p>
+
+<!-- TODO workdays? -->
 
 <h4>Parse <code>`p</code></h4>
 
