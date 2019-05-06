@@ -255,7 +255,7 @@ K key k key"hi" /verify sign
 
 
     <!-- <h3 id="template"></h3><pre></pre> -->
-    <h3 id="group">Group</h3>
+    <h3 id="group">Group <code>=</code></h3>
     <p>With a list, get back the indices at which each unique element appears:
     <pre> ="abracadabra"
 a|0 3 5 7 10
@@ -263,7 +263,7 @@ b|1 8
 c|,4        
 d|,6        
 r|2 9</pre>
-    <h3 id="enumerate">Enumerate</h3><pre> !3
+    <h3 id="enumerate">Enumerate <code>!</code></h3><pre> !3
 0 1 2
  !2 3
 0 0 0 1 1 1
@@ -276,10 +276,10 @@ r|2 9</pre>
 0 1 0
 0 0 1</pre>
 
-    <h3 id="key">Key</h3>
+    <h3 id="key">Key <code>!</code></h3>
     <pre> ! {a:1;b:2}
 `a`b</pre>
-    <h3 id="except">Except</h3>
+    <h3 id="except">Except <code>^</code></h3>
     <pre> (!4)^1
 0 2 3
  (!4)^1 3
@@ -287,7 +287,7 @@ r|2 9</pre>
  "abracadabra" ^ "bc"
 "araadara"</pre>
 
-    <h3 id="take">Take</h3>
+    <h3 id="take">Take <code>#</code></h3>
 
     <pre> 3#"abracadabra"
 "abr"</pre>
@@ -321,7 +321,7 @@ r|2 9</pre>
     
     <h2 id="Adverb">Adverbs</h2>
 
-    <h3 id="eachprior">Each prior</h3>
+    <h3 id="eachprior">Each prior <code>':</code></h3>
 
     <p>The null chosen for the first pairing is of the type of the first member of the list.</p>
     
@@ -434,7 +434,7 @@ a b
 
     <h2 id="util">Utilities</h2>
 
-    <h3 id="within">Within</h3>
+    <h3 id="within"><code>within</code></h3>
 
     <pre> `p within `A`z
 1
@@ -442,6 +442,8 @@ a b
 0</pre>
     
     <h3 id="find"><code>find</code></h3>
+
+    <!-- TODO add wildcards, regex-like features -->
 
     <pre> "abracadabra" find "bra"
 1 3
@@ -480,7 +482,7 @@ a b
 
     <!-- TODO figure out 'f' cases -->
 
-    <h3 id="[n]rand"><code>[n]rand</code></h3>
+    <h3 id="[n]rand">Random <code>[n]rand</code></h3>
 
     <pre> rand 3
 0.7502717 0.8107001 0.8145892
