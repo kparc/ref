@@ -50,14 +50,7 @@
             overflow-y: hidden;
         }
         #index {
-            height: 100%;
-            padding-left: 1em;
-            padding-right: 1em;
             display: none;
-            overflow-y: auto;
-            overflow-x: hidden; /* TODO can we deal with this another way? */
-            overscroll-behavior: contain;
-            border-right: 1px solid rgba(0,0,0,.1);
         }
         #index a {
             /* color: rgb(75, 75, 75); */
@@ -71,6 +64,7 @@
             position: fixed;
             background-color: rgb(240, 240, 240);
             border-right: 1px solid black;
+            z-index: 2;
         }
         #small-nav ul {
             list-style: none;
@@ -115,6 +109,13 @@
             }
             #index {
                 display: block;
+                overflow-y: auto;
+                overflow-x: hidden; /* TODO can we deal with this another way? */
+                overscroll-behavior: contain;
+                border-right: 1px solid rgba(0,0,0,.1);
+                height: 100%;
+                padding-left: 1em;
+                padding-right: 1em;
             }
         }
 
