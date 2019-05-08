@@ -417,6 +417,12 @@ cd</pre>
 
     <h3 id="func">Functions</h3>
 
+    <p>Functions can call themselves by using their own name in their definition. Naive example:</p>
+
+    <pre>factorial: {$[x<2;1;x*factorial[x-1]]}
+ factorial 4
+24</pre>
+
     <p>A function with implicit <code>xyz</code> args can be distinguished from a dict by ensuring the body does not start with an assignment:</p>
 
     <pre> @{a:1;a*x}
@@ -1189,15 +1195,6 @@ https://groups.google.com/d/msg/shaktidb/0yq21rHOacU/QqgeStO-CgAJ
 table generation:
 select a:x,b:1+2*x from +[!3]
 {;[a:x;b:1+2*x]}' !3
--->
-
-<!--
-<h3 id=".z.f">Recursion <code>.z.f</code></h3>
-<p>Use in a function definition to refer to the current function.</p>
-<pre> factorial: {$[x<2;1;x*.z.f[x-1]]}
-factorial 4
-24
-/ Better: {*/1+!x}</pre>
 -->
 
 <!--
