@@ -287,7 +287,7 @@ r|2 9</pre>
  "abracadabra" ^ "bc"
 "araadara"</pre>
 
-    <h3 id="sort">Sort</h3>
+    <h3 id="sort">Sort <code>^</code></h3>
 
     <pre> :: l: rand 4
 0.5594068 0.1751217 0.3652149 0.5086234
@@ -327,6 +327,16 @@ r|2 9</pre>
 1 2</pre>
     
     <h2 id="Adverb">Adverbs</h2>
+
+    <h3 id="over">Over <code>/</code></h3>
+
+    <pre> 3 {x+1}/10
+13</pre>
+
+    <h3 id="scan">Scan <code>\</code></h3>
+
+    <pre> 3 {x+1}\10
+10 11 12 13</pre>
 
     <h3 id="eachprior">Each prior <code>':</code></h3>
 
@@ -842,6 +852,13 @@ a b
 
 <h2 id="datetime">Datetimes</h2>
 
+<!-- TODO 
+
+"Ds"$.z.S        / date,second                          
+1970Y+`t$1.56e12 / unix epoch 
+
+-->
+
 <p>A datetime looks like this:</p>
 
 <pre> .z.T
@@ -1163,7 +1180,7 @@ k('2 4 6')
     links = [].concat( 
         [".z.x"],
         ["Verb", "up", "group", "enumerate", "key", "take", "except", "sort", "floor", "find", "distinct"],
-        ["Adverb", "eachprior", "join", "split", "sv", "vs"],
+        ["Adverb", "over", "scan", "eachprior", "join", "split", "sv", "vs"],
         ["Noun", "func", "expr"],
         ["table"],
         [".z.D", ".z.t"],
