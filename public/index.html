@@ -328,6 +328,17 @@ r|2 9</pre>
     
     <h2 id="Adverb">Adverbs</h2>
 
+    <h3 id="each">Each <code>'</code></h3>
+
+    <p>Make a function apply to each element of a list, rather than the list itself.</p>
+
+    <pre> {"~",x}  "abc"
+"~abc"
+ {"~",x}' "abc"
+~a
+~b
+~c</pre>
+
     <h3 id="over">Over <code>/</code></h3>
 
     <p>n f/x</p>
@@ -1197,7 +1208,7 @@ k('2 4 6')
     links = [].concat( 
         [".z.x"],
         ["Verb", "up", "group", "enum", "key", "take", "except", "sort", "floor", "find", "distinct"],
-        ["Adverb", "over", "scan", "eachprior", "join", "split", "sv", "vs"],
+        ["Adverb", "each", "over", "scan", "eachprior", "join", "split", "sv", "vs"],
         ["Noun", "func", "expr"],
         ["table"],
         [".z.D", ".z.t"],
