@@ -198,7 +198,7 @@
         <!-- Clickable help. These words are linked to detailed explanations via JavaScript at the bottom of this page. -->
 
         <pre id="official-help">$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)     
-                                                                
+                                                                    
 Verb                       Adverb                Noun            Atom List     
 :  assign                  '  each               char  " ab"       `c `C       
 +  add         flip        /  over               name  ``a`b       `n `N       
@@ -211,9 +211,9 @@ Verb                       Adverb                Noun            Atom List
 >  more        down        0: read/write line    dict {a:2;b:`c}   `a `A(table)
 =  equal       group       1: read/write byte    func {(+/x)%#x}   `1..9       
 ~  match       not         2: read/write data    expr :32+9*f%5    `0          
-!  key         enumerate   3: conn/set (.z.ms)                                 
+!  key         enum        3: conn/set (.z.ms)                                 
 ,  catenate    list        4: http/get (.z.mg)   \h      help      \l log      
-^  except      null                              \l f.k  load                  
+^  except      sort                              \l f.k  load                  
 #  take        count       #[t;c;b[;a]] select   \t[:n]x time                  
 _  drop        floor       _[t;c;b[;a]] update   \u[:n]x trace                 
 ?  find        distinct    ?[x;i;f[;y]] splice   \v [d]  vars                  
@@ -221,7 +221,7 @@ _  drop        floor       _[t;c;b[;a]] update   \u[:n]x trace
 .  apply       value       .[x;i;f[;y]] dmend    \lf file \lc char \ll line    
 $  pad|cast    string      $[c;t;f]     cond     \cd [d]  get[set] \gr x f     
                                                                                 
-util: in within bin like find [f]asc [f]dsc [f]key                             
+util: in within bin like find freq [f]asc [f]dsc [f]key                        
 math: sqrt sin cos abs prm cmb [n]log [n]exp [n]rand mod div                   
 aggr: count first last min max sum avg var dev med                             
 sql: [select|update|delete] a.. by b.. from t.. where c..                      
