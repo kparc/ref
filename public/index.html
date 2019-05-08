@@ -330,13 +330,30 @@ r|2 9</pre>
 
     <h3 id="over">Over <code>/</code></h3>
 
+    <p>n f/x</p>
+
     <pre> 3 {x+1}/10
 13</pre>
 
+    <p>p f/x</p>
+
+    <pre> {4>#x} {x,"k"}/"o"
+"okkk"</pre>
+
     <h3 id="scan">Scan <code>\</code></h3>
+
+    <p>n f\x</p>
 
     <pre> 3 {x+1}\10
 10 11 12 13</pre>
+
+    <p>p f\x</p>
+
+    <pre> {4>#x} {x,"k"}\"o"
+"o"   
+"ok"  
+"okk" 
+"okkk"</pre>
 
     <h3 id="eachprior">Each prior <code>':</code></h3>
 
