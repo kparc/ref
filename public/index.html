@@ -332,14 +332,25 @@ r|2 9</pre>
 
     <h3 id="each">Each <code>'</code></h3>
 
-    <p>Make a function apply to each element of a list, rather than the list itself.</p>
+    <p>Make a function apply to each element of its input lists, rather than the list itself.</p>
 
-    <pre> {"~",x}  "abc"
+    <pre> "~" , "abc"
 "~abc"
- {"~",x}' "abc"
+ "~" ,' "abc"
 ~a
 ~b
 ~c</pre>
+
+    <p>'Each' will apply to pairings of its input lists:</p>
+    <!-- TODO better word than 'pairings'? -->
+
+    <pre> "ab" ,' "cd"
+ac
+bd
+
+ {x,y,z}'["ab";"cd";"ef"]
+ace
+bdf</pre>
 
     <h3 id="over">Over <code>/</code></h3>
 
@@ -384,6 +395,23 @@ r|2 9</pre>
 " a"   
 ("a";1)
 (1;`ok)</pre>
+
+    <h3 id="eachright">Each right <code>/:</code></h3>
+
+    <p>Compare to each:</p>
+
+    <pre> "ab" ,' "cd"
+ac
+bd
+ "ab" ,/: "cd"
+abc
+abd</pre>
+
+    <h3 id="eachleft">Each left <code>\:</code></h3>
+
+    <pre> "ab" ,\: "cd"
+acd
+bcd</pre>
 
     <h3 id="join">Join <code>/:</code></h3>
 
@@ -888,6 +916,13 @@ a b
  v
 0 7 2</pre>
 
+    <h3 id="cond">Cond <code>$[c;t;f]</code></h3>
+
+    <p>Simulate a vector cond:</p>
+
+    <pre> {$[x;y;z]}'[1 0 1; "abc"; "def"] 
+"aec"</pre>
+
     <h2 id="bool">Boolean checks</h2>
 
     <h3 id="`ascii"><code>`ascii</code></h4>
@@ -1228,7 +1263,7 @@ k('2 4 6')
     links = [].concat( 
         [".z.x"],
         ["Verb", "up", "group", "enum", "key", "take", "except", "sort", "floor", "find", "distinct"],
-        ["Adverb", "each", "over", "scan", "eachprior", "join", "split", "sv", "vs"],
+        ["Adverb", "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs"],
         ["Noun", "func", "expr"],
         ["table"],
         [".z.D", ".z.t"],
@@ -1238,7 +1273,7 @@ k('2 4 6')
         ["aggr", "med"],
         ["sql"],
         ["line", "byte", "data", "conn"],
-        ["select", "splice", "amend"],
+        ["select", "splice", "amend", "cond"],
         ["bool", "`ascii"],
         ["datetime"],
         ["1way", "2way"]
