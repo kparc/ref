@@ -198,7 +198,7 @@
         <!-- Clickable help. These words are linked to detailed explanations via JavaScript at the bottom of this page. -->
 
         <pre id="official-help">$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)     
-                                                                    
+                                                                
 Verb                       Adverb                Noun            Atom List     
 :  assign                  '  each               char  " ab"       `c `C       
 +  add         flip        /  over               name  ``a`b       `n `N       
@@ -237,6 +237,8 @@ if[c;..];while[c;..]
                                                                                 
 K:key k:key`k1  /public private                                                
 K key k key"hi" /verify sign                                                   
+                                                                                
+"(;)"/:$`x`y`z                                                                 
                                                                                 
 \\ exit</pre>
 
@@ -385,6 +387,8 @@ r|2 9</pre>
 
     <h3 id="join">Join <code>/:</code></h3>
 
+    <p>The following work with <strong>lists of strings</strong>.</p>
+
     <p>Prepend the separator to <code>/:</code>, <a href="https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ">without a space in between</a>.</p>
 
     <pre> "-"/: ("la";"li";"lu";"le";"lo")
@@ -394,6 +398,11 @@ r|2 9</pre>
 
     <pre> `/: ("ab";"cd")
 "ab\ncd\n"</pre>
+
+    <p>With three characters instead of just a separator, prepends/appends the first and last:</p>
+
+<pre> "(;)"/: (,:' "abcd")
+"(a;b;c;d)"</pre>
 
     <h3 id="split">Split <code>\:</code></h3>
 
@@ -666,11 +675,22 @@ a|b
 
     <!-- TODO how will we update this? -->
 
-    <p>As at 2019-05-07:</p>
+    <p>As at 2019-05-10:</p>
 
-    <pre>20190506                                                
-recursion r:{[f;a;x]$[x~*a;a 1;f[0][x;r[f;a]f[1]x]]}    
+    <pre>20190508                                                
++("**";"***") /flip pad                                 
+(0>)+/0 1 -1 -1 0 1 1 1 / early exit                    
+                                                        
+20190506                                                
+r:{[a;b;f;g;x]$[x~a;b;f[x]r[a;b;f;g]g x]}               
+(1;1)(*;-1+)/4                                          
+r[1;1;*;-1+]4                                           
+(3;,2)({y,1_&&/x#'!:'y};1+_sqrt)/100                    
+r[3;,2;{y,1_&&/x#'!:'y};1+_sqrt]100                     
+                                                        
 1 1(*;-1+)/4                                            
+r[1;1;*;-1+]4                                           
+                                                        
 (3;,2)({y,1_&&/x#'!:'y};1+_sqrt)/100                    
                                                         
 NUC                                                     
