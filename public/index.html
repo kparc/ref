@@ -281,6 +281,8 @@ K key k key"hi" /verify sign
 
     <!-- TODO is there a way to force the triadic or tetradic cases without using bracket syntax? -->
 
+    <!-- TODO explore various 'modified assign' methods eg a+:1; a,:1; a[1;2]: 7; a[1 2; 3 4]: (1 2; 3 4) -->
+
     <h3 id="up">Up <code>&lt;</code></h3>
 
     <pre> &lt; "abracadabra"
@@ -362,6 +364,17 @@ r|2 9</pre>
 1 2</pre>
     
     <h2 id="Adverb">Adverbs</h2>
+
+    <p>Although unusual, adverbs can be called in similar ways to verbs:</p>
+
+    <pre> '["~",] "abc"
+~a
+~b
+~c
+ (' ("~",)) "abc"
+~a
+~b
+~c</pre>
 
     <h3 id="each">Each <code>'</code></h3>
 
