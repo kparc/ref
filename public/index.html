@@ -248,6 +248,38 @@ K key k key"hi" /verify sign
 
     <h2 id="Verb">Verbs</h2>
 
+    <p>Force the monadic case by applying a <code>:</code> suffix.</p>
+
+    <p>Force the dyadic case by putting the verb in parentheses:</p>
+
+    <pre> @1
+`i
+ (@)1
+1@</pre>
+
+    <p>Monadic and dyadic versions of a character are <strong>different verbs</strong> - it's not just a case of how many arguments they are called with.</p>
+
+    <p>For example, with a bracket call with one argument, the monadic verb will work fine, while the dyadic verb will project:</p>
+
+    <pre> @:["abc"]
+`C
+ @["abc"]
+"abc"@</pre>
+
+    <p>Project over the first argument by omitting it entirely:</p>
+
+    <pre> @[;1] "abc"
+"b"</pre>
+
+    <p>Triadic versions of a verb are the same as the dyadic version:</p>
+
+    <pre> ?["abcb";"b"]
+1
+ ?["abcb";1;"d"]
+"adbcb"</pre>
+
+    <!-- TODO is there a way to force the triadic or tetradic cases without using bracket syntax? -->
+
     <h3 id="up">Up <code>&lt;</code></h3>
 
     <pre> &lt; "abracadabra"
