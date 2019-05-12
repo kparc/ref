@@ -271,7 +271,7 @@ K key k key"hi" /verify sign
     <pre> @[;1] "abc"
 "b"</pre>
 
-    <p>Triadic versions of a verb are the same as the dyadic version:</p>
+    <p>Triadic versions of a verb are the same as the dyadic version (except for <a href="#cond"><code>cond</code></a>):</p>
 
     <pre>  (?) . ("abcb"; "b")
 1
@@ -950,6 +950,23 @@ a b
 0 7 2</pre>
 
     <h3 id="cond">Cond <code>$[c;t;f]</code></h3>
+
+    <p>If the true expression is returned, the false expression never executes (and vice versa):</p>
+
+    <pre> a:1;b:1
+ $[1;a+:1;b+:1]; (a;b)
+2 1
+ $[0;a+:1;b+:1]; (a;b)
+2 2</pre>
+
+    <p><a href="#Verb">Unlike other triadics</a>, triadic <code>$</code> is not the same as dyadic <code>$</code>:</p>
+
+    <pre> ($) . (`n; "a")
+`a
+ ($) . (1; "a"; "b")
+($) . (1; "a"; "b")
+    ^
+nyi error</pre>
 
     <p>Simulate a vector cond:</p>
 
