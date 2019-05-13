@@ -926,6 +926,17 @@ a b
  t # :(a>1)&(b<5)
 +{a:!0;b:!0}</pre>
 
+    <h3 id="update">Update <code>_[t;c;b[;a]]</code></h3>
+
+    <p>Via <a href="https://groups.google.com/d/msg/shaktidb/77qVfIc5ecU/eSRy8izkAQAJ">Arthur</a>:</p>
+
+    <pre> t:+`b!2 3
+ _[t;();`b! :b+1]
+b
+-
+3
+4</pre>
+
     <h3 id="splice">Splice <code>?[x;i;f[;y]]</code></h3>
 
     <p>Insert <code>y</code> into <code>x</code> at index <code>i</code>.</p>
@@ -1341,7 +1352,7 @@ k('2 4 6')
         ["aggr", "med"],
         ["sql"],
         ["line", "byte", "data", "conn"],
-        ["select", "splice", "amend", "cond"],
+        ["select", "update", "splice", "amend", "cond"],
         ["bool", "`ascii"],
         ["datetime"],
         ["1way", "2way"]
