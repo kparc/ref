@@ -179,7 +179,7 @@
 
             John Earnest's docs:
             <ul>
-                <li><a href="https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Programming.md">Programming</a></li>
+                <li><a href="https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Programming.md">Programming</a> (recommended)</li>
                 <li><a href="https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Trees.md">Trees</a></li>
                 <li><a href="https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Manual.md">Manual</a></li>
             </ul>
@@ -187,6 +187,7 @@
             <br>
 
             <ul>
+                <li><a href="https://github.com/kparc/kcc">k crash course</a> (recommended)</li>
                 <li><a href="https://shakti.com/tutorial">Official tutorial</a></li>
                 <li><a href="https://gitlab.com/k7contrib/docs/">Contribute to these docs</a></li>
             </ul>
@@ -245,6 +246,8 @@ K key k key"hi" /verify sign
 </div>
 
 <div id="detail">
+
+    <!-- TODO make sure 'cast' says you can cast to multiple types. Does dyadic version with array as x cast separate columns to separate types (per CSV)? -->
 
     <h2 id="Verb">Verbs</h2>
 
@@ -535,6 +538,10 @@ cd</pre>
     <h2 id="Noun">Nouns</h2>
 
     <!-- TODO is 'space' seen as null for strings? empty symbol for names? -->
+
+    <h3 id="float">Floats</h3>
+
+    <p>All of <code>1.0</code>, <code>.5</code>, <code>1f</code> are valid float literals.</p>
 
     <h3 id="func">Functions</h3>
 
@@ -1343,7 +1350,7 @@ k('2 4 6')
         [".z.x"],
         ["Verb", "up", "group", "enum", "key", "take", "except", "sort", "floor", "find", "distinct"],
         ["Adverb", "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs"],
-        ["Noun", "func", "expr"],
+        ["Noun", "float", "func", "expr"],
         ["table"],
         [".z.D", ".z.t"],
         ["help", "log"],
