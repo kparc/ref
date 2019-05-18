@@ -887,11 +887,13 @@ sum !3</pre>
 `ABC`DEF    
 1.23 4567.89</pre>
 
-    <p>We can also write lists of strings to a file:</p>
+    <p>We can also write lists of strings to a file (verify output using a text editor):</p>
 
     <pre> "test.txt" 0: ("hello";"world")</pre>
 
-    <p>Verify its output using a text editor.</p>
+    <p>And that includes saving tables to CSV, if we first convert the table to a list of strings:</p>
+
+    <pre> "test.csv" 0: `csv @ +{a:1 2; b:3 4}</pre>
 
     <h3 id="byte">Read/write bytes <code>1:</code></h3>
 
