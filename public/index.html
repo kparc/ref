@@ -895,6 +895,14 @@ sum !3</pre>
 
     <pre> "test.csv" 0: `csv @ +{a:1 2; b:3 4}</pre>
 
+    <p>You can also use <code>0:</code> to deserialise in-memory lists of strings with a common separator. <a href="https://groups.google.com/d/msg/shaktidb/vE4ffjndxik/rYF6K78oBQAJ">Arthur's example</a>:</p>
+
+    <pre>  ("ii";"|")0:("2|3";"3|4";"4|5")
+2 3 4
+3 4 5</pre>
+
+    <p>Keep in mind that it's reading the data into columns, not rows. The first row of the console output is the first item in a list of columns.</p>
+
     <h3 id="byte">Read/write bytes <code>1:</code></h3>
 
     <pre> "testfile" 1: 0x0123456789abcdef
