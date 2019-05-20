@@ -205,7 +205,7 @@ Verb                       Adverb                Noun            Atom List
 +  add         flip        /  over               name  ``a`b       `n `N       
 -  subtract    negate      \  scan               int   Ø 0 2       `i `I      
 *  multiply    first       ': eachprior          float ø 2.3 π ∞   `f `F   
-%  divideby    inverse     /: eachright join|sv  date 2019-06-28   `D `D   .z.D
+%  divideby    inverse     /: eachright join|sv  date 2019-06-28   `D `D   .z.d
 &  min|and     where       \: eachleft split|vs  time 12:34:56.789 `t `T   .z.t
 |  max|or      reverse                                                         
 <  less        up          System                list (2;3.4;`c)   `           
@@ -214,24 +214,24 @@ Verb                       Adverb                Noun            Atom List
 ~  match       not         2: read/write data    expr :32+9*f%5    `0          
 !  key         enum        3: conn/set (.z.ms)                                 
 ,  catenate    list        4: http/get (.z.mg)   \h      help      \l log      
-^  except      sort                              \l f.k  load                  
+^  except      asc                               \l f.k  load                  
 #  take        count       #[t;c;b[;a]] select   \t[:n]x time                  
 _  drop        floor       _[t;c;b[;a]] update   \u[:n]x trace                 
-?  find        distinct    ?[x;i;f[;y]] splice   \v [d]  vars                  
+?  find        unique      ?[x;i;f[;y]] splice   \v [d]  vars                  
 @  index       type        @[x;i;f[;y]] amend    \f [d]  fns                   
 .  apply       value       .[x;i;f[;y]] dmend    \lf file \lc char \ll line    
-$  pad|cast    string      $[c;t;f]     cond     \cd [d]  get[set] \gr x f     
+$  cast|pad    string      $[c;t;f]     cond     \cd [d] get[set] \gr x f      
                                                                                 
-util: in within bin like find freq [f]asc [f]dsc [f]key                        
-math: sqrt sin cos abs prm cmb [n]log [n]exp [n]rand mod div                   
+util: in within bin like find freq prm cmb                                     
+math: sqrt sin cos abs [n]log [n]exp [n]rand                                   
 aggr: count first last min max sum avg var dev med                             
-sql: [select|update|delete] a.. by b.. from t.. where c..                      
+table: [f]asc [f]dsc [f]key [select|update|delete]A by B from T where C        
                                                                                 
 datetime:YMDHRSTUV+duration:ymdhrstuv; T:.z.D+.z.t; 2019-06-28+2m; day:7 mod   
 `year`month`date`hour`minute`second`millisecond`microsecond`nanosecond         
                                                                                 
 bool: `ascii`utf8                                                              
-1way: `p`m`crc`sha`rip`bad   e.g. hash:  `sha@"crypto"                         
+1way: `p`m`crc`sha`rip`bad   e.g. hash: `sha@"crypto"                          
 2way:``j`k`csv`b64`hex`aes   e.g. json: `j?`j@{a:2;b:`c}                       
                                                                                 
 if[c;..];while[c;..]                                                           
@@ -241,7 +241,8 @@ K key k key"hi" /verify sign
                                                                                 
 "(;)"/:$`x`y`z                                                                 
                                                                                 
-\\ exit</pre>
+\\ exit                                                                        
+synonyms: count first last min max sum asc</pre>
 
 </div>
 
@@ -773,105 +774,104 @@ a|b
 
     <!-- TODO how will we update this? -->
 
-    <p>As at 2019-05-10:</p>
+    <p>As at 2019-05-17:</p>
 
-    <pre>20190508                                                
-+("**";"***") /flip pad                                 
-(0>)+/0 1 -1 -1 0 1 1 1 / early exit                    
-                                                        
-20190506                                                
-r:{[a;b;f;g;x]$[x~a;b;f[x]r[a;b;f;g]g x]}               
-(1;1)(*;-1+)/4                                          
-r[1;1;*;-1+]4                                           
-(3;,2)({y,1_&&/x#'!:'y};1+_sqrt)/100                    
-r[3;,2;{y,1_&&/x#'!:'y};1+_sqrt]100                     
-                                                        
-1 1(*;-1+)/4                                            
-r[1;1;*;-1+]4                                           
-                                                        
-(3;,2)({y,1_&&/x#'!:'y};1+_sqrt)/100                    
-                                                        
-NUC                                                     
-^x /sort                                                
-=x /sortkey                                             
-PRF                                                     
-n^                                                      
-!n                                                      
-*|:  /composition                                       
-,/+: /composition                                       
-                                                        
-20190504	                                               
-`aes?`aes@"kei" /encrypt&xdecrypt 4GB per second        
-freq"alibababa" /frequency histogram 1Billion per second
-                                                        
-20190503                                                
-FIX                                                     
-select #n by b from +`b!2 2 3 4                         
-                                                        
-20190501                                                
-v:2 3                                                   
-@[`v;0;7]                                               
-PRF                                                     
-n^i &lt;x ?x x?y                                           
-                                                        
-20190430                                                
-x^y rank sensitive                                      
-f#d domain error if f missing                           
-                                                        
-20190428                                                
-"Ds"$.z.S        / date,second                          
-1970Y+`t$1.56e12 / unix epoch                           
-                                                        
-20190427                                                
-3000000000 (goes to j)                                  
-`f$Ø                                                   
-12h                                                     
-`p?`p"{a:1;b:2 3}"                                      
-                                                        
-20190426                                                
-u:1970Y;T:.z.T;t:T-u;u+t                                
-\gr "write " k.txt                                      
-                                                        
-20190425                                                
-\t  calibrate                                           
-`j? whitespace                                          
-                                                        
-20190421                                                
-`D$"20190320"                                           
-NUC                                                     
-`/:`\:.z.d                                              
-FIX                                                     
-"\n"                                                    
-                                                        
-20190420                                                
-`j?`j .z.T                                              
-`j?"123"                                                
-{ v:1};{"v":1}                                          
-K:key k:key`k1     / public private                     
-K key k key"hi"    / verify sign                        
-4 7 mod x                                               
-FIX                                                     
-`a#t                                                    
-                                                        
-20190418                                                
-{a:2}   instead of [a:2]                                
-mod/div instead of n! -n!  7 mod .z.d                   
-[n]rand instead of n?                                   
-"math*"#."\\h"                                          
-\gr math k.txt (200 times faster than \grep math k.txt) 
-                                                        
-20190415                                                
-\h help                                                 
-\l changelog                                            
-!-n identity matrix                                     
-. x eval                                                
-`/: sS(string from String)                              
-`\: Ss(String from string)                              
-`ascii`utf8`print ".."                                  
-FIX                                                     
--':2 3.4                                                
-.z.T-.z.T                                               
-sum !3</pre>
+    <pre>20190517                                                       
+FIX                                                            
+left join(missing),e.g. (+`a`b!(2 3 4;4 5 6)),(+`a!2 4)!+`b!7 8
+                                                                
+20190508                                                       
++("**";"***") /flip pad                                        
+(0>)+/0 1 -1 -1 0 1 1 1 / early exit                           
+                                                                
+20190506                                                       
+recursion                                                      
+r:{[a;b;f;g;x]$[x~a;b;f[x]r[a;b;f;g]g x]}                      
+r[1;1;*;-1+]4                                                  
+1 1(*;-1+)/4                                                   
+(3;,2)({y,1_&&/x#'!:'y};1+_sqrt)/100                           
+                                                                
+NUC                                                            
+^x /sort                                                       
+=x /sortkey                                                    
+PRF                                                            
+n^                                                             
+!n                                                             
+*|:  /composition                                              
+,/+: /composition                                              
+                                                                
+20190504	                                                      
+`aes?`aes@"kei" /encrypt&xdecrypt 4GB per second               
+freq"alibababa" /frequency histogram 1Billion per second       
+                                                                
+20190503                                                       
+FIX                                                            
+select #n by b from +`b!2 2 3 4                                
+                                                                
+20190501                                                       
+v:2 3                                                          
+@[`v;0;7]                                                      
+PRF                                                            
+n^i &lt;x ?x x?y                                                  
+                                                                
+20190430                                                       
+x^y rank sensitive                                             
+f#d domain error if f missing                                  
+                                                                
+20190428                                                       
+"Ds"$.z.S        / date,second                                 
+1970Y+`t$1.56e12 / unix epoch                                  
+                                                                
+20190427                                                       
+3000000000 (goes to j)                                         
+`f$Ø                                                          
+12h                                                            
+`p?`p"{a:1;b:2 3}"                                             
+                                                                
+20190426                                                       
+u:1970Y;T:.z.T;t:T-u;u+t                                       
+\gr "write " k.txt                                             
+                                                                
+20190425                                                       
+\t  calibrate                                                  
+`j? whitespace                                                 
+                                                                
+20190421                                                       
+`D$"20190320"                                                  
+NUC                                                            
+`/:`\:.z.d                                                     
+FIX                                                            
+"\n"                                                           
+                                                                
+20190420                                                       
+`j?`j .z.T                                                     
+`j?"123"                                                       
+{ v:1};{"v":1}                                                 
+K:key k:key`k1     / public private                            
+K key k key"hi"    / verify sign                               
+4 7 mod x                                                      
+FIX                                                            
+`a#t                                                           
+                                                                
+20190418                                                       
+{a:2}   instead of [a:2]                                       
+mod/div instead of n! -n!  7 mod .z.d                          
+[n]rand instead of n?                                          
+"math*"#."\\h"                                                 
+\gr math k.txt (200 times faster than \grep math k.txt)        
+                                                                
+20190415                                                       
+\h help                                                        
+\l changelog                                                   
+!-n identity matrix                                            
+. x eval                                                       
+`/: sS(string from String)                                     
+`\: Ss(String from string)                                     
+`ascii`utf8`print ".."                                         
+FIX                                                            
+-':2 3.4                                                       
+.z.T-.z.T                                                      
+sum !3   </pre>
 
     <h2 id="IO-IPC">IO and IPC</h2>
 
