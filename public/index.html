@@ -430,6 +430,8 @@ bdf</pre>
 
     <h3 id="eachprior">Each prior <code>':</code></h3>
 
+    <!-- TODO seeded vs seedless https://github.com/kparc/kcc#typ-cast -->
+
     <p>The null chosen for the first pairing is of the type of the first member of the list.</p>
     
     <pre> {y,x}': !3
@@ -917,13 +919,18 @@ sum !3</pre>
 00000000  01 23 45 67 89 ab cd ef                           |.#Eg....|
 00000008</pre>
 
-    <p>And to expand a little on the 'prompt' example from the official tutorial:</p>
-    <!-- TODO figure out how works -->
+    <p>And to break down what's happening in the 'prompt' example from the official tutorial, ie:</p>
 
-<pre> name: 1: ("" 1: "What is your name? ")
+    <pre> name: 1: ("" 1: "What is your name? ")
 What is your name? Me
  name
 "Me"</pre>
+
+    <ul>
+        <li>Read from stdin: <code>1: ""</code>
+        <li>Write to stdout: <code>"" 1: "something"</code></li>
+        <li><code>x 1: y</code> returns <code>x</code> (<a href="https://groups.google.com/d/msg/shaktidb/DmV2eoSEGHU/eEEOKfjCBQAJ">source</a>)</li>
+    </ul>
 
     <h3 id="data">Read/write data <code>2:</code></h3>
 
