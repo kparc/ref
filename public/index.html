@@ -502,6 +502,11 @@ bcd</pre>
 <pre> "(;)"/: (,:' "abcd")
 "(a;b;c;d)"</pre>
 
+    <p>That means 'join' can't be used for multi-character separators, but you can always do this (<a href="https://groups.google.com/d/msg/shaktidb/ttIdJiWx9xI/hiTjuX7_BAAJ">source</a>):</p>
+
+    <pre> {y,x,z}[", "]/$`ab`cd`ef
+"ab, cd, ef"</pre>
+
     <h3 id="split">Split <code>\:</code></h3>
 
     <p>Prepend the separator to <code>\:</code>, <a href="https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ">without a space in between</a>.</p>
