@@ -287,6 +287,20 @@ synonyms: count first last min max sum asc</pre>
 
     <!-- TODO explore various 'modified assign' methods eg a+:1; a,:1; a[1;2]: 7; a[1 2; 3 4]: (1 2; 3 4) -->
 
+    <h3 id="assign">Assign <code>:</code></h3>
+
+    <p>Where an assignment is used in a function, Shakti <a href="https://groups.google.com/d/msg/shaktidb/zejmh3vxdAg/6uCxAA2aAwAJ">suggest</a> rewriting code like this:</p>
+
+    <pre>f: {a: reusedtempdata; a*a}</pre>
+
+    <p>As this:</p>
+
+    <pre>f: {a*a:reusedtempdata}</pre>
+
+    <p>Or this:</p>
+
+    <pre>f: {{x*x} reusedtempdata}</pre>
+
     <h3 id="up">Up <code>&lt;</code></h3>
 
     <pre> &lt; "abracadabra"
@@ -1396,7 +1410,7 @@ k('2 4 6')
 
     links = [].concat( 
         [".z.x"],
-        ["Verb", "up", "group", "enum", "key", "take", "except", "sort", "floor", "find", "distinct"],
+        ["Verb", "assign", "up", "group", "enum", "key", "take", "except", "sort", "floor", "find", "distinct"],
         ["Adverb", "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs"],
         ["Noun", "float", "list", "func", "expr"],
         ["table"],
