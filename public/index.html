@@ -387,16 +387,14 @@ r|2 9</pre>
         
     <p>(This is how the <code>/</code> adverb is distinguished from <code>&nbsp;/</code>, ie the start of a comment.)</p>
 
-    <p>Although unusual, adverbs can be called in similar ways to verbs:</p>
+    <p>Adverbs can be called in similar ways to verbs:</p>
 
-    <pre> '["~",] "abc"
-~a
-~b
-~c
- (' ("~",)) "abc"
-~a
-~b
-~c</pre>
+    <pre> +/ 1 2 3
+6
+ /[+] 1 2 3
+6
+ (/ (+)) 1 2 3
+6</pre>
 
     <h3 id="each">Each <code>'</code></h3>
 
