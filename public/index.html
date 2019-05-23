@@ -161,6 +161,7 @@
                 <li><a href="#commands">Commands</a></li>
                 <li><a href="#converters">Converters</a></li>
                 <li><a href="#.z"><code>.z</code> namespace</a></li>
+                <li><a href="#secrets">Secrets!</a></li>
             </ul>
     
             <br>
@@ -787,6 +788,13 @@ a|b
 
     <h2 id="commands">Commands</h2>
 
+    <p>Access any shell command by putting a <code>\</code> in front of it:</p>
+
+    <pre> \seq 3
+1
+2
+3</pre>
+
     <h3 id="help">Help <code>\h</code></h3>
 
     <p>The official help included in the k binary. It's the navigation to this site!</p>
@@ -1317,6 +1325,13 @@ not.a.real.file</pre>
 <!-- TODO file and network i/o would be cool too :) -->
 <!-- TODO bringing in typed cols from CSVs -->
 <!-- TODO stuff from changelog that's not in help -->
+
+<h3 id="secrets">Secrets!</h3>
+
+<p>In addition to <code>`b64</code>, there's <code>`b58</code>, <a href="https://groups.google.com/d/msg/shaktidb/0yq21rHOacU/1wdeAGHFAAAJ">used</a> in the <code>`bad</code> implementation:</p>
+
+<pre> `b58 "helloworld"
+"6sBRWyteSSzHrs"</pre>
 
 <h2 id="shakti-python">shakti-python</h2>
 
