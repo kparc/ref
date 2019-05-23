@@ -491,7 +491,7 @@ bcd</pre>
     <pre> "-"/: ("la";"li";"lu";"le";"lo")
 "la-li-lu-le-lo"</pre>
 
-    <p>With empty symbol as 'separator', appends a newline to each string and joins:</p>
+    <p>With empty symbol as 'separator', appends a newline to each string and joins. (This is also known as 'sS' or 'string from String', with capitalisation following the k7 convention of lower for atom, upper for list of atoms of same type).</p>
 
     <pre> `/: ("ab";"cd")
 "ab\ncd\n"</pre>
@@ -517,7 +517,7 @@ lu
 le
 lo</pre>
 
-<p>With empty symbol as 'separator', splits on newlines, including (if present) at the end of the last word:</p>
+<p>With empty symbol as 'separator', splits on newlines, including (if present) at the end of the last word. (This is also known as 'Ss' or 'String from string'.)</p>
 
 <pre> `\: "ab\ncd\n"
 ab
