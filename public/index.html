@@ -680,6 +680,24 @@ l|1</pre>
 
     <!-- TODO figure out 'f' cases -->
 
+    <h3 id="[n]log">Natural logarithm (<code>log:</code>) and logarithm (<code>log</code>)</h3>
+
+    <p>Monadic: natural logarithm, ie the power you'd need to raise <i>e</i> by to get <code>x</code>.</p>
+
+    <pre> log 2
+0.6931472
+ log (exp 1)
+1f
+ (exp 1) exp (log 2)
+2f</pre>
+
+    <p>Dyadic: logarithm, ie the number you'd need to raise the left number to to get the right number.</p>
+
+    <pre> 2 log 2
+1f
+ 2 log 4
+2f</pre>
+
     <h3 id="[n]exp">Exponential (<code>exp:</code>) and power (<code>exp</code>)</h3>
 
     <p>Monadic: <i>e</i> to the power of <code>x</code>.</p>
@@ -1500,7 +1518,7 @@ k('2 4 6')
         [".z.d", ".z.t"],
         ["help", "log", "file"],
         ["util", "within", "freq", "[f]asc", "[f]dsc"],
-        ["math", "abs", "prm", "[n]exp", "[n]rand"],
+        ["math", "abs", "prm", "[n]log", "[n]exp", "[n]rand"],
         ["aggr", "med"],
         ["sql"],
         ["line", "byte", "data", "conn"],
