@@ -795,6 +795,30 @@ a|b
 2
 3</pre>
 
+    <h3 id="file">List files <code>\lf</code></h3>
+
+    <pre> \lf
+afile.txt       
+yet another file</pre>
+
+    <h3>List character counts <code>\lc</code></h3>
+
+    <pre> \lc
+afile.txt       |29
+yet another file|50</pre>
+
+    <p>You can't assign the result of <code>\lc</code> directly (ie <code>a: \lc</code> doesn't work). But you <i>can</i> capture its output and see that it is in fact a dictionary:</p>
+
+    <pre> {(x;@x)} @ . "\\lc"
+("afile.txt";"yet another file")!29 50j
+`a</pre>
+
+    <h3>List line counts <code>\ll</code></h3>
+
+    <pre> \ll
+afile.txt       |1
+yet another file|3</pre>
+
     <h3 id="help">Help <code>\h</code></h3>
 
     <p>The official help included in the k binary. It's the navigation to this site!</p>
@@ -1449,7 +1473,7 @@ k('2 4 6')
         ["Noun", "float", "list", "func", "expr"],
         ["table"],
         [".z.d", ".z.t"],
-        ["help", "log"],
+        ["help", "log", "file"],
         ["util", "within", "freq", "[f]asc", "[f]dsc"],
         ["math", "abs", "prm", "[n]rand"],
         ["aggr", "med"],
