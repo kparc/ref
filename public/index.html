@@ -253,6 +253,8 @@ synonyms: count first last min max sum asc</pre>
 
     <h2 id="Verb">Verbs</h2>
 
+    <!-- TODO write monadic verbs in code tags as x:, not x -->
+
     <p>Force the monadic case by applying a <code>:</code> suffix.</p>
 
     <p>Force the dyadic case by putting the verb in parentheses:</p>
@@ -380,6 +382,11 @@ r|2 9</pre>
 <p>Given a filter function (returning <code>1</code>s and <code>0</code>s only):</p>
 <pre> (2 mod)#!9
 1 3 5 7</pre>
+
+    <h3 id="drop">Drop <code>_</code></h3>
+
+    <pre> 4_"abracadabra"
+"cadabra"</pre>
 
     <h3 id="floor">Floor <code>_</code></h3>
 
@@ -1387,13 +1394,11 @@ d
  #!.0
 0</pre>
 
-<p>For other types, take 0 elements from a list of that type (may be a better way?). For names:</p>
+<p>For other types, take 0 elements of an atom of that type (may be a better way?). For example, for names:</p>
 
-<pre> 0#(,`)
-
- @0#(,`)
+<pre> @0#`
 `N
- #0#(,`)
+ #0#`
 0</pre>
 
 
@@ -1540,7 +1545,7 @@ k('2 4 6')
 
     links = [].concat( 
         [".z.x"],
-        ["Verb", "assign", "flip", "up", "group", "enum", "key", "take", "except", "sort", "floor", "find", "distinct"],
+        ["Verb", "assign", "flip", "up", "group", "enum", "key", "take", "drop", "except", "sort", "floor", "find", "distinct"],
         ["Adverb", "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs"],
         ["Noun", "float", "list", "func", "expr"],
         ["table"],
