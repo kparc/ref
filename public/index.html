@@ -680,6 +680,24 @@ l|1</pre>
 
     <!-- TODO figure out 'f' cases -->
 
+    <h3 id="[n]exp">Exponential (<code>exp:</code>) and power (<code>exp</code>)</h3>
+
+    <p>Monadic: <i>e</i> to the power of <code>x</code>.</p>
+
+    <pre> exp 1
+2.718282
+ exp 2
+7.389056
+ (exp 1) exp 2
+7.389056</pre>
+
+    <p>Dyadic: left to the power of right.</p>
+
+    <pre> 2 exp 4
+16f
+ 2 exp -1
+0.5</pre>
+
     <h3 id="[n]rand">Random <code>[n]rand</code></h3>
 
     <pre> rand 3
@@ -1482,7 +1500,7 @@ k('2 4 6')
         [".z.d", ".z.t"],
         ["help", "log", "file"],
         ["util", "within", "freq", "[f]asc", "[f]dsc"],
-        ["math", "abs", "prm", "[n]rand"],
+        ["math", "abs", "prm", "[n]exp", "[n]rand"],
         ["aggr", "med"],
         ["sql"],
         ["line", "byte", "data", "conn"],
