@@ -23,3 +23,4 @@ TODO:
 * Tempted to switch to [MkDocs/Material](https://squidfunk.github.io/mkdocs-material/), but want to keep it simple for now
 * Consider [Zig's docs approach](https://ziglang.org/documentation/master/#Introduction) - easily downloaded single file + code samples form part of the test suite
 * Get a better system for dynamically adding links, that can handle a word appearing more than once in the help (eg maybe subsequent mentions become '#list2')
+* Consider moving 'contribute' link to right-hand side of banner (just be wary of impact on small mobile phone screens)
