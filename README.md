@@ -1,5 +1,7 @@
 # Reference Card
 
+https://kparc.github.io/refcard/
+
 An unofficial clickable version of k7 quickref, accessible in the REPL with `\h`.
 
 It provides examples, short recipes, dev progress notes, and links to other resources.
