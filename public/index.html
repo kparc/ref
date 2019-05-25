@@ -209,19 +209,19 @@ Verb                       Adverb                Noun            Atom List
 %  divideby    inverse     /: eachright join|sv  date 2019-06-28   `D `D   .z.d
 &  min|and     where       \: eachleft split|vs  time 12:34:56.789 `t `T   .z.t
 |  max|or      reverse                                                         
-<  less        up          System                list (2;3.4;`c)   `           
+<  less        up          System                list (2;3.4;`c)   `l `L       
 >  more        down        0: read/write line    dict {a:2;b:`c}   `a `A(table)
-=  equal       group       1: read/write byte    expr :32+9*f%5    `0          
-~  match       not         2: read/write data    func {(+/x)%#x}   `1..9       
-!  key         enum        3: conn/set (.z.ms)   asof <0 3!10 20               
-,  catenate    list        4: http/get (.z.mg)                                 
+=  equal       group       1: read/write byte    step `b 0 3!2 4   `b          
+~  match       not         2: read/write data    expr :32+9*f%5    `0          
+!  key         enum        3: conn/set (.z.ms)   func {(+/x)%#x}   `1..9       
+,  catenate    enlist      4: http/get (.z.mg)                                 
 ^  except      asc                               \l f.k  load      \h help     
 #  take        count       #[t;c;b[;a]] select   \t[:n]x time      \l log      
 _  drop        floor       _[t;c;b[;a]] update   \u[:n]x trace                 
 ?  find        unique      ?[x;i;f[;y]] splice   \v [d]  vars                  
 @  index       type        @[x;i;f[;y]] amend    \f [d]  fns                   
 .  apply       value       .[x;i;f[;y]] dmend    \lf file \lc char \ll line    
-$  cast|pad    string      $[c;t;f]     cond     \cd [d] get[set] \gr x f      
+$  cast|pad    string      $[c;t;f]     cond     \cd [d] get[set]  \gr x file  
                                                                                 
 util: in within bin like find freq prm cmb                                     
 math: sqrt sin cos abs [n]log [n]exp [n]rand mod div                           
@@ -239,9 +239,7 @@ if[c;..];while[c;..]
                                                                                 
 K:key k:key`k1  /public private                                                
 K key k key"hi" /verify sign                                                   
-                                                                                
 "(;)"/:$`x`y`z                                                                 
-                                                                                
 \\ exit                                                                        
 synonyms: count first last min max sum asc</pre>
 
@@ -908,7 +906,11 @@ yet another file|3</pre>
 
     <p>As at 2019-05-17:</p>
 
-    <pre>20190522                                                  
+    <pre>20190524                                                  
+FIX                                                       
+,/,(:)                                                    
+                                                            
+20190522                                                  
 ?2 3 5                                                    
 ^2 3 5                                                    
 FIX                                                       
@@ -1010,7 +1012,7 @@ mod/div instead of n! -n!  7 mod .z.d
 FIX                                                       
 -':2 3.4                                                  
 .z.T-.z.T                                                 
-sum !3   </pre>
+sum !3  </pre>
 
     <h2 id="IO-IPC">IO and IPC</h2>
 
