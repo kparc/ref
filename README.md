@@ -1,8 +1,6 @@
-# docs
+# Reference Card
 
-Community docs for Shakti's k7. 
-
-The docs are a clickable version of the k7 quickref, accessible in k7 with `\h`.
+An unofficial clickable version of k7 quickref, accessible in the REPL with `\h`.
 
 It provides examples, short recipes, dev progress notes, and links to other resources.
 
