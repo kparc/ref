@@ -405,6 +405,25 @@ r|2 9</pre>
 0 1 0
 0 0 1</pre>
 
+    <h3 id="catenate">Catentate <code>,</code></h3>
+
+    <p>Joins two atoms. Prepends/appends an atom to a list. Merges lists.</p>
+
+    <pre> 1,2
+1 2
+ 1 2,3
+1 2 3
+ 1,2 3
+1 2 3
+ 1 2,3 4
+1 2 3 4</pre>
+
+    <p>If you want to make a list nested in the output, enlist it first:</p>
+
+    <pre> 1,,2 3
+1  
+2 3</pre>
+
     <h3 id="key">Key <code>!</code></h3>
     <pre> ! {a:1;b:2}
 `a`b</pre>
@@ -1611,7 +1630,7 @@ k('2 4 6')
 
     links = [].concat( 
         [".z.x"],
-        ["Verb", "assign", "flip", "min", "where", "up", "group", "match", "enum", "key", "take", "drop", "except", "sort", "floor", "find", "distinct"],
+        ["Verb", "assign", "flip", "min", "where", "up", "group", "match", "enum", "catenate", "key", "take", "drop", "except", "sort", "floor", "find", "distinct"],
         ["Adverb", "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs"],
         ["Noun", "float", "list", "func", "expr"],
         ["table"],
