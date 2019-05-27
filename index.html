@@ -9,7 +9,7 @@
     <title>k refcard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* TODO: fix smooth scrolling on mobile */
+        /* TODO: tap top to scroll to start on mobile */
         body {
             font-family: Consolas, monospace;
             font-size: 12px;
@@ -202,10 +202,7 @@
                 <br>
                 <li><a href="http://nsl.com">no stinking loops</a></li>
                 <br>
-                <li><a href="https://github.com/kparc/kcc/blob/master/README.md">k crash course</a></li>            
-
-
-                <!--li><a href="https://github.com/kparc/ref">Contribute to these docs</a></li-->
+                <li><a href="https://github.com/kparc/kcc/blob/master/README.md">k crash course</a></li>
 
             </ul>
 
@@ -267,8 +264,6 @@ synonyms: count first last min max sum asc</pre>
 
     <h2 id="Verb">Verbs</h2>
 
-    <!-- TODO write monadic verbs in code tags as x:, not x -->
-
     <p>Force the monadic case by applying a <code>:</code> suffix.</p>
 
     <p>Force the dyadic case by putting the verb in parentheses:</p>
@@ -318,7 +313,7 @@ synonyms: count first last min max sum asc</pre>
 
     <pre>f: {{x*x} reusedtempdata}</pre>
 
-    <h3 id="flip">Flip <code>#</code></h3>
+    <h3 id="flip">Flip <code>+:</code></h3>
 
     <pre>  ("#";"##")
 "#" 
@@ -362,7 +357,7 @@ synonyms: count first last min max sum asc</pre>
     <pre> &1 0 2 1
 ^0 2 2 3</pre>
 
-    <h3 id="up">Up <code>&lt;</code></h3>
+    <h3 id="up">Up <code>&lt;:</code></h3>
 
     <pre> &lt; "abracadabra"
 0 3 5 7 10 1 8 4 6 2 9
@@ -371,7 +366,7 @@ synonyms: count first last min max sum asc</pre>
 
 
     <!-- <h3 id="template"></h3><pre></pre> -->
-    <h3 id="group">Group <code>=</code></h3>
+    <h3 id="group">Group <code>=:</code></h3>
     <p>With a list, get back the indices at which each unique element appears:
     <pre> ="abracadabra"
 a|0 3 5 7 10
@@ -392,7 +387,8 @@ r|2 9</pre>
     <pre> (1;"c";(;{a:2}))~(1;"c";(;{a:1}))
 0</pre>
 
-    <h3 id="enum">Enumerate <code>!</code></h3><pre> !3
+    <h3 id="enum">Enumerate <code>!:</code></h3>
+    <pre> !3
 0 1 2
  !2 3
 0 0 0 1 1 1
@@ -435,7 +431,7 @@ r|2 9</pre>
  "abracadabra" ^ "bc"
 "araadara"</pre>
 
-    <h3 id="sort">Sort <code>^</code></h3>
+    <h3 id="sort">Sort <code>^:</code></h3>
 
     <pre> :: l: rand 4
 0.5594068 0.1751217 0.3652149 0.5086234
@@ -456,7 +452,7 @@ r|2 9</pre>
     <pre> 4_"abracadabra"
 "cadabra"</pre>
 
-    <h3 id="floor">Floor <code>_</code></h3>
+    <h3 id="floor">Floor <code>_:</code></h3>
 
     <pre> _ 1.23 -1.23 0
 1 -2 0</pre>
@@ -468,7 +464,7 @@ r|2 9</pre>
  2 3 1 4 0 ? 3 1 0
 1 2 4</pre>
 
-    <h3 id="distinct">Distinct <code>?</code></h3>
+    <h3 id="distinct">Distinct <code>?:</code></h3>
 
     <pre> ? "abracadabra"
 "abrcd"
@@ -1101,7 +1097,6 @@ sum !3  </pre>
 
     <h3 id="line">Read/write line <code>0:</code></h3>
 
-    <!-- TODO what about writing to CSV? -->
     <p>Given the following in <code>test.csv</code>:</p>
     <pre>1,ABC,1.23
 3,DEF,4567.89</pre>
