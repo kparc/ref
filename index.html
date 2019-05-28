@@ -505,6 +505,16 @@ a
     <pre> {z,x,y} . `a`b`c
 `c`a`b</pre>
 
+    <h3 id="value">Value <code>.:</code></h3>
+
+    <pre> ."1+2"
+3
+
+ d:1
+ ."d+:1"
+ d
+2</pre>
+
     <h3 id="cast">Cast <code>$</code> (with a non-string)</h3>
 
     <pre> "YMD"$0
@@ -1717,7 +1727,7 @@ k('2 4 6')
 
     links = [].concat( 
         [".z.x"],
-        ["Verb", "assign", "add", "flip", "min", "where", "up", "group", "match", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find", "unique", "apply", "cast", "pad", "string"],
+        ["Verb", "assign", "add", "flip", "min", "where", "up", "group", "match", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find", "unique", "apply", "value", "cast", "pad", "string"],
         ["Adverb", "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs"],
         ["Noun", "float", "list", "dict", "func", "expr"],
         ["table"],
