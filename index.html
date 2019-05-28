@@ -505,6 +505,27 @@ a
     <pre> {z,x,y} . `a`b`c
 `c`a`b</pre>
 
+    <h3 id="cast">Cast <code>$</code> (with a non-string)</h3>
+
+    <pre> "YMD"$0
+2024Y     
+2024-01M  
+2024-01-01
+
+ (`Y`M`D$0)~"YMD"$0
+1
+
+ `c$65+!3
+"ABC"</pre>
+<!-- TODO add "char to int" case -->
+
+    <h3 id="pad">Pad <code>$</code> (with string)</h3>
+
+    <pre> 4$"abc"
+"abc "
+ 2$"abc"
+"ab"</pre>
+
     <h3 id="string">String <code>$:</code></h3>
 
     <pre> $1
@@ -1686,7 +1707,7 @@ k('2 4 6')
 
     links = [].concat( 
         [".z.x"],
-        ["Verb", "assign", "add", "flip", "min", "where", "up", "group", "match", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find", "unique", "apply", "string"],
+        ["Verb", "assign", "add", "flip", "min", "where", "up", "group", "match", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find", "unique", "apply", "cast", "pad", "string"],
         ["Adverb", "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs"],
         ["Noun", "float", "list", "func", "expr"],
         ["table"],
