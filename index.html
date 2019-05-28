@@ -524,6 +524,27 @@ a
  2 3 1 4 0 ? 3 1 0
 1 2 4</pre>
 
+    <p><code>i?</code> is draw (with replacement), <code>-i?</code> is deal (without replacement):</p>
+
+    <pre> ^ 9 ? 9
+^1 3 5 5 6 6 7 7 8
+ ^ -9 ? 9
+^?0 1 2 3 4 5 6 7 8
+
+ 10 ? 9
+1 0 1 7 3 6 2 2 5 0
+ -10 ? 9
+-10 ? 9
+    ^
+length error</pre>
+
+    <p>You can also draw or deal from a list:</p>
+
+    <pre> 3 ? "abcd"
+"daa"
+ -3 ? "abcd"
+"acb"</pre>
+
     <h3 id="unique">Unique <code>?:</code></h3>
 
     <pre> ? "abracadabra"
