@@ -377,6 +377,10 @@ b|2</pre>
  s@&lt;s: "abracadabra"
 "aaaaabbcdrr"</pre>
 
+    <h3 id="equal">Equal <code>=</code></h3>
+
+    <pre> 1=1f
+1</pre>
 
     <!-- <h3 id="template"></h3><pre></pre> -->
     <h3 id="group">Group <code>=:</code></h3>
@@ -398,6 +402,11 @@ r|2 9</pre>
     <p>With one value different in the nested structure:</p>
 
     <pre> (1;"c";(;{a:2}))~(1;"c";(;{a:1}))
+0</pre>
+
+    <p>Unlike <a href="#equal">equal <code>=</code></a>, match compares types:</p>
+
+    <pre> 1~1f
 0</pre>
 
     <h3 id="not">Not <code>~:</code></h3>
@@ -1765,7 +1774,7 @@ k('2 4 6')
 
     links = [].concat( 
         [".z.x"],
-        ["Verb", "assign", "add", "flip", "divideby", "min", "where", "up", "group", "match", "not", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find", "unique", "apply", "value", "cast", "pad", "string"],
+        ["Verb", "assign", "add", "flip", "divideby", "min", "where", "up", "equal", "group", "match", "not", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find", "unique", "apply", "value", "cast", "pad", "string"],
         ["Adverb", "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs"],
         ["Noun", "float", "list", "dict", "func", "expr"],
         ["table"],
