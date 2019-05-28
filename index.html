@@ -834,6 +834,19 @@ a b
  1 2 3 within 1 2 3
 0 1 0</pre>
 
+    <h3 id="like"><code>like</code></h3>
+
+    <pre> "abc" like "*b?"
+1
+ "abcd" like "*b?"
+0
+
+ (,"1") like "[0-3]"
+1
+ (,"4") like "[0-3]"
+0</pre>
+    <!-- TODO other things captured by like, eg capture groups, ranges? -->
+
     <h3 id="freq">Frequency histogram</h3>
 
     <p>Counts of each item in the list.</p>
@@ -1748,7 +1761,7 @@ k('2 4 6')
         ["table"],
         [".z.d", ".z.t"],
         ["help", "log", "file"],
-        ["util", "within", "freq", "[f]asc", "[f]dsc", "[f]key"],
+        ["util", "within", "like", "freq", "[f]asc", "[f]dsc", "[f]key"],
         ["math", "abs", "prm", "[n]log", "[n]exp", "[n]rand", "mod"],
         ["aggr", "med"],
         ["sql"],
