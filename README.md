@@ -8,7 +8,7 @@ It provides examples, short recipes, dev progress notes, and links to other reso
 
 Trial versions of k for macOS and Linux can be downloaded from Anaconda - follow the instructions [here](https://github.com/kparc/kcc/blob/master/README.md#get).
 
-To add a page:
+To add a section:
 
 1. Select a word that you'd like to contribute docs for in the quickref
 2. Add it to the `links` array in `index.html`
