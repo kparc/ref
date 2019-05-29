@@ -585,7 +585,14 @@ length error</pre>
  `c $ 65+!3
 "ABC"</pre>
 
-    <p>However, you can't cast chars to ints or floats. Instead:</p>
+    <p>However, casting chars to ints/floats/etc is more like a parse than a cast:</p>
+
+    <pre> `i$"123"
+123
+ `i$"ABC"
+Ø</pre>
+
+    <p>If you want ASCII numbers of characters:</p>
 
     <pre> 0+"ABC"
 65 66 67
