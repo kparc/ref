@@ -583,7 +583,13 @@ length error</pre>
 
  `c $ 65+!3
 "ABC"</pre>
-<!-- TODO add "char to int" case -->
+
+    <p>However, you can't cast chars to ints or floats. Instead:</p>
+
+    <pre> 0+"ABC"
+65 66 67
+ 0f+"ABC"
+65 66 67f</pre>
 
     <h3 id="pad">Pad <code>$</code> (with string)</h3>
 
