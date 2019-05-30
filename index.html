@@ -445,6 +445,11 @@ r|2 9</pre>
 0 1 0
 0 0 1</pre>
 
+    <p>Given a dict, get its keys:</p>
+
+    <pre> ! {a:1;b:2}
+`a`b</pre>
+
     <h3 id="catenate">Catentate <code>,</code></h3>
 
     <p>Joins two atoms. Prepends/appends an atom to a list. Merges lists.</p>
@@ -482,8 +487,12 @@ a
 2</pre>
 
     <h3 id="key">Key <code>!</code></h3>
-    <pre> ! {a:1;b:2}
-`a`b</pre>
+
+    <p>Generate a dictionary from lists of keys and values:</p>
+
+    <pre> `k @ `a`b!1 2
+"{a:1;b:2}"</pre>
+
     <h3 id="except">Except <code>^</code></h3>
     <pre> (!4)^1
 0 2 3
@@ -864,6 +873,13 @@ cd</pre>
 b|2
 a|1</pre>
 
+    <p>Recover the keys and values using <code>!:</code> and <code>.:</code>:</p>
+
+    <pre> !{a:1;b:2}
+`a`b
+ .{a:1;b:2}
+1 2</pre>
+
     <h3 id="func">Functions</h3>
 
     <p>Functions can call themselves by using their own name in their definition. Naive example:</p>
@@ -936,7 +952,7 @@ a b
 0</pre>
     <!-- TODO other things captured by like, eg capture groups, ranges? -->
 
-    <h3 id="freq">Frequency histogram</h3>
+    <h3 id="freq">Frequency histogram <code>freq</code></h3>
 
     <p>Counts of each item in the list.</p>
 
