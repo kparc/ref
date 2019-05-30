@@ -283,6 +283,13 @@ synonyms: count first last min max sum asc</pre>
  @["abc"]
 "abc"@</pre>
 
+    <p>For dyadic verbs, <code>x</code> is on the left and <code>y</code> is on the right:</p>
+
+<pre> 1,2
+1 2
+ ,[1;2]
+1 2</pre>
+
     <p>Project over the first argument by omitting it entirely:</p>
 
     <pre> @[;1] "abc"
@@ -570,7 +577,18 @@ length error</pre>
  d:1
  ."d+:1"
  d
-2</pre>
+2
+
+ . :x+y
+(+;`x;`y)
+":x+y"   
+
+ . {x+y+a:1}
+(+;`x;(+;`y;(::;`a;1)))
+"{x+y+a:1}"            
+`                      
+`x`y                   
+,`a</pre>
 
     <h3 id="cast">Cast <code>$</code> (with a non-string)</h3>
 
