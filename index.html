@@ -816,6 +816,15 @@ cd</pre>
     <pre> 2/: 1 0 1 0
 10</pre>
 
+    <p>Zero is represented as an empty integer list <code>!0</code>, not <code>0</code>:</p>
+
+    <pre> 10/: !0
+0
+ 10/: 0
+{{z+y*x}/[0;x;y]}
+    ^
+class error</pre>
+
     <p>You can also turn a vector in (year, month, day) form into a k date:</p>
 
 <pre> `/: 2019 5 4
@@ -836,6 +845,11 @@ cd</pre>
  2\: 10
 1 0 1 0</pre>
 
+    <p>Conversion of zero into a base may be surprising (empty list), but is consistent:</p>
+
+    <pre> 10\: 0
+!0</pre>
+
     <p>You can also turn a k date into a (year, month, day) vector:</p>
 
 <pre> `\: .z.d
@@ -847,7 +861,7 @@ cd</pre>
 
     <h3 id="float">Floats</h3>
 
-    <p>All of <code>1.0</code>, <code>.5</code>, <code>1f</code> are valid float literals.</p>
+    <p>All of <code>1.0</code>, <code>.5</code>, <code>1.</code>, <code>1f</code> are valid float literals.</p>
 
     <pre> Ø=ø
 1
