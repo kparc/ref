@@ -323,6 +323,38 @@ synonyms: count first last min max sum asc</pre>
 
     <pre>f: {{x*x} reusedtempdata}</pre>
 
+    <p>You can assign a value to a list index, or a dictionary key:</p>
+
+    <pre> a:!3
+ a[1]:4
+ a
+0 4 2
+
+ d:{a:1;b:2}
+ d[`a`c]:3 4
+ d
+a|3
+b|2
+c|4</pre>
+
+    <p>You can combine assignment with other verbs:</p>
+
+    <pre> a:1
+ a+:1
+ a
+2
+
+ l:()
+ l,:1 2 3
+ l
+1 2 3
+
+ l[0],:0
+ l
+1 0
+2  
+3</pre>
+
     <h3 id="add">Add <code>+</code></h3>
 
     <pre> {a:1}+{a:2}
