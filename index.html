@@ -624,6 +624,33 @@ length error</pre>
     <pre> {z,x,y} . `a`b`c
 `c`a`b</pre>
 
+    <p>Apply can also be used to 'drill' into a data structure in a similar way to bracket indexing. For example:</p>
+
+    <pre> :: m: 3 3 # !9
+0 1 2
+3 4 5
+6 7 8
+
+ / Atom at x position
+ m[1]
+3 4 5
+ m . 1
+3 4 5
+         
+ / List in x position
+ m[1 2]
+3 4 5
+6 7 8
+ m . ,(1 2)
+3 4 5
+6 7 8
+        
+ / Atoms at x and y positions
+ m[1; 2]
+5
+ m . 1 2
+5</pre>
+
     <h3 id="value">Value <code>.:</code></h3>
 
     <pre> . "1+2"
@@ -1540,7 +1567,12 @@ b
 
     <h3 id="amend">Amend <code>@[x;i;f[;y]]</code></h3>
 
-    <p>Replace the element at <code>i</code> in <code>x</code> with <code>y</code>.</p>
+    <p>Apply function f to the elements at each <code>i</code> of <code>x</code> (with argument <code>y</code>, if f is dyadic).</p>
+
+    <pre> @[!3; 0 2; 1+]
+1 1 3
+ @[!3; 0 2; +; 2 7]
+2 1 9</pre>
 
     <p>To do the update in-place, use the data's name symbol instead of the name directly (<code>`name</code> vs <code>name</code>).</p>
 
@@ -1554,26 +1586,61 @@ b
  v
 0 7 2</pre>
 
-    <h3 id="dmend">Dmend <code></code></h3>
+    <h3 id="dmend">Dmend <code>.[x;i;f[;y]]</code></h3>
+
+    <p>Think of dmend as 'deep' or 'drill' amend - it's similar to amend in the same way that dyadic <code>.</code> and <code>@</code> are similar.</p>
+
+    <p><code>i</code> is a list that governs which slices of <code>x</code> to apply <code>f</code> to.</p>
 
     <p>Apply function to all elements:</p>
 
     <pre> .[!3; (); +; 1]
 1 2 3</pre>
 
-    <p>Apply function to specific indices:</p>
+    <p>Apply <code>f</code> to specific indices; ie one 'depth' level down, apply <code>f</code> to slices 0 and 2:</p>
 
     <pre> .[!3; ,0 2; 7]
-7 1 7
+7 1 7</pre>
 
- .[!3; ,0 2; 1+]
-1 1 3
+    <p>Apply to rows or specific elements of a matrix:</p>
 
- .[!3; ,0 2; +; 1]
-1 1 3
-
- .[3 3 # !9; (1 2; 1 2); +; 1]
+    <pre> :: m: 3 3 # !9 
 0 1 2
+3 4 5
+6 7 8
+
+ / Row 1:
+
+ .[m; ,1; 1+]
+0 1 2
+4 5 6
+6 7 8
+
+ / Row 1, element 2:
+
+ .[m; 1 2; 1+]
+0 1 2
+3 4 6
+6 7 8
+
+ / Row 0, elements 1 and 2:
+
+ .[m; (0; 1 2); 1+]
+ 0 2 3
+ 3 4 5
+ 6 7 8
+ 
+ / In each of rows 1 and 2, elements 1 and 2:
+
+ .[m; (1 2; 1 2); 1+]
+ 0 1 2
+ 3 5 6
+ 6 8 9
+
+ / In all rows, elements 1 and 2:
+
+ .[m; (; 1 2); 1+]
+0 2 3
 3 5 6
 6 8 9</pre>
 
