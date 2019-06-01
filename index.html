@@ -355,6 +355,15 @@ c|4</pre>
 2  
 3</pre>
 
+    <p>Assign doesn't appear to be callable with square brackets; in fact the parse tree suggests it has an unconventional evaluation order:</p>
+
+    <pre> `p "I[0]:4"
+::    
+(`I;0)
+4</pre>
+
+    <p>Under normal bracket precedence, you'd lose info about where to assign to before the assign verb is invoked, because <code>(`I;0)</code> would resolve to the first element of <code>I</code>.</p>
+
     <h3 id="add">Add <code>+</code></h3>
 
     <pre> {a:1}+{a:2}
@@ -1545,6 +1554,29 @@ b
  v
 0 7 2</pre>
 
+    <h3 id="dmend">Dmend <code></code></h3>
+
+    <p>Apply function to all elements:</p>
+
+    <pre> .[!3; (); +; 1]
+1 2 3</pre>
+
+    <p>Apply function to specific indices:</p>
+
+    <pre> .[!3; ,0 2; 7]
+7 1 7
+
+ .[!3; ,0 2; 1+]
+1 1 3
+
+ .[!3; ,0 2; +; 1]
+1 1 3
+
+ .[3 3 # !9; (1 2; 1 2); +; 1]
+0 1 2
+3 5 6
+6 8 9</pre>
+
     <h3 id="cond">Cond <code>$[c;t;f]</code></h3>
 
     <p>If the true expression is returned, the false expression never executes (and vice versa):</p>
@@ -1940,7 +1972,7 @@ k('2 4 6')
         ["aggr", "med"],
         ["sql"],
         ["line", "byte", "data", "conn"],
-        ["select", "update", "splice", "amend", "cond"],
+        ["select", "update", "splice", "amend", "dmend", "cond"],
         ["bool", "`ascii"],
         ["datetime"],
         ["1way", "2way"]
