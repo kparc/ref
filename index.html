@@ -50,10 +50,10 @@
             display: flex;
             overflow-y: hidden;
         }
-        #index {
+        #card {
             display: none;
         }
-        #index a {
+        #card a {
             /* color: rgb(75, 75, 75); */
         }
         #small-nav {
@@ -112,7 +112,7 @@
                 padding-left: 0.7em;
                 position: inherit
             }
-            #index {
+            #card {
                 display: block;
                 overflow-y: auto;
                 overflow-x: hidden; /* TODO can we deal with this another way? */
@@ -212,7 +212,7 @@
 
         </nav>
 
-    <div id="index">
+    <div id="card">
 
         <!-- Clickable help. These words are linked to detailed explanations via JavaScript at the bottom of this page. -->
 
@@ -619,6 +619,18 @@ length error</pre>
 `a`b 
 0    
 1 2</pre>
+
+    <h3 id="index">Index <code>@</code></h3>
+
+    <p>With an atom, applies that atom to the left function:</p>
+
+    <pre> (1+) @ 2
+3</pre>
+
+    <p>With a list, applies each element of that list to the function ('shallow' application, ie doesn't go beyond <code>x</code> of <code>xyz</code>):</p>
+
+    <pre> (1+) @ 2 4 7
+3 5 8</pre>
 
     <h3 id="apply">Apply <code>.</code></h3>
 
@@ -2030,7 +2042,7 @@ k('2 4 6')
 
     links = [].concat( 
         [".z.x"],
-        ["Verb", "assign", "add", "flip", "divideby", "min", "where", "up", "equal", "group", "match", "not", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find", "unique", "apply", "value", "cast", "pad", "string"],
+        ["Verb", "assign", "add", "flip", "divideby", "min", "where", "up", "equal", "group", "match", "not", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find", "unique", "index", "apply", "value", "cast", "pad", "string"],
         ["Adverb", "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs"],
         ["Noun", "float", "list", "dict", "func", "expr"],
         ["table"],
