@@ -812,7 +812,7 @@ bdf</pre>
 
     <h3 id="eachprior">Each prior <code>':</code></h3>
 
-    <!-- TODO seeded vs seedless https://github.com/kparc/kcc#typ-cast -->
+    <!-- TODO seeded vs seedless. also works for over, scan https://github.com/kparc/kcc#typ-cast -->
 
     <p>The null chosen for the first pairing is of the type of the first member of the list.</p>
     
@@ -828,6 +828,13 @@ bdf</pre>
 " a"   
 ("a";1)
 (1;`ok)</pre>
+
+    <p><code>':</code> can also provide a 'sliding window' of size <code>x</code> over <code>y</code>:</p>
+
+    <pre> 3': !5
+0 1 2
+1 2 3
+2 3 4</pre>
 
     <h3 id="eachright">Each right <code>/:</code></h3>
 
