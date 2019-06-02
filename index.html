@@ -1916,14 +1916,14 @@ a b
 
 <p>In the REPL, contains an empty list by default:</p>
 
-<pre>(base) chris@chris-VirtualBox:~/sheet$ k
+<pre>(base) chris@chris-VirtualBox:~$ k
 2019-04-28 15:03:42 2core 1gb avx2 © shakti l2.0 test
  .z.x
 ()</pre>
 
 <p>But in a file, it lists the filename and any args after it. If <code>testarg.k</code> comprises the line <code>.z.x</code>:</p>
 
-<pre>(base) chris@chris-VirtualBox:~/sheet$ k testarg.k not.a.real.file
+<pre>(base) chris@chris-VirtualBox:~$ k testarg.k not.a.real.file
 2019-04-28 15:03:42 2core 1gb avx2 © shakti l2.0 test
 testarg.k      
 not.a.real.file</pre>
@@ -1932,7 +1932,7 @@ not.a.real.file</pre>
 
 <p>Also, note those arguments won't appear if we load <code>testarg.k</code> in another k process:</p>
 
-<pre>(base) chris@chris-VirtualBox:~/sheet$ k
+<pre>(base) chris@chris-VirtualBox:~$ k
 2019-04-28 15:03:42 2core 1gb avx2 © shakti l2.0 test
 \l testarg.k
 ()</pre>
