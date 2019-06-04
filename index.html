@@ -569,9 +569,16 @@ a
     <pre> 3#"abracadabra"
 "abr"</pre>
 
-<p>Given a filter function (returning <code>1</code>s and <code>0</code>s only):</p>
+<p>Given a filter function ('uniform boolean', ie returns a list of booleans same length as the input list):</p>
 <pre> (2 mod)#!9
-1 3 5 7</pre>
+1 3 5 7
+
+ (>':)#3 1 4
+3 4
+
+ ({x~|x}')#("racecar";"nope";"bob")
+racecar
+bob</pre>
 
     <p>Taking zero elements of a list generates an empty list of the type of the first element of the list (or if the list is empty, the type of the list):</p>
 
@@ -660,7 +667,7 @@ length error</pre>
 3 4 5
          
  / List in x position
- / Notice [] brackets with single arg effectively enlists that arg
+ / Notice [] effectively enlists a single arg
  m[1 2]
 3 4 5
 6 7 8
@@ -1005,11 +1012,11 @@ a|1</pre>
  factorial 4
 24</pre>
 
-    <p>A function with implicit <code>xyz</code> args can be distinguished from a dict by ensuring the body does not start with an assignment:</p>
+    <p>A function with implicit <code>xyz</code> args can be distinguished from a dict by ensuring the body does not start with an assignment (eg start with <code>;</code> or, in scripts, a newline):</p>
 
     <pre> @{a:1;a*x}
 value error: a
- @{;a:1;a*x}   / in scripts, can also be a newline instead of a semicolon
+ @{;a:1;a*x}
 `1</pre>
 
     <h3 id="expr">Expressions</h3>
@@ -1221,9 +1228,9 @@ a c|b
     
     <p>A table can also be considered as a flipped dict of lists, where each list is of equal length.</p>
 
-    <pre>t: ({a:1;b:2};{a:3;b:4})   / Row-wise
-u: +`a`b !    (1 3;2 4)    / Col-wise (flipped dict)
-v:  `a`b ! /: (1 2;3 4)    / Row-wise, but de-duplicate headers using eachright
+    <pre>t: ({a:1;b:2};{a:3;b:4})
+u: +`a`b !    (1 3;2 4)
+v:  `a`b ! /: (1 2;3 4)
 
 / The tables match:
 t~u
@@ -1235,7 +1242,8 @@ w: ({a:1;b:2}
 
 t~w
 
-/ Break row-wise (condensed row format) over multiple lines:
+/ Break row-wise (condensed row format)
+/ over multiple lines:
 x: `a`b!/:(1 2
            3 4)
 
@@ -1497,7 +1505,7 @@ sum !3  </pre>
     <p>You can verify <code>1:</code> works with raw bytes using an external tool:</p>
  
     <pre>$ hexdump -C testfile
-00000000  01 23 45 67 89 ab cd ef                           |.#Eg....|
+00000000  01 23 45 67 89 ab cd ef
 00000008</pre>
 
     <p>And to break down what's happening in the 'prompt' example from the official tutorial, ie:</p>
@@ -1551,7 +1559,8 @@ a b
 2 5
 3 6
 
- / But since there are just two arguments, we can use # as an infix verb:
+ / But since there are just two arguments,
+ / we can use # as an infix verb:
 
  t # :a>1
 a b
@@ -1736,7 +1745,8 @@ nyi error</pre>
 
 <p>'0' is Monday. Get the day of the week with <code>7 mod</code>.</p>
 
-<pre> `Mon`Tue`Wed`Thu`Fri`Sat`Sun @ 7 mod 2024-01-01
+<pre> d:`Mon`Tue`Wed`Thu`Fri`Sat`Sun
+ d @ 7 mod 2024-01-01
 `Mon</pre>
 
 <p>You can also use duration literals (requires short-form code), and do date arithmetic:</p>
