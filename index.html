@@ -197,7 +197,6 @@
             <br>
 
             <!-- in desktop, move bar to LHS instead of top. in mobile, make the jumps let you see the heading jumped to, and fix the bar at the top, and make the bar disappear when a link is clicked. -->
-            <!-- add 'cut' (_) -->
             <!-- add how to install k itself (miniconda, rlwrap) -->
 
             <!-- John Earnest's: -->
@@ -592,6 +591,13 @@ bob</pre>
     <pre> 4_"abracadabra"
 "cadabra"</pre>
 
+    <p><code>I_</code> is cut:</p>
+
+     <pre> 1 2 6_"abracadabra"
+"b"
+"raca"
+"dabra"</pre>
+
     <h3 id="floor">Floor <code>_:</code></h3>
 
     <pre> _ 1.23 -1.23 0
@@ -844,6 +850,13 @@ bdf</pre>
 " a"   
 ("a";1)
 (1;`ok)</pre>
+
+    <p>Specify a number to seed the scan:</p>
+
+    <pre> +':!5
+0 1 3 5 7
+ 8+':!5
+8 1 3 5 7</pre>
 
     <p><code>':</code> can also provide a 'sliding window' of size <code>x</code> over <code>y</code>:</p>
 
