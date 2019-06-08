@@ -787,7 +787,7 @@ Zero is represented as an empty integer list `!0`, not `0`:
  10/: !0
 0
  10/: 0
-{{z+y*x}/[0;x;y]}
+{{ "{{z+y*x" }}}/[0;x;y]}
     ^
 class error
 ```
