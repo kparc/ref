@@ -281,7 +281,7 @@ synonyms: count first last min max sum asc</pre>
         return "<a href=\"#" + word + "\">" + word + "</a>"
     }
     /* DOWNLOAD, CONVERT AND DISPLAY REFCARD DETAIL */
-    var converter = new showdown.Converter({tables: true, customizedHeaderId: true});
+    var converter = new showdown.Converter({tables: true, rawHeaderId: true, customizedHeaderId: true});
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
