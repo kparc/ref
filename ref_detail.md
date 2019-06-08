@@ -64,7 +64,7 @@ f: {a*a:reusedtempdata}
 Or this:
 
 ```q
-f: &#123;{x*x} reusedtempdata}
+f: { {x*x} reusedtempdata }
 ```
 
 You can assign a value to a list index, or a dictionary key:
@@ -787,8 +787,8 @@ Zero is represented as an empty integer list `!0`, not `0`:
  10/: !0
 0
  10/: 0
-&#123;{z+y*x}/[0;x;y]}
-    ^
+{ {z+y*x} / [0;x;y] }
+     ^
 class error
 ```
 
