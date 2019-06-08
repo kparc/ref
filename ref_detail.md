@@ -1,4 +1,4 @@
-## Verbs
+## [Verbs](#verbs)
 
 Force the monadic case by applying a `:` suffix.
 
