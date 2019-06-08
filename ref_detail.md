@@ -1,4 +1,4 @@
-## Verbs {verbs}
+## Verbs {Verb}
 
 Force the monadic case by applying a `:` suffix.
 
@@ -252,7 +252,7 @@ Unlike [equal `=`](#equal), match compares types:
 1
 ```
 
-### Enumerate `!:` {enumerate}
+### Enumerate `!:` {enum}
 
 ```q
  !3
@@ -588,7 +588,7 @@ a b
 ,"1"
 ```
 
-## Adverbs {adverbs}
+## Adverbs {Adverb}
 
 There should be no spaces between an adverb and the expression on its left-hand side ([source](https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ)).
 
@@ -826,9 +826,9 @@ You can also turn a k date into a (year, month, day) vector:
 2019 5 4
 ```
 
-## Nouns {nouns}
+## Nouns {Noun}
 
-### Floats {floats}
+### Floats {float}
 
 All of `1.0`, `.5`, `1.`, `1f` are valid float literals.
 
@@ -839,7 +839,7 @@ All of `1.0`, `.5`, `1.`, `1f` are valid float literals.
 0
 ```
 
-### Lists {lists}
+### Lists {list}
 
 `` (2;3.4;`c) `` (or any list of atoms, functions etc) can also be written `` 2,3.4,`c ``:
 
@@ -858,7 +858,7 @@ But it breaks down when you include nested lists such as strings:
 `c
 ```
 
-### Dictionaries {dicts}
+### Dictionaries {dict}
 
 Dicts are ordered:
 
@@ -877,7 +877,7 @@ Recover the keys and values using `!:` and `.:`:
 1 2
 ```
 
-### Functions {functions}
+### Functions {func}
 
 Functions can call themselves by using their own name in their definition. Naive example:
 
@@ -896,7 +896,7 @@ value error: a
 `1
 ```
 
-### Expressions {exprs}
+### Expressions {expr}
 
 Exprs can be executed on tables, eg:
 
@@ -913,7 +913,7 @@ a b
 
 Some expr functionality is NYI. For more info, see [this forum post](https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ).
 
-## Utilities {utilities}
+## Utilities {util}
 
 ### `in` {in}
 
@@ -1117,7 +1117,7 @@ Normal distribution `rand -i`:
 1 0 3
 ```
 
-## Aggregations {aggregations}
+## Aggregations {aggr}
 
 ### Median `med` {med}
 
@@ -1136,7 +1136,7 @@ If the count of the data is even, return the value on the right of the middle.
 
 ## Tables and KSQL {tables-ksql}
 
-### Tables {tables}
+### Tables {table}
 
 A table is a list of dicts where each dict has the same keys in the same order.
 
@@ -1697,7 +1697,7 @@ Or (modified version of [Arthur's](https://groups.google.com/d/msg/shaktidb/6JLp
 "aec"
 ```
 
-## Boolean checks {boolean}
+## Boolean checks {bool}
 
 ### `` `ascii `` {ascii}
 
@@ -1710,7 +1710,7 @@ Are all characters in the string in the [ASCII set](https://en.wikipedia.org/wik
 0
 ```
 
-## Datetimes {datetimes}
+## Datetimes {datetime}
 
 A datetime looks like this:
 
