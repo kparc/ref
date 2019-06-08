@@ -1010,7 +1010,7 @@ a c|b
 
 ## Math {math}
 
-### Absolute value `abs` {asc}
+### Absolute value `abs` {abs}
 
 ```q
  abs 1.23
@@ -1042,7 +1042,7 @@ Generates permutation indices.
 1 2
 ```
 
-### Natural logarithm (`log:`) and logarithm (`log`) {log}
+### Natural logarithm (`log:`) and logarithm (`log`) {[n]log}
 
 Monadic: natural logarithm, ie the power you'd need to raise *e* by to get `x`.
 
@@ -1064,7 +1064,7 @@ Dyadic: logarithm, ie the number you'd need to raise the left number to to get t
 2f
 ```
 
-### Exponential (`exp:`) and power (`exp`) {exp}
+### Exponential (`exp:`) and power (`exp`) {[n]exp}
 
 Monadic: *e* to the power of `x`.
 
@@ -1772,13 +1772,13 @@ Convert to/from/between datetimes and durations using `$`. It takes a name or st
 
 Convert between dates and year, month date digits using [`` `/: ``](#sv) and [`` `\: ``](#vs).
 
-### Current date `.z.d` {current-date}
+### Current date `.z.d` {.z.d}
 
 ```q
 .z.d / 2019-04-02
 ```
 
-### Current time `.z.t` {current-time}
+### Current time `.z.t` {.z.t}
 
 Greenwich Mean Time.
 
