@@ -285,7 +285,7 @@ synonyms: count first last min max sum asc</pre>
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var html = converter.makeHtml(xhttp.responseText);
-            console.log(html);
+            detail.innerHTML = html;
         }
     };
     xhttp.open("GET", "https://raw.githubusercontent.com/kparc/ref/master/ref_detail.md", true);
