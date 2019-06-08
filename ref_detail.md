@@ -1,4 +1,4 @@
-## [Verbs](#verbs)
+## Verbs {verbs}
 
 Force the monadic case by applying a `:` suffix.
 
@@ -47,7 +47,7 @@ Triadic versions of a verb are the same as the dyadic version (except for [`cond
 "adbcb"
 ```
 
-### Assign `:`
+### Assign `:` {assign}
 
 Where an assignment is used in a function, consider rewriting code like this ([source](https://groups.google.com/d/msg/shaktidb/zejmh3vxdAg/6uCxAA2aAwAJ)):
 
@@ -114,7 +114,7 @@ Assign doesn't appear to be callable with square brackets; in fact the parse tre
 
 Under normal bracket precedence, you'd lose info about where to assign to before the assign verb is invoked, because `` (`I;0) `` would resolve to the first element of `I`.
 
-### Add `+`
+### Add `+` {add}
 
 ```q
  {a:1}+{a:2}
@@ -127,7 +127,7 @@ b|2
 "z"
 ```
 
-### Flip `+:`
+### Flip `+:` {flip}
 
 ```q
   ("#";"##")
@@ -151,7 +151,7 @@ b|2
 Ø 1
 ```
 
-### First `*:`
+### First `*:` {first}
 
 First of an empty list is null of the type of the list:
 
@@ -160,14 +160,14 @@ First of an empty list is null of the type of the list:
 Ø
 ```
 
-### Divide by `%`
+### Divide by `%` {divideby}
 
 ```q
  1 % 2
 0.5
 ```
 
-### Min/and `&`
+### Min/and `&` {min-and}
 
 Used as 'min':
 
@@ -182,7 +182,7 @@ Used as 'min':
 1 0
 ```
 
-### Where `&:`
+### Where `&:` {where}
 
 Generate an ascending list of numbers, where the number of times number *i* appears is equal to the number at position *i* of the input list.
 
