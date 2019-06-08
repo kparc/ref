@@ -64,7 +64,7 @@ f: {a*a:reusedtempdata}
 Or this:
 
 ```q
-f: {{x*x} reusedtempdata}
+f: {{ "{{x*x"}}}}} reusedtempdata}
 ```
 
 You can assign a value to a list index, or a dictionary key:
