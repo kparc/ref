@@ -388,6 +388,15 @@ Taking zero elements of a list generates an empty list of the type of the first 
 "cadabra"
 ```
 
+`I_` is cut:
+
+```q
+ 1 2 6_"abracadabra"
+"b"
+"raca"
+"dabra"
+```
+
 ### Floor `_:` {floor}
 
 ```q
@@ -705,6 +714,15 @@ The null chosen for the first pairing is of the type of the first member of the 
 " a"
 ("a";1)
 (1;`ok)
+```
+
+Specify a number to seed the scan:
+
+```q
+ +':!5
+0 1 3 5 7
+ 8+':!5
+8 1 3 5 7
 ```
 
 `':` can also provide a 'sliding window' of size `x` over `y`:
