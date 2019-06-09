@@ -177,7 +177,7 @@
                 <li><a href="#nouns">Nouns</a></li>
                 <li><a href="#many-args">3+ args</a></li>
                 <li><a href="#datetime">Datetimes</a></li>
-                <li><a href="#tables-KSQL">Tables &amp; KSQL</a></li>
+                <li><a href="#tables-ksql">Tables &amp; KSQL</a></li>
                 <li><a href="#util">Utilities</a></li>
                 <li><a href="#math">Math</a></li>
                 <li><a href="#aggr">Aggregations</a></li>
@@ -295,12 +295,12 @@ synonyms: count first last min max sum asc</pre>
             "not", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find",
             "unique", "index", "apply", "value", "cast", "pad", "string",
         ["Adverb", "Adverb", "adverbs"], "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs",
-        "Noun", "float", "list", "dict", "func", "expr",
+        ["Noun", "Noun", "nouns"], "float", "list", "dict", "func", "expr",
         "table",
         ".z.d", ".z.t",
         ["\\h help", "\\h help", "command-h"], ["\\l log", "\\l log", "command-l"], 
             ["\\lf file", "\\lf file", "command-lf"], ["\\lc char", "\\lc char", "command-lc"], ["\\ll line", "\\ll line", "command-ll"],
-        "util", "within", "like", "freq", "[f]asc", "[f]dsc", "[f]key",
+        "util", ["in within", "in", "in"], "within", "like", "freq", "[f]asc", "[f]dsc", "[f]key",
         "math", "abs", "prm", "cmb", "[n]log", "[n]exp", "[n]rand", "mod",
         "aggr", "med",
         "sql",
@@ -311,7 +311,7 @@ synonyms: count first last min max sum asc</pre>
         "1way", "2way"
     ]
 
-    // TODO figure out to add doubles like `find`
+    // TODO script may break where context for a given change was modified by an earlier change
     const refcard_elem = document.getElementById("official-help")
     let text = refcard_elem.innerHTML;
     for (let i in links) {
@@ -349,7 +349,6 @@ select a:x,b:1+2*x from +[!3]
 0
  `print @ "∞"
 1</pre>
-
 
 -->
 

@@ -867,7 +867,7 @@ You can also turn a k date into a (year, month, day) vector:
 2019 5 4
 ```
 
-## Nouns {noun}
+## Nouns {nouns}
 
 ### Floats {float}
 
@@ -991,6 +991,17 @@ Some expr functionality is NYI. For more info, see [this forum post](https://gro
 
  2 10 in !9
 1 0
+```
+
+### `in` {in}
+
+```q
+ 2 5 in !5
+1 0
+ 2 5 in (1 2; 2 5; 2 4)
+1
+ 2 5 in (1 2; 2 4)
+0
 ```
 
 ### `within` {within}
