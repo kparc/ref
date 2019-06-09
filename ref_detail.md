@@ -1470,7 +1470,7 @@ sum !3
 
 ## IO and IPC {io-ipc}
 
-### Read/write line `0:` {io-line}
+### Read/write line `0:` {rw-line}
 
 Given the following in `test.csv`:
 
@@ -1512,7 +1512,7 @@ You can also use `0:` to deserialise in-memory lists of strings with a common se
 
 Keep in mind it's reading the data into columns, not rows. The first row of the console output is the first item in a list of columns.
 
-### Read/write bytes `1:` {io-bytes}
+### Read/write bytes `1:` {rw-byte}
 
 ```q
  "testfile" 1: 0x0123456789abcdef
@@ -1543,7 +1543,7 @@ What is your name? Me
 
 On the last point: if just writing to stdout, make sure to put a semicolon at the end to suppress outputting the characters on the left of `1:` to the REPL.
 
-### Read/write data `2:` {io-data}
+### Read/write data `2:` {rw-data}
 
 ```q
  "testfile" 2: (1 2 3 4)
