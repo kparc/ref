@@ -1,4 +1,4 @@
-## Verbs {verb}
+## Verbs {verbs}
 
 Force the monadic case by applying a `:` suffix.
 
@@ -620,7 +620,7 @@ a b
 ,"1"
 ```
 
-## Adverbs {adverb}
+## Adverbs {adverbs}
 
 There should be no spaces between an adverb and the expression on its left-hand side ([source](https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ)).
 

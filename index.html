@@ -172,9 +172,9 @@
                                                           TODO mobile detection/support
                                                       -->
             <ul>
-                <li><a href="#Verb">Verbs</a></li>
-                <li><a href="#Adverb">Adverbs</a></li>
-                <li><a href="#Noun">Nouns</a></li>
+                <li><a href="#verbs">Verbs</a></li>
+                <li><a href="#adverbs">Adverbs</a></li>
+                <li><a href="#nouns">Nouns</a></li>
                 <li><a href="#multi-args">3+ args</a></li>
                 <li><a href="#datetime">Datetimes</a></li>
                 <li><a href="#tables-KSQL">Tables &amp; KSQL</a></li>
@@ -276,10 +276,6 @@ synonyms: count first last min max sum asc</pre>
 
 <script>
 
-    const raw_elem = document.getElementById("official-help")
-    function makeLink(word) {
-        return "<a href=\"#" + word + "\">" + word + "</a>"
-    }
     /* DOWNLOAD, CONVERT AND DISPLAY REFCARD DETAIL */
     var converter = new showdown.Converter({tables: true, rawHeaderId: true, customizedHeaderId: true});
     var xhttp = new XMLHttpRequest();
@@ -292,30 +288,40 @@ synonyms: count first last min max sum asc</pre>
     xhttp.open("GET", "https://raw.githubusercontent.com/kparc/ref/master/ref_detail.md", true);
     xhttp.send();
 
-    links = [].concat( 
-        [".z.x"],
-        ["Verb", "assign", "add", "flip", "divideby", "min", "where", "up", "equal", "group", "match", "not", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find", "unique", "index", "apply", "value", "cast", "pad", "string"],
-        ["Adverb", "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs"],
-        ["Noun", "float", "list", "dict", "func", "expr"],
-        ["table"],
-        [".z.d", ".z.t"],
-        ["help", "log", "lf file", "lc char", "ll line"],
-        ["util", "within", "like", "freq", "[f]asc", "[f]dsc", "[f]key"],
-        ["math", "abs", "prm", "cmb", "[n]log", "[n]exp", "[n]rand", "mod"],
-        ["aggr", "med"],
-        ["sql"],
-        ["line", "byte", "data", "conn"],
-        ["select", "update", "splice", "amend", "dmend", "cond"],
-        ["bool", "`ascii"],
-        ["datetime"],
-        ["1way", "2way"]
-    )
+    // Format: string OR [context, text to link, anchor link ID] (latter is for cases where more precise linking is needed)
+    links = [
+        ".z.x",
+        ["Verb", "Verb", "verbs"], "assign", "add", "flip", "divideby", "min", "where", "up", "equal", "group", "match", 
+            "not", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find",
+            "unique", "index", "apply", "value", "cast", "pad", "string",
+        ["Adverb", "Adverb", "adverbs"], "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs",
+        "Noun", "float", "list", "dict", "func", "expr",
+        "table",
+        ".z.d", ".z.t",
+        "help", "log", "lf file", "lc char", "ll line",
+        "util", "within", "like", "freq", "[f]asc", "[f]dsc", "[f]key",
+        "math", "abs", "prm", "cmb", "[n]log", "[n]exp", "[n]rand", "mod",
+        "aggr", "med",
+        "sql",
+        "line", "byte", "data", "conn",
+        "select", "update", "splice", "amend", "dmend", "cond",
+        "bool", "ascii",
+        "datetime",
+        "1way", "2way"
+    ]
 
     // TODO figure out to add doubles like `find`
+    const refcard_elem = document.getElementById("official-help")
+    let text = refcard_elem.innerHTML;
     for (let i in links) {
-        const w = links[i]
-        raw_elem.innerHTML = raw_elem.innerHTML.replace(w, makeLink(w))
+        let data = links[i];
+        if (typeof data == "string") {
+            text = text.replace(data, "<a href=\"#" + data + "\">" + data + "</a>")
+        } else {
+            text = text.replace(data[0], data[0].replace(data[1], "<a href=\"#" + data[2] + "\">" + data[1] + "</a>"))
+        }
     }
+    refcard_elem.innerHTML = text;
     
 </script>
 
