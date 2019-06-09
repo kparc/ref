@@ -1,4 +1,4 @@
-## Verbs {Verb}
+## Verbs {verb}
 
 Force the monadic case by applying a `:` suffix.
 
@@ -554,6 +554,29 @@ If you want ASCII numbers of characters:
 65 66 67f
 ```
 
+`$` is also **matrix multiply**:
+
+```q
+ `m @ x: (1 0; 0 0)
+1 0
+0 0
+
+ `m @ y: (3 2; 9 7)
+3 2
+9 7
+
+ x $ y
+3 2f
+0 0f
+
+ y $ x
+3 0f
+9 0f
+
+ 1 0 1 0 $ 3 2 9 7
+12f
+```
+
 ### Pad `$` (with string) {pad}
 
 Pads with spaces on right-hand side, or truncates from right:
@@ -588,7 +611,7 @@ a b
 ,"1"
 ```
 
-## Adverbs {Adverb}
+## Adverbs {adverb}
 
 There should be no spaces between an adverb and the expression on its left-hand side ([source](https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ)).
 
@@ -826,7 +849,7 @@ You can also turn a k date into a (year, month, day) vector:
 2019 5 4
 ```
 
-## Nouns {Noun}
+## Nouns {noun}
 
 ### Floats {float}
 
@@ -840,6 +863,30 @@ All of `1.0`, `.5`, `1.`, `1f` are valid float literals.
 ```
 
 ### Lists {list}
+
+Although two lists may be zero length, and have the same type, they may not be the same:
+
+```q
+ (@()) = @0 2 # 0
+1
+ (#()) = #0 2 # 0
+1
+ () ~ 0 2 # 0
+0
+```
+
+The 'extra dimensions' can matter for matrix multiplication:
+
+```q
+ () $ (0 2 # 0)
+0#,ø ø
+ (!0) $ (0 2 # 0)
+0 0f
+ (0 2 # 0) $ !0
+(0 2 # 0) $ !0
+          ^
+length error
+```
 
 `` (2;3.4;`c) `` (or any list of atoms, functions etc) can also be written `` 2,3.4,`c ``:
 
