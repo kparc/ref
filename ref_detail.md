@@ -167,9 +167,7 @@ First of an empty list is null of the type of the list:
 0.5
 ```
 
-### Min/and `&` {min-and}
-
-Used as 'min':
+### Min `&` {min}
 
 ```q
  2 & 1
@@ -181,6 +179,8 @@ Used as 'min':
  1 3 & 2 0
 1 0
 ```
+
+<!-- TODO 'and' -->
 
 ### Where `&:` {where}
 
@@ -342,7 +342,7 @@ Generate a dictionary from lists of keys and values:
 "araadara"
 ```
 
-### Sort ascending `^:` {sort-asc}
+### Sort ascending `^:` {asc}
 
 ```q
  :: l: rand 4
@@ -697,7 +697,7 @@ p f\x
 "okkk"
 ```
 
-### Each prior `':` {each-prior}
+### Each prior `':` {eachprior}
 
 The null chosen for the first pairing is of the type of the first member of the list.
 
@@ -734,7 +734,7 @@ Specify a number to seed the scan:
 2 3 4
 ```
 
-### Each right `/:` {each-right}
+### Each right `/:` {eachright}
 
 Compare to each:
 
@@ -747,7 +747,7 @@ abc
 abd
 ```
 
-### Each left `\:` {each-left}
+### Each left `\:` {eachleft}
 
 ```q
  "ab" ,\: "cd"
@@ -1318,7 +1318,7 @@ Access any shell command by putting a `\` in front of it:
 3
 ```
 
-### List files `\lf` {lf}
+### List files `\lf` {command-lf}
 
 ```q
  \lf
@@ -1326,7 +1326,7 @@ afile.txt
 yet another file
 ```
 
-### List character counts `\lc` {lc}
+### List character counts `\lc` {command-lc}
 
 ```q
  \lc
@@ -1342,7 +1342,7 @@ You can't assign the result of `\lc` directly (ie `a: \lc` doesn't work). But yo
 `a
 ```
 
-### List line counts `\ll` {ll}
+### List line counts `\ll` {command-ll}
 
 ```q
  \ll
@@ -1350,11 +1350,11 @@ afile.txt       |1
 yet another file|3
 ```
 
-### Help `\h` {h}
+### Help `\h` {command-h}
 
 The official help included in the k binary. It's the navigation to this site!
 
-### Changelog `\l` {l}
+### Changelog `\l` {command-l}
 
 As at 2019-05-17:
 
@@ -1572,7 +1572,7 @@ Then in another k process, set up a connection to the first k process, send it c
 42
 ```
 
-## 3+ arguments {3args}
+## 3+ arguments {many-args}
 
 ### Select `#[t;c;b[;a]]` {select}
 
@@ -2013,7 +2013,7 @@ For other types, take 0 elements of an atom of that type (may be a better way?).
 0
 ```
 
-## `.z` namespace
+## `.z` namespace {.z}
 
 ### `.z.x` {.z.x}
 

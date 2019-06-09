@@ -175,13 +175,13 @@
                 <li><a href="#verbs">Verbs</a></li>
                 <li><a href="#adverbs">Adverbs</a></li>
                 <li><a href="#nouns">Nouns</a></li>
-                <li><a href="#multi-args">3+ args</a></li>
+                <li><a href="#many-args">3+ args</a></li>
                 <li><a href="#datetime">Datetimes</a></li>
                 <li><a href="#tables-KSQL">Tables &amp; KSQL</a></li>
                 <li><a href="#util">Utilities</a></li>
                 <li><a href="#math">Math</a></li>
                 <li><a href="#aggr">Aggregations</a></li>
-                <li><a href="#IO-IPC">IO and IPC</a></li>
+                <li><a href="#io-ipc">IO and IPC</a></li>
                 <li><a href="#commands">Commands</a></li>
                 <li><a href="#converters">Converters</a></li>
                 <li><a href="#.z"><code>.z</code> namespace</a></li>
@@ -298,12 +298,13 @@ synonyms: count first last min max sum asc</pre>
         "Noun", "float", "list", "dict", "func", "expr",
         "table",
         ".z.d", ".z.t",
-        "help", "log", "lf file", "lc char", "ll line",
+        ["\\h help", "\\h help", "command-h"], ["\\l log", "\\l log", "command-l"], 
+            ["\\lf file", "\\lf file", "command-lf"], ["\\lc char", "\\lc char", "command-lc"], ["\\ll line", "\\ll line", "command-ll"],
         "util", "within", "like", "freq", "[f]asc", "[f]dsc", "[f]key",
         "math", "abs", "prm", "cmb", "[n]log", "[n]exp", "[n]rand", "mod",
         "aggr", "med",
         "sql",
-        "line", "byte", "data", "conn",
+        ["0: read/write line", "0: read/write line", "rw-line"], ["1: read/write byte", "1: read/write byte", "rw-byte"], ["2: read/write data", "2: read/write data", "rw-data"], "conn",
         "select", "update", "splice", "amend", "dmend", "cond",
         "bool", "ascii",
         "datetime",
