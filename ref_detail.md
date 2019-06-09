@@ -989,13 +989,6 @@ Some expr functionality is NYI. For more info, see [this forum post](https://gro
  "abcz" in "abracadabra"
 1 1 1 0
 
- 2 10 in !9
-1 0
-```
-
-### `in` {in}
-
-```q
  2 5 in !5
 1 0
  2 5 in (1 2; 2 5; 2 4)
