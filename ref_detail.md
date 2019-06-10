@@ -358,18 +358,13 @@ Generate a dictionary from lists of keys and values:
 "abr"
 ```
 
-Given a filter function ('uniform boolean', ie returns a list of booleans same length as the input list):
+Given a filter function (returns `1` or `0` given `x`):
 
 ```q
- (2 mod)#!9
+ (2\)#!9
 1 3 5 7
-
- (>':)#3 1 4
-3 4
-
- ({x~|x}')#("racecar";"nope";"bob")
-racecar
-bob
+ {~2\x}#!9      
+0 2 4 6 8
 ```
 
 Taking zero elements of a list generates an empty list of the type of the first element of the list (or if the list is empty, the type of the list):
@@ -1177,13 +1172,11 @@ Normal distribution `rand -i`:
 0.8556685
 ```
 
-### `mod` {mod}
+### Mod `\` {mod}
 
 ```q
- 2 mod !10
+ 2\!10
 0 1 0 1 0 1 0 1 0 1
- 2 3 4 mod 3
-1 0 3
 ```
 
 ## Aggregations {aggr}

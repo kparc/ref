@@ -226,49 +226,49 @@
 
         <!-- Clickable help. These words are linked to detailed explanations via JavaScript at the bottom of this page. -->
 
-        <pre id="official-help">$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)     
+        <pre id="official-help">$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)   
                                                                 
-Verb                       Adverb                Noun            Atom List     
-:  assign                  '  each               char  " ab"       `c `C       
-+  add         flip        /  over               name  ``a`b       `n `N       
--  subtract    negate      \  scan               int   Ø 0 2       `i `I      
-*  multiply    first       ': eachprior          float ø 2.3 π ∞   `f `F   
-%  divideby    inverse     /: eachright join|sv  date 2019-06-28   `D `D   .z.d
-&  min|and     where       \: eachleft split|vs  time 12:34:56.789 `t `T   .z.t
-|  max|or      reverse                                                         
-<  less        up          System                list (2;3.4;`c)   `l `L       
->  more        down        0: read/write line    dict {a:2;b:`c}   `a `A(table)
-=  equal       group       1: read/write byte    step `b 0 3!2 4   `b          
-~  match       not         2: read/write data    expr :32+9*f%5    `0          
-!  key         enum        3: conn/set (.z.ms)   func {(+/x)%#x}   `1..9       
-,  catenate    enlist      4: http/get (.z.mg)                                 
-^  except      asc                               \l f.k  load      \h help     
-#  take        count       #[t;c;b[;a]] select   \t[:n]x time      \l log      
-_  drop        floor       _[t;c;b[;a]] update   \u[:n]x trace                 
-?  find        unique      ?[x;i;f[;y]] splice   \v [d]  vars                  
-@  index       type        @[x;i;f[;y]] amend    \f [d]  fns                   
-.  apply       value       .[x;i;f[;y]] dmend    \lf file \lc char \ll line    
-$  cast|pad    string      $[c;t;f]     cond     \cd [d] get[set]  \gr x file  
+Verb                       Adverb                Noun              Type      
+:  assign                  '  each      n bar    char  " ab"       `c        
++  add         flip        /  over      n div    name  ``a`b       `n        
+-  subtract    negate      \  scan      n mod    int   Ø 0 2       `i       
+*  multiply    first       ': eachprior          float ø 2.3 π ∞   `f    
+%  divideby    inverse     /: eachright join|sv  date 2019-06-28   `D .z.D   
+&  min|and     where       \: eachleft split|vs  time 12:34:56.789 `t .z.t   
+|  max|or      reverse                                                       
+<  less        up          System                list (2;3.4;`c)   `.        
+>  more        down        0: read/write line    dict {a:2;b:`c}   `a        
+=  equal       group       1: read/write byte    tabl +{a:2 3 4}   `A        
+~  match       not         2: read/write data    expr :32+9*f%5    `0        
+!  key         enum        3: conn/set (.z.ms)   func {(+/x)%#x}   `1        
+,  catenate    enlist      4: http/get (.z.mg)   xtab `a`b!+`c`d!(2 3;4 5)   
+^  except      asc                                                           
+#  take        count       #[t;c;b[;a]] select   \l f.k  load       \h help  
+_  drop        floor       _[t;c;b[;a]] update   \t[:n]x milli/time \l log   
+?  find        unique      ?[x;i;f[;y]] splice   \u[:n]x micro/trace         
+@  index       type        @[x;i;f[;y]] amend    \v[d]  vars       \f[d] fns 
+.  apply       value       .[x;i;f[;y]] dmend    \lf file \lc char \ll line  
+$  cast|pad    string      $[c;t;f]     cond     \cd [d] get[set]  \gr x file
                                                                                 
-util: in within bin like find freq prm cmb                                     
-math: sqrt sin cos abs [n]log [n]exp [n]rand mod div                           
-aggr: count first last min max sum avg var dev med                             
-table: [f]asc [f]dsc [f]key [select|update|delete]A by B from T where C        
+util: in within bin like find freq prm cmb                                   
+math: sqrt sin cos abs [n]log [n]exp [n]rand                                 
+aggr: count first last min max sum avg var dev med                           
+tabl: [f]asc [f]dsc [f]key [select|update|delete]A by B from T where C       
                                                                                 
-datetime:YMDHRSTUV+duration:ymdhrstuv; T:.z.D+.z.t; 2019-06-28+2m; day:7 mod   
-`year`month`date`hour`minute`second`millisecond`microsecond`nanosecond         
+datetime:YMDHRSTUV+duration:ymdhrstuv; .z.D+.z.t; day:7\ mth:12\ b5:5'       
+`year`month`date`hour`minute`second`millisecond`microsecond`nanosecond       
                                                                                 
-bool: `ascii`utf8                                                              
-1way: `p`m`crc`sha`rip`bad   e.g. hash: `sha@"crypto"                          
-2way:``j`k`csv`b64`hex`aes   e.g. json: `j?`j@{a:2;b:`c}                       
+bool: `ascii`utf8                                                            
+1way: `p`m`crc`sha`rip`bad   e.g. hash: `sha@"crypto"                        
+2way:``j`k`csv`b64`hex`aes   e.g. json: `j?`j@{a:2;b:`c}                     
                                                                                 
-if[c;..];while[c;..]                                                           
+if[c;..];while[c;..]                                                         
                                                                                 
-K:key k:key`k1  /public private                                                
-K key k key"hi" /verify sign                                                   
-"(;)"/:$`x`y`z                                                                 
-\\ exit                                                                        
-synonyms: count first last min max sum asc</pre>
+K:key k:key`k1  /public private                                              
+K key k key"hi" /verify sign                                                 
+"(;)"/:$`x`y`z                                                               
+\\ exit                                                                      
+attr: ?x ^x =x   </pre>
 
 </div>
 
@@ -294,14 +294,14 @@ synonyms: count first last min max sum asc</pre>
         ["Verb", "Verb", "verbs"], "assign", "add", "flip", "divideby", "min", "where", "up", "equal", "group", "match", 
             "not", "enum", "catenate", "key", "take", "drop", "except", "asc", "floor", "find",
             "unique", "index", "apply", "value", "cast", "pad", "string",
-        ["Adverb", "Adverb", "adverbs"], "each", "over", "scan", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs",
+        ["Adverb", "Adverb", "adverbs"], "each", "over", "scan", "mod", "eachprior", "eachright", "eachleft", "join", "split", "sv", "vs",
         ["Noun", "Noun", "nouns"], "float", "list", "dict", "func", "expr",
         "table",
         ".z.d", ".z.t",
         ["\\h help", "\\h help", "command-h"], ["\\l log", "\\l log", "command-l"], 
             ["\\lf file", "\\lf file", "command-lf"], ["\\lc char", "\\lc char", "command-lc"], ["\\ll line", "\\ll line", "command-ll"],
         "util", ["in within", "in", "in"], "within", "like", "freq", "[f]asc", "[f]dsc", "[f]key",
-        "math", "abs", "prm", "cmb", "[n]log", "[n]exp", "[n]rand", "mod",
+        "math", "abs", "prm", "cmb", "[n]log", "[n]exp", "[n]rand",
         "aggr", "med",
         "sql",
         ["0: read/write line", "0: read/write line", "rw-line"], ["1: read/write byte", "1: read/write byte", "rw-byte"], ["2: read/write data", "2: read/write data", "rw-data"], "conn",
