@@ -4,7 +4,7 @@ Force the monadic case by applying a `:` suffix.
 
 Force the dyadic case by putting the verb in parentheses:
 
-```q
+```kc
  @1
 `i
  (@)1
@@ -15,7 +15,7 @@ Monadic and dyadic versions of a character are **different verbs** - it's not ju
 
 For example, with a bracket call with one argument, the monadic verb will work fine, while the dyadic verb will project:
 
-```q
+```kc
  @:["abc"]
 `C
  @["abc"]
@@ -24,7 +24,7 @@ For example, with a bracket call with one argument, the monadic verb will work f
 
 For dyadic verbs, `x` is on the left and `y` is on the right:
 
-```q
+```kc
  1,2
 1 2
  ,[1;2]
@@ -33,14 +33,14 @@ For dyadic verbs, `x` is on the left and `y` is on the right:
 
 Project over the first argument by omitting it entirely:
 
-```q
+```kc
  @[;1] "abc"
 "b"
 ```
 
 Triadic versions of a verb are the same as the dyadic version (except for [`cond`](#cond)):
 
-```q
+```kc
  (?) . ("abcb"; "b")
 1
  (?) . ("abcb"; 1; "d")
@@ -51,25 +51,25 @@ Triadic versions of a verb are the same as the dyadic version (except for [`cond
 
 Where an assignment is used in a function, consider rewriting code like this ([source](https://groups.google.com/d/msg/shaktidb/zejmh3vxdAg/6uCxAA2aAwAJ)):
 
-```q
+```kc
 f: {a: reusedtempdata; a*a}
 ```
 
 As this:
 
-```q
+```kc
 f: {a*a:reusedtempdata}
 ```
 
 Or this:
 
-```q
+```kc
 f: { {x*x} reusedtempdata }
 ```
 
 You can assign a value to a list index, or a dictionary key:
 
-```q
+```kc
  a:!3
  a[1]:4
  a
@@ -85,7 +85,7 @@ c|4
 
 You can combine assignment with other verbs:
 
-```q
+```kc
  a:1
  a+:1
  a
@@ -105,7 +105,7 @@ You can combine assignment with other verbs:
 
 Assign doesn't appear to be callable with square brackets; in fact the parse tree suggests it has an unconventional evaluation order:
 
-```q
+```kc
  `p "I[0]:4"
 ::
 (`I;0)
@@ -116,7 +116,7 @@ Under normal bracket precedence, you'd lose info about where to assign to before
 
 ### Add `+` {add}
 
-```q
+```kc
  {a:1}+{a:2}
 {a:3}
  {a:1}+{b:2}
@@ -129,7 +129,7 @@ b|2
 
 ### Flip `+:` {flip}
 
-```q
+```kc
   ("#";"##")
 "#"
 "##"
@@ -155,21 +155,21 @@ b|2
 
 First of an empty list is null of the type of the list:
 
-```q
+```kc
  *0#,1
 Ø
 ```
 
 ### Divide by `%` {divideby}
 
-```q
+```kc
  1 % 2
 0.5
 ```
 
 ### Min `&` {min}
 
-```q
+```kc
  2 & 1
 1
  2 & 1 3
@@ -186,14 +186,14 @@ First of an empty list is null of the type of the list:
 
 Generate an ascending list of numbers, where the number of times number *i* appears is equal to the number at position *i* of the input list.
 
-```q
+```kc
  &1 0 2 1
 ^0 2 2 3
 ```
 
 ### Up `<:` {up}
 
-```q
+```kc
  < "abracadabra"
 0 3 5 7 10 1 8 4 6 2 9
  s@<s: "abracadabra"
@@ -202,7 +202,7 @@ Generate an ascending list of numbers, where the number of times number *i* appe
 
 ### Equal `=` {equal}
 
-```q
+```kc
  1=1f
 1
 ```
@@ -211,7 +211,7 @@ Generate an ascending list of numbers, where the number of times number *i* appe
 
 With a list, get back the indices at which each unique element appears:
 
-```q
+```kc
  ="abracadabra"
 a|0 3 5 7 10
 b|1 8
@@ -224,28 +224,28 @@ r|2 9
 
 Test whether data is identical. Can handle nested structures.
 
-```q
+```kc
  (1;"c";(;{a:2}))~(1;"c";(;{a:2}))
 1
 ```
 
 With one value different in the nested structure:
 
-```q
+```kc
  (1;"c";(;{a:2}))~(1;"c";(;{a:1}))
 0
 ```
 
 Unlike [equal `=`](#equal), match compares types:
 
-```q
+```kc
  1~1f
 0
 ```
 
 ### Not `~:` {not}
 
-```q
+```kc
  ~3
 0
  ~~3
@@ -254,7 +254,7 @@ Unlike [equal `=`](#equal), match compares types:
 
 ### Enumerate `!:` {enum}
 
-```q
+```kc
  !3
 0 1 2
  !2 3
@@ -264,7 +264,7 @@ Unlike [equal `=`](#equal), match compares types:
 
 With a negative integer argument, generate an identity matrix:
 
-```q
+```kc
  !-3
 1 0 0
 0 1 0
@@ -273,7 +273,7 @@ With a negative integer argument, generate an identity matrix:
 
 Given a dict, get its keys:
 
-```q
+```kc
  ! {a:1;b:2}
 `a`b
 ```
@@ -282,7 +282,7 @@ Given a dict, get its keys:
 
 Joins two atoms. Prepends/appends an atom to a list. Merges lists.
 
-```q
+```kc
  1,2
 1 2
  1 2,3
@@ -295,7 +295,7 @@ Joins two atoms. Prepends/appends an atom to a list. Merges lists.
 
 If you want to make a list nested in the output, enlist it first:
 
-```q
+```kc
  1,,2 3
 1
 2 3
@@ -303,7 +303,7 @@ If you want to make a list nested in the output, enlist it first:
 
 Catenate merges dicts (where keys collide, right overrides left):
 
-```q
+```kc
  {a:1;b:2},{a:3;c:4}
 a|3
 b|2
@@ -312,7 +312,7 @@ c|4
 
 Tables are lists of dicts, so:
 
-```q
+```kc
  t:+{a:,1}
  u:+{a:,2}
  t,u
@@ -326,14 +326,14 @@ a
 
 Generate a dictionary from lists of keys and values:
 
-```q
+```kc
  `k @ `a`b!1 2
 "{a:1;b:2}"
 ```
 
 ### Except `^` {except}
 
-```q
+```kc
  (!4)^1
 0 2 3
  (!4)^1 3
@@ -344,7 +344,7 @@ Generate a dictionary from lists of keys and values:
 
 ### Sort ascending `^:` {asc}
 
-```q
+```kc
  :: l: rand 4
 0.5594068 0.1751217 0.3652149 0.5086234
  ^l
@@ -353,14 +353,14 @@ Generate a dictionary from lists of keys and values:
 
 ### Take `#` {take}
 
-```q
+```kc
  3#"abracadabra"
 "abr"
 ```
 
 Given a filter function (returns `1` or `0` given `x`):
 
-```q
+```kc
  (2\)#!9
 1 3 5 7
  {~2\x}#!9      
@@ -369,7 +369,7 @@ Given a filter function (returns `1` or `0` given `x`):
 
 Taking zero elements of a list generates an empty list of the type of the first element of the list (or if the list is empty, the type of the list):
 
-```q
+```kc
  0#(1;`a)
 !0
  0#!0
@@ -378,14 +378,14 @@ Taking zero elements of a list generates an empty list of the type of the first 
 
 ### Drop `_` {drop}
 
-```q
+```kc
  4_"abracadabra"
 "cadabra"
 ```
 
 `I_` is cut:
 
-```q
+```kc
  1 2 6_"abracadabra"
 "b"
 "raca"
@@ -394,14 +394,14 @@ Taking zero elements of a list generates an empty list of the type of the first 
 
 ### Floor `_:` {floor}
 
-```q
+```kc
  _ 1.23 -1.23 0
 1 -2 0
 ```
 
 ### Find `?` {find}
 
-```q
+```kc
  2 3 1 4 0 ? 3
 1
  2 3 1 4 0 ? 3 1 0
@@ -410,7 +410,7 @@ Taking zero elements of a list generates an empty list of the type of the first 
 
 `i?` is draw (with replacement), `-i?` is deal (without replacement):
 
-```q
+```kc
  ^ 9 ? 9
 ^1 3 5 5 6 6 7 7 8
  ^ -9 ? 9
@@ -426,7 +426,7 @@ length error
 
 You can also draw or deal from a list:
 
-```q
+```kc
  3 ? "abcd"
 "daa"
  -3 ? "abcd"
@@ -435,7 +435,7 @@ You can also draw or deal from a list:
 
 ### Unique `?:` {unique}
 
-```q
+```kc
  ? "abracadabra"
 "abrcd"
  ? ("hi"; 1 2 3; `a`b; 0; "hi"; `a`b; 1 2; 0)
@@ -450,41 +450,41 @@ You can also draw or deal from a list:
 
 With an atom, applies that atom to the left function:
 
-```q
+```kc
  (1+) @ 2
 3
 ```
 
 With a list, applies each element of that list to the function ('shallow' application, ie doesn't go beyond `x` of `xyz`):
 
-```q
+```kc
  (1+) @ 2 4 7
 3 5 8
 ```
 
 ### Apply `.` {apply}
 
-```q
+```kc
  {z,x,y} . `a`b`c
 `c`a`b
 ```
 
 Apply can also be used to 'drill' into a data structure in a similar way to bracket indexing. For example:
 
-```q
+```kc
  :: m: 3 3 # !9
 0 1 2
 3 4 5
 6 7 8
 
- / Atom at x position
+  / Atom at x position
  m[1]
 3 4 5
  m . 1
 3 4 5
 
- / List in x position
- / Notice [] effectively enlists a single arg
+  / List in x position
+  / Notice [] effectively enlists a single arg
  m[1 2]
 3 4 5
 6 7 8
@@ -492,7 +492,7 @@ Apply can also be used to 'drill' into a data structure in a similar way to brac
 3 4 5
 6 7 8
 
- / Atoms at x and y positions
+  / Atoms at x and y positions
  m[1; 2]
 5
  m . 1 2
@@ -501,7 +501,7 @@ Apply can also be used to 'drill' into a data structure in a similar way to brac
 
 ### Value `.:` {value}
 
-```q
+```kc
  . "1+2"
 3
 
@@ -527,7 +527,7 @@ Apply can also be used to 'drill' into a data structure in a similar way to brac
 
 ### Cast `$` (with a non-string) {cast}
 
-```q
+```kc
  "YMD"$0
 2024Y
 2024-01M
@@ -542,7 +542,7 @@ Apply can also be used to 'drill' into a data structure in a similar way to brac
 
 However, casting chars to ints/floats/etc is more like a parse than a cast:
 
-```q
+```kc
  `i$"123"
 123
  `i$"ABC"
@@ -551,7 +551,7 @@ However, casting chars to ints/floats/etc is more like a parse than a cast:
 
 If you want ASCII numbers of characters:
 
-```q
+```kc
  0+"ABC"
 65 66 67
  0f+"ABC"
@@ -560,7 +560,7 @@ If you want ASCII numbers of characters:
 
 `$` is also **matrix multiply**:
 
-```q
+```kc
  `m @ x: (1 0; 0 0)
 1 0
 0 0
@@ -585,7 +585,7 @@ If you want ASCII numbers of characters:
 
 Pads with spaces on right-hand side, or truncates from right:
 
-```q
+```kc
  4$"abc"
 "abc "
  2$"abc"
@@ -594,7 +594,7 @@ Pads with spaces on right-hand side, or truncates from right:
 
 ### String `$:` {string}
 
-```q
+```kc
  $1
 ,"1"
 
@@ -623,7 +623,7 @@ There should be no spaces between an adverb and the expression on its left-hand 
 
 Adverbs can be called in similar ways to verbs:
 
-```q
+```kc
  +/ 1 2 3
 6
  /[+] 1 2 3
@@ -636,7 +636,7 @@ Adverbs can be called in similar ways to verbs:
 
 Make a function apply to each element of its input lists, rather than the list itself.
 
-```q
+```kc
  "~" , "abc"
 "~abc"
  "~" ,' "abc"
@@ -647,7 +647,7 @@ Make a function apply to each element of its input lists, rather than the list i
 
 'Each' will apply to pairings of its input lists:
 
-```q
+```kc
  "ab" ,' "cd"
 ac
 bd
@@ -661,14 +661,14 @@ bdf
 
 n f/x
 
-```q
+```kc
  3 {x+1}/10
 13
 ```
 
 p f/x
 
-```q
+```kc
  {4>#x} {x,"k"}/"o"
 "okkk"
 ```
@@ -677,14 +677,14 @@ p f/x
 
 n f\x
 
-```q
+```kc
  3 {x+1}\10
 10 11 12 13
 ```
 
 p f\x
 
-```q
+```kc
  {4>#x} {x,"k"}\"o"
 "o"
 "ok"
@@ -696,7 +696,7 @@ p f\x
 
 The null chosen for the first pairing is of the type of the first member of the list.
 
-```q
+```kc
  {y,x}': !3
 Ø 0
 0 1
@@ -713,7 +713,7 @@ The null chosen for the first pairing is of the type of the first member of the 
 
 Specify a number to seed the scan:
 
-```q
+```kc
  +':!5
 0 1 3 5 7
  8+':!5
@@ -722,7 +722,7 @@ Specify a number to seed the scan:
 
 `':` can also provide a 'sliding window' of size `x` over `y`:
 
-```q
+```kc
  3': !5
 0 1 2
 1 2 3
@@ -733,7 +733,7 @@ Specify a number to seed the scan:
 
 Compare to each:
 
-```q
+```kc
  "ab" ,' "cd"
 ac
 bd
@@ -744,7 +744,7 @@ abd
 
 ### Each left `\:` {eachleft}
 
-```q
+```kc
  "ab" ,\: "cd"
 acd
 bcd
@@ -756,28 +756,28 @@ The following work with **lists of strings**.
 
 Prepend the separator to `/:`, [without a space in between](https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ).
 
-```q
+```kc
  "-"/: ("la";"li";"lu";"le";"lo")
 "la-li-lu-le-lo"
 ```
 
 With empty symbol as 'separator', appends a newline to each string and joins. (This is also known as 'sS' or 'string from String', with capitalisation following the k7 convention of lower for atom, upper for list of atoms of same type).
 
-```q
+```kc
  `/: ("ab";"cd")
 "ab\ncd\n"
 ```
 
 With three characters instead of just a separator, prepends/appends the first and last:
 
-```q
+```kc
  "(;)"/: (,:' "abcd")
 "(a;b;c;d)"
 ```
 
 That means 'join' can't be used for multi-character separators, but you can always do this ([source](https://groups.google.com/d/msg/shaktidb/ttIdJiWx9xI/hiTjuX7_BAAJ)):
 
-```q
+```kc
  {y,x,z}[", "]/$`ab`cd`ef
 "ab, cd, ef"
 ```
@@ -786,7 +786,7 @@ That means 'join' can't be used for multi-character separators, but you can alwa
 
 Prepend the separator to `\:`, [without a space in between](https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ).
 
-```q
+```kc
  "-"\: "la-li-lu-le-lo"
 la
 li
@@ -797,7 +797,7 @@ lo
 
 With empty symbol as 'separator', splits on newlines, including (if present) at the end of the last word. (This is also known as 'Ss' or 'String from string'.)
 
-```q
+```kc
  `\: "ab\ncd\n"
 ab
 cd
@@ -812,14 +812,14 @@ Mnemonic tip: read 'sv' in k evaluation order, ie right to left.
 
 Convert a vector of numbers from a specified base into base 10:
 
-```q
+```kc
  2/: 1 0 1 0
 10
 ```
 
 Zero is represented as an empty integer list `!0`, not `0`:
 
-```q
+```kc
  10/: !0
 0
  10/: 0
@@ -830,7 +830,7 @@ class error
 
 You can also turn a vector in (year, month, day) form into a k date:
 
-```q
+```kc
  `/: 2019 5 4
 2019-05-04
 ```
@@ -841,7 +841,7 @@ Mnemonic tip: read 'vs' in k evaluation order, ie right to left.
 
 Convert a number from base 10 into a specified base:
 
-```q
+```kc
  10\: 1000
 1 0 0 0
  2\: 10
@@ -850,14 +850,14 @@ Convert a number from base 10 into a specified base:
 
 Conversion of zero into a base may be surprising (empty list), but is consistent:
 
-```q
+```kc
  10\: 0
 !0
 ```
 
 You can also turn a k date into a (year, month, day) vector:
 
-```q
+```kc
  `\: .z.d
 2019 5 4
 ```
@@ -868,7 +868,7 @@ You can also turn a k date into a (year, month, day) vector:
 
 All of `1.0`, `.5`, `1.`, `1f` are valid float literals.
 
-```q
+```kc
  Ø=ø
 1
  Ø~ø
@@ -879,7 +879,7 @@ All of `1.0`, `.5`, `1.`, `1f` are valid float literals.
 
 Although two lists may be zero length, and have the same type, they may not be the same:
 
-```q
+```kc
  (@()) = @0 2 # 0
 1
  (#()) = #0 2 # 0
@@ -890,7 +890,7 @@ Although two lists may be zero length, and have the same type, they may not be t
 
 The 'extra dimensions' can matter for matrix multiplication:
 
-```q
+```kc
  () $ (0 2 # 0)
 0#,ø ø
  (!0) $ (0 2 # 0)
@@ -903,14 +903,14 @@ length error
 
 `` (2;3.4;`c) `` (or any list of atoms, functions etc) can also be written `` 2,3.4,`c ``:
 
-```q
+```kc
  (2;3.4;`c)~2,3.4,`c
 1
 ```
 
 But it breaks down when you include nested lists such as strings:
 
-```q
+```kc
  2,"hi",`c
 2
 "h"
@@ -922,7 +922,7 @@ But it breaks down when you include nested lists such as strings:
 
 Dicts are ordered:
 
-```q
+```kc
  |{a:1;b:2}
 b|2
 a|1
@@ -930,7 +930,7 @@ a|1
 
 Recover the keys and values using `!:` and `.:`:
 
-```q
+```kc
  !{a:1;b:2}
 `a`b
  .{a:1;b:2}
@@ -941,7 +941,7 @@ Recover the keys and values using `!:` and `.:`:
 
 Functions can call themselves by using their own name in their definition. Naive example:
 
-```q
+```kc
 factorial: {$[x<2;1;x*factorial[x-1]]}
  factorial 4
 24
@@ -949,7 +949,7 @@ factorial: {$[x<2;1;x*factorial[x-1]]}
 
 A function with implicit `xyz` args can be distinguished from a dict by ensuring the body does not start with an assignment (eg start with `;` or, in scripts, a newline):
 
-```q
+```kc
  @{a:1;a*x}
 value error: a
  @{;a:1;a*x}
@@ -960,7 +960,7 @@ value error: a
 
 Exprs can be executed on tables, eg:
 
-```q
+```kc
  t: +`a`b!(1 2 3;4 5 6)
  t :a>1
 0 1 1
@@ -977,7 +977,7 @@ Some expr functionality is NYI. For more info, see [this forum post](https://gro
 
 ### `in` {in}
 
-```q
+```kc
  `c`d in `a`b`c
 1 0
 
@@ -994,7 +994,7 @@ Some expr functionality is NYI. For more info, see [this forum post](https://gro
 
 ### `within` {within}
 
-```q
+```kc
  `p within `A`z
 1
  `p within `A`Z
@@ -1003,7 +1003,7 @@ Some expr functionality is NYI. For more info, see [this forum post](https://gro
 
 Includes lower bound, excludes upper bound:
 
-```q
+```kc
  1 within 1 2
 1
  2 within 1 2
@@ -1014,7 +1014,7 @@ Includes lower bound, excludes upper bound:
 
 ### `like` {like}
 
-```q
+```kc
  "abc" like "*b?"
 1
  "abcd" like "*b?"
@@ -1030,7 +1030,7 @@ Includes lower bound, excludes upper bound:
 
 Counts of each item in the list.
 
-```q
+```kc
  freq "alibaba"
 a|3
 b|2
@@ -1040,7 +1040,7 @@ l|1
 
 ### `find` {find}
 
-```q
+```kc
  "abracadabra" find "bra"
 1 3
 8 3
@@ -1048,14 +1048,14 @@ l|1
 
 ### Sort ascending `[f]asc` {[f]asc}
 
-```q
+```kc
  asc "abracadabra"
 "aaaaabbcdrr"
 ```
 
 ### Sort descending `[f]dsc` {[f]dsc}
 
-```q
+```kc
  dsc "abracadabra"
 "rrdcbbaaaaa"
 ```
@@ -1064,7 +1064,7 @@ l|1
 
 Turn a table into a keyed table:
 
-```q
+```kc
  `a`c key ({a:1;b:2;c:3};{a:4;b:5;c:6})
 a c|b
 - -|-
@@ -1076,7 +1076,7 @@ a c|b
 
 ### Absolute value `abs` {abs}
 
-```q
+```kc
  abs 1.23
 1.23
  abs -1.23
@@ -1087,7 +1087,7 @@ a c|b
 
 Generates permutation indices.
 
-```q
+```kc
  prm 3
 0 1 2
 1 0 2
@@ -1099,7 +1099,7 @@ Generates permutation indices.
 
 ### Combinations {cmb}
 
-```q
+```kc
  2 cmb 3
 0 1
 0 2
@@ -1110,7 +1110,7 @@ Generates permutation indices.
 
 Monadic: natural logarithm, ie the power you'd need to raise *e* by to get `x`.
 
-```q
+```kc
  log 2
 0.6931472
  log (exp 1)
@@ -1121,7 +1121,7 @@ Monadic: natural logarithm, ie the power you'd need to raise *e* by to get `x`.
 
 Dyadic: logarithm, ie the number you'd need to raise the left number to to get the right number.
 
-```q
+```kc
  2 log 2
 1f
  2 log 4
@@ -1132,7 +1132,7 @@ Dyadic: logarithm, ie the number you'd need to raise the left number to to get t
 
 Monadic: *e* to the power of `x`.
 
-```q
+```kc
  exp 1
 2.718282
  exp 2
@@ -1143,7 +1143,7 @@ Monadic: *e* to the power of `x`.
 
 Dyadic: left to the power of right.
 
-```q
+```kc
  2 exp 4
 16f
  2 exp -1
@@ -1154,7 +1154,7 @@ Dyadic: left to the power of right.
 
 Uniform distribution `rand i` or `i rand i`:
 
-```q
+```kc
  rand 3
 0.7502717 0.8107001 0.8145892
  3 rand 10
@@ -1163,7 +1163,7 @@ Uniform distribution `rand i` or `i rand i`:
 
 Normal distribution `rand -i`:
 
-```q
+```kc
  `m @ rand -5
 1.207587
 0.5333917
@@ -1174,7 +1174,7 @@ Normal distribution `rand -i`:
 
 ### Mod `\` {mod}
 
-```q
+```kc
  2\!10
 0 1 0 1 0 1 0 1 0 1
 ```
@@ -1187,7 +1187,7 @@ The value in the middle if the data was sorted.
 
 If the count of the data is even, return the value on the right of the middle.
 
-```q
+```kc
  med !3
 1
  med !4
@@ -1204,7 +1204,7 @@ A table is a list of dicts where each dict has the same keys in the same order.
 
 A table can also be considered as a flipped dict of lists, where each list is of equal length.
 
-```q
+```kc
 t: ({a:1;b:2};{a:3;b:4})
 u: +`a`b !    (1 3;2 4)
 v:  `a`b ! /: (1 2;3 4)
@@ -1229,7 +1229,7 @@ t~x
 
 You can access rows or columns of the table by indexing using the row number or column key:
 
-```q
+```kc
 t[1]    / {a:3;b:4}
 t[`b]    / 2 4
 t[1;`a]  / 3
@@ -1237,7 +1237,7 @@ t[1;`a]  / 3
 
 Key tables are dictionaries where the rows of one table map to the rows of another table.
 
-```q
+```kc
 k: ({a:1;c:3}
     {a:4;c:6})
 v: ({b:2};{b:5})
@@ -1248,7 +1248,7 @@ kt   / (+{a:1 4;c:3 6})!+{b:2 5}
 
 You can also use `key` to set the key columns after creation:
 
-```q
+```kc
  t: ({a:1;b:2;c:3};{a:4;b:5;c:6})
  tk: `a`c key t
  tk~kt  / 1
@@ -1256,13 +1256,13 @@ You can also use `key` to set the key columns after creation:
 
 Access rows of the value table by indexing into the keytable:
 
-```q
+```kc
 kt[{a:4;c:6}]  / {b:5}
 ```
 
 ### KSQL {ksql}
 
-```q
+```kc
  t: ({a:1;b:2};{a:3;b:4})
  update b:a*2 from t
 a b
@@ -1273,7 +1273,7 @@ a b
 
 Note t is not updated in-place:
 
-```q
+```kc
  t
 a b
 - -
@@ -1283,7 +1283,7 @@ a b
 
 Use `by` to group rows or aggregations:
 
-```q
+```kc
  :: t: ({a:1;b:2;c:3};{a:2;b:3;c:4};{a:1;b:4;c:5})
 a b c
 - - -
@@ -1308,7 +1308,7 @@ a|b
 
 Access any shell command by putting a `\` in front of it:
 
-```q
+```kc
  \seq 3
 1
 2
@@ -1317,7 +1317,7 @@ Access any shell command by putting a `\` in front of it:
 
 ### List files `\lf` {command-lf}
 
-```q
+```kc
  \lf
 afile.txt
 yet another file
@@ -1325,7 +1325,7 @@ yet another file
 
 ### List character counts `\lc` {command-lc}
 
-```q
+```kc
  \lc
 afile.txt       |29
 yet another file|50
@@ -1333,7 +1333,7 @@ yet another file|50
 
 You can't assign the result of `\lc` directly (ie `a: \lc` doesn't work). But you *can* capture its output and see that it is in fact a dictionary:
 
-```q
+```kc
  {(x;@x)} @ . "\\lc"
 ("afile.txt";"yet another file")!29 50j
 `a
@@ -1341,7 +1341,7 @@ You can't assign the result of `\lc` directly (ie `a: \lc` doesn't work). But yo
 
 ### List line counts `\ll` {command-ll}
 
-```q
+```kc
  \ll
 afile.txt       |1
 yet another file|3
@@ -1361,14 +1361,14 @@ Find the latest changelog on [GitHub](https://github.com/kparc/box/blob/master/t
 
 Given the following in `test.csv`:
 
-```q
+```kc
 1,ABC,1.23
 3,DEF,4567.89
 ```
 
 We can read it in as lists of type `inf` respectively and separator `,`:
 
-```q
+```kc
  ("inf";",")0:"test.csv"
 1 3
 `ABC`DEF
@@ -1379,19 +1379,19 @@ The filename can be given as `` `test.csv `` instead of `"test.csv"` (one char s
 
 We can also write lists of strings to a file (verify output using a text editor):
 
-```q
+```kc
  "test.txt" 0: ("hello";"world")
 ```
 
 And that includes saving tables to CSV, if we first convert the table to a list of strings:
 
-```q
+```kc
  "test.csv" 0: `csv @ +{a:1 2; b:3 4}
 ```
 
 You can also use `0:` to deserialise in-memory lists of strings with a common separator. [Arthur's example](https://groups.google.com/d/msg/shaktidb/vE4ffjndxik/rYF6K78oBQAJ):
 
-```q
+```kc
   ("ii";"|")0:("2|3";"3|4";"4|5")
 2 3 4
 3 4 5
@@ -1401,7 +1401,7 @@ Keep in mind it's reading the data into columns, not rows. The first row of the 
 
 ### Read/write bytes `1:` {rw-byte}
 
-```q
+```kc
  "testfile" 1: 0x0123456789abcdef
  1: "testfile"
 0x0123456789abcdef
@@ -1409,7 +1409,7 @@ Keep in mind it's reading the data into columns, not rows. The first row of the 
 
 You can verify `1:` works with raw bytes using an external tool:
 
-```q
+```kc
 $ hexdump -C testfile
 00000000  01 23 45 67 89 ab cd ef
 00000008
@@ -1417,7 +1417,7 @@ $ hexdump -C testfile
 
 And to break down what's happening in the 'prompt' example from the official tutorial, ie:
 
-```q
+```kc
  name: 1: ("" 1: "What is your name? ")
 What is your name? Me
  name
@@ -1432,7 +1432,7 @@ On the last point: if just writing to stdout, make sure to put a semicolon at th
 
 ### Read/write data `2:` {rw-data}
 
-```q
+```kc
  "testfile" 2: (1 2 3 4)
  2: "testfile"
 1 2 3 4
@@ -1440,7 +1440,7 @@ On the last point: if just writing to stdout, make sure to put a semicolon at th
 
 You can see what `testfile` looks like in bytes with `1:`:
 
-```q
+```kc
  1: "testfile"
 0x000000070400000001000000020000000300000004000000
 ```
@@ -1451,7 +1451,7 @@ Start a k process running with port 1234 (that's `k -p 1234`).
 
 Then in another k process, set up a connection to the first k process, send it commands, and get responses:
 
-```q
+```kc
 2019-04-18 15:45:55 2core 1gb avx2 © shakti l2.0 test
  conn: 3: 1234
  conn 4: "life: 42"
@@ -1465,7 +1465,7 @@ Then in another k process, set up a connection to the first k process, send it c
 
 Get all rows of `t` where `c` is true.
 
-```q
+```kc
  t: +`a`b!(1 2 3;4 5 6)
  #[t; :a>1]
 a b
@@ -1492,7 +1492,7 @@ a b
 
 Via [Arthur](https://groups.google.com/d/msg/shaktidb/77qVfIc5ecU/eSRy8izkAQAJ):
 
-```q
+```kc
  t:+`b!2 3
  _[t;();`b! :b+1]
 b
@@ -1507,7 +1507,7 @@ Insert `y` into `x` at index `i`.
 
 If an element was at that index before, move it right.
 
-```q
+```kc
  ?[!3;2;`abc]
 0
 1
@@ -1527,7 +1527,7 @@ If an element was at that index before, move it right.
 
 Apply function f to the elements at each `i` of `x` (with argument `y`, if f is dyadic).
 
-```q
+```kc
  @[!3; 0 2; 1+]
 1 1 3
  @[!3; 0 2; +; 2 7]
@@ -1536,7 +1536,7 @@ Apply function f to the elements at each `i` of `x` (with argument `y`, if f is 
 
 To do the update in-place, use the data's name symbol instead of the name directly (`` `name `` vs `name`).
 
-```q
+```kc
 v:!3
  @[v;1;7]
 0 7 2
@@ -1556,21 +1556,21 @@ Think of dmend as 'deep' or 'drill' amend - it's similar to amend in the same wa
 
 Apply function to all elements:
 
-```q
+```kc
  .[!3; (); +; 1]
 1 2 3
 ```
 
 Apply `f` to slices 0 and 2 on the first 'depth' level down:
 
-```q
+```kc
  .[!3; ,0 2; 7]
 7 1 7
 ```
 
 Apply to rows or specific elements of a matrix:
 
-```q
+```kc
  :: m: 3 3 # !9
 0 1 2
 3 4 5
@@ -1616,7 +1616,7 @@ Apply to rows or specific elements of a matrix:
 
 If the true expression is returned, the false expression never executes (and vice versa):
 
-```q
+```kc
  a:1;b:1
  $[1;a+:1;b+:1]; (a;b)
 2 1
@@ -1626,7 +1626,7 @@ If the true expression is returned, the false expression never executes (and vic
 
 [Unlike other triadics](#Verb), triadic `$` is not the same as dyadic `$`:
 
-```q
+```kc
  ($) . (`n; "a")
 `a
  ($) . (1; "a"; "b")
@@ -1637,14 +1637,14 @@ nyi error
 
 Simulate a vector cond:
 
-```q
+```kc
  {$[x;y;z]}'[1 0 1; "abc"; "def"]
 "aec"
 ```
 
 Or (modified version of [Arthur's](https://groups.google.com/d/msg/shaktidb/6JLpGPE-bfM/mlAzxcrgAQAJ) - no `$` needed!):
 
-```q
+```kc
  {(+(z;y))@'x}[1 0 1;"abc";"def"]
 "aec"
 ```
@@ -1655,7 +1655,7 @@ Or (modified version of [Arthur's](https://groups.google.com/d/msg/shaktidb/6JLp
 
 Are all characters in the string in the [ASCII set](https://en.wikipedia.org/wiki/ASCII#Character_set)?
 
-```q
+```kc
  `ascii @ "123"
 1
  `ascii @ "∞"
@@ -1666,7 +1666,7 @@ Are all characters in the string in the [ASCII set](https://en.wikipedia.org/wik
 
 A datetime looks like this:
 
-```q
+```kc
  .z.T
 2019-05-04T13:13:12.313
 ```
@@ -1675,14 +1675,14 @@ Datetime literals are [designed](https://groups.google.com/forum/#!topic/shaktid
 
 Dates start from `2024-01-01`:
 
-```q
+```kc
  `D $ 0
 2024-01-01
 ```
 
 '0' is Monday. Get the day of the week with `7 mod`.
 
-```q
+```kc
  d:`Mon`Tue`Wed`Thu`Fri`Sat`Sun
  d @ 7 mod 2024-01-01
 `Mon
@@ -1690,7 +1690,7 @@ Dates start from `2024-01-01`:
 
 You can also use duration literals (requires short-form code), and do date arithmetic:
 
-```q
+```kc
  .z.d
 2019-05-04
  .z.d + 2m
@@ -1713,7 +1713,7 @@ Datetime and duration names:
 
 Convert to/from/between datetimes and durations using `$`. It takes a name or string (short version only):
 
-```q
+```kc
  `year $ .z.t
 2019y
  `y  $ 2019
@@ -1726,7 +1726,7 @@ Convert between dates and year, month date digits using [`` `/: ``](#sv) and [``
 
 ### Current date `.z.d` {.z.d}
 
-```q
+```kc
 .z.d / 2019-04-02
 ```
 
@@ -1734,7 +1734,7 @@ Convert between dates and year, month date digits using [`` `/: ``](#sv) and [``
 
 Greenwich Mean Time.
 
-```q
+```kc
 .z.t / 11:18:14.857
 ```
 
@@ -1746,7 +1746,7 @@ Convert to with `` `x@data `` or `` `x data `` or `` `x[data] ``, where `` `x ``
 
 #### Parse `` `p `` {parse}
 
-```q
+```kc
  `p @ "5*!3"
 *
 5
@@ -1755,7 +1755,7 @@ Convert to with `` `x@data `` or `` `x data `` or `` `x[data] ``, where `` `x ``
 
 A parse tree can be executed with `.`:
 
-```q
+```kc
  . `p @ "5*!3"
 0 5 10
 ```
@@ -1766,7 +1766,7 @@ The parser enlists names (and lists of names) to indicate they should not be eva
 
 Examples:
 
-```q
+```kc
  e: "1;.1;`n;\"c\";1 2;1. 2.;`n`o;\"chars\";"
  e,:":;v;1+2;+/1 2;{x+2y};a:1;:a+2b; /comment;\\h"
 
@@ -1794,7 +1794,7 @@ a:1       (::;`a;1)
 
 #### Matrix display `` `m `` {matrix}
 
-```q
+```kc
 d: 1 2 3
 d
 1 2 3
@@ -1812,7 +1812,7 @@ Convert from with `` `x?serialdata ``.
 
 #### Binary `` ` `` {binary}
 
-```q
+```kc
  ` "a"
 0x0161
  ` `a
@@ -1823,14 +1823,14 @@ Convert from with `` `x?serialdata ``.
 
 #### JSON `` `j `` {json}
 
-```q
+```kc
  `j ({a:1;b:2};{a:"x";b:`z})
 "[{\"a\":1,\"b\":2},{\"a\":\"x\",\"b\":\"z\"}]"
 ```
 
 #### KSON `` `k `` {kson}
 
-```q
+```kc
  `k 2*!3
 "0 2 4"
  `k ({a:1;b:2};{a:"x";b:`z})
@@ -1839,7 +1839,7 @@ Convert from with `` `x?serialdata ``.
 
 #### `` `csv `` {csv}
 
-```q
+```kc
  `csv ? ("a,b";"1,2";"3,4")
 a b
 - -
@@ -1851,7 +1851,7 @@ a b
 
 #### How can I test if something is an atom, or a list?
 
-```q
+```kc
 isatom:{x~*x}
 ```
 
@@ -1859,7 +1859,7 @@ isatom:{x~*x}
 
 Use the identity function, `::`:
 
-```q
+```kc
  a:1+2  / no output
  :: a:1+2
 3
@@ -1871,7 +1871,7 @@ Use the identity function, `::`:
 
 For characters, it's just `""`:
 
-```q
+```kc
  #""
 0
  @""
@@ -1880,7 +1880,7 @@ For characters, it's just `""`:
 
 For integers and floats, use `!`:
 
-```q
+```kc
  @!0
 `I
  #!0
@@ -1893,7 +1893,7 @@ For integers and floats, use `!`:
 
 For other types, take 0 elements of an atom of that type (may be a better way?). For example, for names:
 
-```q
+```kc
  @0#`
 `N
  #0#`
@@ -1906,7 +1906,7 @@ For other types, take 0 elements of an atom of that type (may be a better way?).
 
 In the REPL, contains an empty list by default:
 
-```q
+```
 (base) chris@chris-VirtualBox:~$ k
 2019-04-28 15:03:42 2core 1gb avx2 © shakti l2.0 test
  .z.x
@@ -1915,7 +1915,7 @@ In the REPL, contains an empty list by default:
 
 But in a file, it lists the filename and any args after it. If `testarg.k` comprises the line `.z.x`:
 
-```q
+```
 (base) chris@chris-VirtualBox:~$ k testarg.k not.a.real.file
 2019-04-28 15:03:42 2core 1gb avx2 © shakti l2.0 test
 testarg.k
@@ -1926,7 +1926,7 @@ Therefore, `.z.x` can be used to pass arguments to a k script.
 
 Also, note those arguments won't appear if we load `testarg.k` in another k process:
 
-```q
+```
 (base) chris@chris-VirtualBox:~$ k
 2019-04-28 15:03:42 2core 1gb avx2 © shakti l2.0 test
  \l testarg.k
@@ -1939,7 +1939,7 @@ So you can also use `.z.x` to identify whether a script was run in its own right
 
 In addition to `` `b64 ``, there's `` `b58 ``, [used](https://groups.google.com/d/msg/shaktidb/0yq21rHOacU/1wdeAGHFAAAJ) in the `` `bad `` implementation:
 
-```q
+```kc
  `b58 "helloworld"
 "6sBRWyteSSzHrs"
 ```
@@ -1966,7 +1966,7 @@ Type `help('shakti')` at the Python prompt to view the package help.
 
 ### Examples
 
-```q
+```python
 (base) chris@chris-VirtualBox:~$ python
 Python 3.7.1 (default, Dec 14 2018, 19:28:38)
 [GCC 7.3.0] :: Anaconda, Inc. on linux
