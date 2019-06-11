@@ -901,6 +901,19 @@ The 'extra dimensions' can matter for matrix multiplication:
 length error
 ```
 
+Empty list `()` is the same as `0 0#""`, but not `0#""` or `0 0 0#""`:
+
+```kc
+ 0#""
+""
+ 0 0#""
+()
+ ()~0 0#""
+1
+ ()~0 0 0#""
+0
+```
+
 `` (2;3.4;`c) `` (or any list of atoms, functions etc) can also be written `` 2,3.4,`c ``:
 
 ```kc
