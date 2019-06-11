@@ -1185,7 +1185,27 @@ Normal distribution `rand -i`:
 0.8556685
 ```
 
-### Mod `\` {mod}
+### Bar `i'`
+
+Round down to the nearest `i`.
+
+```kc
+ 5'9
+5
+ 5'10
+10
+```
+
+### Integer division `i/`
+
+```kc
+ 5/9
+1
+ 5/10
+2
+```
+
+### Mod `i\` {mod}
 
 ```kc
  2\!10
