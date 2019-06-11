@@ -1185,7 +1185,7 @@ Normal distribution `rand -i`:
 0.8556685
 ```
 
-### Bar `i'`
+### Bar `i'` {bar}
 
 Round down to the nearest `i`.
 
@@ -1196,7 +1196,7 @@ Round down to the nearest `i`.
 10
 ```
 
-### Integer division `i/`
+### Integer division `i/` {div}
 
 ```kc
  5/9
