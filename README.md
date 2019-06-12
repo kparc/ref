@@ -54,5 +54,10 @@ and serve the `./build/` directory over http
 * merge with updated content
 * plug in test script
 * create a build hook
+<<<<<<< HEAD
 
 >>>>>>> initial commit
+=======
+* add some fancy `<meta>` tags like `name` and `description`
+* learn [pug](https://naltatis.github.io/jade-syntax-docs/), aka jade, it will take you ~30 minutes, if you want to modify html
+>>>>>>> updated README
