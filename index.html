@@ -1,6 +1,5 @@
 <html>
 
-<!-- TODO maybe hamburger button switches between simple and detailed navigation? -->
 <!-- TODO click on symbol to copy to clipboard -->
 <!-- TODO feedback: table of contents, search results (if any), cross-reference pages ("i/o verbs"), "see also" on topic pages, stuff like that -->
 <!-- https://chat.stackexchange.com/transcript/message/50039343#50039343 -->
@@ -26,23 +25,14 @@
             background: grey;
             color: white;
             width: 100%;
-            padding-top: 0.1em;
-            padding-bottom: 0.1em;
+            padding-top: 0.35em;
+            padding-bottom: 0.35em;
             font-size: 1em;
-        }
-        header #hamburger {
-            margin-top: 0.1em;
-            margin-bottom: 0.1em;
-            margin-left: 8px;
-            background-color: grey;
-            border: 1px solid white;
-            color: white;
         }
         header h1 {
             display: inline-block;
+            margin: 0;
             margin-left: 8px;
-            margin-top: 0.1em;
-            margin-bottom: 0.1em;
             font-weight: normal;
             font-size: 1em;
         }
@@ -51,9 +41,8 @@
             vertical-align: middle;
             float: right;
             font-size: 1em;
+            margin: 0;
             margin-right: 8px;
-            margin-top: 0.3em;
-            margin-bottom: 0.1em;
         }
         header a {
             color: white;
@@ -144,84 +133,14 @@
 </head>
 
 <body>
-
-    <script>
-        function toggle_menu () {
-            const h = document.getElementById("small-nav")
-            if (h.getAttribute("style")) {
-                h.removeAttribute("style")
-            } else {
-                h.setAttribute("style", "display: block")
-            }
-        }
-        window.onload = function() {
-            const links = document.getElementById("small-nav").querySelectorAll("a");
-            links.forEach(function(link) {link.onclick = toggle_menu})
-        }
-    </script>
     
     <header>
         <!-- TODO make font bigger for mobile? figure out why font size changes for code boxes on mobile? -->
-        <button id="hamburger" onclick="toggle_menu()">&equiv;</button><h1>k refcard (unofficial)</h1>
+        <h1><a href="https://kparc.github.io/">kparc</a>: refcard (unofficial)</h1>
         <p><a href="http://github.com/kparc/ref">Fork me!</a></p>
     </header>
     
     <div id="container">
-
-        <nav id="small-nav" style="display: block;"> <!-- expanded by default
-                                                          TODO remember toggle status in permanent cookie
-                                                          TODO mobile detection/support
-                                                      -->
-            <ul>
-                <li><a href="#verbs">Verbs</a></li>
-                <li><a href="#adverbs">Adverbs</a></li>
-                <li><a href="#nouns">Nouns</a></li>
-                <li><a href="#many-args">3+ args</a></li>
-                <li><a href="#datetime">Datetimes</a></li>
-                <li><a href="#tables-ksql">Tables &amp; KSQL</a></li>
-                <li><a href="#util">Utilities</a></li>
-                <li><a href="#math">Math</a></li>
-                <li><a href="#aggr">Aggregations</a></li>
-                <li><a href="#io-ipc">IO and IPC</a></li>
-                <li><a href="#commands">Commands</a></li>
-                <li><a href="#converters">Converters</a></li>
-                <li><a href="#.z"><code>.z</code> namespace</a></li>
-                <li><a href="#secrets">Secrets!</a></li>
-            </ul>
-    
-            <br>
-    
-            <ul>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#shakti-python">shakti-python</a></li>
-                <li><a href="#communities">Communities</a></li>
-            </ul>
-
-            <br>
-
-            <!-- in desktop, move bar to LHS instead of top. in mobile, make the jumps let you see the heading jumped to, and fix the bar at the top, and make the bar disappear when a link is clicked. -->
-            <!-- add how to install k itself (miniconda, rlwrap) -->
-
-            <!-- John Earnest's: -->
-            <ul>
-                <!-- li><a href="https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Programming.md">Programming</a> (recommended)</li -->
-                <li><a href="https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Trees.md">Trees</a></li>
-                <!--li><a href="https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Manual.md">Manual</a></li-->
-            </ul>
-
-            <br>
-
-            <ul>
-
-                <li><a href="https://shakti.com/tutorial">Official tutorial</a></li>
-                <br>
-                <li><a href="http://nsl.com">no stinking loops</a></li>
-                <br>
-                <li><a href="https://github.com/kparc/kcc/blob/master/README.md">k crash course</a></li>
-
-            </ul>
-
-        </nav>
 
     <div id="card">
 
@@ -353,6 +272,53 @@ select a:x,b:1+2*x from +[!3]
 1</pre>
 
 -->
+
+            <!--
+            <ul>
+                <li><a href="#verbs">Verbs</a></li>
+                <li><a href="#adverbs">Adverbs</a></li>
+                <li><a href="#nouns">Nouns</a></li>
+                <li><a href="#many-args">3+ args</a></li>
+                <li><a href="#datetime">Datetimes</a></li>
+                <li><a href="#tables-ksql">Tables &amp; KSQL</a></li>
+                <li><a href="#util">Utilities</a></li>
+                <li><a href="#math">Math</a></li>
+                <li><a href="#aggr">Aggregations</a></li>
+                <li><a href="#io-ipc">IO and IPC</a></li>
+                <li><a href="#commands">Commands</a></li>
+                <li><a href="#converters">Converters</a></li>
+                <li><a href="#.z"><code>.z</code> namespace</a></li>
+                <li><a href="#secrets">Secrets!</a></li>
+            </ul> 
+    
+            <br>
+    
+            <ul>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#shakti-python">shakti-python</a></li>
+            </ul>
+
+            <br>
+
+            <!-- in desktop, move bar to LHS instead of top. in mobile, make the jumps let you see the heading jumped to, and fix the bar at the top, and make the bar disappear when a link is clicked. -->
+            <!-- add how to install k itself (miniconda, rlwrap) -->
+
+            <!-- John Earnest's:
+            <ul>
+                    <!-- li><a href="https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Programming.md">Programming</a> (recommended)</li
+                    <li><a href="https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Trees.md">Trees</a></li>
+                    <!--li><a href="https://github.com/JohnEarnest/ok/blob/gh-pages/docs/Manual.md">Manual</a></li
+                </ul>
+    
+                <br>
+    
+                <ul>
+    
+                    <li><a href="https://shakti.com/tutorial">Official tutorial</a></li>
+                    <br>
+                    <li><a href="http://nsl.com">no stinking loops</a></li>
+    
+                </ul> -->
 
 </body>
 

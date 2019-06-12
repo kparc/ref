@@ -2061,10 +2061,3 @@ shakti-python also lets you do some things that k doesn't:
 
 - [Delete globals](https://groups.google.com/d/msg/shaktidb/etsXDI9J4o4/HmefTXyBAwAJ) (at your peril!)
 - [Catch errors](https://groups.google.com/d/msg/shaktidb/lQ3XSvFPDhw/DOlmmFgHDAAJ)
-
-## Communities {communities}
-
-- [shakti google group](https://groups.google.com/forum/#!forum/shaktidb) (official - for 'how to' queries)
-- [the k tree](https://chat.stackexchange.com/rooms/90748/the-k-tree)
-  write access: email `".@acegiklmnort"@7 13 12 4 4 0 10 5 10 1 5 9 2 6 8 0 3 11 9`
-- [r/apljk](https://www.reddit.com/r/apljk/)
