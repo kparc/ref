@@ -22,4 +22,10 @@ $(document).ready(function() {
         $('#theme').attr('href', t);
         localStorage.setItem('kref-theme', JSON.stringify(all));
     });
+    
+    var p = 0;
+    $(window).on('scroll', function(e) {
+            $('h1').css('position', window.scrollY < p ? 'fixed' : 'absolute');
+        p = window.scrollY;
+    });
 });

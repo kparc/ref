@@ -24,7 +24,7 @@
         display: none;
     }
     header h1 {
-        position: relative;
+        position: relative !important;
     }
 
     main, footer {
