@@ -1,0 +1,27 @@
+{
+  "name": "ref",
+  "version": "1.0.0",
+  "description": "K reference card",
+  "main": "bundler/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "bundler/index.js",
+    "clean": "rm -r build"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@node-minify/clean-css": "^4.0.5",
+    "@node-minify/core": "^4.0.5",
+    "@node-minify/uglify-es": "^4.0.5",
+    "cheerio": "^1.0.0-rc.3",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "prismjs": "^1.16.0",
+    "pug": "^2.0.3",
+    "rehype-stringify": "^6.0.0",
+    "remark-parse": "^6.0.3",
+    "remark-rehype": "^4.0.0",
+    "unified": "^7.1.0"
+  }
+}

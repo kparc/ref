@@ -1,0 +1,33 @@
+@media (min-width: 42rem) {
+    header pre {
+        display: block;
+        font-size: .7em;
+        padding: 1rem;
+    }
+    body {
+        font-size: 1.6rem;
+    }
+    header::before {
+        height: 6rem;
+    }
+}
+
+@media (min-width: 70rem) {
+    header {
+        width: 40rem;
+        float: left;
+        height: 100vh;
+        position: fixed;
+        overflow-y: auto;
+    }
+    header::before {
+        display: none;
+    }
+    header h1 {
+        position: relative;
+    }
+
+    main, footer {
+        margin-left: 40rem;
+    }
+}

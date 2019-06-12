@@ -1,0 +1,17 @@
+@font-face {
+  font-display: swap;
+  font-family: "Lab 2";
+  src: url("../fonts/lab-c1ed1828.eot");
+  src: url("../fonts/lab-c1ed1828.eot#iefix") format("embedded-opentype"), url("../fonts/lab-8df87c2d.woff2") format("woff2"),url("../fonts/lab-bcb1f8a4.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Vinila";
+  src: url("../fonts/vinila-cf2202a5.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+}
+

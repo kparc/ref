@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # k reference card
 
 https://kparc.github.io/ref
@@ -25,3 +26,33 @@ TODO:
 * Consider [Zig's docs approach](https://ziglang.org/documentation/master/#Introduction) - easily downloaded single file + code samples form part of the test suite
 * Get a better system for dynamically adding links, that can handle a word appearing more than once in the help (eg maybe subsequent mentions become '#list2')
 * Consider moving 'contribute' link to right-hand side of banner (just be wary of impact on small mobile phone screens)
+=======
+## Yet another take on the refcard
+
+### Features
+
+* build script that produces static html
+* server-side markdown render
+* links to \h in markdown (you can even use regexp)
+* \h loaded from a text at the build time
+* `pug` template engine for html
+* minified css and client-side javascript
+* themes (click *kei_logo.svg* for now. if you find a better place for this button - put it there)
+
+### How to run
+
+```
+npm i
+npm run build
+```
+and serve the `./build/` directory over http
+
+**Warning! The build fails if there are \h linking errors**
+
+### Todo
+
+* merge with updated content
+* plug in test script
+* create a build hook
+
+>>>>>>> initial commit
