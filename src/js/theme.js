@@ -1,8 +1,8 @@
 $(document).ready(function() {
     var themes = [
         '',
-        '/css/solarized.css',
-        '/css/monokai.css',
+        './css/solarized.css',
+        './css/monokai.css',
     ];
 
     try {
