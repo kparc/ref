@@ -2,10 +2,10 @@
   "name": "ref",
   "version": "1.0.0",
   "description": "K reference card",
-  "main": "bundler/index.js",
+  "main": "node bundler/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "bundler/index.js",
+    "build": "node bundler/index.js",
     "clean": "rm -r build"
   },
   "author": "",
