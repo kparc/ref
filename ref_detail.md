@@ -864,6 +864,15 @@ You can also turn a k date into a (year, month, day) vector:
 
 ## Nouns {nouns}
 
+### Names {name}
+
+Names start with a backtick `` ` ``. They can be:
+
+- naked (eg `` `abc ``) - alphanumerics only
+- quoted (eg `` `"a_b" ``) - any character except zero byte.
+
+Names are also known as symbols.
+
 ### Floats {float}
 
 All of `1.0`, `.5`, `1.`, `1f` are valid float literals.
