@@ -1,5 +1,5 @@
 {
-  "name": "ref",
+  "name": "@kparc/ref",
   "version": "1.0.0",
   "description": "K reference card",
   "main": "grunt",
