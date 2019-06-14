@@ -1,7 +1,9 @@
-$(document).ready(setTimeout.bind(window, function() {
+$(document).ready(function() {
     var data = $('h2,h3')
         .toArray()
-        .map(v => ({ code: $(v).find('code').text() , label: v.innerText, id: '#' + v.id }))
+        .map(function(v) {
+            return { code: $(v).find('code').text() , label: v.innerText, id: '#' + v.id }
+        });
     $('#autocomplete').easyAutocomplete({
         data: data,
         getValue: function(el) {
@@ -23,4 +25,4 @@ $(document).ready(setTimeout.bind(window, function() {
 		    }
 	    }
     });
-}, 500));
+});
