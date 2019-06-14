@@ -866,10 +866,10 @@ You can also turn a k date into a (year, month, day) vector:
 
 ### Names {name}
 
-Names start with a backtick `` ` ``. They can be:
+Names start with a backtick `` ` ``. Name literals can be:
 
-- naked (eg `` `abc ``) - alphanumerics only
-- quoted (eg `` `"a_b" ``) - any character except zero byte.
+- naked (eg `` `abc ``) - contain alphanumerics only
+- quoted (eg `` `"a_b" ``) - contain any character, but zero byte (`"\0"`) ends the name.
 
 Names are also known as symbols.
 
