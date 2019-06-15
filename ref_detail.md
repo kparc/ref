@@ -875,6 +875,9 @@ Names are also known as symbols.
 
 ### Floats {float}
 
+<!-- add info about int and float null arithmetic - eg null float is NaN -->
+<!-- quotes in 'name' list aren't being formatted? -->
+
 All of `1.0`, `.5`, `1.`, `1f` are valid float literals.
 
 ```kc
