@@ -1251,9 +1251,7 @@ A table can also be considered as a flipped dict of lists, where each list is of
 
 ```kc
  t: ({a:1;b:2};{a:3;b:4})
- u: +`a`b !    (1 3;2 4)
-
-/ The tables match:
+ u: +`a`b!(1 3;2 4)
  t~u
 1
 ```
@@ -1261,9 +1259,12 @@ A table can also be considered as a flipped dict of lists, where each list is of
 You can access rows or columns of the table by indexing using the row number or column key:
 
 ```kc
-t[1]    / {a:3;b:4}
-t[`b]    / 2 4
-t[1;`a]  / 3
+ t[1]~{a:3;b:4}
+1
+ t[`b]~2 4
+1
+ t[1;`a]~3
+1
 ```
 
 Key tables are dictionaries where the rows of one table map to the rows of another table.
