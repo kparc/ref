@@ -35,6 +35,12 @@ module.exports = function(grunt) {
         src: '**',
         dest: 'build/'
       }
+    },
+    'gh-pages': {
+      options: {
+        base: 'build'
+      },
+      src: ['**']
     }
   });
 
@@ -42,7 +48,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-pug');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-gh-pages');
 
-  grunt.registerTask('default', ['uglify', 'cssmin', 'pug', 'copy']);
+  const tasks = ['uglify', 'cssmin', 'pug', 'copy'];
+
+  grunt.registerTask('default', tasks);
+  grunt.registerTask('pub', tasks.concat(['gh-pages']));
 
 };
