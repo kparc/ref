@@ -410,7 +410,7 @@ Taking zero elements of a list generates an empty list of the type of the first 
 
 `i?` is draw (with replacement), `-i?` is deal (without replacement):
 
-```kc
+```kc-nyi
  ^ 9 ? 9
 ^1 3 5 5 6 6 7 7 8
  ^ -9 ? 9
@@ -819,7 +819,7 @@ Convert a vector of numbers from a specified base into base 10:
 
 Zero is represented as an empty integer list `!0`, not `0`:
 
-```kc
+```kc-nyi
  10/: !0
 0
  10/: 0
@@ -902,7 +902,7 @@ Although two lists may be zero length, and have the same type, they may not be t
 
 The 'extra dimensions' can matter for matrix multiplication:
 
-```kc
+```kc-nyi
  () $ (0 2 # 0)
 0#,ø ø
  (!0) $ (0 2 # 0)
@@ -967,7 +967,7 @@ Recover the keys and values using `!:` and `.:`:
 Functions can call themselves by using their own name in their definition. Naive example:
 
 ```kc
-factorial: {$[x<2;1;x*factorial[x-1]]}
+ factorial: {$[x<2;1;x*factorial[x-1]]}
  factorial 4
 24
 ```
@@ -1269,20 +1269,21 @@ You can access rows or columns of the table by indexing using the row number or 
 
 Key tables are dictionaries where the rows of one table map to the rows of another table.
 
-```kc
-k: ({a:1;c:3}; {a:4;c:6})
-v: ({b:2};{b:5})
-kt: k!v
-kt   / (+{a:1 4;c:3 6})!+{b:2 5}
-@kt  / `a
-```
-
-You can also use `key` to set the key columns after creation:
+You can also use `key` to set the key columns after creation.
 
 ```kc
+ k: ({a:1;c:3}; {a:4;c:6})
+ v: ({b:2};{b:5})
+ kt: k!v
+ kt~(+{a:1 4;c:3 6})!+{b:2 5}
+1
+ @kt
+`a
+
  t: ({a:1;b:2;c:3};{a:4;b:5;c:6})
  tk: `a`c key t
- tk~kt  / 1
+ tk~kt
+1
 ```
 
 Access rows of the value table by indexing into the keytable:
@@ -1399,7 +1400,7 @@ Given the following in `test.csv`:
 
 We can read it in as lists of type `inf` respectively and separator `,`:
 
-```kc
+```kc-nyi
  ("inf";",")0:"test.csv"
 1 3
 `ABC`DEF
@@ -1448,7 +1449,7 @@ $ hexdump -C testfile
 
 And to break down what's happening in the 'prompt' example from the official tutorial, ie:
 
-```kc
+```kc-nyi
  name: 1: ("" 1: "What is your name? ")
 What is your name? Me
  name
@@ -1482,7 +1483,7 @@ Start a k process running with port 1234 (that's `k -p 1234`).
 
 Then in another k process, set up a connection to the first k process, send it commands, and get responses:
 
-```kc
+```kc-nyi
 2019-04-18 15:45:55 2core 1gb avx2 © shakti l2.0 test
  conn: 3: 1234
  conn 4: "life: 42"
@@ -1504,8 +1505,8 @@ a b
 2 5
 3 6
 
- / But since there are just two arguments,
- / we can use # as an infix verb:
+  / But since there are just two arguments,
+  / we can use # as an infix verb:
 
  t # :a>1
 a b
@@ -1568,7 +1569,7 @@ Apply function f to the elements at each `i` of `x` (with argument `y`, if f is 
 To do the update in-place, use the data's name symbol instead of the name directly (`` `name `` vs `name`).
 
 ```kc
-v:!3
+ v:!3
  @[v;1;7]
 0 7 2
  v
@@ -1607,35 +1608,35 @@ Apply to rows or specific elements of a matrix:
 3 4 5
 6 7 8
 
- / Row 1:
+  / Row 1:
 
  .[m; ,1; 1+]
 0 1 2
 4 5 6
 6 7 8
 
- / Row 1, element 2:
+  / Row 1, element 2:
 
  .[m; 1 2; 1+]
 0 1 2
 3 4 6
 6 7 8
 
- / Row 0, elements 1 and 2:
+  / Row 0, elements 1 and 2:
 
  .[m; (0; 1 2); 1+]
  0 2 3
  3 4 5
  6 7 8
 
- / In each of rows 1 and 2, elements 1 and 2:
+  / In each of rows 1 and 2, elements 1 and 2:
 
  .[m; (1 2; 1 2); 1+]
  0 1 2
  3 5 6
  6 8 9
 
- / In all rows, elements 1 and 2:
+  / In all rows, elements 1 and 2:
 
  .[m; (; 1 2); 1+]
 0 2 3
@@ -1657,7 +1658,7 @@ If the true expression is returned, the false expression never executes (and vic
 
 [Unlike other triadics](#Verb), triadic `$` is not the same as dyadic `$`:
 
-```kc
+```kc-nyi
  ($) . (`n; "a")
 `a
  ($) . (1; "a"; "b")
@@ -1819,7 +1820,7 @@ v         `v          n
 {x+2y}    {x+2y}      1
 a:1       (::;`a;1)
 :a+2b     :a+2b       0
- /comment             1
+/comment             1
 \h        (\;`h)
 ```
 
