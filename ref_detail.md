@@ -1250,26 +1250,12 @@ A table is a list of dicts where each dict has the same keys in the same order.
 A table can also be considered as a flipped dict of lists, where each list is of equal length.
 
 ```kc
-t: ({a:1;b:2};{a:3;b:4})
-u: +`a`b !    (1 3;2 4)
-v:  `a`b ! /: (1 2;3 4)
+ t: ({a:1;b:2};{a:3;b:4})
+ u: +`a`b !    (1 3;2 4)
 
 / The tables match:
-t~u
-t~v
-
-/ Break row-wise over multiple lines:
-w: ({a:1;b:2}
-    {a:3;b:4})
-
-t~w
-
-/ Break row-wise (condensed row format)
-/ over multiple lines:
-x: `a`b!/:(1 2
-           3 4)
-
-t~x
+ t~u
+1
 ```
 
 You can access rows or columns of the table by indexing using the row number or column key:
@@ -1283,8 +1269,7 @@ t[1;`a]  / 3
 Key tables are dictionaries where the rows of one table map to the rows of another table.
 
 ```kc
-k: ({a:1;c:3}
-    {a:4;c:6})
+k: ({a:1;c:3}; {a:4;c:6})
 v: ({b:2};{b:5})
 kt: k!v
 kt   / (+{a:1 4;c:3 6})!+{b:2 5}
