@@ -1945,6 +1945,23 @@ For other types, take 0 elements of an atom of that type (may be a better way?).
 0
 ```
 
+#### How can I make k's output syntax more 'raw'?
+
+Start k with argument `-v`:
+
+```
+(base) chris@chris-VirtualBox:~$ k
+2019-06-08 13:39:07 2core 4gb avx2 © shakti l2.0 test
+ {a:1;b:2}
+a|1
+b|2
+
+(base) chris@chris-VirtualBox:~$ k -v
+2019-06-08 13:39:07 2core 4gb avx2 © shakti l2.0 test
+ {a:1;b:2}
+{a:1;b:2}
+```
+
 ## `.z` namespace {.z}
 
 ### `.z.x` {.z.x}
