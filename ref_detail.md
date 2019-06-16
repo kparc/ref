@@ -1243,7 +1243,7 @@ If the count of the data is even, return the value on the right of the middle.
 
 ## Tables and KSQL {tables-ksql}
 
-### Tables {table}
+### Tables {tabl}
 
 A table is a list of dicts where each dict has the same keys in the same order.
 
