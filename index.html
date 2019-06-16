@@ -1,0 +1,1150 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>+/kei | K reference card</title><link rel="stylesheet" href="./css/core.css"><link rel="stylesheet" href="./css/media.css"><link rel="stylesheet" href="./css/fonts.css"><link id="theme" rel="stylesheet" href="./css/monokai.css"></head><body><header><h1 id="top"><span>ref <code id="k-item">k</code></span><span class="right"><div class="easy-autocomplete"><input id="autocomplete" placeholder="Search..."></div><img class="avatar" src="./svg/kei_logo.svg" alt="kei"></span></h1><pre class="refcard">$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)
+
+Verb                       Adverb                Noun              Type
+:  <a href="#assign">assign</a>                  '  <a href="#each">each</a>      n bar    char  " ab"       `c
++  add         <a href="#flip">flip</a>        /  <a href="#over">over</a>      n div    name  ``a`b       `n
+-  subtract    negate      \  <a href="#scan">scan</a>      n <a href="#mod">mod</a>    int   Ø 0 2       `i
+*  multiply    first       ': <a href="#each-prior">eachprior</a>          float ø 2.3 π ∞   `f
+%  divideby    inverse     /: <a href="#each-right">eachright</a> <a href="#join">join</a>|<a href="#scalar-from-vector-sv">sv</a>  date 2019-06-28   `D <a href="#current-date-z-d">.z.D</a>
+&  min|and     where       \: <a href="#each-left">eachleft</a> <a href="#split">split</a>|<a href="#vector-from-scalar-vs">vs</a>  time 12:34:56.789 `t <a href="#current-time-z-t">.z.t</a>
+|  max|or      reverse
+<  less        <a href="#up">up</a>          System                list (2;3.4;`c)   `.
+>  more        down        0: <a href="#read-write-line-0">read/write line</a>    dict {a:2;b:`c}   `a
+=  equal       <a href="#group">group</a>       1: <a href="#read-write-bytes-1">read/write byte</a>    <a href="#tables">tabl</a> +{a:2 3 4}   `A
+~  match       not         2: <a href="#read-write-data-2">read/write data</a>    expr :32+9*f%5    `0
+!  <a href="#key">key</a>         <a href="#enumerate">enum</a>        3: <a href="#inter-process-communication-3-and-4">conn/set</a> (.z.ms)   func {(+/x)%#x}   `1
+,  catenate    enlist      4: http/get (.z.mg)   xtab `a`b!+`c`d!(2 3;4 5)
+^  <a href="#except">except</a>      <a href="#sort">asc</a>
+#  <a href="#take">take</a>        count       #[t;c;b[;a]] <a href="#select-t-c-b-a">select</a>   \l f.k  load       <a href="#help-h">\h help</a>
+_  <a href="#drop">drop</a>        <a href="#floor">floor</a>       _[t;c;b[;a]] <a href="#update-t-c-b-a">update</a>   \t[:n]x milli/time <a href="#changelog-l">\l log</a>
+?  <a href="#find">find</a>        <a href="#distinct">unique</a>      ?[x;i;f[;y]] <a href="#splice-x-i-f-y">splice</a>   \u[:n]x micro/trace
+@  index       type        @[x;i;f[;y]] <a href="#amend-x-i-f-y">amend</a>    \v[d]  vars       \f[d] fns
+.  apply       value       .[x;i;f[;y]] dmend    <a href="#list-files-lf">\lf file</a> <a href="#list-character-counts-lc">\lc char</a> <a href="#list-line-counts-ll">\ll line</a>
+$  cast|pad    string      $[c;t;f]     <a href="#cond-c-t-f">cond</a>     \cd [d] get[set]  \gr x file
+
+<a href="#utilities">util</a>: <a href="#in">in</a> <a href="#within">within</a> bin like <a href="#find-1">find</a> freq <a href="#permutations-prm">prm</a> cmb
+<a href="#math">math</a>: sqrt sin cos <a href="#absolute-value-abs">abs</a> <a href="#natural-logarithm-log-and-logarithm-log">[n]log</a> <a href="#exponential-exp-and-power-exp">[n]exp</a> <a href="#random-n-rand">[n]rand</a>
+aggr: count first last min max sum avg var dev <a href="#median-med">med</a>
+tabl: <a href="#sort-ascending-asc">[f]asc</a> <a href="#sort-descending-dsc">[f]dsc</a> [f]key [select|update|delete]A by B from T where C
+
+<a href="#datetimes">datetime</a>:YMDHRSTUV+duration:ymdhrstuv; .z.D+.z.t; day:7\ mth:12\ b5:5'
+`year`month`date`hour`minute`second`millisecond`microsecond`nanosecond
+
+<a href="#boolean-checks">bool</a>: <a href="#ascii">`ascii</a>`utf8
+<a href="#one-way-conversions">1way</a>: <a href="#parse-p">`p</a><a href="#matrix-display-m">`m</a>`crc`sha`rip`bad   e.g. hash: `sha@"crypto"
+<a href="#two-way-conversions">2way</a>:<a href="#binary">`</a><a href="#json-j">`j</a><a href="#kson-k">`k</a>`csv`b64`hex`aes   e.g. json: `j?`j@{a:2;b:`c}
+
+if[c;..];while[c;..]
+
+K:key k:key`k1  /public private
+K key k key"hi" /verify sign
+"(;)"/:$`x`y`z
+\\ exit
+attr: ?x ^x =x
+</pre></header><main><html><head></head><body><h2>Verbs</h2>
+<p>Force the monadic case by applying a <code>:</code> suffix.</p>
+<p>Force the dyadic case by putting the verb in parentheses:</p>
+<pre><code class="language-q in"><span class="token verb operator">@</span><span class="token number">1</span></code>
+<code class="language-q out"><span class="token symbol">`i</span></code>
+<code class="language-q in"><span class="token punctuation">(</span><span class="token verb operator">@</span><span class="token punctuation">)</span><span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">1</span><span class="token verb operator">@</span></code>
+</pre>
+<p>Monadic and dyadic versions of a character are <strong>different verbs</strong> - it&apos;s not just a case of how many arguments they are called with.</p>
+<p>For example, with a bracket call with one argument, the monadic verb will work fine, while the dyadic verb will project:</p>
+<pre><code class="language-q in"><span class="token verb operator">@:</span><span class="token punctuation">[</span><span class="token string">&quot;abc&quot;</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token symbol">`C</span></code>
+<code class="language-q in"><span class="token verb operator">@</span><span class="token punctuation">[</span><span class="token string">&quot;abc&quot;</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token string">&quot;abc&quot;</span><span class="token verb operator">@</span></code>
+</pre>
+<p>Project over the first argument by omitting it entirely:</p>
+<pre><code class="language-q in"><span class="token verb operator">@</span><span class="token punctuation">[</span><span class="token punctuation">;</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token string">&quot;abc&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;b&quot;</span></code>
+</pre>
+<p>Triadic versions of a verb are the same as the dyadic version (except for <a href="#cond"><code>cond</code></a>):</p>
+<pre><code class="language-q in"><span class="token punctuation">(</span><span class="token verb operator">?</span><span class="token punctuation">)</span> <span class="token verb operator">.</span> <span class="token punctuation">(</span><span class="token string">&quot;abcb&quot;</span><span class="token punctuation">;</span> <span class="token string">&quot;b&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token number">1</span></code>
+<code class="language-q in"><span class="token punctuation">(</span><span class="token verb operator">?</span><span class="token punctuation">)</span> <span class="token verb operator">.</span> <span class="token punctuation">(</span><span class="token string">&quot;abcb&quot;</span><span class="token punctuation">;</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token string">&quot;d&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token string">&quot;adbcb&quot;</span></code>
+</pre>
+<h3 id="assign">Assign <code>:</code> </h3>
+<p>Where an assignment is used in a function, consider rewriting code like this (<a href="https://groups.google.com/d/msg/shaktidb/zejmh3vxdAg/6uCxAA2aAwAJ">source</a>):</p>
+<pre><code class="language-q out">f<span class="token verb operator">:</span> <span class="token punctuation">{</span>a<span class="token verb operator">:</span> reusedtempdata<span class="token punctuation">;</span> a<span class="token verb operator">*</span>a<span class="token punctuation">}</span></code>
+</pre>
+<p>As this:</p>
+<pre><code class="language-q out">f<span class="token verb operator">:</span> <span class="token punctuation">{</span>a<span class="token verb operator">*</span>a<span class="token verb operator">:</span>reusedtempdata<span class="token punctuation">}</span></code>
+</pre>
+<p>Or this:</p>
+<pre><code class="language-q out">f<span class="token verb operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">{</span>x<span class="token verb operator">*</span>x<span class="token punctuation">}</span> reusedtempdata<span class="token punctuation">}</span></code>
+</pre>
+<h3 id="flip">Flip <code>+</code> </h3>
+<pre><code class="language-q in"> <span class="token punctuation">(</span><span class="token string">&quot;#&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;##&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token string">&quot;#&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;##&quot;</span></code>
+
+<code class="language-q in"><span class="token verb operator">+</span><span class="token punctuation">(</span><span class="token string">&quot;#&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;##&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">#</span><span class="token verb operator">#</span></code>
+<code class="language-q out"><span class="token verb operator">#</span><span class="token verb operator">#</span></code>
+
+<code class="language-q in"><span class="token verb operator">+</span><span class="token punctuation">(</span><span class="token string">&quot;##&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;###&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">#</span><span class="token verb operator">#</span></code>
+<code class="language-q out"><span class="token verb operator">#</span><span class="token verb operator">#</span></code>
+<code class="language-q in"><span class="token verb operator">#</span></code>
+
+<code class="language-q in"><span class="token verb operator">*</span><span class="token verb operator">+</span><span class="token verb operator">+</span><span class="token punctuation">(</span><span class="token string">&quot;##&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;###&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token string">&quot;## &quot;</span></code>
+
+<code class="language-q in"><span class="token verb operator">+</span><span class="token punctuation">(</span><span class="token verb operator">!</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token verb operator">!</span><span class="token number">2</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">0</span></code>
+<code class="language-q out">&#xD8; <span class="token number">1</span></code>
+</pre>
+<h3 id="up">Up <code>&lt;</code> </h3>
+<pre><code class="language-q in"><span class="token verb operator">&lt;</span> <span class="token string">&quot;abracadabra&quot;</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">3</span> <span class="token number">5</span> <span class="token number">7</span> <span class="token number">10</span> <span class="token number">1</span> <span class="token number">8</span> <span class="token number">4</span> <span class="token number">6</span> <span class="token number">2</span> <span class="token number">9</span></code>
+<code class="language-q in">s<span class="token verb operator">@</span><span class="token verb operator">&lt;</span>s<span class="token verb operator">:</span> <span class="token string">&quot;abracadabra&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;aaaaabbcdrr&quot;</span></code>
+</pre>
+<h3 id="group">Group <code>=</code> </h3>
+<p>With a list, get back the indices at which each unique element appears:</p>
+<pre><code class="language-q in"><span class="token verb operator">=</span><span class="token string">&quot;abracadabra&quot;</span></code>
+<code class="language-q out">a<span class="token verb operator">|</span><span class="token number">0</span> <span class="token number">3</span> <span class="token number">5</span> <span class="token number">7</span> <span class="token number">10</span></code>
+<code class="language-q out">b<span class="token verb operator">|</span><span class="token number">1</span> <span class="token number">8</span></code>
+<code class="language-q out">c<span class="token verb operator">|</span><span class="token verb operator">,</span><span class="token number">4</span></code>
+<code class="language-q out">d<span class="token verb operator">|</span><span class="token verb operator">,</span><span class="token number">6</span></code>
+<code class="language-q out">r<span class="token verb operator">|</span><span class="token number">2</span> <span class="token number">9</span></code>
+</pre>
+<h3 id="enumerate">Enumerate <code>!</code> </h3>
+<pre><code class="language-q in"><span class="token verb operator">!</span><span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">1</span> <span class="token number">2</span></code>
+<code class="language-q in"><span class="token verb operator">!</span><span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">0</span> <span class="token number">1</span> <span class="token number">2</span></code>
+</pre>
+<p>With a negative integer argument, generate an identity matrix:</p>
+<pre><code class="language-q in"><span class="token verb operator">!</span><span class="token verb operator">-</span><span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">0</span> <span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">1</span> <span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">0</span> <span class="token number">1</span></code>
+</pre>
+<h3 id="key">Key <code>!</code> </h3>
+<pre><code class="language-q in"><span class="token verb operator">!</span> <span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">}</span></code>
+<code class="language-q out"><span class="token symbol">`a</span><span class="token symbol">`b</span></code>
+</pre>
+<h3 id="except">Except <code>^</code> </h3>
+<pre><code class="language-q in"><span class="token punctuation">(</span><span class="token verb operator">!</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token verb operator">^</span><span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q in"><span class="token punctuation">(</span><span class="token verb operator">!</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token verb operator">^</span><span class="token number">1</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">2</span></code>
+<code class="language-q in"><span class="token string">&quot;abracadabra&quot;</span> <span class="token verb operator">^</span> <span class="token string">&quot;bc&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;araadara&quot;</span></code>
+</pre>
+<h3 id="sort">Sort <code>^</code> </h3>
+<pre><code class="language-q in"><span class="token verb operator">::</span> l<span class="token verb operator">:</span> <span class="token keyword">rand</span> <span class="token number">4</span></code>
+<code class="language-q out"><span class="token number">0.5594068</span> <span class="token number">0.1751217</span> <span class="token number">0.3652149</span> <span class="token number">0.5086234</span></code>
+<code class="language-q in"><span class="token verb operator">^</span>l</code>
+<code class="language-q out"><span class="token number">0.1751217</span> <span class="token number">0.3652149</span> <span class="token number">0.5086234</span> <span class="token number">0.5594068</span></code>
+</pre>
+<h3 id="take">Take <code>#</code> </h3>
+<pre><code class="language-q in"><span class="token number">3</span><span class="token verb operator">#</span><span class="token string">&quot;abracadabra&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;abr&quot;</span></code>
+</pre>
+<p>Given a filter function (returning <code>1</code>s and <code>0</code>s only):</p>
+<pre><code class="language-q in"><span class="token punctuation">(</span><span class="token number">2</span> <span class="token keyword">mod</span><span class="token punctuation">)</span><span class="token verb operator">#</span><span class="token verb operator">!</span><span class="token number">9</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">3</span> <span class="token number">5</span> <span class="token number">7</span></code>
+</pre>
+<h3 id="drop">Drop <code>_</code> </h3>
+<pre><code class="language-q in"><span class="token number">4</span><span class="token verb operator">_</span><span class="token string">&quot;abracadabra&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;cadabra&quot;</span></code>
+</pre>
+<h3 id="floor">Floor <code>_</code> </h3>
+<pre><code class="language-q in"><span class="token verb operator">_</span> <span class="token number">1.23</span> <span class="token verb operator">-</span><span class="token number">1.23</span> <span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token verb operator">-</span><span class="token number">2</span> <span class="token number">0</span></code>
+</pre>
+<h3 id="find">Find <code>?</code> </h3>
+<pre><code class="language-q in"><span class="token number">2</span> <span class="token number">3</span> <span class="token number">1</span> <span class="token number">4</span> <span class="token number">0</span> <span class="token verb operator">?</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">1</span></code>
+<code class="language-q in"><span class="token number">2</span> <span class="token number">3</span> <span class="token number">1</span> <span class="token number">4</span> <span class="token number">0</span> <span class="token verb operator">?</span> <span class="token number">3</span> <span class="token number">1</span> <span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span> <span class="token number">4</span></code>
+</pre>
+<h3 id="distinct">Distinct <code>?</code> </h3>
+<pre><code class="language-q in"><span class="token verb operator">?</span> <span class="token string">&quot;abracadabra&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;abrcd&quot;</span></code>
+<code class="language-q in"><span class="token verb operator">?</span> <span class="token punctuation">(</span><span class="token string">&quot;hi&quot;</span><span class="token punctuation">;</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token symbol">`a</span><span class="token symbol">`b</span><span class="token punctuation">;</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token string">&quot;hi&quot;</span><span class="token punctuation">;</span> <span class="token symbol">`a</span><span class="token symbol">`b</span><span class="token punctuation">;</span> <span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token number">0</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token string">&quot;hi&quot;</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token symbol">`a</span><span class="token symbol">`b</span></code>
+<code class="language-q out"><span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span></code>
+</pre>
+<h2>Adverbs</h2>
+<p>There should be no spaces between an adverb and the expression on its left-hand side (<a href="https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ">source</a>).</p>
+<p>(This is how the <code>/</code> adverb is distinguished from <code>/</code>, ie the start of a comment.)</p>
+<p>Adverbs can be called in similar ways to verbs:</p>
+<pre><code class="language-q in"><span class="token verb operator">+</span><span class="token adverb function">/</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">6</span></code>
+<code class="language-q in"><span class="token comment">/[+] 1 2 3</span></code>
+<code class="language-q out"><span class="token number">6</span></code>
+<code class="language-q in"><span class="token punctuation">(</span><span class="token adverb function">/</span> <span class="token punctuation">(</span><span class="token verb operator">+</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">6</span></code>
+</pre>
+<h3 id="each">Each <code>&apos;</code> </h3>
+<p>Make a function apply to each element of its input lists, rather than the list itself.</p>
+<pre><code class="language-q in"><span class="token string">&quot;~&quot;</span> <span class="token verb operator">,</span> <span class="token string">&quot;abc&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;~abc&quot;</span></code>
+<code class="language-q in"><span class="token string">&quot;~&quot;</span> <span class="token verb operator">,</span><span class="token adverb function">&apos;</span> <span class="token string">&quot;abc&quot;</span></code>
+<code class="language-q out"><span class="token verb operator">~</span>a</code>
+<code class="language-q out"><span class="token verb operator">~</span>b</code>
+<code class="language-q out"><span class="token verb operator">~</span>c</code>
+</pre>
+<p>&apos;Each&apos; will apply to pairings of its input lists:</p>
+<pre><code class="language-q in"><span class="token string">&quot;ab&quot;</span> <span class="token verb operator">,</span><span class="token adverb function">&apos;</span> <span class="token string">&quot;cd&quot;</span></code>
+<code class="language-q out">ac</code>
+<code class="language-q out">bd</code>
+
+<code class="language-q in"><span class="token punctuation">{</span>x<span class="token verb operator">,</span>y<span class="token verb operator">,</span>z<span class="token punctuation">}</span><span class="token adverb function">&apos;</span><span class="token punctuation">[</span><span class="token string">&quot;ab&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;cd&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;ef&quot;</span><span class="token punctuation">]</span></code>
+<code class="language-q out">ace</code>
+<code class="language-q out">bdf</code>
+</pre>
+<h3 id="over">Over <code>/</code> </h3>
+<p>n f/x</p>
+<pre><code class="language-q in"><span class="token number">3</span> <span class="token punctuation">{</span>x<span class="token verb operator">+</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token comment">/10</span></code>
+<code class="language-q out"><span class="token number">13</span></code>
+</pre>
+<p>p f/x</p>
+<pre><code class="language-q in"><span class="token punctuation">{</span><span class="token number">4</span><span class="token verb operator">&gt;</span><span class="token verb operator">#</span>x<span class="token punctuation">}</span> <span class="token punctuation">{</span>x<span class="token verb operator">,</span><span class="token string">&quot;k&quot;</span><span class="token punctuation">}</span><span class="token comment">/&quot;o&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;okkk&quot;</span></code>
+</pre>
+<h3 id="scan">Scan <code>\</code> </h3>
+<p>n f\x</p>
+<pre><code class="language-q in"><span class="token number">3</span> <span class="token punctuation">{</span>x<span class="token verb operator">+</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token adverb function">\</span><span class="token number">10</span></code>
+<code class="language-q out"><span class="token number">10</span> <span class="token number">11</span> <span class="token number">12</span> <span class="token number">13</span></code>
+</pre>
+<p>p f\x</p>
+<pre><code class="language-q in"><span class="token punctuation">{</span><span class="token number">4</span><span class="token verb operator">&gt;</span><span class="token verb operator">#</span>x<span class="token punctuation">}</span> <span class="token punctuation">{</span>x<span class="token verb operator">,</span><span class="token string">&quot;k&quot;</span><span class="token punctuation">}</span><span class="token adverb function">\</span><span class="token string">&quot;o&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;o&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;ok&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;okk&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;okkk&quot;</span></code>
+</pre>
+<h3 id="each-prior">Each prior <code>&apos;:</code> </h3>
+<p>The null chosen for the first pairing is of the type of the first member of the list.</p>
+<pre><code class="language-q in"><span class="token punctuation">{</span>y<span class="token verb operator">,</span>x<span class="token punctuation">}</span><span class="token adverb function">&apos;:</span> <span class="token verb operator">!</span><span class="token number">3</span></code>
+<code class="language-q out">&#xD8; <span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span></code>
+<code class="language-q in"><span class="token punctuation">{</span>y<span class="token verb operator">,</span>x<span class="token punctuation">}</span><span class="token adverb function">&apos;:</span> <span class="token number">1.0</span> <span class="token number">2.1</span> <span class="token number">4.7</span></code>
+<code class="language-q out">&#xF8; <span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2.1</span></code>
+<code class="language-q out"><span class="token number">2.1</span> <span class="token number">4.7</span></code>
+<code class="language-q in"><span class="token punctuation">{</span>y<span class="token verb operator">,</span>x<span class="token punctuation">}</span><span class="token adverb function">&apos;:</span> <span class="token punctuation">(</span><span class="token string">&quot;a&quot;</span><span class="token punctuation">;</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token symbol">`ok</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token string">&quot; a&quot;</span></code>
+<code class="language-q out"><span class="token punctuation">(</span><span class="token string">&quot;a&quot;</span><span class="token punctuation">;</span><span class="token number">1</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token symbol">`ok</span><span class="token punctuation">)</span></code>
+</pre>
+<h3 id="each-right">Each right <code>/:</code> </h3>
+<p>Compare to each:</p>
+<pre><code class="language-q in"><span class="token string">&quot;ab&quot;</span> <span class="token verb operator">,</span><span class="token adverb function">&apos;</span> <span class="token string">&quot;cd&quot;</span></code>
+<code class="language-q out">ac</code>
+<code class="language-q out">bd</code>
+<code class="language-q in"><span class="token string">&quot;ab&quot;</span> <span class="token verb operator">,</span><span class="token adverb function">/:</span> <span class="token string">&quot;cd&quot;</span></code>
+<code class="language-q out">abc</code>
+<code class="language-q out">abd</code>
+</pre>
+<h3 id="each-left">Each left <code>\:</code> </h3>
+<pre><code class="language-q in"><span class="token string">&quot;ab&quot;</span> <span class="token verb operator">,</span><span class="token adverb function">\:</span> <span class="token string">&quot;cd&quot;</span></code>
+<code class="language-q out">acd</code>
+<code class="language-q out">bcd</code>
+</pre>
+<h3 id="join">Join <code>/:</code> </h3>
+<p>The following work with <strong>lists of strings</strong>.</p>
+<p>Prepend the separator to <code>/:</code>, <a href="https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ">without a space in between</a>.</p>
+<pre><code class="language-q in"><span class="token string">&quot;-&quot;</span><span class="token adverb function">/:</span> <span class="token punctuation">(</span><span class="token string">&quot;la&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;li&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;lu&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;le&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;lo&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token string">&quot;la-li-lu-le-lo&quot;</span></code>
+</pre>
+<p>With empty symbol as &apos;separator&apos;, appends a newline to each string and joins. (This is also known as &apos;sS&apos; or &apos;string from String&apos;, with capitalisation following the k7 convention of lower for atom, upper for list of atoms of same type).</p>
+<pre><code class="language-q in"><span class="token symbol">`</span><span class="token adverb function">/:</span> <span class="token punctuation">(</span><span class="token string">&quot;ab&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;cd&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token string">&quot;ab\ncd\n&quot;</span></code>
+</pre>
+<p>With three characters instead of just a separator, prepends/appends the first and last:</p>
+<pre><code class="language-q in"><span class="token string">&quot;(;)&quot;</span><span class="token adverb function">/:</span> <span class="token punctuation">(</span><span class="token verb operator">,:</span><span class="token adverb function">&apos;</span> <span class="token string">&quot;abcd&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token string">&quot;(a;b;c;d)&quot;</span></code>
+</pre>
+<p>That means &apos;join&apos; can&apos;t be used for multi-character separators, but you can always do this (<a href="https://groups.google.com/d/msg/shaktidb/ttIdJiWx9xI/hiTjuX7_BAAJ">source</a>):</p>
+<pre><code class="language-q in"><span class="token punctuation">{</span>y<span class="token verb operator">,</span>x<span class="token verb operator">,</span>z<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token string">&quot;, &quot;</span><span class="token punctuation">]</span><span class="token comment">/$`ab`cd`ef</span></code>
+<code class="language-q out"><span class="token string">&quot;ab, cd, ef&quot;</span></code>
+</pre>
+<h3 id="split">Split <code>\:</code> </h3>
+<p>Prepend the separator to <code>\:</code>, <a href="https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ">without a space in between</a>.</p>
+<pre><code class="language-q in"><span class="token string">&quot;-&quot;</span><span class="token adverb function">\:</span> <span class="token string">&quot;la-li-lu-le-lo&quot;</span></code>
+<code class="language-q out">la</code>
+<code class="language-q out">li</code>
+<code class="language-q out">lu</code>
+<code class="language-q out">le</code>
+<code class="language-q out">lo</code>
+</pre>
+<p>With empty symbol as &apos;separator&apos;, splits on newlines, including (if present) at the end of the last word. (This is also known as &apos;Ss&apos; or &apos;String from string&apos;.)</p>
+<pre><code class="language-q in"><span class="token symbol">`</span><span class="token adverb function">\:</span> <span class="token string">&quot;ab\ncd\n&quot;</span></code>
+<code class="language-q out">ab</code>
+<code class="language-q out">cd</code>
+<code class="language-q in"><span class="token symbol">`</span><span class="token adverb function">\:</span> <span class="token string">&quot;ab\ncd&quot;</span></code>
+<code class="language-q out">ab</code>
+<code class="language-q out">cd</code>
+</pre>
+<h3 id="scalar-from-vector-sv">Scalar from vector (sv) <code>/:</code> </h3>
+<p>Mnemonic tip: read &apos;sv&apos; in k evaluation order, ie right to left.</p>
+<p>Convert a vector of numbers from a specified base into base 10:</p>
+<pre><code class="language-q in"><span class="token number">2</span><span class="token adverb function">/:</span> <span class="token number">1</span> <span class="token number">0</span> <span class="token number">1</span> <span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">10</span></code>
+</pre>
+<p>You can also turn a vector in (year, month, day) form into a k date:</p>
+<pre><code class="language-q in"><span class="token symbol">`</span><span class="token adverb function">/:</span> <span class="token number">2019</span> <span class="token number">5</span> <span class="token number">4</span></code>
+<code class="language-q out"><span class="token number">2019</span><span class="token verb operator">-</span><span class="token number">05</span><span class="token verb operator">-</span><span class="token number">04</span></code>
+</pre>
+<h3 id="vector-from-scalar-vs">Vector from scalar (vs) <code>\:</code> </h3>
+<p>Mnemonic tip: read &apos;vs&apos; in k evaluation order, ie right to left.</p>
+<p>Convert a number from base 10 into a specified base:</p>
+<pre><code class="language-q in"><span class="token number">10</span><span class="token adverb function">\:</span> <span class="token number">1000</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span></code>
+<code class="language-q in"><span class="token number">2</span><span class="token adverb function">\:</span> <span class="token number">10</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">0</span> <span class="token number">1</span> <span class="token number">0</span></code>
+</pre>
+<p>You can also turn a k date into a (year, month, day) vector:</p>
+<pre><code class="language-q in"><span class="token symbol">`</span><span class="token adverb function">\:</span> <span class="token punctuation">.</span>z<span class="token punctuation">.</span>d</code>
+<code class="language-q out"><span class="token number">2019</span> <span class="token number">5</span> <span class="token number">4</span></code>
+</pre>
+<h2>Nouns</h2>
+<h3>Floats</h3>
+<p>All of <code>1.0</code>, <code>.5</code>, <code>1f</code> are valid float literals.</p>
+<h3>Lists</h3>
+<p><code>(2;3.4;`c)</code> (or any list of atoms, functions etc) can also be written <code>2,3.4,`c</code>:</p>
+<pre><code class="language-q in"><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">;</span><span class="token number">3.4</span><span class="token punctuation">;</span><span class="token symbol">`c</span><span class="token punctuation">)</span><span class="token verb operator">~</span><span class="token number">2</span><span class="token verb operator">,</span><span class="token number">3.4</span><span class="token verb operator">,</span><span class="token symbol">`c</span></code>
+<code class="language-q out"><span class="token number">1</span></code>
+</pre>
+<p>But it breaks down when you include nested lists such as strings:</p>
+<pre><code class="language-q in"><span class="token number">2</span><span class="token verb operator">,</span><span class="token string">&quot;hi&quot;</span><span class="token verb operator">,</span><span class="token symbol">`c</span></code>
+<code class="language-q out"><span class="token number">2</span></code>
+<code class="language-q out"><span class="token string">&quot;h&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;i&quot;</span></code>
+<code class="language-q out"><span class="token symbol">`c</span></code>
+</pre>
+<h3>Functions</h3>
+<p>Functions can call themselves by using their own name in their definition. Naive example:</p>
+<pre><code class="language-q out">factorial<span class="token verb operator">:</span> <span class="token punctuation">{</span><span class="token verb operator">$</span><span class="token punctuation">[</span>x<span class="token verb operator">&lt;</span><span class="token number">2</span><span class="token punctuation">;</span><span class="token number">1</span><span class="token punctuation">;</span>x<span class="token verb operator">*</span>factorial<span class="token punctuation">[</span>x<span class="token verb operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">}</span></code>
+<code class="language-q in">factorial <span class="token number">4</span></code>
+<code class="language-q out"><span class="token number">24</span></code>
+</pre>
+<p>A function with implicit <code>xyz</code> args can be distinguished from a dict by ensuring the body does not start with an assignment:</p>
+<pre><code class="language-q in"><span class="token verb operator">@</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>a<span class="token verb operator">*</span>x<span class="token punctuation">}</span></code>
+<code class="language-q out"><span class="token keyword">value</span> error<span class="token verb operator">:</span> a</code>
+<code class="language-q in"><span class="token verb operator">@</span><span class="token punctuation">{</span><span class="token punctuation">;</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>a<span class="token verb operator">*</span>x<span class="token punctuation">}</span>   <span class="token comment">/ in scripts, can also be a newline instead of a semicolon</span></code>
+<code class="language-q out"><span class="token symbol">`1</span></code>
+</pre>
+<h3>Expressions</h3>
+<p>Exprs can be executed on tables, eg:</p>
+<pre><code class="language-q in">t<span class="token verb operator">:</span> <span class="token verb operator">+</span><span class="token symbol">`a</span><span class="token symbol">`b</span><span class="token verb operator">!</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">;</span><span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span><span class="token punctuation">)</span></code>
+<code class="language-q in">t <span class="token verb operator">:</span>a<span class="token verb operator">&gt;</span><span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">1</span> <span class="token number">1</span></code>
+<code class="language-q in">t<span class="token verb operator">@</span><span class="token verb operator">&amp;</span>t <span class="token verb operator">:</span>a<span class="token verb operator">&gt;</span><span class="token number">1</span></code>
+<code class="language-q out">a b</code>
+<code class="language-q out"><span class="token verb operator">-</span> <span class="token verb operator">-</span></code>
+<code class="language-q out"><span class="token number">2</span> <span class="token number">5</span></code>
+<code class="language-q out"><span class="token number">3</span> <span class="token number">6</span></code>
+</pre>
+<p>Some expr functionality is NYI. For more info, see <a href="https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ">this forum post</a>.</p>
+<h2 id="utilities">Utilities </h2>
+<h3 id="in"><code>in</code> </h3>
+<pre><code class="language-q in"><span class="token symbol">`c</span><span class="token symbol">`d</span> <span class="token keyword">in</span> <span class="token symbol">`a</span><span class="token symbol">`b</span><span class="token symbol">`c</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">0</span></code>
+
+<code class="language-q in"><span class="token string">&quot;abcz&quot;</span> <span class="token keyword">in</span> <span class="token string">&quot;abracadabra&quot;</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">0</span></code>
+
+<code class="language-q in"><span class="token number">2</span> <span class="token number">10</span> <span class="token keyword">in</span> <span class="token verb operator">!</span><span class="token number">9</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">0</span></code>
+</pre>
+<h3 id="within"><code>within</code> </h3>
+<pre><code class="language-q in"><span class="token symbol">`p</span> <span class="token keyword">within</span> <span class="token symbol">`A</span><span class="token symbol">`z</span></code>
+<code class="language-q out"><span class="token number">1</span></code>
+<code class="language-q in"><span class="token symbol">`p</span> <span class="token keyword">within</span> <span class="token symbol">`A</span><span class="token symbol">`Z</span></code>
+<code class="language-q out"><span class="token number">0</span></code>
+</pre>
+<p>Includes lower bound, excludes upper bound:</p>
+<pre><code class="language-q in"><span class="token number">1</span> <span class="token keyword">within</span> <span class="token number">1</span> <span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">1</span></code>
+<code class="language-q in"><span class="token number">2</span> <span class="token keyword">within</span> <span class="token number">1</span> <span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">0</span></code>
+<code class="language-q in"><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token keyword">within</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">1</span> <span class="token number">0</span></code>
+</pre>
+<h3>Frequency histogram</h3>
+<p>Counts of each item in the list.</p>
+<pre><code class="language-q in">freq <span class="token string">&quot;alibaba&quot;</span></code>
+<code class="language-q out">a<span class="token verb operator">|</span><span class="token number">3</span></code>
+<code class="language-q out">b<span class="token verb operator">|</span><span class="token number">2</span></code>
+<code class="language-q out">i<span class="token verb operator">|</span><span class="token number">1</span></code>
+<code class="language-q out">l<span class="token verb operator">|</span><span class="token number">1</span></code>
+</pre>
+<h3 id="find-1"><code>find</code> </h3>
+<pre><code class="language-q in"><span class="token string">&quot;abracadabra&quot;</span> find <span class="token string">&quot;bra&quot;</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">8</span> <span class="token number">3</span></code>
+</pre>
+<h3 id="sort-ascending-asc">Sort ascending <code>asc</code> </h3>
+<pre><code class="language-q in"><span class="token keyword">asc</span> <span class="token string">&quot;abracadabra&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;aaaaabbcdrr&quot;</span></code>
+</pre>
+<h3 id="sort-descending-dsc">Sort descending <code>dsc</code> </h3>
+<pre><code class="language-q in">dsc <span class="token string">&quot;abracadabra&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;rrdcbbaaaaa&quot;</span></code>
+</pre>
+<h2 id="math">Math </h2>
+<h3 id="absolute-value-abs">Absolute value <code>abs</code> </h3>
+<pre><code class="language-q in"><span class="token keyword">abs</span> <span class="token number">1.23</span></code>
+<code class="language-q out"><span class="token number">1.23</span></code>
+<code class="language-q in"><span class="token keyword">abs</span> <span class="token verb operator">-</span><span class="token number">1.23</span></code>
+<code class="language-q out"><span class="token number">1.23</span></code>
+</pre>
+<h3 id="permutations-prm">Permutations <code>prm</code> </h3>
+<p>Generates permutation indices.</p>
+<pre><code class="language-q in">prm <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">1</span> <span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">0</span> <span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span> <span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">2</span> <span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">2</span> <span class="token number">0</span> <span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">2</span> <span class="token number">1</span> <span class="token number">0</span></code>
+</pre>
+<h3 id="natural-logarithm-log-and-logarithm-log">Natural logarithm (<code>log:</code>) and logarithm (<code>log</code>) </h3>
+<p>Monadic: natural logarithm, ie the power you&apos;d need to raise <em>e</em> by to get <code>x</code>.</p>
+<pre><code class="language-q in"><span class="token keyword">log</span> <span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">0.6931472</span></code>
+<code class="language-q in"><span class="token keyword">log</span> <span class="token punctuation">(</span><span class="token keyword">exp</span> <span class="token number">1</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token number">1f</span></code>
+<code class="language-q in"><span class="token punctuation">(</span><span class="token keyword">exp</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">exp</span> <span class="token punctuation">(</span><span class="token keyword">log</span> <span class="token number">2</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token number">2f</span></code>
+</pre>
+<p>Dyadic: logarithm, ie the number you&apos;d need to raise the left number to to get the right number.</p>
+<pre><code class="language-q in"><span class="token number">2</span> <span class="token keyword">log</span> <span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">1f</span></code>
+<code class="language-q in"><span class="token number">2</span> <span class="token keyword">log</span> <span class="token number">4</span></code>
+<code class="language-q out"><span class="token number">2f</span></code>
+</pre>
+<h3 id="exponential-exp-and-power-exp">Exponential (<code>exp:</code>) and power (<code>exp</code>) </h3>
+<p>Monadic: <em>e</em> to the power of <code>x</code>.</p>
+<pre><code class="language-q in"><span class="token keyword">exp</span> <span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">2.718282</span></code>
+<code class="language-q in"><span class="token keyword">exp</span> <span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">7.389056</span></code>
+<code class="language-q in"><span class="token punctuation">(</span><span class="token keyword">exp</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">exp</span> <span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">7.389056</span></code>
+</pre>
+<p>Dyadic: left to the power of right.</p>
+<pre><code class="language-q in"><span class="token number">2</span> <span class="token keyword">exp</span> <span class="token number">4</span></code>
+<code class="language-q out"><span class="token number">16f</span></code>
+<code class="language-q in"><span class="token number">2</span> <span class="token keyword">exp</span> <span class="token verb operator">-</span><span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">0.5</span></code>
+</pre>
+<h3 id="random-n-rand">Random <code>[n]rand</code> </h3>
+<pre><code class="language-q in"><span class="token keyword">rand</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">0.7502717</span> <span class="token number">0.8107001</span> <span class="token number">0.8145892</span></code>
+<code class="language-q in"><span class="token number">3</span> <span class="token keyword">rand</span> <span class="token number">10</span></code>
+<code class="language-q out"><span class="token number">7</span> <span class="token number">3</span> <span class="token number">9</span></code>
+</pre>
+<h3 id="mod"><code>mod</code> </h3>
+<pre><code class="language-q in"><span class="token number">2</span> <span class="token keyword">mod</span> <span class="token verb operator">!</span><span class="token number">10</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">1</span> <span class="token number">0</span> <span class="token number">1</span> <span class="token number">0</span> <span class="token number">1</span> <span class="token number">0</span> <span class="token number">1</span> <span class="token number">0</span> <span class="token number">1</span></code>
+<code class="language-q in"><span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token keyword">mod</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">0</span> <span class="token number">3</span></code>
+</pre>
+<h2>Aggregations</h2>
+<h3 id="median-med">Median <code>med</code> </h3>
+<p>The value in the middle if the data was sorted.</p>
+<p>If the count of the data is even, return the value on the right of the middle.</p>
+<pre><code class="language-q in"><span class="token keyword">med</span> <span class="token verb operator">!</span><span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">1</span></code>
+<code class="language-q in"><span class="token keyword">med</span> <span class="token verb operator">!</span><span class="token number">4</span></code>
+<code class="language-q out"><span class="token number">2</span></code>
+<code class="language-q in"><span class="token keyword">med</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">2</span></code>
+</pre>
+<h2>Tables and KSQL</h2>
+<h3 id="tables">Tables </h3>
+<p>A table is a list of dicts where each dict has the same keys in the same order.</p>
+<p>A table can also be considered as a flipped dict of lists, where each list is of equal length.</p>
+<pre><code class="language-q out">t<span class="token verb operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">3</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">)</span>   <span class="token comment">/ Row-wise</span></code>
+<code class="language-q out">u<span class="token verb operator">:</span> <span class="token verb operator">+</span><span class="token symbol">`a</span><span class="token symbol">`b</span> <span class="token verb operator">!</span>    <span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">3</span><span class="token punctuation">;</span><span class="token number">2</span> <span class="token number">4</span><span class="token punctuation">)</span>    <span class="token comment">/ Col-wise (flipped dict)</span></code>
+<code class="language-q out">v<span class="token verb operator">:</span>  <span class="token symbol">`a</span><span class="token symbol">`b</span> <span class="token verb operator">!</span> <span class="token comment">/: (1 2;3 4)    / Row-wise, but de-duplicate headers using eachright</span></code>
+
+<code class="language-q out"><span class="token comment">/ The tables match:</span></code>
+<code class="language-q out">t<span class="token verb operator">~</span>u</code>
+<code class="language-q out">t<span class="token verb operator">~</span>v</code>
+
+<code class="language-q out"><span class="token comment">/ Break row-wise over multiple lines:</span></code>
+<code class="language-q out">w<span class="token verb operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">}</span></code>
+<code class="language-q in">   <span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">3</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">)</span></code>
+
+<code class="language-q out">t<span class="token verb operator">~</span>w</code>
+
+<code class="language-q out"><span class="token comment">/ Break row-wise (condensed row format) over multiple lines:</span></code>
+<code class="language-q out">x<span class="token verb operator">:</span> <span class="token symbol">`a</span><span class="token symbol">`b</span><span class="token verb operator">!</span><span class="token adverb function">/:</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span></code>
+<code class="language-q in">          <span class="token number">3</span> <span class="token number">4</span><span class="token punctuation">)</span></code>
+
+<code class="language-q out">t<span class="token verb operator">~</span>x</code>
+</pre>
+<p>You can access rows or columns of the table by indexing using the row number or column key:</p>
+<pre><code class="language-q out">t<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>    <span class="token comment">/ {a:3;b:4}</span></code>
+<code class="language-q out">t<span class="token punctuation">[</span><span class="token symbol">`b</span><span class="token punctuation">]</span>    <span class="token comment">/ 2 4</span></code>
+<code class="language-q out">t<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token symbol">`a</span><span class="token punctuation">]</span>  <span class="token comment">/ 3</span></code>
+</pre>
+<p>Key tables are dictionaries where the rows of one table map to the rows of another table.</p>
+<pre><code class="language-q out">k<span class="token verb operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>c<span class="token verb operator">:</span><span class="token number">3</span><span class="token punctuation">}</span></code>
+<code class="language-q in">   <span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">4</span><span class="token punctuation">;</span>c<span class="token verb operator">:</span><span class="token number">6</span><span class="token punctuation">}</span><span class="token punctuation">)</span></code>
+<code class="language-q out">v<span class="token verb operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>b<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">{</span>b<span class="token verb operator">:</span><span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">)</span></code>
+<code class="language-q out">kt<span class="token verb operator">:</span> k<span class="token verb operator">!</span>v</code>
+<code class="language-q out">kt   <span class="token comment">/ (+{a:1 4;c:3 6})!+{b:2 5}</span></code>
+<code class="language-q out"><span class="token verb operator">@</span>kt  <span class="token comment">/ `a</span></code>
+</pre>
+<p>You can also use <code>key</code> to set the key columns after creation:</p>
+<pre><code class="language-q in">t<span class="token verb operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">;</span>c<span class="token verb operator">:</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">4</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">5</span><span class="token punctuation">;</span>c<span class="token verb operator">:</span><span class="token number">6</span><span class="token punctuation">}</span><span class="token punctuation">)</span></code>
+<code class="language-q in">tk<span class="token verb operator">:</span> <span class="token symbol">`a</span><span class="token symbol">`c</span> <span class="token keyword">key</span> t</code>
+<code class="language-q in">tk<span class="token verb operator">~</span>kt  <span class="token comment">/ 1</span></code>
+</pre>
+<p>Access rows of the value table by indexing into the keytable:</p>
+<pre><code class="language-q out">kt<span class="token punctuation">[</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">4</span><span class="token punctuation">;</span>c<span class="token verb operator">:</span><span class="token number">6</span><span class="token punctuation">}</span><span class="token punctuation">]</span>  <span class="token comment">/ {b:5}</span></code>
+</pre>
+<h3>KSQL</h3>
+<pre><code class="language-q in">t<span class="token verb operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">3</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">)</span></code>
+<code class="language-q in"><span class="token keyword">update</span> b<span class="token verb operator">:</span>a<span class="token verb operator">*</span><span class="token number">2</span> <span class="token keyword">from</span> t</code>
+<code class="language-q out">a b</code>
+<code class="language-q out"><span class="token verb operator">-</span> <span class="token verb operator">-</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">3</span> <span class="token number">6</span></code>
+</pre>
+<p>Note t is not updated in-place:</p>
+<pre><code class="language-q in">t</code>
+<code class="language-q out">a b</code>
+<code class="language-q out"><span class="token verb operator">-</span> <span class="token verb operator">-</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">3</span> <span class="token number">4</span></code>
+</pre>
+<p>Use <code>by</code> to group rows or aggregations:</p>
+<pre><code class="language-q in"><span class="token verb operator">::</span> t<span class="token verb operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">;</span>c<span class="token verb operator">:</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">3</span><span class="token punctuation">;</span>c<span class="token verb operator">:</span><span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">4</span><span class="token punctuation">;</span>c<span class="token verb operator">:</span><span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">)</span></code>
+<code class="language-q out">a b c</code>
+<code class="language-q out"><span class="token verb operator">-</span> <span class="token verb operator">-</span> <span class="token verb operator">-</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">4</span> <span class="token number">5</span></code>
+
+<code class="language-q in"><span class="token keyword">select</span> <span class="token keyword">by</span> a <span class="token keyword">from</span> t</code>
+<code class="language-q out">a<span class="token verb operator">|</span></code>
+<code class="language-q out"><span class="token verb operator">-</span><span class="token verb operator">|</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span></code>
+<code class="language-q out"><span class="token number">1</span><span class="token verb operator">|</span><span class="token verb operator">+</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span> <span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">2</span> <span class="token number">4</span><span class="token punctuation">;</span>c<span class="token verb operator">:</span><span class="token number">3</span> <span class="token number">5</span><span class="token punctuation">}</span></code>
+<code class="language-q out"><span class="token number">2</span><span class="token verb operator">|</span><span class="token verb operator">,</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">3</span><span class="token punctuation">;</span>c<span class="token verb operator">:</span><span class="token number">4</span><span class="token punctuation">}</span></code>
+
+<code class="language-q in"><span class="token keyword">select</span> <span class="token keyword">sum</span> b <span class="token keyword">by</span> a <span class="token keyword">from</span> t</code>
+<code class="language-q out">a<span class="token verb operator">|</span>b</code>
+<code class="language-q out"><span class="token verb operator">-</span><span class="token verb operator">|</span><span class="token verb operator">-</span></code>
+<code class="language-q out"><span class="token number">1</span><span class="token verb operator">|</span><span class="token number">6</span></code>
+<code class="language-q out"><span class="token number">2</span><span class="token verb operator">|</span><span class="token number">3</span></code>
+</pre>
+<h2>Commands</h2>
+<p>Access any shell command by putting a <code>\</code> in front of it:</p>
+<pre><code class="language-q in"><span class="token keyword">\seq</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">3</span></code>
+</pre>
+<h3 id="list-files-lf">List files <code>\lf</code> </h3>
+<pre><code class="language-q in"><span class="token keyword">\lf</span></code>
+<code class="language-q out">afile<span class="token punctuation">.</span>txt</code>
+<code class="language-q out">yet another file</code>
+</pre>
+<h3 id="list-character-counts-lc">List character counts <code>\lc</code> </h3>
+<pre><code class="language-q in"><span class="token keyword">\lc</span></code>
+<code class="language-q out">afile<span class="token punctuation">.</span>txt       <span class="token verb operator">|</span><span class="token number">29</span></code>
+<code class="language-q out">yet another file<span class="token verb operator">|</span><span class="token number">50</span></code>
+</pre>
+<p>You can&apos;t assign the result of <code>\lc</code> directly (ie <code>a: \lc</code> doesn&apos;t work). But you <em>can</em> capture its output and see that it is in fact a dictionary:</p>
+<pre><code class="language-q in"><span class="token punctuation">{</span><span class="token punctuation">(</span>x<span class="token punctuation">;</span><span class="token verb operator">@</span>x<span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token verb operator">@</span> <span class="token verb operator">.</span> <span class="token string">&quot;\\lc&quot;</span></code>
+<code class="language-q out"><span class="token punctuation">(</span><span class="token string">&quot;afile.txt&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;yet another file&quot;</span><span class="token punctuation">)</span><span class="token verb operator">!</span><span class="token number">29</span> <span class="token number">50j</span></code>
+<code class="language-q out"><span class="token symbol">`a</span></code>
+</pre>
+<h3 id="list-line-counts-ll">List line counts <code>\ll</code> </h3>
+<pre><code class="language-q in"><span class="token keyword">\ll</span></code>
+<code class="language-q out">afile<span class="token punctuation">.</span>txt       <span class="token verb operator">|</span><span class="token number">1</span></code>
+<code class="language-q out">yet another file<span class="token verb operator">|</span><span class="token number">3</span></code>
+</pre>
+<h3 id="help-h">Help <code>\h</code> </h3>
+<p>The official help included in the k binary. It&apos;s the navigation to this site!</p>
+<h3 id="changelog-l">Changelog <code>\l</code> </h3>
+<p>As at 2019-05-17:</p>
+<pre><code class="language-q out"><span class="token number">20190524</span></code>
+<code class="language-q out">FIX</code>
+<code class="language-q out"><span class="token verb operator">,</span><span class="token adverb function">/</span><span class="token verb operator">,</span><span class="token punctuation">(</span><span class="token verb operator">:</span><span class="token punctuation">)</span></code>
+
+<code class="language-q out"><span class="token number">20190522</span></code>
+<code class="language-q out"><span class="token verb operator">?</span><span class="token number">2</span> <span class="token number">3</span> <span class="token number">5</span></code>
+<code class="language-q out"><span class="token verb operator">^</span><span class="token number">2</span> <span class="token number">3</span> <span class="token number">5</span></code>
+<code class="language-q out">FIX</code>
+<code class="language-q out"><span class="token keyword">\ll</span></code>
+<code class="language-q out"><span class="token keyword">\lc</span></code>
+
+<code class="language-q out"><span class="token number">20190517</span></code>
+<code class="language-q out">FIX</code>
+<code class="language-q out">left join<span class="token punctuation">(</span>missing<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token verb operator">+</span><span class="token symbol">`a</span><span class="token symbol">`b</span><span class="token verb operator">!</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span><span class="token punctuation">;</span><span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token verb operator">,</span><span class="token punctuation">(</span><span class="token verb operator">+</span><span class="token symbol">`a</span><span class="token verb operator">!</span><span class="token number">2</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token verb operator">!</span><span class="token verb operator">+</span><span class="token symbol">`b</span><span class="token verb operator">!</span><span class="token number">7</span> <span class="token number">8</span></code>
+
+<code class="language-q out"><span class="token number">20190508</span></code>
+<code class="language-q out"><span class="token verb operator">+</span><span class="token punctuation">(</span><span class="token string">&quot;**&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;***&quot;</span><span class="token punctuation">)</span> <span class="token comment">/flip pad</span></code>
+<code class="language-q out"><span class="token punctuation">(</span><span class="token number">0</span><span class="token verb operator">&gt;</span><span class="token punctuation">)</span><span class="token verb operator">+</span><span class="token adverb function">/</span><span class="token number">0</span> <span class="token number">1</span> <span class="token verb operator">-</span><span class="token number">1</span> <span class="token verb operator">-</span><span class="token number">1</span> <span class="token number">0</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token comment">/ early exit</span></code>
+
+<code class="language-q out"><span class="token number">20190506</span></code>
+<code class="language-q out">recursion</code>
+<code class="language-q out">r<span class="token verb operator">:</span><span class="token punctuation">{</span><span class="token punctuation">[</span>a<span class="token punctuation">;</span>b<span class="token punctuation">;</span>f<span class="token punctuation">;</span>g<span class="token punctuation">;</span>x<span class="token punctuation">]</span><span class="token verb operator">$</span><span class="token punctuation">[</span>x<span class="token verb operator">~</span>a<span class="token punctuation">;</span>b<span class="token punctuation">;</span>f<span class="token punctuation">[</span>x<span class="token punctuation">]</span>r<span class="token punctuation">[</span>a<span class="token punctuation">;</span>b<span class="token punctuation">;</span>f<span class="token punctuation">;</span>g<span class="token punctuation">]</span>g x<span class="token punctuation">]</span><span class="token punctuation">}</span></code>
+<code class="language-q out">r<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token verb operator">*</span><span class="token punctuation">;</span><span class="token verb operator">-</span><span class="token number">1</span><span class="token verb operator">+</span><span class="token punctuation">]</span><span class="token number">4</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">1</span><span class="token punctuation">(</span><span class="token verb operator">*</span><span class="token punctuation">;</span><span class="token verb operator">-</span><span class="token number">1</span><span class="token verb operator">+</span><span class="token punctuation">)</span><span class="token comment">/4</span></code>
+<code class="language-q out"><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">;</span><span class="token verb operator">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>y<span class="token verb operator">,</span><span class="token number">1</span><span class="token verb operator">_</span><span class="token verb operator">&amp;</span><span class="token verb operator">&amp;</span><span class="token adverb function">/</span>x<span class="token verb operator">#</span><span class="token adverb function">&apos;</span><span class="token verb operator">!:</span><span class="token adverb function">&apos;</span>y<span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token number">1</span><span class="token verb operator">+</span><span class="token verb operator">_</span>sqrt<span class="token punctuation">)</span><span class="token comment">/100</span></code>
+
+<code class="language-q out">NUC</code>
+<code class="language-q out"><span class="token verb operator">^</span>x <span class="token comment">/sort</span></code>
+<code class="language-q out"><span class="token verb operator">=</span>x <span class="token comment">/sortkey</span></code>
+<code class="language-q out">PRF</code>
+<code class="language-q out">n<span class="token verb operator">^</span></code>
+<code class="language-q out"><span class="token verb operator">!</span>n</code>
+<code class="language-q out"><span class="token verb operator">*</span><span class="token verb operator">|:</span>  <span class="token comment">/composition</span></code>
+<code class="language-q out"><span class="token verb operator">,</span><span class="token adverb function">/</span><span class="token verb operator">+:</span> <span class="token comment">/composition</span></code>
+
+<code class="language-q out"><span class="token number">20190504</span></code>
+<code class="language-q out"><span class="token symbol">`aes</span><span class="token verb operator">?</span><span class="token symbol">`aes</span><span class="token verb operator">@</span><span class="token string">&quot;kei&quot;</span> <span class="token comment">/encrypt&amp;xdecrypt 4GB per second</span></code>
+<code class="language-q out">freq<span class="token string">&quot;alibababa&quot;</span> <span class="token comment">/frequency histogram 1Billion per second</span></code>
+
+<code class="language-q out"><span class="token number">20190503</span></code>
+<code class="language-q out">FIX</code>
+<code class="language-q out"><span class="token keyword">select</span> <span class="token verb operator">#</span>n <span class="token keyword">by</span> b <span class="token keyword">from</span> <span class="token verb operator">+</span><span class="token symbol">`b</span><span class="token verb operator">!</span><span class="token number">2</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span></code>
+
+<code class="language-q out"><span class="token number">20190501</span></code>
+<code class="language-q out">v<span class="token verb operator">:</span><span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token verb operator">@</span><span class="token punctuation">[</span><span class="token symbol">`v</span><span class="token punctuation">;</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token number">7</span><span class="token punctuation">]</span></code>
+<code class="language-q out">PRF</code>
+<code class="language-q out">n<span class="token verb operator">^</span>i <span class="token verb operator">&lt;</span>x <span class="token verb operator">?</span>x x<span class="token verb operator">?</span>y</code>
+
+<code class="language-q out"><span class="token number">20190430</span></code>
+<code class="language-q out">x<span class="token verb operator">^</span>y <span class="token keyword">rank</span> sensitive</code>
+<code class="language-q out">f<span class="token verb operator">#</span>d domain error <span class="token keyword">if</span> f missing</code>
+
+<code class="language-q out"><span class="token number">20190428</span></code>
+<code class="language-q out"><span class="token string">&quot;Ds&quot;</span><span class="token verb operator">$</span><span class="token punctuation">.</span>z<span class="token punctuation">.</span>S        <span class="token comment">/ date,second</span></code>
+<code class="language-q out"><span class="token number">1970</span>Y<span class="token verb operator">+</span><span class="token symbol">`t</span><span class="token verb operator">$</span><span class="token number">1.56e12</span> <span class="token comment">/ unix epoch</span></code>
+
+<code class="language-q out"><span class="token number">20190427</span></code>
+<code class="language-q out"><span class="token number">3000000000</span> <span class="token punctuation">(</span>goes to j<span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token symbol">`f</span><span class="token verb operator">$</span>&#xD8;</code>
+<code class="language-q out"><span class="token number">12h</span></code>
+<code class="language-q out"><span class="token symbol">`p</span><span class="token verb operator">?</span><span class="token symbol">`p</span><span class="token string">&quot;{a:1;b:2 3}&quot;</span></code>
+
+<code class="language-q out"><span class="token number">20190426</span></code>
+<code class="language-q out">u<span class="token verb operator">:</span><span class="token number">1970</span>Y<span class="token punctuation">;</span>T<span class="token verb operator">:</span><span class="token punctuation">.</span>z<span class="token punctuation">.</span>T<span class="token punctuation">;</span>t<span class="token verb operator">:</span>T<span class="token verb operator">-</span>u<span class="token punctuation">;</span>u<span class="token verb operator">+</span>t</code>
+<code class="language-q out"><span class="token keyword">\gr</span> <span class="token string">&quot;write &quot;</span> k<span class="token punctuation">.</span>txt</code>
+
+<code class="language-q out"><span class="token number">20190425</span></code>
+<code class="language-q out"><span class="token keyword">\t</span>  calibrate</code>
+<code class="language-q out"><span class="token symbol">`j</span><span class="token verb operator">?</span> whitespace</code>
+
+<code class="language-q out"><span class="token number">20190421</span></code>
+<code class="language-q out"><span class="token symbol">`D</span><span class="token verb operator">$</span><span class="token string">&quot;20190320&quot;</span></code>
+<code class="language-q out">NUC</code>
+<code class="language-q out"><span class="token symbol">`</span><span class="token adverb function">/:</span><span class="token symbol">`</span><span class="token adverb function">\:</span><span class="token punctuation">.</span>z<span class="token punctuation">.</span>d</code>
+<code class="language-q out">FIX</code>
+<code class="language-q out"><span class="token string">&quot;\n&quot;</span></code>
+
+<code class="language-q out"><span class="token number">20190420</span></code>
+<code class="language-q out"><span class="token symbol">`j</span><span class="token verb operator">?</span><span class="token symbol">`j</span> <span class="token punctuation">.</span>z<span class="token punctuation">.</span>T</code>
+<code class="language-q out"><span class="token symbol">`j</span><span class="token verb operator">?</span><span class="token string">&quot;123&quot;</span></code>
+<code class="language-q out"><span class="token punctuation">{</span> v<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">{</span><span class="token string">&quot;v&quot;</span><span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">}</span></code>
+<code class="language-q out">K<span class="token verb operator">:</span><span class="token keyword">key</span> k<span class="token verb operator">:</span><span class="token keyword">key</span><span class="token symbol">`k1</span>     <span class="token comment">/ public private</span></code>
+<code class="language-q out">K <span class="token keyword">key</span> k <span class="token keyword">key</span><span class="token string">&quot;hi&quot;</span>    <span class="token comment">/ verify sign</span></code>
+<code class="language-q out"><span class="token number">4</span> <span class="token number">7</span> <span class="token keyword">mod</span> x</code>
+<code class="language-q out">FIX</code>
+<code class="language-q out"><span class="token symbol">`a</span><span class="token verb operator">#</span>t</code>
+
+<code class="language-q out"><span class="token number">20190418</span></code>
+<code class="language-q out"><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">}</span>   instead of <span class="token punctuation">[</span>a<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token keyword">mod</span><span class="token adverb function">/</span><span class="token keyword">div</span> instead of n<span class="token verb operator">!</span> <span class="token verb operator">-</span>n<span class="token verb operator">!</span>  <span class="token number">7</span> <span class="token keyword">mod</span> <span class="token punctuation">.</span>z<span class="token punctuation">.</span>d</code>
+<code class="language-q out"><span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token keyword">rand</span> instead of n<span class="token verb operator">?</span></code>
+<code class="language-q out"><span class="token string">&quot;math*&quot;</span><span class="token verb operator">#</span><span class="token verb operator">.</span><span class="token string">&quot;\\h&quot;</span></code>
+<code class="language-q out"><span class="token keyword">\gr</span> math k<span class="token punctuation">.</span>txt <span class="token punctuation">(</span><span class="token number">200</span> times faster than <span class="token keyword">\grep</span> math k<span class="token punctuation">.</span>txt<span class="token punctuation">)</span></code>
+
+<code class="language-q out"><span class="token number">20190415</span></code>
+<code class="language-q out"><span class="token keyword">\h</span> help</code>
+<code class="language-q out"><span class="token keyword">\l</span> changelog</code>
+<code class="language-q out"><span class="token verb operator">!</span><span class="token verb operator">-</span>n <span class="token keyword">identity</span> matrix</code>
+<code class="language-q out"><span class="token verb operator">.</span> x <span class="token keyword">eval</span></code>
+<code class="language-q out"><span class="token symbol">`</span><span class="token adverb function">/:</span> sS<span class="token punctuation">(</span><span class="token keyword">string</span> <span class="token keyword">from</span> String<span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token symbol">`</span><span class="token adverb function">\:</span> Ss<span class="token punctuation">(</span>String <span class="token keyword">from</span> <span class="token keyword">string</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token symbol">`ascii</span><span class="token symbol">`utf8</span><span class="token symbol">`print</span> <span class="token string">&quot;..&quot;</span></code>
+<code class="language-q out">FIX</code>
+<code class="language-q out"><span class="token verb operator">-</span><span class="token adverb function">&apos;:</span><span class="token number">2</span> <span class="token number">3.4</span></code>
+<code class="language-q out"><span class="token punctuation">.</span>z<span class="token punctuation">.</span>T<span class="token verb operator">-</span><span class="token punctuation">.</span>z<span class="token punctuation">.</span>T</code>
+<code class="language-q out"><span class="token keyword">sum</span> <span class="token verb operator">!</span><span class="token number">3</span></code>
+</pre>
+<h2>IO and IPC</h2>
+<h3 id="read-write-line-0">Read/write line <code>0:</code> </h3>
+<p>Given the following in <code>test.csv</code>:</p>
+<pre><code class="language-q out"><span class="token number">1</span><span class="token verb operator">,</span>ABC<span class="token verb operator">,</span><span class="token number">1.23</span></code>
+<code class="language-q out"><span class="token number">3</span><span class="token verb operator">,</span>DEF<span class="token verb operator">,</span><span class="token number">4567.89</span></code>
+</pre>
+<p>We can read it in as lists of type <code>inf</code> respectively and separator <code>,</code>:</p>
+<pre><code class="language-q in"><span class="token punctuation">(</span><span class="token string">&quot;inf&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;,&quot;</span><span class="token punctuation">)</span><span class="token verb operator">0:</span><span class="token string">&quot;test.csv&quot;</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token symbol">`ABC</span><span class="token symbol">`DEF</span></code>
+<code class="language-q out"><span class="token number">1.23</span> <span class="token number">4567.89</span></code>
+</pre>
+<p>The filename can be given as <code>`test.csv</code> instead of <code>&quot;test.csv&quot;</code> (one char shorter!).</p>
+<p>We can also write lists of strings to a file (verify output using a text editor):</p>
+<pre><code class="language-q in"><span class="token string">&quot;test.txt&quot;</span> <span class="token verb operator">0:</span> <span class="token punctuation">(</span><span class="token string">&quot;hello&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;world&quot;</span><span class="token punctuation">)</span></code>
+</pre>
+<p>And that includes saving tables to CSV, if we first convert the table to a list of strings:</p>
+<pre><code class="language-q in"><span class="token string">&quot;test.csv&quot;</span> <span class="token verb operator">0:</span> <span class="token symbol">`csv</span> <span class="token verb operator">@</span> <span class="token verb operator">+</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">;</span> b<span class="token verb operator">:</span><span class="token number">3</span> <span class="token number">4</span><span class="token punctuation">}</span></code>
+</pre>
+<p>You can also use <code>0:</code> to deserialise in-memory lists of strings with a common separator. <a href="https://groups.google.com/d/msg/shaktidb/vE4ffjndxik/rYF6K78oBQAJ">Arthur&apos;s example</a>:</p>
+<pre><code class="language-q in"> <span class="token punctuation">(</span><span class="token string">&quot;ii&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;|&quot;</span><span class="token punctuation">)</span><span class="token verb operator">0:</span><span class="token punctuation">(</span><span class="token string">&quot;2|3&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;3|4&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;4|5&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span></code>
+<code class="language-q out"><span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span></code>
+</pre>
+<p>Keep in mind it&apos;s reading the data into columns, not rows. The first row of the console output is the first item in a list of columns.</p>
+<h3 id="read-write-bytes-1">Read/write bytes <code>1:</code> </h3>
+<pre><code class="language-q in"><span class="token string">&quot;testfile&quot;</span> <span class="token verb operator">1:</span> <span class="token number">0x0123456789abcdef</span></code>
+<code class="language-q in"><span class="token verb operator">1:</span> <span class="token string">&quot;testfile&quot;</span></code>
+<code class="language-q out"><span class="token number">0x0123456789abcdef</span></code>
+</pre>
+<p>You can verify <code>1:</code> works with raw bytes using an external tool:</p>
+<pre><code class="language-q out"><span class="token verb operator">$</span> hexdump <span class="token verb operator">-</span>C testfile</code>
+<code class="language-q out"><span class="token number">00000000</span>  <span class="token number">01</span> <span class="token number">23</span> <span class="token number">45</span> <span class="token number">67</span> <span class="token number">89</span> ab cd ef                           <span class="token verb operator">|</span><span class="token verb operator">.</span><span class="token verb operator">#</span>Eg<span class="token punctuation">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">|</span></code>
+<code class="language-q out"><span class="token number">00000008</span></code>
+</pre>
+<p>And to break down what&apos;s happening in the &apos;prompt&apos; example from the official tutorial, ie:</p>
+<pre><code class="language-q in">name<span class="token verb operator">:</span> <span class="token verb operator">1:</span> <span class="token punctuation">(</span><span class="token string">&quot;&quot;</span> <span class="token verb operator">1:</span> <span class="token string">&quot;What is your name? &quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out">What is your name<span class="token verb operator">?</span> Me</code>
+<code class="language-q in">name</code>
+<code class="language-q out"><span class="token string">&quot;Me&quot;</span></code>
+</pre>
+<ul>
+<li>Read from stdin: <code>1: &quot;&quot;</code> or <code>1: `</code></li>
+<li>Write to stdout: <code>&quot;&quot; 1: &quot;string&quot;</code> or <code>` 1: &quot;string&quot;</code></li>
+<li><code>x 1: y</code> returns <code>x</code> (<a href="https://groups.google.com/d/msg/shaktidb/DmV2eoSEGHU/eEEOKfjCBQAJ">source</a>)</li>
+</ul>
+<p>On the last point: if just writing to stdout, make sure to put a semicolon at the end to suppress outputting the characters on the left of <code>1:</code> to the REPL.</p>
+<h3 id="read-write-data-2">Read/write data <code>2:</code> </h3>
+<pre><code class="language-q in"><span class="token string">&quot;testfile&quot;</span> <span class="token number">2</span><span class="token verb operator">:</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span><span class="token punctuation">)</span></code>
+<code class="language-q in"><span class="token number">2</span><span class="token verb operator">:</span> <span class="token string">&quot;testfile&quot;</span></code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span></code>
+</pre>
+<p>You can see what <code>testfile</code> looks like in bytes with <code>1:</code>:</p>
+<pre><code class="language-q in"><span class="token verb operator">1:</span> <span class="token string">&quot;testfile&quot;</span></code>
+<code class="language-q out"><span class="token number">0x000000070400000001000000020000000300000004000000</span></code>
+</pre>
+<h3 id="inter-process-communication-3-and-4">Inter-process communication <code>3:</code> and <code>4:</code> </h3>
+<p>Start a k process running with port 1234 (that&apos;s <code>k -p 1234</code>).</p>
+<p>Then in another k process, set up a connection to the first k process, send it commands, and get responses:</p>
+<pre><code class="language-q out"><span class="token number">2019</span><span class="token verb operator">-</span><span class="token number">04</span><span class="token verb operator">-</span><span class="token number">18</span> <span class="token datetime number">15:45:55</span> <span class="token number">2</span>core <span class="token number">1</span>gb avx2 &#xA9; shakti l2<span class="token punctuation">.</span><span class="token number">0</span> test</code>
+<code class="language-q in">conn<span class="token verb operator">:</span> <span class="token number">3</span><span class="token verb operator">:</span> <span class="token number">1234</span></code>
+<code class="language-q in">conn <span class="token number">4</span><span class="token verb operator">:</span> <span class="token string">&quot;life: 42&quot;</span></code>
+<code class="language-q in">conn <span class="token number">4</span><span class="token verb operator">:</span> <span class="token string">&quot;life&quot;</span></code>
+<code class="language-q out"><span class="token number">42</span></code>
+</pre>
+<h2>3+ arguments</h2>
+<h3 id="select-t-c-b-a">Select <code>#[t;c;b[;a]]</code> </h3>
+<p>Get all rows of <code>t</code> where <code>c</code> is true.</p>
+<pre><code class="language-q in">t<span class="token verb operator">:</span> <span class="token verb operator">+</span><span class="token symbol">`a</span><span class="token symbol">`b</span><span class="token verb operator">!</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">;</span><span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span><span class="token punctuation">)</span></code>
+<code class="language-q in"><span class="token verb operator">#</span><span class="token punctuation">[</span>t<span class="token punctuation">;</span> <span class="token verb operator">:</span>a<span class="token verb operator">&gt;</span><span class="token number">1</span><span class="token punctuation">]</span></code>
+<code class="language-q out">a b</code>
+<code class="language-q out"><span class="token verb operator">-</span> <span class="token verb operator">-</span></code>
+<code class="language-q out"><span class="token number">2</span> <span class="token number">5</span></code>
+<code class="language-q out"><span class="token number">3</span> <span class="token number">6</span></code>
+
+<code class="language-q in"><span class="token comment">/ But since there are just two arguments, we can use # as an infix verb:</span></code>
+
+<code class="language-q in">t <span class="token verb operator">#</span> <span class="token verb operator">:</span>a<span class="token verb operator">&gt;</span><span class="token number">1</span></code>
+<code class="language-q out">a b</code>
+<code class="language-q out"><span class="token verb operator">-</span> <span class="token verb operator">-</span></code>
+<code class="language-q out"><span class="token number">2</span> <span class="token number">5</span></code>
+<code class="language-q out"><span class="token number">3</span> <span class="token number">6</span></code>
+
+<code class="language-q in">t <span class="token verb operator">#</span> <span class="token verb operator">:</span><span class="token punctuation">(</span>a<span class="token verb operator">&gt;</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token verb operator">&amp;</span><span class="token punctuation">(</span>b<span class="token verb operator">&lt;</span><span class="token number">6</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">,</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">5</span><span class="token punctuation">}</span></code>
+<code class="language-q in">t <span class="token verb operator">#</span> <span class="token verb operator">:</span><span class="token punctuation">(</span>a<span class="token verb operator">&gt;</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token verb operator">&amp;</span><span class="token punctuation">(</span>b<span class="token verb operator">&lt;</span><span class="token number">5</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">+</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token verb operator">!</span><span class="token number">0</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token verb operator">!</span><span class="token number">0</span><span class="token punctuation">}</span></code>
+</pre>
+<h3 id="update-t-c-b-a">Update <code>_[t;c;b[;a]]</code> </h3>
+<p>Via <a href="https://groups.google.com/d/msg/shaktidb/77qVfIc5ecU/eSRy8izkAQAJ">Arthur</a>:</p>
+<pre><code class="language-q in">t<span class="token verb operator">:</span><span class="token verb operator">+</span><span class="token symbol">`b</span><span class="token verb operator">!</span><span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q in"><span class="token verb operator">_</span><span class="token punctuation">[</span>t<span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token symbol">`b</span><span class="token verb operator">!</span> <span class="token verb operator">:</span>b<span class="token verb operator">+</span><span class="token number">1</span><span class="token punctuation">]</span></code>
+<code class="language-q out">b</code>
+<code class="language-q out"><span class="token verb operator">-</span></code>
+<code class="language-q out"><span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">4</span></code>
+</pre>
+<h3 id="splice-x-i-f-y">Splice <code>?[x;i;f[;y]]</code> </h3>
+<p>Insert <code>y</code> into <code>x</code> at index <code>i</code>.</p>
+<p>If an element was at that index before, move it right.</p>
+<pre><code class="language-q in"><span class="token verb operator">?</span><span class="token punctuation">[</span><span class="token verb operator">!</span><span class="token number">3</span><span class="token punctuation">;</span><span class="token number">2</span><span class="token punctuation">;</span><span class="token symbol">`abc</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">1</span></code>
+<code class="language-q out"><span class="token symbol">`abc</span></code>
+<code class="language-q out"><span class="token number">2</span></code>
+<code class="language-q in"><span class="token verb operator">?</span><span class="token punctuation">[</span><span class="token verb operator">!</span><span class="token number">3</span><span class="token punctuation">;</span><span class="token number">2</span><span class="token punctuation">;</span><span class="token string">&quot;abc&quot;</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">1</span></code>
+<code class="language-q out"><span class="token string">&quot;a&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;b&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;c&quot;</span></code>
+<code class="language-q out"><span class="token number">2</span></code>
+</pre>
+<h3 id="amend-x-i-f-y">Amend <code>@[x;i;f[;y]]</code> </h3>
+<p>Replace the element at <code>i</code> in <code>x</code> with <code>y</code>.</p>
+<p>To do the update in-place, use the data&apos;s name symbol instead of the name directly (<code>`name</code> vs <code>name</code>).</p>
+<pre><code class="language-q out">v<span class="token verb operator">:</span><span class="token verb operator">!</span><span class="token number">3</span></code>
+<code class="language-q in"><span class="token verb operator">@</span><span class="token punctuation">[</span>v<span class="token punctuation">;</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token number">7</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">7</span> <span class="token number">2</span></code>
+<code class="language-q in">v</code>
+<code class="language-q out"><span class="token verb operator">!</span><span class="token number">3</span>   <span class="token comment">/ original assignment unchanged</span></code>
+<code class="language-q in"><span class="token verb operator">@</span><span class="token punctuation">[</span><span class="token symbol">`v</span><span class="token punctuation">;</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token number">7</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token symbol">`v</span></code>
+<code class="language-q in">v</code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">7</span> <span class="token number">2</span></code>
+</pre>
+<h3 id="cond-c-t-f">Cond <code>$[c;t;f]</code> </h3>
+<p>If the true expression is returned, the false expression never executes (and vice versa):</p>
+<pre><code class="language-q in">a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">1</span></code>
+<code class="language-q in"><span class="token verb operator">$</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">;</span>a<span class="token verb operator">+:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">+:</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token punctuation">(</span>a<span class="token punctuation">;</span>b<span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token number">2</span> <span class="token number">1</span></code>
+<code class="language-q in"><span class="token verb operator">$</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">;</span>a<span class="token verb operator">+:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">+:</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token punctuation">(</span>a<span class="token punctuation">;</span>b<span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token number">2</span> <span class="token number">2</span></code>
+</pre>
+<p><a href="#Verb">Unlike other triadics</a>, triadic <code>$</code> is not the same as dyadic <code>$</code>:</p>
+<pre><code class="language-q in"><span class="token punctuation">(</span><span class="token verb operator">$</span><span class="token punctuation">)</span> <span class="token verb operator">.</span> <span class="token punctuation">(</span><span class="token symbol">`n</span><span class="token punctuation">;</span> <span class="token string">&quot;a&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token symbol">`a</span></code>
+<code class="language-q in"><span class="token punctuation">(</span><span class="token verb operator">$</span><span class="token punctuation">)</span> <span class="token verb operator">.</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token string">&quot;a&quot;</span><span class="token punctuation">;</span> <span class="token string">&quot;b&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token punctuation">(</span><span class="token verb operator">$</span><span class="token punctuation">)</span> <span class="token verb operator">.</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token string">&quot;a&quot;</span><span class="token punctuation">;</span> <span class="token string">&quot;b&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q in">   <span class="token verb operator">^</span></code>
+<code class="language-q out">nyi error</code>
+</pre>
+<p>Simulate a vector cond:</p>
+<pre><code class="language-q in"><span class="token punctuation">{</span><span class="token verb operator">$</span><span class="token punctuation">[</span>x<span class="token punctuation">;</span>y<span class="token punctuation">;</span>z<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token adverb function">&apos;</span><span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">0</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token string">&quot;abc&quot;</span><span class="token punctuation">;</span> <span class="token string">&quot;def&quot;</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token string">&quot;aec&quot;</span></code>
+</pre>
+<p>Or (modified version of <a href="https://groups.google.com/d/msg/shaktidb/6JLpGPE-bfM/mlAzxcrgAQAJ">Arthur&apos;s</a> - no <code>$</code> needed!):</p>
+<pre><code class="language-q in"><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token verb operator">+</span><span class="token punctuation">(</span>z<span class="token punctuation">;</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token verb operator">@</span><span class="token adverb function">&apos;</span>x<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">0</span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token string">&quot;abc&quot;</span><span class="token punctuation">;</span><span class="token string">&quot;def&quot;</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token string">&quot;aec&quot;</span></code>
+</pre>
+<h2 id="boolean-checks">Boolean checks </h2>
+<h3 id="ascii"><code>`ascii</code> </h3>
+<p>Are all characters in the string in the <a href="https://en.wikipedia.org/wiki/ASCII#Character_set">ASCII set</a>?</p>
+<pre><code class="language-q in"><span class="token symbol">`ascii</span> <span class="token verb operator">@</span> <span class="token string">&quot;123&quot;</span></code>
+<code class="language-q out"><span class="token number">1</span></code>
+<code class="language-q in"><span class="token symbol">`ascii</span> <span class="token verb operator">@</span> <span class="token string">&quot;&#x221E;&quot;</span></code>
+<code class="language-q out"><span class="token number">0</span></code>
+</pre>
+<h2 id="datetimes">Datetimes </h2>
+<p>A datetime looks like this:</p>
+<pre><code class="language-q in"><span class="token punctuation">.</span>z<span class="token punctuation">.</span>T</code>
+<code class="language-q out"><span class="token number">2019</span><span class="token verb operator">-</span><span class="token number">05</span><span class="token verb operator">-</span><span class="token number">04</span>T<span class="token datetime number">13:13:12.313</span></code>
+</pre>
+<p>Datetime literals are <a href="https://groups.google.com/forum/#!topic/shaktidb/184DnAJrwKU">designed</a> to match <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.</p>
+<p>Dates start from <code>2024-01-01</code>:</p>
+<pre><code class="language-q in"><span class="token symbol">`D</span> <span class="token verb operator">$</span> <span class="token number">0</span></code>
+<code class="language-q out"><span class="token number">2024</span><span class="token verb operator">-</span><span class="token number">01</span><span class="token verb operator">-</span><span class="token number">01</span></code>
+</pre>
+<p>&apos;0&apos; is Monday. Get the day of the week with <code>7 mod</code>.</p>
+<pre><code class="language-q in"><span class="token symbol">`Mon</span><span class="token symbol">`Tue</span><span class="token symbol">`Wed</span><span class="token symbol">`Thu</span><span class="token symbol">`Fri</span><span class="token symbol">`Sat</span><span class="token symbol">`Sun</span> <span class="token verb operator">@</span> <span class="token number">7</span> <span class="token keyword">mod</span> <span class="token number">2024</span><span class="token verb operator">-</span><span class="token number">01</span><span class="token verb operator">-</span><span class="token number">01</span></code>
+<code class="language-q out"><span class="token symbol">`Mon</span></code>
+</pre>
+<p>You can also use duration literals (requires short-form code), and do date arithmetic:</p>
+<pre><code class="language-q in"><span class="token punctuation">.</span>z<span class="token punctuation">.</span>d</code>
+<code class="language-q out"><span class="token number">2019</span><span class="token verb operator">-</span><span class="token number">05</span><span class="token verb operator">-</span><span class="token number">04</span></code>
+<code class="language-q in"><span class="token punctuation">.</span>z<span class="token punctuation">.</span>d <span class="token verb operator">+</span> <span class="token number">2</span>m</code>
+<code class="language-q out"><span class="token number">2019</span><span class="token verb operator">-</span><span class="token number">07</span><span class="token verb operator">-</span><span class="token number">04</span></code>
+</pre>
+<p>Datetime and duration names:</p>
+<div style="width: 100%; overflow-x: auto"><table>
+<thead>
+<tr>
+<th>Long-form duration</th>
+<th>Short-form duration</th>
+<th>Datetime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`year</td>
+<td>`y</td>
+<td>`Y</td>
+</tr>
+<tr>
+<td>`month</td>
+<td>`m</td>
+<td>`M</td>
+</tr>
+<tr>
+<td>`date</td>
+<td>`d</td>
+<td>`D</td>
+</tr>
+<tr>
+<td>`hour</td>
+<td>`h</td>
+<td>`H</td>
+</tr>
+<tr>
+<td>`minute</td>
+<td>`r</td>
+<td>`R</td>
+</tr>
+<tr>
+<td>`second</td>
+<td>`s</td>
+<td>`S</td>
+</tr>
+<tr>
+<td>`millisecond</td>
+<td>`t</td>
+<td>`T</td>
+</tr>
+<tr>
+<td>`microsecond</td>
+<td>`u</td>
+<td>`U</td>
+</tr>
+<tr>
+<td>`nanosecond</td>
+<td>`v</td>
+<td>`V</td>
+</tr>
+</tbody>
+</table></div>
+<p>Convert to/from/between datetimes and durations using <code>$</code>. It takes a name or string (short version only):</p>
+<pre><code class="language-q in"><span class="token symbol">`year</span> <span class="token verb operator">$</span> <span class="token punctuation">.</span>z<span class="token punctuation">.</span>t</code>
+<code class="language-q out"><span class="token number">2019</span>y</code>
+<code class="language-q in"><span class="token symbol">`y</span>  <span class="token verb operator">$</span> <span class="token number">2019</span></code>
+<code class="language-q out"><span class="token number">2019</span>y</code>
+<code class="language-q in"><span class="token string">&quot;y&quot;</span> <span class="token verb operator">$</span> <span class="token number">2019</span></code>
+<code class="language-q out"><span class="token number">2019</span>y</code>
+</pre>
+<p>Convert between dates and year, month date digits using <a href="#sv"><code>`/:</code></a> and <a href="#vs"><code>`\:</code></a>.</p>
+<h3 id="current-date-z-d">Current date <code>.z.d</code> </h3>
+<pre><code class="language-q out"><span class="token punctuation">.</span>z<span class="token punctuation">.</span>d <span class="token comment">/ 2019-04-02</span></code>
+</pre>
+<h3 id="current-time-z-t">Current time <code>.z.t</code> </h3>
+<p>Greenwich Mean Time.</p>
+<pre><code class="language-q out"><span class="token punctuation">.</span>z<span class="token punctuation">.</span>t <span class="token comment">/ 11:18:14.857</span></code>
+</pre>
+<h2>Converters</h2>
+<h3 id="one-way-conversions">One-way conversions </h3>
+<p>Convert to with <code>`x@data</code> or <code>`x data</code>, where <code>`x</code> is the relevant name.</p>
+<h4 id="parse-p">Parse <code>`p</code> </h4>
+<pre><code class="language-q in"><span class="token symbol">`p</span> <span class="token verb operator">@</span> <span class="token string">&quot;5*!3&quot;</span></code>
+<code class="language-q out"><span class="token verb operator">*</span></code>
+<code class="language-q out"><span class="token number">5</span></code>
+<code class="language-q out"><span class="token punctuation">(</span><span class="token verb operator">!:</span><span class="token punctuation">;</span><span class="token number">3</span><span class="token punctuation">)</span></code>
+</pre>
+<p>A parse tree can be executed with <code>.</code>:</p>
+<pre><code class="language-q in"><span class="token verb operator">.</span> <span class="token symbol">`p</span> <span class="token verb operator">@</span> <span class="token string">&quot;5*!3&quot;</span></code>
+<code class="language-q out"><span class="token number">0</span> <span class="token number">5</span> <span class="token number">10</span></code>
+</pre>
+<p>Although parse trees can be converted into strings with <code>`p ?</code>, it is not a lossless conversion.</p>
+<p>The parser enlists names (and lists of names) to indicate they should not be evaluated.</p>
+<p>Examples:</p>
+<pre><code class="language-q in">e<span class="token verb operator">:</span> <span class="token string">&quot;1;.1;`n;\&quot;c\&quot;;1 2;1. 2.;`n`o;\&quot;chars\&quot;;&quot;</span></code>
+<code class="language-q in">e<span class="token verb operator">,:</span><span class="token string">&quot;:;v;1+2;+/1 2;{x+2y};a:1;:a+2b; /comment;\\h&quot;</span></code>
+
+<code class="language-q in"><span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token keyword">string</span><span class="token verb operator">:</span> x<span class="token punctuation">;</span> parsetree<span class="token verb operator">:</span> <span class="token symbol">`p</span> x<span class="token punctuation">;</span> <span class="token keyword">type</span><span class="token verb operator">:</span> <span class="token verb operator">@</span> <span class="token symbol">`p</span> x<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token adverb function">&apos;</span> <span class="token string">&quot;;&quot;</span><span class="token adverb function">\:</span> e</code>
+<code class="language-q out"><span class="token keyword">string</span>    parsetree   <span class="token keyword">type</span></code>
+<code class="language-q out"><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span> <span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span> <span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span><span class="token verb operator">-</span></code>
+<code class="language-q out"><span class="token number">1</span>         <span class="token number">1</span>           i</code>
+<code class="language-q out"><span class="token verb operator">.</span><span class="token number">1</span>        <span class="token number">0.1</span>         f</code>
+<code class="language-q out"><span class="token symbol">`n</span>        <span class="token verb operator">,</span><span class="token symbol">`n</span>         N</code>
+<code class="language-q out"><span class="token string">&quot;c&quot;</span>       <span class="token string">&quot;c&quot;</span>         c</code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span>       <span class="token number">1</span> <span class="token number">2</span>         I</code>
+<code class="language-q out"><span class="token number">1.</span> <span class="token number">2.</span>     <span class="token number">1</span> <span class="token number">2f</span>        F</code>
+<code class="language-q out"><span class="token symbol">`n</span><span class="token symbol">`o</span>      <span class="token verb operator">,</span><span class="token symbol">`n</span><span class="token symbol">`o</span></code>
+<code class="language-q out"><span class="token string">&quot;chars&quot;</span>   <span class="token string">&quot;chars&quot;</span>     C</code>
+<code class="language-q out"><span class="token verb operator">:</span>         <span class="token verb operator">:</span>           <span class="token number">2</span></code>
+<code class="language-q out">v         <span class="token symbol">`v</span>          n</code>
+<code class="language-q out"><span class="token number">1</span><span class="token verb operator">+</span><span class="token number">2</span>       <span class="token punctuation">(</span><span class="token verb operator">+</span><span class="token punctuation">;</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token number">2</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">+</span><span class="token adverb function">/</span><span class="token number">1</span> <span class="token number">2</span>     <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token adverb function">/</span><span class="token punctuation">;</span><span class="token verb operator">+</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token punctuation">{</span>x<span class="token verb operator">+</span><span class="token number">2</span>y<span class="token punctuation">}</span>    <span class="token punctuation">{</span>x<span class="token verb operator">+</span><span class="token number">2</span>y<span class="token punctuation">}</span>      <span class="token number">1</span></code>
+<code class="language-q out">a<span class="token verb operator">:</span><span class="token number">1</span>       <span class="token punctuation">(</span><span class="token verb operator">::</span><span class="token punctuation">;</span><span class="token symbol">`a</span><span class="token punctuation">;</span><span class="token number">1</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">:</span>a<span class="token verb operator">+</span><span class="token number">2b</span>     <span class="token verb operator">:</span>a<span class="token verb operator">+</span><span class="token number">2b</span>       <span class="token number">0</span></code>
+<code class="language-q in"><span class="token comment">/comment             1</span></code>
+<code class="language-q out"><span class="token keyword">\h</span>        <span class="token punctuation">(</span><span class="token adverb function">\</span><span class="token punctuation">;</span><span class="token symbol">`h</span><span class="token punctuation">)</span></code>
+</pre>
+<h4 id="matrix-display-m">Matrix display <code>`m</code> </h4>
+<pre><code class="language-q out">d<span class="token verb operator">:</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q out">d</code>
+<code class="language-q out"><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token symbol">`m</span> d</code>
+<code class="language-q out"><span class="token number">1</span></code>
+<code class="language-q out"><span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">3</span></code>
+</pre>
+<h3 id="two-way-conversions">Two-way conversions </h3>
+<p>Convert to with <code>`x@data</code> or <code>`x data</code>, where <code>`x</code> is the relevant name.</p>
+<p>Convert from with <code>`x?serialdata</code>.</p>
+<h4 id="binary">Binary <code>`</code>  </h4>
+<pre><code class="language-q in"><span class="token symbol">`</span> <span class="token string">&quot;a&quot;</span></code>
+<code class="language-q out"><span class="token number">0x0161</span></code>
+<code class="language-q in"><span class="token symbol">`</span> <span class="token symbol">`a</span></code>
+<code class="language-q out"><span class="token number">0x0f6100</span></code>
+<code class="language-q in"><span class="token symbol">`</span> <span class="token number">10</span></code>
+<code class="language-q out"><span class="token number">0x070a000000</span></code>
+</pre>
+<h4 id="json-j">JSON <code>`j</code> </h4>
+<pre><code class="language-q in"><span class="token symbol">`j</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token string">&quot;x&quot;</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token symbol">`z</span><span class="token punctuation">}</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token string">&quot;[{\&quot;a\&quot;:1,\&quot;b\&quot;:2},{\&quot;a\&quot;:\&quot;x\&quot;,\&quot;b\&quot;:\&quot;z\&quot;}]&quot;</span></code>
+</pre>
+<h4 id="kson-k">KSON <code>`k</code> </h4>
+<pre><code class="language-q in"><span class="token symbol">`k</span> <span class="token number">2</span><span class="token verb operator">*</span><span class="token verb operator">!</span><span class="token number">3</span></code>
+<code class="language-q out"><span class="token string">&quot;0 2 4&quot;</span></code>
+<code class="language-q in"><span class="token symbol">`k</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token number">1</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">{</span>a<span class="token verb operator">:</span><span class="token string">&quot;x&quot;</span><span class="token punctuation">;</span>b<span class="token verb operator">:</span><span class="token symbol">`z</span><span class="token punctuation">}</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token string">&quot;+{a:(1;\&quot;x\&quot;);b:(2;`z)}&quot;</span></code>
+</pre>
+<h2>FAQ</h2>
+<h4>How do I see the output of an assignment expression?</h4>
+<p>Use the identity function, <code>::</code>:</p>
+<pre><code class="language-q in">a<span class="token verb operator">:</span><span class="token number">1</span><span class="token verb operator">+</span><span class="token number">2</span>  <span class="token comment">/ no output</span></code>
+<code class="language-q in"><span class="token verb operator">::</span> a<span class="token verb operator">:</span><span class="token number">1</span><span class="token verb operator">+</span><span class="token number">2</span></code>
+<code class="language-q out"><span class="token number">3</span></code>
+<code class="language-q in"><span class="token verb operator">@</span><span class="token punctuation">(</span><span class="token verb operator">::</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token symbol">`1</span></code>
+</pre>
+<h4>How do I make an empty typed list?</h4>
+<p>For characters, it&apos;s just <code>&quot;&quot;</code>:</p>
+<pre><code class="language-q in"><span class="token verb operator">#</span><span class="token string">&quot;&quot;</span></code>
+<code class="language-q out"><span class="token number">0</span></code>
+<code class="language-q in"><span class="token verb operator">@</span><span class="token string">&quot;&quot;</span></code>
+<code class="language-q out"><span class="token symbol">`C</span></code>
+</pre>
+<p>For integers and floats, use <code>!</code>:</p>
+<pre><code class="language-q in"><span class="token verb operator">@</span><span class="token verb operator">!</span><span class="token number">0</span></code>
+<code class="language-q out"><span class="token symbol">`I</span></code>
+<code class="language-q in"><span class="token comment">#!0</span></code>
+<code class="language-q out"><span class="token number">0</span></code>
+<code class="language-q in"><span class="token verb operator">@</span><span class="token verb operator">!</span><span class="token verb operator">.</span><span class="token number">0</span></code>
+<code class="language-q out"><span class="token symbol">`F</span></code>
+<code class="language-q in"><span class="token comment">#!.0</span></code>
+<code class="language-q out"><span class="token number">0</span></code>
+</pre>
+<p>For other types, take 0 elements of an atom of that type (may be a better way?). For example, for names:</p>
+<pre><code class="language-q in"><span class="token verb operator">@</span><span class="token number">0</span><span class="token verb operator">#</span><span class="token symbol">`</span></code>
+<code class="language-q out"><span class="token symbol">`N</span></code>
+<code class="language-q in"><span class="token verb operator">#</span><span class="token number">0</span><span class="token verb operator">#</span><span class="token symbol">`</span></code>
+<code class="language-q out"><span class="token number">0</span></code>
+</pre>
+<h2><code>.z</code> namespace</h2>
+<h3><code>.z.x</code></h3>
+<p>In the REPL, contains an empty list by default:</p>
+<pre><code class="language-q out"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> chris<span class="token verb operator">@</span>chris<span class="token verb operator">-</span>VirtualBox<span class="token verb operator">:</span><span class="token verb operator">~</span><span class="token adverb function">/</span>sheet<span class="token verb operator">$</span> k</code>
+<code class="language-q out"><span class="token number">2019</span><span class="token verb operator">-</span><span class="token number">04</span><span class="token verb operator">-</span><span class="token number">28</span> <span class="token datetime number">15:03:42</span> <span class="token number">2</span>core <span class="token number">1</span>gb avx2 &#xA9; shakti l2<span class="token punctuation">.</span><span class="token number">0</span> test</code>
+<code class="language-q in"><span class="token punctuation">.</span>z<span class="token punctuation">.</span>x</code>
+<code class="language-q out"><span class="token punctuation">(</span><span class="token punctuation">)</span></code>
+</pre>
+<p>But in a file, it lists the filename and any args after it. If <code>testarg.k</code> comprises the line <code>.z.x</code>:</p>
+<pre><code class="language-q out"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> chris<span class="token verb operator">@</span>chris<span class="token verb operator">-</span>VirtualBox<span class="token verb operator">:</span><span class="token verb operator">~</span><span class="token adverb function">/</span>sheet<span class="token verb operator">$</span> k testarg<span class="token punctuation">.</span>k <span class="token keyword">not</span><span class="token punctuation">.</span>a<span class="token punctuation">.</span>real<span class="token punctuation">.</span>file</code>
+<code class="language-q out"><span class="token number">2019</span><span class="token verb operator">-</span><span class="token number">04</span><span class="token verb operator">-</span><span class="token number">28</span> <span class="token datetime number">15:03:42</span> <span class="token number">2</span>core <span class="token number">1</span>gb avx2 &#xA9; shakti l2<span class="token punctuation">.</span><span class="token number">0</span> test</code>
+<code class="language-q out">testarg<span class="token punctuation">.</span>k</code>
+<code class="language-q out"><span class="token keyword">not</span><span class="token punctuation">.</span>a<span class="token punctuation">.</span>real<span class="token punctuation">.</span>file</code>
+</pre>
+<p>Therefore, <code>.z.x</code> can be used to pass arguments to a k script.</p>
+<p>Also, note those arguments won&apos;t appear if we load <code>testarg.k</code> in another k process:</p>
+<pre><code class="language-q out"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> chris<span class="token verb operator">@</span>chris<span class="token verb operator">-</span>VirtualBox<span class="token verb operator">:</span><span class="token verb operator">~</span><span class="token adverb function">/</span>sheet<span class="token verb operator">$</span> k</code>
+<code class="language-q out"><span class="token number">2019</span><span class="token verb operator">-</span><span class="token number">04</span><span class="token verb operator">-</span><span class="token number">28</span> <span class="token datetime number">15:03:42</span> <span class="token number">2</span>core <span class="token number">1</span>gb avx2 &#xA9; shakti l2<span class="token punctuation">.</span><span class="token number">0</span> test</code>
+<code class="language-q out"><span class="token keyword">\l</span> testarg<span class="token punctuation">.</span>k</code>
+<code class="language-q out"><span class="token punctuation">(</span><span class="token punctuation">)</span></code>
+</pre>
+<p>So you can also use <code>.z.x</code> to identify whether a script was run in its own right, or merely <code>\l</code>-ed into another k process.</p>
+<h3>Secrets!</h3>
+<p>In addition to <code>`b64</code>, there&apos;s <code>`b58</code>, <a href="https://groups.google.com/d/msg/shaktidb/0yq21rHOacU/1wdeAGHFAAAJ">used</a> in the <code>`bad</code> implementation:</p>
+<pre><code class="language-q in"><span class="token symbol">`b58</span> <span class="token string">&quot;helloworld&quot;</span></code>
+<code class="language-q out"><span class="token string">&quot;6sBRWyteSSzHrs&quot;</span></code>
+</pre>
+<h2>shakti-python</h2>
+<h3>Install</h3>
+<p>One way to install shakti-python is to use <a href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">Miniconda</a>.</p>
+<p>To install Miniconda under Ubuntu 18.04:</p>
+<ul>
+<li>Download the Miniconda installer for Python 3, 64-bit (<a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh">direct link</a>)</li>
+<li>In a terminal in your download directory, run:
+<code>bash Miniconda3-latest-Linux-x86_64.sh</code></li>
+</ul>
+<p>Once Miniconda is installed, open a new terminal and run:
+<code>conda install -c shaktidb shakti-python</code>.</p>
+<p>Then to get to shakti-python, at the prompt, run <code>python</code>
+(or if you chose to not update your .bashrc, <code>~/miniconda3/bin/python</code>).</p>
+<p>Type <code>help(&apos;shakti&apos;)</code> at the Python prompt to view the package help.</p>
+<h3>Examples</h3>
+<pre><code class="language-q out"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> chris<span class="token verb operator">@</span>chris<span class="token verb operator">-</span>VirtualBox<span class="token verb operator">:</span><span class="token verb operator">~</span><span class="token verb operator">$</span> python</code>
+<code class="language-q out">Python <span class="token number">3.7</span><span class="token verb operator">.</span><span class="token number">1</span> <span class="token punctuation">(</span>default<span class="token verb operator">,</span> Dec <span class="token number">14</span> <span class="token number">2018</span><span class="token verb operator">,</span> <span class="token datetime number">19:28:38</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token punctuation">[</span>GCC <span class="token number">7.3</span><span class="token verb operator">.</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token verb operator">::</span> Anaconda<span class="token verb operator">,</span> Inc<span class="token punctuation">.</span> on linux</code>
+<code class="language-q out">Type <span class="token string">&quot;help&quot;</span><span class="token verb operator">,</span> <span class="token string">&quot;copyright&quot;</span><span class="token verb operator">,</span> <span class="token string">&quot;credits&quot;</span> <span class="token keyword">or</span> <span class="token string">&quot;license&quot;</span> for more information<span class="token punctuation">.</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> import shakti</code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> <span class="token verb operator">#</span> Execute k commands<span class="token verb operator">:</span></code>
+<code class="language-q out"><span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span> a <span class="token verb operator">=</span> shakti<span class="token punctuation">.</span>k<span class="token punctuation">(</span><span class="token string">&quot;!3&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> a</code>
+<code class="language-q out">k<span class="token punctuation">(</span><span class="token adverb function">&apos;</span><span class="token verb operator">!</span><span class="token number">3</span><span class="token adverb function">&apos;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> a<span class="token punctuation">.</span>  <span class="token verb operator">#</span> press tab twice for auto<span class="token verb operator">-</span>completion <span class="token punctuation">(</span>have truncated output<span class="token punctuation">)</span></code>
+<code class="language-q out">a<span class="token punctuation">.</span>append<span class="token punctuation">(</span>    a<span class="token punctuation">.</span>cat<span class="token punctuation">(</span>       a<span class="token punctuation">.</span><span class="token keyword">distinct</span><span class="token punctuation">(</span>  a<span class="token punctuation">.</span>eq<span class="token punctuation">(</span>        a<span class="token punctuation">.</span><span class="token keyword">first</span><span class="token punctuation">(</span>     a<span class="token punctuation">.</span><span class="token keyword">group</span><span class="token punctuation">(</span> <span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span></code>
+<code class="language-q out">a<span class="token punctuation">.</span>apply<span class="token punctuation">(</span>     a<span class="token punctuation">.</span>clear<span class="token punctuation">(</span>     a<span class="token punctuation">.</span>dsc<span class="token punctuation">(</span>       a<span class="token punctuation">.</span><span class="token keyword">eval</span><span class="token punctuation">(</span>      a<span class="token punctuation">.</span><span class="token keyword">flip</span><span class="token punctuation">(</span>      a<span class="token punctuation">.</span><span class="token keyword">iasc</span><span class="token punctuation">(</span>  <span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span></code>
+<code class="language-q out">a<span class="token punctuation">.</span><span class="token keyword">asc</span><span class="token punctuation">(</span>       a<span class="token punctuation">.</span><span class="token keyword">count</span><span class="token punctuation">(</span>     a<span class="token punctuation">.</span><span class="token keyword">enlist</span><span class="token punctuation">(</span>    a<span class="token punctuation">.</span>extend<span class="token punctuation">(</span>    a<span class="token punctuation">.</span><span class="token keyword">floor</span><span class="token punctuation">(</span>     a<span class="token punctuation">.</span><span class="token keyword">idesc</span><span class="token punctuation">(</span> <span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> <span class="token verb operator">#</span> shakti functions <span class="token keyword">and</span> object methods can take Python objects directly<span class="token verb operator">:</span></code>
+<code class="language-q out"><span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span> a<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token verb operator">,</span> <span class="token number">2</span><span class="token verb operator">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code>
+<code class="language-q out">k<span class="token punctuation">(</span><span class="token adverb function">&apos;</span><span class="token number">0</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token adverb function">&apos;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> b <span class="token verb operator">=</span> a<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token verb operator">,</span> <span class="token number">2</span><span class="token verb operator">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token verb operator">.</span><span class="token keyword">where</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> b</code>
+<code class="language-q out">k<span class="token punctuation">(</span><span class="token adverb function">&apos;</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">5</span> <span class="token number">5</span><span class="token adverb function">&apos;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> <span class="token keyword">sum</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span></code>
+<code class="language-q out">k<span class="token punctuation">(</span><span class="token adverb function">&apos;</span><span class="token number">31</span><span class="token adverb function">&apos;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> <span class="token verb operator">#</span> User<span class="token verb operator">-</span>facing module API<span class="token verb operator">:</span></code>
+<code class="language-q out"><span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span> shakti<span class="token punctuation">.</span><span class="token verb operator">_</span><span class="token verb operator">_</span>all<span class="token verb operator">_</span><span class="token verb operator">_</span></code>
+<code class="language-q out"><span class="token punctuation">[</span><span class="token adverb function">&apos;</span>q<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>k<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>o<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">flip</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">neg</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">sqrt</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>enum<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">parse</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">where</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">reverse</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span></code>
+<code class="language-q out"><span class="token adverb function">&apos;</span><span class="token keyword">count</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">first</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">last</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">sum</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">min</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">max</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">avg</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">var</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">iasc</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">idesc</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span></code>
+<code class="language-q out"><span class="token adverb function">&apos;</span><span class="token keyword">group</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>not<span class="token verb operator">_</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">enlist</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">null</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">floor</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">string</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">distinct</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>type<span class="token verb operator">_</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span></code>
+<code class="language-q out"><span class="token adverb function">&apos;</span>eval<span class="token verb operator">_</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>apply<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>at<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">rand</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>find<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>cast<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>take<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>shape<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>match<span class="token adverb function">&apos;</span><span class="token verb operator">,</span></code>
+<code class="language-q out"><span class="token adverb function">&apos;</span>cat<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>drop<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">cut</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">log</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">exp</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">sin</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">cos</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">first</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">last</span><span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>error<span class="token adverb function">&apos;</span><span class="token verb operator">,</span></code>
+<code class="language-q out"><span class="token adverb function">&apos;</span>&#xD8;<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>&#xF8;<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span>inf<span class="token adverb function">&apos;</span><span class="token verb operator">,</span> <span class="token adverb function">&apos;</span><span class="token keyword">show</span><span class="token adverb function">&apos;</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> <span class="token verb operator">#</span> Convert Python objects to k<span class="token verb operator">:</span></code>
+<code class="language-q out"><span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span> shakti<span class="token punctuation">.</span>o<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code>
+<code class="language-q out">k<span class="token punctuation">(</span><span class="token adverb function">&apos;</span><span class="token verb operator">!</span><span class="token number">10</span><span class="token adverb function">&apos;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> <span class="token verb operator">#</span> o is equivalent to k<span class="token adverb function">&apos;</span>s <span class="token keyword">identity</span> function<span class="token verb operator">:</span></code>
+<code class="language-q out"><span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span> shakti<span class="token punctuation">.</span>o <span class="token verb operator">=</span><span class="token verb operator">=</span> shakti<span class="token punctuation">.</span>k<span class="token punctuation">(</span><span class="token adverb function">&apos;:</span><span class="token verb operator">:</span><span class="token adverb function">&apos;</span><span class="token punctuation">)</span></code>
+<code class="language-q out">True</code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> <span class="token verb operator">#</span> Add globals to k<span class="token verb operator">:</span></code>
+<code class="language-q out"><span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span> shakti<span class="token punctuation">.</span>q<span class="token punctuation">.</span>a <span class="token verb operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token verb operator">,</span><span class="token number">2</span><span class="token verb operator">,</span><span class="token number">3</span><span class="token punctuation">]</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> shakti<span class="token punctuation">.</span>k<span class="token punctuation">(</span><span class="token string">&quot;a*2&quot;</span><span class="token punctuation">)</span></code>
+<code class="language-q out">k<span class="token punctuation">(</span><span class="token adverb function">&apos;</span><span class="token number">2</span> <span class="token number">4</span> <span class="token number">6</span><span class="token adverb function">&apos;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> shakti<span class="token punctuation">.</span>q<span class="token punctuation">.</span>a <span class="token verb operator">*</span> <span class="token number">2</span></code>
+<code class="language-q out">k<span class="token punctuation">(</span><span class="token adverb function">&apos;</span><span class="token number">2</span> <span class="token number">4</span> <span class="token number">6</span><span class="token adverb function">&apos;</span><span class="token punctuation">)</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span> <span class="token verb operator">#</span> REPL<span class="token verb operator">:</span> shakti<span class="token punctuation">.</span>k<span class="token verb operator">_</span>repl<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token verb operator">,</span> <span class="token keyword">or</span> just<span class="token punctuation">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span></code>
+<code class="language-q out"><span class="token verb operator">.</span><span class="token verb operator">.</span><span class="token verb operator">.</span> <span class="token comment">/</span></code>
+<code class="language-q in"><span class="token verb operator">+</span><span class="token adverb function">/</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span></code>
+<code class="language-q out"><span class="token number">6</span></code>
+<code class="language-q in"><span class="token adverb function">\</span><span class="token adverb function">\</span></code>
+<code class="language-q out"><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span><span class="token verb operator">&gt;</span></code>
+</pre>
+<p>shakti-python also lets you do some things that k doesn&apos;t:</p>
+<ul>
+<li><a href="https://groups.google.com/d/msg/shaktidb/etsXDI9J4o4/HmefTXyBAwAJ">Delete globals</a> (at your peril!)</li>
+<li><a href="https://groups.google.com/d/msg/shaktidb/lQ3XSvFPDhw/DOlmmFgHDAAJ">Catch errors</a></li>
+</ul>
+<h2>Communities</h2>
+<ul>
+<li><a href="https://groups.google.com/forum/#!forum/shaktidb">shakti google group</a> (official - for &apos;how to&apos; queries)</li>
+<li><a href="https://chat.stackexchange.com/rooms/90748/the-k-tree">the k tree</a>
+write access: email <code>&quot;.@acegiklmnort&quot;@7 13 12 4 4 0 10 5 10 1 5 9 2 6 8 0 3 11 9</code></li>
+<li><a href="https://www.reddit.com/r/apljk/">r/apljk</a></li>
+</ul></body></html></main><footer><span>built with love on June 16, 2019</span></footer><script src="./js/jquery.min.js"></script><script src="./js/theme.js"></script><script src="./js/jquery.easy-autocomplete.min.js"></script><script src="./js/autocomplete.js"></script><script src="./js/noise.js"></script></body></html>
