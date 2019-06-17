@@ -1,4 +1,4 @@
-## Verbs {verbs}
+## Verbs **Verb**
 
 Force the monadic case by applying a `:` suffix.
 
@@ -47,7 +47,7 @@ Triadic versions of a verb are the same as the dyadic version (except for [`cond
 "adbcb"
 ```
 
-### Assign `:` {assign}
+### Assign `:` **assign**
 
 Where an assignment is used in a function, consider rewriting code like this ([source](https://groups.google.com/d/msg/shaktidb/zejmh3vxdAg/6uCxAA2aAwAJ)):
 
@@ -114,7 +114,7 @@ Assign doesn't appear to be callable with square brackets; in fact the parse tre
 
 Under normal bracket precedence, you'd lose info about where to assign to before the assign verb is invoked, because `` (`I;0) `` would resolve to the first element of `I`.
 
-### Add `+` {add}
+### Add `+` **add**
 
 ```kc
  {a:1}+{a:2}
@@ -127,7 +127,7 @@ b|2
 "z"
 ```
 
-### Flip `+:` {flip}
+### Flip `+:` **flip**
 
 ```kc
   ("#";"##")
@@ -151,7 +151,7 @@ b|2
 Ø 1
 ```
 
-### First `*:` {first}
+### First `*:` **first**
 
 First of an empty list is null of the type of the list:
 
@@ -160,14 +160,14 @@ First of an empty list is null of the type of the list:
 Ø
 ```
 
-### Divide by `%` {divideby}
+### Divide by `%` **divideby**
 
 ```kc
  1 % 2
 0.5
 ```
 
-### Min `&` {min}
+### Min `&` **min**
 
 ```kc
  2 & 1
@@ -182,7 +182,7 @@ First of an empty list is null of the type of the list:
 
 <!-- TODO 'and' -->
 
-### Where `&:` {where}
+### Where `&:` **where**
 
 Generate an ascending list of numbers, where the number of times number *i* appears is equal to the number at position *i* of the input list.
 
@@ -191,7 +191,7 @@ Generate an ascending list of numbers, where the number of times number *i* appe
 ^0 2 2 3
 ```
 
-### Up `<:` {up}
+### Up `<:` **up**
 
 ```kc
  < "abracadabra"
@@ -200,14 +200,14 @@ Generate an ascending list of numbers, where the number of times number *i* appe
 "aaaaabbcdrr"
 ```
 
-### Equal `=` {equal}
+### Equal `=` **equal**
 
 ```kc
  1=1f
 1
 ```
 
-### Group `=:` {group}
+### Group `=:` **group**
 
 With a list, get back the indices at which each unique element appears:
 
@@ -220,7 +220,7 @@ d|,6
 r|2 9
 ```
 
-### Match `~` {match}
+### Match `~` **match**
 
 Test whether data is identical. Can handle nested structures.
 
@@ -243,7 +243,7 @@ Unlike [equal `=`](#equal), match compares types:
 0
 ```
 
-### Not `~:` {not}
+### Not `~:` **not**
 
 ```kc
  ~3
@@ -252,7 +252,7 @@ Unlike [equal `=`](#equal), match compares types:
 1
 ```
 
-### Enumerate `!:` {enum}
+### Enumerate `!:` **enum**
 
 ```kc
  !3
@@ -278,7 +278,7 @@ Given a dict, get its keys:
 `a`b
 ```
 
-### Catentate `,` {catenate}
+### Catentate `,` **catenate**
 
 Joins two atoms. Prepends/appends an atom to a list. Merges lists.
 
@@ -322,7 +322,7 @@ a
 2
 ```
 
-### Key `!` {key}
+### Key `!` **key**
 
 Generate a dictionary from lists of keys and values:
 
@@ -331,7 +331,7 @@ Generate a dictionary from lists of keys and values:
 "{a:1;b:2}"
 ```
 
-### Except `^` {except}
+### Except `^` **except**
 
 ```kc
  (!4)^1
@@ -342,7 +342,7 @@ Generate a dictionary from lists of keys and values:
 "araadara"
 ```
 
-### Sort ascending `^:` {asc}
+### Sort ascending `^:` **asc**
 
 ```kc
  :: l: rand 4
@@ -351,7 +351,7 @@ Generate a dictionary from lists of keys and values:
 0.1751217 0.3652149 0.5086234 0.5594068
 ```
 
-### Take `#` {take}
+### Take `#` **take**
 
 ```kc
  3#"abracadabra"
@@ -376,7 +376,7 @@ Taking zero elements of a list generates an empty list of the type of the first 
 !0
 ```
 
-### Drop `_` {drop}
+### Drop `_` **drop**
 
 ```kc
  4_"abracadabra"
@@ -392,14 +392,14 @@ Taking zero elements of a list generates an empty list of the type of the first 
 "dabra"
 ```
 
-### Floor `_:` {floor}
+### Floor `_:` **floor**
 
 ```kc
  _ 1.23 -1.23 0
 1 -2 0
 ```
 
-### Find `?` {find}
+### Find `?` **find**
 
 ```kc
  2 3 1 4 0 ? 3
@@ -433,7 +433,7 @@ You can also draw or deal from a list:
 "acb"
 ```
 
-### Unique `?:` {unique}
+### Unique `?:` **unique**
 
 ```kc
  ? "abracadabra"
@@ -446,7 +446,7 @@ You can also draw or deal from a list:
 1 2
 ```
 
-### Index `@` {index}
+### Index `@` **index**
 
 With an atom, applies that atom to the left function:
 
@@ -462,7 +462,7 @@ With a list, applies each element of that list to the function ('shallow' applic
 3 5 8
 ```
 
-### Apply `.` {apply}
+### Apply `.` **apply**
 
 ```kc
  {z,x,y} . `a`b`c
@@ -499,7 +499,7 @@ Apply can also be used to 'drill' into a data structure in a similar way to brac
 5
 ```
 
-### Value `.:` {value}
+### Value `.:` **value**
 
 ```kc
  . "1+2"
@@ -525,7 +525,7 @@ Apply can also be used to 'drill' into a data structure in a similar way to brac
 ,`a
 ```
 
-### Cast `$` (with a non-string) {cast}
+### Cast `$` (with a non-string) **cast**
 
 ```kc
  "YMD"$0
@@ -581,7 +581,7 @@ If you want ASCII numbers of characters:
 12f
 ```
 
-### Pad `$` (with string) {pad}
+### Pad `$` (with string) **pad**
 
 Pads with spaces on right-hand side, or truncates from right:
 
@@ -592,7 +592,7 @@ Pads with spaces on right-hand side, or truncates from right:
 "ab"
 ```
 
-### String `$:` {string}
+### String `$:` **/string(?= )/**
 
 ```kc
  $1
@@ -615,7 +615,7 @@ a b
 ,"1"
 ```
 
-## Adverbs {adverbs}
+## Adverbs **Adverb**
 
 There should be no spaces between an adverb and the expression on its left-hand side ([source](https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ)).
 
@@ -632,7 +632,7 @@ Adverbs can be called in similar ways to verbs:
 6
 ```
 
-### Each `'` {each}
+### Each `'` **each**
 
 Make a function apply to each element of its input lists, rather than the list itself.
 
@@ -657,7 +657,7 @@ ace
 bdf
 ```
 
-### Over `/` {over}
+### Over `/` **over**
 
 n f/x
 
@@ -673,7 +673,7 @@ p f/x
 "okkk"
 ```
 
-### Scan `\` {scan}
+### Scan `\` **scan**
 
 n f\x
 
@@ -692,7 +692,7 @@ p f\x
 "okkk"
 ```
 
-### Each prior `':` {eachprior}
+### Each prior `':` **eachprior**
 
 The null chosen for the first pairing is of the type of the first member of the list.
 
@@ -729,7 +729,7 @@ Specify a number to seed the scan:
 2 3 4
 ```
 
-### Each right `/:` {eachright}
+### Each right `/:` **eachright**
 
 Compare to each:
 
@@ -742,7 +742,7 @@ abc
 abd
 ```
 
-### Each left `\:` {eachleft}
+### Each left `\:` **eachleft**
 
 ```kc
  "ab" ,\: "cd"
@@ -750,7 +750,7 @@ acd
 bcd
 ```
 
-### Join `/:` {join}
+### Join `/:` **join**
 
 The following work with **lists of strings**.
 
@@ -782,7 +782,7 @@ That means 'join' can't be used for multi-character separators, but you can alwa
 "ab, cd, ef"
 ```
 
-### Split `\:` {split}
+### Split `\:` **split**
 
 Prepend the separator to `\:`, [without a space in between](https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ).
 
@@ -806,7 +806,7 @@ ab
 cd
 ```
 
-### Scalar from vector (sv) `/:` {sv}
+### Scalar from vector (sv) `/:` **sv**
 
 Mnemonic tip: read 'sv' in k evaluation order, ie right to left.
 
@@ -835,7 +835,7 @@ You can also turn a vector in (year, month, day) form into a k date:
 2019-05-04
 ```
 
-### Vector from scalar (vs) `\:` {vs}
+### Vector from scalar (vs) `\:` **vs**
 
 Mnemonic tip: read 'vs' in k evaluation order, ie right to left.
 
@@ -862,9 +862,9 @@ You can also turn a k date into a (year, month, day) vector:
 2019 5 4
 ```
 
-## Nouns {nouns}
+## Nouns **Noun**
 
-### Names {name}
+### Names **name**
 
 Names start with a backtick `` ` ``. Name literals can be:
 
@@ -873,7 +873,7 @@ Names start with a backtick `` ` ``. Name literals can be:
 
 Names are also known as symbols.
 
-### Floats {float}
+### Floats **float**
 
 <!-- add info about int and float null arithmetic - eg null float is NaN -->
 <!-- quotes in 'name' list aren't being formatted? -->
@@ -887,7 +887,7 @@ All of `1.0`, `.5`, `1.`, `1f` are valid float literals.
 0
 ```
 
-### Lists {list}
+### Lists **list**
 
 Although two lists may be zero length, and have the same type, they may not be the same:
 
@@ -943,7 +943,7 @@ But it breaks down when you include nested lists such as strings:
 `c
 ```
 
-### Dictionaries {dict}
+### Dictionaries **dict**
 
 Dicts are ordered:
 
@@ -962,7 +962,7 @@ Recover the keys and values using `!:` and `.:`:
 1 2
 ```
 
-### Functions {func}
+### Functions **func**
 
 Functions can call themselves by using their own name in their definition. Naive example:
 
@@ -981,7 +981,7 @@ value error: a
 `1
 ```
 
-### Expressions {expr}
+### Expressions **expr**
 
 Exprs can be executed on tables, eg:
 
@@ -998,9 +998,9 @@ a b
 
 Some expr functionality is NYI. For more info, see [this forum post](https://groups.google.com/d/msg/shaktidb/5N6VjsOBjoA/GjFgeP4yDAAJ).
 
-## Utilities {util}
+## Utilities **util**
 
-### `in` {in}
+### `in` **/in(?= within)/**
 
 ```kc
  `c`d in `a`b`c
@@ -1017,7 +1017,7 @@ Some expr functionality is NYI. For more info, see [this forum post](https://gro
 0
 ```
 
-### `within` {within}
+### `within` **within**
 
 ```kc
  `p within `A`z
@@ -1037,7 +1037,7 @@ Includes lower bound, excludes upper bound:
 0 1 0
 ```
 
-### `like` {like}
+### `like` **like**
 
 ```kc
  "abc" like "*b?"
@@ -1051,7 +1051,7 @@ Includes lower bound, excludes upper bound:
 0
 ```
 
-### Frequency histogram `freq` {freq}
+### Frequency histogram `freq` **freq**
 
 Counts of each item in the list.
 
@@ -1063,7 +1063,7 @@ i|1
 l|1
 ```
 
-### `find` {find}
+### `find` **find**
 
 ```kc
  "abracadabra" find "bra"
@@ -1071,21 +1071,21 @@ l|1
 8 3
 ```
 
-### Sort ascending `[f]asc` {[f]asc}
+### Sort ascending `[f]asc` **[f]asc**
 
 ```kc
  asc "abracadabra"
 "aaaaabbcdrr"
 ```
 
-### Sort descending `[f]dsc` {[f]dsc}
+### Sort descending `[f]dsc` **[f]dsc**
 
 ```kc
  dsc "abracadabra"
 "rrdcbbaaaaa"
 ```
 
-### Key `[f]key` {[f]key}
+### Key `[f]key` **[f]key**
 
 Turn a table into a keyed table:
 
@@ -1097,9 +1097,9 @@ a c|b
 4 6|5
 ```
 
-## Math {math}
+## Math **math**
 
-### Absolute value `abs` {abs}
+### Absolute value `abs` **abs**
 
 ```kc
  abs 1.23
@@ -1108,7 +1108,7 @@ a c|b
 1.23
 ```
 
-### Permutations `prm` {prm}
+### Permutations `prm` **prm**
 
 Generates permutation indices.
 
@@ -1122,7 +1122,7 @@ Generates permutation indices.
 2 1 0
 ```
 
-### Combinations {cmb}
+### Combinations **cmb**
 
 ```kc
  2 cmb 3
@@ -1131,7 +1131,7 @@ Generates permutation indices.
 1 2
 ```
 
-### Natural logarithm (`log:`) and logarithm (`log`) {[n]log}
+### Natural logarithm (`log:`) and logarithm (`log`) **[n]log**
 
 Monadic: natural logarithm, ie the power you'd need to raise *e* by to get `x`.
 
@@ -1153,7 +1153,7 @@ Dyadic: logarithm, ie the number you'd need to raise the left number to to get t
 2f
 ```
 
-### Exponential (`exp:`) and power (`exp`) {[n]exp}
+### Exponential (`exp:`) and power (`exp`) **[n]exp**
 
 Monadic: *e* to the power of `x`.
 
@@ -1175,7 +1175,7 @@ Dyadic: left to the power of right.
 0.5
 ```
 
-### Random `[n]rand` {[n]rand}
+### Random `[n]rand` **[n]rand**
 
 Uniform distribution `rand i` or `i rand i`:
 
@@ -1197,7 +1197,7 @@ Normal distribution `rand -i`:
 0.8556685
 ```
 
-### Bar `i'` {bar}
+### Bar `i'` **bar**
 
 Round down to the nearest `i`.
 
@@ -1208,7 +1208,7 @@ Round down to the nearest `i`.
 10
 ```
 
-### Integer division `i/` {div}
+### Integer division `i/` **div**
 
 ```kc
  5/9
@@ -1217,16 +1217,16 @@ Round down to the nearest `i`.
 2
 ```
 
-### Mod `i\` {mod}
+### Mod `i\` **mod**
 
 ```kc
  2\!10
 0 1 0 1 0 1 0 1 0 1
 ```
 
-## Aggregations {aggr}
+## Aggregations **aggr**
 
-### Median `med` {med}
+### Median `med` **med**
 
 The value in the middle if the data was sorted.
 
@@ -1241,9 +1241,9 @@ If the count of the data is even, return the value on the right of the middle.
 2
 ```
 
-## Tables and KSQL {tables-ksql}
+## Tables and KSQL 
 
-### Tables {tabl}
+### Tables **tabl**
 
 A table is a list of dicts where each dict has the same keys in the same order.
 
@@ -1336,7 +1336,7 @@ a|b
 2|3
 ```
 
-## Commands {commands}
+## Commands
 
 Access any shell command by putting a `\` in front of it:
 
@@ -1347,7 +1347,7 @@ Access any shell command by putting a `\` in front of it:
 3
 ```
 
-### List files `\lf` {command-lf}
+### List files `\lf` **\lf**
 
 ```kc
  \lf
@@ -1355,7 +1355,7 @@ afile.txt
 yet another file
 ```
 
-### List character counts `\lc` {command-lc}
+### List character counts `\lc` **\lc**
 
 ```kc
  \lc
@@ -1371,7 +1371,7 @@ You can't assign the result of `\lc` directly (ie `a: \lc` doesn't work). But yo
 `a
 ```
 
-### List line counts `\ll` {command-ll}
+### List line counts `\ll` **\ll**
 
 ```kc
  \ll
@@ -1379,17 +1379,17 @@ afile.txt       |1
 yet another file|3
 ```
 
-### Help `\h` {command-h}
+### Help `\h` **\h**
 
 The official help included in the k binary. It's the navigation to this site!
 
-### Changelog `\l` {command-l}
+### Changelog `\l` **\l**
 
 Find the latest changelog on [GitHub](https://github.com/kparc/box/blob/master/txt/l.txt).
 
-## IO and IPC {io-ipc}
+## IO and IPC 
 
-### Read/write line `0:` {rw-line}
+### Read/write line `0:` **read/write line**
 
 Given the following in `test.csv`:
 
@@ -1431,7 +1431,7 @@ You can also use `0:` to deserialise in-memory lists of strings with a common se
 
 Keep in mind it's reading the data into columns, not rows. The first row of the console output is the first item in a list of columns.
 
-### Read/write bytes `1:` {rw-byte}
+### Read/write bytes `1:` **read/write byte**
 
 ```kc
  "testfile" 1: 0x0123456789abcdef
@@ -1462,7 +1462,7 @@ What is your name? Me
 
 On the last point: if just writing to stdout, make sure to put a semicolon at the end to suppress outputting the characters on the left of `1:` to the REPL.
 
-### Read/write data `2:` {rw-data}
+### Read/write data `2:` **read/write data**
 
 ```kc
  "testfile" 2: (1 2 3 4)
@@ -1477,7 +1477,7 @@ You can see what `testfile` looks like in bytes with `1:`:
 0x000000070400000001000000020000000300000004000000
 ```
 
-### Inter-process communication `3:` and `4:` {conn}
+### Inter-process communication `3:` and `4:` **conn/set**
 
 Start a k process running with port 1234 (that's `k -p 1234`).
 
@@ -1491,9 +1491,9 @@ Then in another k process, set up a connection to the first k process, send it c
 42
 ```
 
-## 3+ arguments {many-args}
+## 3+ arguments 
 
-### Select `#[t;c;b[;a]]` {select}
+### Select `#[t;c;b[;a]]` **select**
 
 Get all rows of `t` where `c` is true.
 
@@ -1520,7 +1520,7 @@ a b
 +{a:!0;b:!0}
 ```
 
-### Update `_[t;c;b[;a]]` {update}
+### Update `_[t;c;b[;a]]` **update**
 
 Via [Arthur](https://groups.google.com/d/msg/shaktidb/77qVfIc5ecU/eSRy8izkAQAJ):
 
@@ -1533,7 +1533,7 @@ b
 4
 ```
 
-### Splice `?[x;i;f[;y]]` {splice}
+### Splice `?[x;i;f[;y]]` **splice**
 
 Insert `y` into `x` at index `i`.
 
@@ -1555,7 +1555,7 @@ If an element was at that index before, move it right.
 
 ```
 
-### Amend `@[x;i;f[;y]]` {amend}
+### Amend `@[x;i;f[;y]]` **amend**
 
 Apply function f to the elements at each `i` of `x` (with argument `y`, if f is dyadic).
 
@@ -1580,7 +1580,7 @@ To do the update in-place, use the data's name symbol instead of the name direct
 0 7 2
 ```
 
-### Dmend `.[x;i;f[;y]]` {dmend}
+### Dmend `.[x;i;f[;y]]` **dmend**
 
 Think of dmend as 'deep' or 'drill' amend - it's similar to amend in the same way that dyadic `.` and `@` are similar.
 
@@ -1644,7 +1644,7 @@ Apply to rows or specific elements of a matrix:
 6 8 9
 ```
 
-### Cond `$[c;t;f]` {cond}
+### Cond `$[c;t;f]` **cond**
 
 If the true expression is returned, the false expression never executes (and vice versa):
 
@@ -1681,9 +1681,9 @@ Or (modified version of [Arthur's](https://groups.google.com/d/msg/shaktidb/6JLp
 "aec"
 ```
 
-## Boolean checks {bool}
+## Boolean checks **bool**
 
-### `` `ascii `` {ascii}
+### `` `ascii `` **`ascii**
 
 Are all characters in the string in the [ASCII set](https://en.wikipedia.org/wiki/ASCII#Character_set)?
 
@@ -1694,7 +1694,7 @@ Are all characters in the string in the [ASCII set](https://en.wikipedia.org/wik
 0
 ```
 
-## Datetimes {datetime}
+## Datetimes **datetime**
 
 A datetime looks like this:
 
@@ -1756,13 +1756,13 @@ Convert to/from/between datetimes and durations using `$`. It takes a name or st
 
 Convert between dates and year, month date digits using [`` `/: ``](#sv) and [`` `\: ``](#vs).
 
-### Current date `.z.d` {.z.d}
+### Current date `.z.d`
 
 ```kc
 .z.d / 2019-04-02
 ```
 
-### Current time `.z.t` {.z.t}
+### Current time `.z.t` **.z.t**
 
 Greenwich Mean Time.
 
@@ -1770,13 +1770,13 @@ Greenwich Mean Time.
 .z.t / 11:18:14.857
 ```
 
-## Converters {converters}
+## Converters
 
-### One-way conversions {1way}
+### One-way conversions **1way**
 
 Convert to with `` `x@data `` or `` `x data `` or `` `x[data] ``, where `` `x `` is the relevant name.
 
-#### Parse `` `p `` {parse}
+#### Parse `` `p `` **`p**
 
 ```kc
  `p @ "5*!3"
@@ -1824,7 +1824,7 @@ a:1       (::;`a;1)
 \h        (\;`h)
 ```
 
-#### Matrix display `` `m `` {matrix}
+#### Matrix display `` `m `` **/\`m(?=\`crc)/**
 
 ```kc
 d: 1 2 3
@@ -1836,13 +1836,13 @@ d
 3
 ```
 
-### Two-way conversions {2way}
+### Two-way conversions **2way**
 
 Convert to with `` `x@data `` or `` `x data ``, where `` `x `` is the relevant name.
 
 Convert from with `` `x?serialdata ``.
 
-#### Binary `` ` `` {binary}
+#### Binary `` ` `` **/\`(?=\`j)/**
 
 ```kc
  ` "a"
@@ -1853,14 +1853,14 @@ Convert from with `` `x?serialdata ``.
 0x070a000000
 ```
 
-#### JSON `` `j `` {json}
+#### JSON `` `j `` **/\`j(?=\`k)/**
 
 ```kc
  `j ({a:1;b:2};{a:"x";b:`z})
 "[{\"a\":1,\"b\":2},{\"a\":\"x\",\"b\":\"z\"}]"
 ```
 
-#### KSON `` `k `` {kson}
+#### KSON `` `k `` **/\`k(?=\`csv)/**
 
 ```kc
  `k 2*!3
@@ -1869,7 +1869,7 @@ Convert from with `` `x?serialdata ``.
 "+{a:(1;\"x\");b:(2;`z)}"
 ```
 
-#### `` `csv `` {csv}
+#### `` `csv `` **`csv**
 
 ```kc
  `csv ? ("a,b";"1,2";"3,4")
@@ -1879,7 +1879,7 @@ a b
 3 4
 ```
 
-## FAQ {FAQ}
+## FAQ
 
 #### How can I test if something is an atom, or a list?
 
@@ -1949,7 +1949,7 @@ b|2
 {a:1;b:2}
 ```
 
-## `.z` namespace {.z}
+## `.z` namespace **.z**
 
 ### `.z.x` {.z.x}
 
@@ -1984,7 +1984,7 @@ Also, note those arguments won't appear if we load `testarg.k` in another k proc
 
 So you can also use `.z.x` to identify whether a script was run in its own right, or merely `\l`-ed into another k process.
 
-### Secrets! {secrets}
+### Secrets! 
 
 In addition to `` `b64 ``, there's `` `b58 ``, [used](https://groups.google.com/d/msg/shaktidb/0yq21rHOacU/1wdeAGHFAAAJ) in the `` `bad `` implementation:
 

@@ -1,0 +1,77 @@
+/* solarized */
+body {
+  font-family: "Vinila", "Helvetica", sans-serif;
+}
+
+pre, code, header {
+    background-color: #f5f5f5;
+    color: #657b83;
+    color: #657b83;
+    /* font-family: PPro,Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace; */
+}
+
+a, a:hover, a:active, a:visited {
+    color: #dc322f;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1>code, h2>code, h3>code, h4>code, p>code {
+    background-color: rgba(207,121,100,.06)!important;
+}
+
+h1 {
+    background-color: #0a3144;
+    color: #f5f5f5;
+}
+
+h2 {
+    background-color: #0c6979;
+    color: #f5f5f5;
+}
+
+#k-item {
+    background-color: hsla(0,0%,100%,.05)!important;
+    color: #ddd;
+}
+
+.avatar {
+    background-color: transparent;
+}
+
+header h1 input, header h1 input:focus {
+    color: #f5f5f5;
+    border-color: #f5f5f5;
+}
+
+.easy-autocomplete a:hover {
+    text-decoration: none;
+}
+
+footer {
+    background-color: #657b83;
+    color: #f5f5f5;
+}
+
+.token.verb {
+    color: #dc322f;
+}
+
+.token.number, .token.symbol {
+    color: #268bd2;
+}
+
+.token.string {
+    color: #2aa198;
+}
+
+.token.keyword {
+    color: #859900;
+}
+
+.token.adverb, .token.function {
+    color: #859900;
+}

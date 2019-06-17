@@ -1,0 +1,43 @@
+$k [-p 1234] [f.k]                           .z.i(pid) .z.x(arg) .z.e(env)
+
+Verb                       Adverb                Noun              Type
+:  assign                  '  each      n bar    char  " ab"       `c
++  add         flip        /  over      n div    name  ``a`b       `n
+-  subtract    negate      \  scan      n mod    int   Ø 0 2       `i
+*  multiply    first       ': eachprior          float ø 2.3 π ∞   `f
+%  divideby    inverse     /: eachright join|sv  date 2019-06-28   `D .z.D
+&  min|and     where       \: eachleft split|vs  time 12:34:56.789 `t .z.t
+|  max|or      reverse
+<  less        up          System                list (2;3.4;`c)   `.
+>  more        down        0: read/write line    dict {a:2;b:`c}   `a
+=  equal       group       1: read/write byte    tabl +{a:2 3 4}   `A
+~  match       not         2: read/write data    expr :32+9*f%5    `0
+!  key         enum        3: conn/set (.z.ms)   func {(+/x)%#x}   `1
+,  catenate    enlist      4: http/get (.z.mg)   xtab `a`b!+`c`d!(2 3;4 5)
+^  except      asc                               
+#  take        count       #[t;c;b[;a]] select   \l f.k  load       \h help
+_  drop        floor       _[t;c;b[;a]] update   \t[:n]x milli/time \l log
+?  find        unique      ?[x;i;f[;y]] splice   \u[:n]x micro/trace
+@  index       type        @[x;i;f[;y]] amend    \v[d]  vars       \f[d] fns
+.  apply       value       .[x;i;f[;y]] dmend    \lf file \lc char \ll line
+$  cast|pad    string      $[c;t;f]     cond     \cd [d] get[set]  \gr x file
+
+util: in within bin like find freq prm cmb
+math: sqrt sin cos abs [n]log [n]exp [n]rand
+aggr: count first last min max sum avg var dev med
+tabl: [f]asc [f]dsc [f]key [select|update|delete]A by B from T where C
+
+datetime:YMDHRSTUV+duration:ymdhrstuv; .z.D+.z.t; day:7\ mth:12\ b5:5'
+`year`month`date`hour`minute`second`millisecond`microsecond`nanosecond
+
+bool: `ascii`utf8
+1way: `p`m`crc`sha`rip`bad   e.g. hash: `sha@"crypto"
+2way:``j`k`csv`b64`hex`aes   e.g. json: `j?`j@{a:2;b:`c}
+
+if[c;..];while[c;..]
+
+K:key k:key`k1  /public private
+K key k key"hi" /verify sign
+"(;)"/:$`x`y`z
+\\ exit
+attr: ?x ^x =x
