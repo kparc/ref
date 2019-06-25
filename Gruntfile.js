@@ -1,4 +1,5 @@
 const getPugData = require('./bundler/pug.js')
+process.exit(1)
 
 module.exports = function(grunt) {
 
