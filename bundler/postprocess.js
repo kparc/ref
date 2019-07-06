@@ -6,19 +6,34 @@ const _ = require('lodash')
 const prism = require('prismjs')
 const loadLang = require('prismjs/components/')
 const moment = require('moment')
+const validate = require('./snippets')
+const k = require('./k')
 
 const e = i => i ? -i : ''
 const ifregexp = s => /^\/.*\/$/.test(s) ? new RegExp(s.slice(1, -1)) : s
 loadLang(['q'])
 
-module.exports = function(text, html) {
+module.exports = function(html) {
     var $ = ch.load(html)
+    var text = k('\\h')
 
     // get rid of trailing whitespace
     text = text.split('\n').map(s => s.trimRight()).join('\n')
     
+    // validate snippets
+    let snippets = []
+    console.log('validating snippets')
+    console.log(k())
+    $('code.language-kc').each((k,v) => console.log(`ran ${k} tests so far`) ||snippets.push(validate($(v).text())))
+    snippets = snippets.filter(f => !f.valid)
+    if (snippets.length) {
+        console.error(snippets)
+        // uncomment the following line to make the build fail if errors were detected
+        //throw "invalid snippets detected"
+    }
+
     // invoke syntax highlighter, but only on the input lines    
-    $('code.language-q').each((k, v) => $(v).replaceWith(
+    $('code.language-kc').each((k, v) => $(v).replaceWith(
         $(v)
             .text()
             .split('\n')
@@ -76,5 +91,5 @@ module.exports = function(text, html) {
     
     // tables will screw with us unless contaminated in a div
     $('table').each((i, el) => $(el).replaceWith(`<div style="width: 100%; overflow-x: auto">${$.html($(el))}</div>`))
-    return { h: text, md: $.html(), date: moment().format("LL") }
+    return { h: k() + '\n' + text, md: $.html(), date: moment().format("LL") }
 }

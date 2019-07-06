@@ -48,11 +48,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-pug');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-gh-pages');
 
   const tasks = ['uglify', 'cssmin', 'pug', 'copy'];
 
   grunt.registerTask('default', tasks);
-  grunt.registerTask('pub', tasks.concat(['gh-pages']));
 
 };

@@ -11,6 +11,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "grunt",
+        "install": "node bundler/download.js",
         "dev": "grunt watch",
         "clean": "rm -r build"
     },
