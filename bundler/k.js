@@ -1,7 +1,9 @@
 const execSync = require('child_process').execSync
+const os = require('os').platform()
 
 const k = (i='') => {
-    let s = execSync('script -qefc "./k" /dev/null | cat', {
+    const cmd = os === 'darwin' ? 'script -q /dev/null "./k"' : 'script -qefc "./k" /dev/null';
+    let s = execSync(cmd + ' | cat', {
         cwd: process.cwd() + '/bundler/bin',
         input: i + '\n',
         encoding: 'utf8'
