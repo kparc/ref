@@ -1,6 +1,6 @@
 const get = require('./get')
 const exec = require('child_process').exec
-const os = require('os').platform
+const os = require('os').platform()
 
 const ex = (s, i='') => new Promise((res, rej) => {
     let stdin = exec(s, {
