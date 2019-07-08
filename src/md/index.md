@@ -1589,16 +1589,16 @@ Apply to rows or specific elements of a matrix:
   / Row 0, elements 1 and 2:
 
  .[m; (0; 1 2); 1+]
- 0 2 3
- 3 4 5
- 6 7 8
+0 2 3
+3 4 5
+6 7 8
 
   / In each of rows 1 and 2, elements 1 and 2:
 
  .[m; (1 2; 1 2); 1+]
- 0 1 2
- 3 5 6
- 6 8 9
+0 1 2
+3 5 6
+6 8 9
 
   / In all rows, elements 1 and 2:
 
