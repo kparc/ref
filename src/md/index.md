@@ -1286,7 +1286,7 @@ a|b
 
 Access any shell command by putting a `\` in front of it:
 
-```kc
+```kc-no-tests
  \seq 3
 1
 2
@@ -1295,7 +1295,7 @@ Access any shell command by putting a `\` in front of it:
 
 ### List files `\lf` **\lf**
 
-```kc
+```kc-no-tests
  \lf
 afile.txt
 yet another file
@@ -1303,7 +1303,7 @@ yet another file
 
 ### List character counts `\lc` **\lc**
 
-```kc
+```kc-no-tests
  \lc
 afile.txt       |29
 yet another file|50
@@ -1319,7 +1319,7 @@ You can't assign the result of `\lc` directly (ie `a: \lc` doesn't work). But yo
 
 ### List line counts `\ll` **\ll**
 
-```kc
+```kc-no-tests
  \ll
 afile.txt       |1
 yet another file|3
