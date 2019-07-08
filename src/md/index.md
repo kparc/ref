@@ -724,11 +724,11 @@ Prepend the separator to `/:`, [without a space in between](https://groups.googl
 "la-li-lu-le-lo"
 ```
 
-With empty symbol as 'separator', appends a newline to each string and joins. (This is also known as 'sS' or 'string from String', with capitalisation following the k7 convention of lower for atom, upper for list of atoms of same type).
+With empty symbol as 'separator', appends a carriage return and newline to each string and joins. (This is also known as 'sS' or 'string from String', with capitalisation following the k7 convention of lower for atom, upper for list of atoms of same type).
 
 ```kc
  `/: ("ab";"cd")
-"ab\ncd\n"
+"ab\r\ncd\r\n"
 ```
 
 With three characters instead of just a separator, prepends/appends the first and last:
