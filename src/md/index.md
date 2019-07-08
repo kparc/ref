@@ -116,7 +116,7 @@ Under normal bracket precedence, you'd lose info about where to assign to before
 
 ### Add `+` **add**
 
-```kc
+```kc-no-tests
  {a:1}+{a:2}
 {a:3}
  {a:1}+{b:2}
