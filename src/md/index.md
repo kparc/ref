@@ -464,17 +464,16 @@ Apply can also be used to 'drill' into a data structure in a similar way to brac
 3 4 5
 6 7 8
 
-  / Atom at x position
  m[1]
 3 4 5
- m . 1
+
+ m . ,1
 3 4 5
 
-  / List in x position
-  / Notice [] effectively enlists a single arg
  m[1 2]
 3 4 5
 6 7 8
+
  m . ,1 2
 3 4 5
 6 7 8
