@@ -17,7 +17,7 @@ For example, with a bracket call with one argument, the monadic verb will work f
 
 ```kc
  @:["abc"]
-`C
+`c
  @["abc"]
 "abc"@
 ```
@@ -78,9 +78,9 @@ You can assign a value to a list index, or a dictionary key:
  d:{a:1;b:2}
  d[`a`c]:3 4
  d
-a|3
-b|2
-c|4
+a:3
+b:2
+c:4
 ```
 
 You can combine assignment with other verbs:
@@ -116,7 +116,7 @@ Under normal bracket precedence, you'd lose info about where to assign to before
 
 ### Add `+` **add**
 
-```kc
+```kc-no-tests
  {a:1}+{a:2}
 {a:3}
  {a:1}+{b:2}
@@ -130,25 +130,21 @@ b|2
 ### Flip `+:` **flip**
 
 ```kc
-  ("#";"##")
-"#"
-"##"
+  ("a";"bc")
+"a"
+"bc"
 
- +("#";"##")
-##
-##
+ +("a";"bc")
+ab
+ac
 
- +("##";"###")
-##
-##
- #
+ +(1 2 3;4 5)
+1 4
+2 5
+3 Ø
 
  *++("##";"###")
 "## "
-
- +(!1;!2)
-0 0
-Ø 1
 ```
 
 ### First `*:` **first**
@@ -195,7 +191,7 @@ Generate an ascending list of numbers, where the number of times number *i* appe
 
 ```kc
  < "abracadabra"
-0 3 5 7 10 1 8 4 6 2 9
+?0 3 5 7 10 1 8 4 6 2 9
  s@<s: "abracadabra"
 "aaaaabbcdrr"
 ```
@@ -256,19 +252,12 @@ Unlike [equal `=`](#equal), match compares types:
 
 ```kc
  !3
+!3
+ ,/!3
 0 1 2
  !2 3
-0 0 0 1 1 1
+^0 0 0 1 1 1
 0 1 2 0 1 2
-```
-
-With a negative integer argument, generate an identity matrix:
-
-```kc
- !-3
-1 0 0
-0 1 0
-0 0 1
 ```
 
 Given a dict, get its keys:
@@ -305,9 +294,9 @@ Catenate merges dicts (where keys collide, right overrides left):
 
 ```kc
  {a:1;b:2},{a:3;c:4}
-a|3
-b|2
-c|4
+a:3
+b:2
+c:4
 ```
 
 Tables are lists of dicts, so:
@@ -345,10 +334,8 @@ Generate a dictionary from lists of keys and values:
 ### Sort ascending `^:` **asc**
 
 ```kc
- :: l: rand 4
-0.5594068 0.1751217 0.3652149 0.5086234
- ^l
-0.1751217 0.3652149 0.5086234 0.5594068
+ ^1 3 4 2
+^1 2 3 4
 ```
 
 ### Take `#` **take**
@@ -387,9 +374,9 @@ Taking zero elements of a list generates an empty list of the type of the first 
 
 ```kc
  1 2 6_"abracadabra"
-"b"
-"raca"
-"dabra"
+b
+raca
+dabra
 ```
 
 ### Floor `_:` **floor**
@@ -428,16 +415,16 @@ You can also draw or deal from a list:
 
 ```kc
  3 ? "abcd"
-"daa"
+"bdb"
  -3 ? "abcd"
-"acb"
+"cab"
 ```
 
 ### Unique `?:` **unique**
 
 ```kc
  ? "abracadabra"
-"abrcd"
+?"abrcd"
  ? ("hi"; 1 2 3; `a`b; 0; "hi"; `a`b; 1 2; 0)
 "hi"
 1 2 3
@@ -477,17 +464,16 @@ Apply can also be used to 'drill' into a data structure in a similar way to brac
 3 4 5
 6 7 8
 
-  / Atom at x position
  m[1]
 3 4 5
- m . 1
+
+ m . ,1
 3 4 5
 
-  / List in x position
-  / Notice [] effectively enlists a single arg
  m[1 2]
 3 4 5
 6 7 8
+
  m . ,1 2
 3 4 5
 6 7 8
@@ -558,29 +544,6 @@ If you want ASCII numbers of characters:
 65 66 67f
 ```
 
-`$` is also **matrix multiply**:
-
-```kc
- `m @ x: (1 0; 0 0)
-1 0
-0 0
-
- `m @ y: (3 2; 9 7)
-3 2
-9 7
-
- x $ y
-3 2f
-0 0f
-
- y $ x
-3 0f
-9 0f
-
- 1 0 1 0 $ 3 2 9 7
-12f
-```
-
 ### Pad `$` (with string) **pad**
 
 Pads with spaces on right-hand side, or truncates from right:
@@ -602,8 +565,8 @@ Pads with spaces on right-hand side, or truncates from right:
 "name"
 
  ${a:1 2;b:3}
-a|(,"1";,"2")
-b|,"3"
+a:(,"1";,"2")
+b:,"3"
 
  :: s:$+`a`b!(1 2;3 4)
 a b
@@ -621,16 +584,16 @@ There should be no spaces between an adverb and the expression on its left-hand 
 
 (This is how the `/` adverb is distinguished from ` /`, ie the start of a comment.)
 
-Adverbs can be called in similar ways to verbs:
+Adverbs can be called in some similar ways to verbs:
 
 ```kc
  +/ 1 2 3
 6
- /[+] 1 2 3
-6
  (/ (+)) 1 2 3
 6
 ```
+
+But expect differences when trying to use adverbs as verbs, due to their many overloads.
 
 ### Each `'` **each**
 
@@ -761,11 +724,11 @@ Prepend the separator to `/:`, [without a space in between](https://groups.googl
 "la-li-lu-le-lo"
 ```
 
-With empty symbol as 'separator', appends a newline to each string and joins. (This is also known as 'sS' or 'string from String', with capitalisation following the k7 convention of lower for atom, upper for list of atoms of same type).
+With empty symbol as 'separator', appends a carriage return and newline to each string and joins. (This is also known as 'sS' or 'string from String', with capitalisation following the k7 convention of lower for atom, upper for list of atoms of same type).
 
 ```kc
  `/: ("ab";"cd")
-"ab\ncd\n"
+"ab\r\ncd\r\n"
 ```
 
 With three characters instead of just a separator, prepends/appends the first and last:
@@ -828,13 +791,6 @@ Zero is represented as an empty integer list `!0`, not `0`:
 class error
 ```
 
-You can also turn a vector in (year, month, day) form into a k date:
-
-```kc
- `/: 2019 5 4
-2019-05-04
-```
-
 ### Vector from scalar (vs) `\:` **vs**
 
 Mnemonic tip: read 'vs' in k evaluation order, ie right to left.
@@ -853,13 +809,6 @@ Conversion of zero into a base may be surprising (empty list), but is consistent
 ```kc
  10\: 0
 !0
-```
-
-You can also turn a k date into a (year, month, day) vector:
-
-```kc
- `\: .z.d
-2019 5 4
 ```
 
 ## Nouns **Noun**
@@ -949,8 +898,8 @@ Dicts are ordered:
 
 ```kc
  |{a:1;b:2}
-b|2
-a|1
+b:2
+a:1
 ```
 
 Recover the keys and values using `!:` and `.:`:
@@ -976,7 +925,7 @@ A function with implicit `xyz` args can be distinguished from a dict by ensuring
 
 ```kc
  @{a:1;a*x}
-value error: a
+value error: x
  @{;a:1;a*x}
 `1
 ```
@@ -1033,8 +982,8 @@ Includes lower bound, excludes upper bound:
 1
  2 within 1 2
 0
- 1 2 3 within 1 2 3
-0 1 0
+ 1 2 3 within 1 3
+1 1 0
 ```
 
 ### `like` **like**
@@ -1075,7 +1024,7 @@ l|1
 
 ```kc
  asc "abracadabra"
-"aaaaabbcdrr"
+^"aaaaabbcdrr"
 ```
 
 ### Sort descending `[f]dsc` **[f]dsc**
@@ -1114,12 +1063,12 @@ Generates permutation indices.
 
 ```kc
  prm 3
-0 1 2
-1 0 2
-1 2 0
-0 2 1
-2 0 1
-2 1 0
+?0 1 2
+?1 0 2
+?1 2 0
+?0 2 1
+?2 0 1
+?2 1 0
 ```
 
 ### Combinations **cmb**
@@ -1181,20 +1130,20 @@ Uniform distribution `rand i` or `i rand i`:
 
 ```kc
  rand 3
-0.7502717 0.8107001 0.8145892
+0.5 0.9078156 0.269656
  3 rand 10
-7 3 9
+5 5 1
 ```
 
 Normal distribution `rand -i`:
 
 ```kc
  `m @ rand -5
-1.207587
-0.5333917
-0.3390071
--0.2990315
-0.8556685
+1.157194e-13
+-0.5821508
+1.846709
+-1.075539
+0.890081
 ```
 
 ### Bar `i'` **bar**
@@ -1259,6 +1208,7 @@ A table can also be considered as a flipped dict of lists, where each list is of
 You can access rows or columns of the table by indexing using the row number or column key:
 
 ```kc
+ t: ({a:1;b:2};{a:3;b:4})
  t[1]~{a:3;b:4}
 1
  t[`b]~2 4
@@ -1301,12 +1251,8 @@ a b
 - -
 1 2
 3 6
-```
 
-Note t is not updated in-place:
-
-```kc
- t
+ t / t not updated in-place
 a b
 - -
 1 2
@@ -1325,9 +1271,9 @@ a b c
 
  select by a from t
 a|
--|--------------------
-1|+{a:1 1;b:2 4;c:3 5}
-2|,{a:2;b:3;c:4}
+-|--------------
+1|+{b:2 4;c:3 5}
+2|+{b:,3;c:,4}
 
  select sum b by a from t
 a|b
@@ -1340,7 +1286,7 @@ a|b
 
 Access any shell command by putting a `\` in front of it:
 
-```kc
+```kc-no-tests
  \seq 3
 1
 2
@@ -1349,7 +1295,7 @@ Access any shell command by putting a `\` in front of it:
 
 ### List files `\lf` **\lf**
 
-```kc
+```kc-no-tests
  \lf
 afile.txt
 yet another file
@@ -1357,7 +1303,7 @@ yet another file
 
 ### List character counts `\lc` **\lc**
 
-```kc
+```kc-no-tests
  \lc
 afile.txt       |29
 yet another file|50
@@ -1367,13 +1313,13 @@ You can't assign the result of `\lc` directly (ie `a: \lc` doesn't work). But yo
 
 ```kc
  {(x;@x)} @ . "\\lc"
-("afile.txt";"yet another file")!29 50j
+(,"k";"test.csv";"test.k";"test.txt";"testfile")!211392 12 4 12 24j
 `a
 ```
 
 ### List line counts `\ll` **\ll**
 
-```kc
+```kc-no-tests
  \ll
 afile.txt       |1
 yet another file|3
@@ -1499,24 +1445,24 @@ Get all rows of `t` where `c` is true.
 
 ```kc
  t: +`a`b!(1 2 3;4 5 6)
- #[t; :a>1]
+ #[:a>1;t]
 a b
 - -
 2 5
 3 6
 
-  / But since there are just two arguments,
-  / we can use # as an infix verb:
+ / But since there are just two arguments,
+ / we can use # as an infix verb:
 
- t # :a>1
+ (:a>1)#t
 a b
 - -
 2 5
 3 6
 
- t # :(a>1)&(b<6)
-,{a:2;b:5}
- t # :(a>1)&(b<5)
+ (:(a>1)&(b<6)) # t
++{a:,2;b:,5}
+ (:(a>1)&(b<5)) # t
 +{a:!0;b:!0}
 ```
 
@@ -1572,8 +1518,8 @@ To do the update in-place, use the data's name symbol instead of the name direct
  v:!3
  @[v;1;7]
 0 7 2
- v
-!3   / original assignment unchanged
+ v / original assignment unchanged
+!3
  @[`v;1;7]
 `v
  v
@@ -1585,13 +1531,6 @@ To do the update in-place, use the data's name symbol instead of the name direct
 Think of dmend as 'deep' or 'drill' amend - it's similar to amend in the same way that dyadic `.` and `@` are similar.
 
 `i` is a list that governs which slices of `x` to apply `f` to.
-
-Apply function to all elements:
-
-```kc
- .[!3; (); +; 1]
-1 2 3
-```
 
 Apply `f` to slices 0 and 2 on the first 'depth' level down:
 
@@ -1625,16 +1564,16 @@ Apply to rows or specific elements of a matrix:
   / Row 0, elements 1 and 2:
 
  .[m; (0; 1 2); 1+]
- 0 2 3
- 3 4 5
- 6 7 8
+0 2 3
+3 4 5
+6 7 8
 
   / In each of rows 1 and 2, elements 1 and 2:
 
  .[m; (1 2; 1 2); 1+]
- 0 1 2
- 3 5 6
- 6 8 9
+0 1 2
+3 5 6
+6 8 9
 
   / In all rows, elements 1 and 2:
 
@@ -1681,25 +1620,12 @@ Or (modified version of [Arthur's](https://groups.google.com/d/msg/shaktidb/6JLp
 "aec"
 ```
 
-## Boolean checks **bool**
-
-### `` `ascii `` **`ascii**
-
-Are all characters in the string in the [ASCII set](https://en.wikipedia.org/wiki/ASCII#Character_set)?
-
-```kc
- `ascii @ "123"
-1
- `ascii @ "∞"
-0
-```
-
 ## Datetimes **datetime**
 
 A datetime looks like this:
 
 ```kc
- .z.T
+ 2019-05-04T13:13:12.313 /.z.T
 2019-05-04T13:13:12.313
 ```
 
@@ -1716,17 +1642,15 @@ Dates start from `2024-01-01`:
 
 ```kc
  d:`Mon`Tue`Wed`Thu`Fri`Sat`Sun
- d @ 7 mod 2024-01-01
+ d @ 7\2024-01-01
 `Mon
 ```
 
 You can also use duration literals (requires short-form code), and do date arithmetic:
 
 ```kc
- .z.d
-2019-05-04
- .z.d + 2m
-2019-07-04
+ 2024-01-01 + 2m
+2024-03-01
 ```
 
 Datetime and duration names:
@@ -1746,11 +1670,15 @@ Datetime and duration names:
 Convert to/from/between datetimes and durations using `$`. It takes a name or string (short version only):
 
 ```kc
- `year $ .z.t
+ `year $ .z.t / .z.t doesn't contain year
+0y
+ `Y    $ .z.D
+2019Y
+ `Y    $ .z.D+.z.t
+2019Y
+ `y    $ 2019
 2019y
- `y  $ 2019
-2019y
- "y" $ 2019
+ "y"   $ 2019
 2019y
 ```
 
@@ -1800,28 +1728,28 @@ Examples:
 
 ```kc
  e: "1;.1;`n;\"c\";1 2;1. 2.;`n`o;\"chars\";"
- e,:":;v;1+2;+/1 2;{x+2y};a:1;:a+2b; /comment;\\h"
+ e,:":;v;1+2;+/1 2;{x+2*y};a:1;:a+2*b; /comment;\\h"
 
- {{string: x; parsetree: `p x; type: @ `p x}}' ";"\: e
+ {`string`parsetree`type!(x;`p x;@`p x)}' ";"\: e
 string    parsetree   type
 --------- ----------- ----
-1         1           i
-.1        0.1         f
-`n        ,`n         N
-"c"       "c"         c
-1 2       1 2         I
-1. 2.     1 2f        F
-`n`o      ,`n`o
-"chars"   "chars"     C
-:         :           2
-v         `v          n
-1+2       (+;1;2)
-+/1 2     ((/;+);1 2)
-{x+2y}    {x+2y}      1
-a:1       (::;`a;1)
-:a+2b     :a+2b       0
-/comment             1
-\h        (\;`h)
+1         1           `i
+.1        0.1         `f
+`n        ,`n         `n
+"c"       "c"         `c
+1 2       1 2         `i
+1. 2.     1 2f        `f
+`n`o      ,`n`o       `.
+"chars"   "chars"     `c
+:         :           `2
+v         `v          `n
+1+2       (+;1;2)     `.
++/1 2     ((/;+);1 2) `.
+{x+2*y}   {x+2*y}     `2
+a:1       (::;`a;1)   `.
+:a+2*b    :a+2*b      `0
+/comment             `
+\h        (;`h)       `.
 ```
 
 #### Matrix display `` `m `` **/\`m(?=\`crc)/**
@@ -1907,18 +1835,18 @@ For characters, it's just `""`:
  #""
 0
  @""
-`C
+`c
 ```
 
 For integers and floats, use `!`:
 
 ```kc
  @!0
-`I
+`i
  #!0
 0
  @!.0
-`F
+`f
  #!.0
 0
 ```
@@ -1927,7 +1855,7 @@ For other types, take 0 elements of an atom of that type (may be a better way?).
 
 ```kc
  @0#`
-`N
+`n
  #0#`
 0
 ```
@@ -1992,3 +1920,14 @@ In addition to `` `b64 ``, there's `` `b58 ``, [used](https://groups.google.com/
  `b58 "helloworld"
 "6sBRWyteSSzHrs"
 ```
+
+Are all characters in the string in the [ASCII set](https://en.wikipedia.org/wiki/ASCII#Character_set)?
+
+```kc
+ `ascii @ "123"
+1
+ `ascii @ "∞"
+0
+```
+
+There is also a corresponding `` `utf8 `` verb.
