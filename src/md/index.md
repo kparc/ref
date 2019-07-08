@@ -1532,13 +1532,6 @@ Think of dmend as 'deep' or 'drill' amend - it's similar to amend in the same wa
 
 `i` is a list that governs which slices of `x` to apply `f` to.
 
-Apply function to all elements:
-
-```kc
- .[!3; (); +; 1]
-1 2 3
-```
-
 Apply `f` to slices 0 and 2 on the first 'depth' level down:
 
 ```kc
