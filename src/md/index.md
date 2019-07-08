@@ -262,15 +262,6 @@ Unlike [equal `=`](#equal), match compares types:
 0 1 2 0 1 2
 ```
 
-With a negative integer argument, generate an identity matrix:
-
-```kc
- !-3
-1 0 0
-0 1 0
-0 0 1
-```
-
 Given a dict, get its keys:
 
 ```kc
@@ -556,29 +547,6 @@ If you want ASCII numbers of characters:
 65 66 67
  0f+"ABC"
 65 66 67f
-```
-
-`$` is also **matrix multiply**:
-
-```kc
- `m @ x: (1 0; 0 0)
-1 0
-0 0
-
- `m @ y: (3 2; 9 7)
-3 2
-9 7
-
- x $ y
-3 2f
-0 0f
-
- y $ x
-3 0f
-9 0f
-
- 1 0 1 0 $ 3 2 9 7
-12f
 ```
 
 ### Pad `$` (with string) **pad**
