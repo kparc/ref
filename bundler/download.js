@@ -14,14 +14,14 @@ const ex = (s, i='') => new Promise((res, rej) => {
 const platform = os === 'darwin' ? 'osx' : 'linux'
 
 get('https://api.anaconda.org/package/shaktidb/shakti/files', {
-    'Accept': 'application/json'    
+    'Accept': 'application/json'
 })
     .then(({data}) => JSON.parse(data))
     .then(data => data.filter(i =>
             i.attrs && i.attrs.platform == platform
         )
-        .filter(i => 
-            i.labels && i.labels[0] == 'main'
+        .filter(i =>
+            i.labels && i.labels[0] == 'dev'
         )
         .reduce((a, b) => a.upload_time > b.upload_time ? a : b).download_url
     )
