@@ -17,7 +17,7 @@ For example, with a bracket call with one argument, the monadic verb will work f
 
 ```kc
  @:["abc"]
-`C
+`c
  @["abc"]
 "abc"@
 ```
@@ -1800,28 +1800,28 @@ Examples:
 
 ```kc
  e: "1;.1;`n;\"c\";1 2;1. 2.;`n`o;\"chars\";"
- e,:":;v;1+2;+/1 2;{x+2y};a:1;:a+2b; /comment;\\h"
+ e,:":;v;1+2;+/1 2;{x+2*y};a:1;:a+2*b; /comment;\\h"
 
- {{string: x; parsetree: `p x; type: @ `p x}}' ";"\: e
+ {`string`parsetree`type!(x;`p x;@`p x)}' ";"\: e
 string    parsetree   type
 --------- ----------- ----
-1         1           i
-.1        0.1         f
-`n        ,`n         N
-"c"       "c"         c
-1 2       1 2         I
-1. 2.     1 2f        F
-`n`o      ,`n`o
-"chars"   "chars"     C
-:         :           2
-v         `v          n
-1+2       (+;1;2)
-+/1 2     ((/;+);1 2)
-{x+2y}    {x+2y}      1
-a:1       (::;`a;1)
-:a+2b     :a+2b       0
-/comment             1
-\h        (\;`h)
+1         1           `i
+.1        0.1         `f
+`n        ,`n         `n
+"c"       "c"         `c
+1 2       1 2         `i
+1. 2.     1 2f        `f
+`n`o      ,`n`o       `.
+"chars"   "chars"     `c
+:         :           `2
+v         `v          `n
+1+2       (+;1;2)     `.
++/1 2     ((/;+);1 2) `.
+{x+2*y}   {x+2*y}     `2
+a:1       (::;`a;1)   `.
+:a+2*b    :a+2*b      `0
+/comment             `
+\h        (;`h)       `.
 ```
 
 #### Matrix display `` `m `` **/\`m(?=\`crc)/**
@@ -1907,18 +1907,18 @@ For characters, it's just `""`:
  #""
 0
  @""
-`C
+`c
 ```
 
 For integers and floats, use `!`:
 
 ```kc
  @!0
-`I
+`i
  #!0
 0
  @!.0
-`F
+`f
  #!.0
 0
 ```
@@ -1927,7 +1927,7 @@ For other types, take 0 elements of an atom of that type (may be a better way?).
 
 ```kc
  @0#`
-`N
+`n
  #0#`
 0
 ```
