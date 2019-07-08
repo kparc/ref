@@ -791,13 +791,6 @@ Zero is represented as an empty integer list `!0`, not `0`:
 class error
 ```
 
-You can also turn a vector in (year, month, day) form into a k date:
-
-```kc
- `/: 2019 5 4
-2019-05-04
-```
-
 ### Vector from scalar (vs) `\:` **vs**
 
 Mnemonic tip: read 'vs' in k evaluation order, ie right to left.
@@ -816,13 +809,6 @@ Conversion of zero into a base may be surprising (empty list), but is consistent
 ```kc
  10\: 0
 !0
-```
-
-You can also turn a k date into a (year, month, day) vector:
-
-```kc
- `\: .z.d
-2019 5 4
 ```
 
 ## Nouns **Noun**
