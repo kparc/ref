@@ -191,7 +191,7 @@ Generate an ascending list of numbers, where the number of times number *i* appe
 
 ```kc
  < "abracadabra"
-0 3 5 7 10 1 8 4 6 2 9
+?0 3 5 7 10 1 8 4 6 2 9
  s@<s: "abracadabra"
 "aaaaabbcdrr"
 ```
@@ -252,9 +252,11 @@ Unlike [equal `=`](#equal), match compares types:
 
 ```kc
  !3
+!3
+ ,/!3
 0 1 2
  !2 3
-0 0 0 1 1 1
+^0 0 0 1 1 1
 0 1 2 0 1 2
 ```
 
@@ -332,10 +334,8 @@ Generate a dictionary from lists of keys and values:
 ### Sort ascending `^:` **asc**
 
 ```kc
- :: l: rand 4
-0.5594068 0.1751217 0.3652149 0.5086234
- ^l
-0.1751217 0.3652149 0.5086234 0.5594068
+ ^1 3 4 2
+^1 2 3 4
 ```
 
 ### Take `#` **take**
@@ -424,7 +424,7 @@ You can also draw or deal from a list:
 
 ```kc
  ? "abracadabra"
-"abrcd"
+?"abrcd"
  ? ("hi"; 1 2 3; `a`b; 0; "hi"; `a`b; 1 2; 0)
 "hi"
 1 2 3
@@ -1039,7 +1039,7 @@ l|1
 
 ```kc
  asc "abracadabra"
-"aaaaabbcdrr"
+^"aaaaabbcdrr"
 ```
 
 ### Sort descending `[f]dsc` **[f]dsc**
@@ -1078,12 +1078,12 @@ Generates permutation indices.
 
 ```kc
  prm 3
-0 1 2
-1 0 2
-1 2 0
-0 2 1
-2 0 1
-2 1 0
+?0 1 2
+?1 0 2
+?1 2 0
+?0 2 1
+?2 0 1
+?2 1 0
 ```
 
 ### Combinations **cmb**
