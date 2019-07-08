@@ -1625,7 +1625,7 @@ Or (modified version of [Arthur's](https://groups.google.com/d/msg/shaktidb/6JLp
 A datetime looks like this:
 
 ```kc
- .z.T
+ 2019-05-04T13:13:12.313 /.z.T
 2019-05-04T13:13:12.313
 ```
 
@@ -1642,17 +1642,15 @@ Dates start from `2024-01-01`:
 
 ```kc
  d:`Mon`Tue`Wed`Thu`Fri`Sat`Sun
- d @ 7 mod 2024-01-01
+ d @ 7\2024-01-01
 `Mon
 ```
 
 You can also use duration literals (requires short-form code), and do date arithmetic:
 
 ```kc
- .z.d
-2019-05-04
- .z.d + 2m
-2019-07-04
+ 2024-01-01 + 2m
+2024-03-01
 ```
 
 Datetime and duration names:
@@ -1672,11 +1670,15 @@ Datetime and duration names:
 Convert to/from/between datetimes and durations using `$`. It takes a name or string (short version only):
 
 ```kc
- `year $ .z.t
+ `year $ .z.t / .z.t doesn't contain year
+0y
+ `Y    $ .z.D
+2019Y
+ `Y    $ .z.D+.z.t
+2019Y
+ `y    $ 2019
 2019y
- `y  $ 2019
-2019y
- "y" $ 2019
+ "y"   $ 2019
 2019y
 ```
 
