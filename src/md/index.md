@@ -584,16 +584,16 @@ There should be no spaces between an adverb and the expression on its left-hand 
 
 (This is how the `/` adverb is distinguished from ` /`, ie the start of a comment.)
 
-Adverbs can be called in similar ways to verbs:
+Adverbs can be called in some similar ways to verbs:
 
 ```kc
  +/ 1 2 3
 6
- /[+] 1 2 3
-6
  (/ (+)) 1 2 3
 6
 ```
+
+But expect differences when trying to use adverbs as verbs, due to their many overloads.
 
 ### Each `'` **each**
 
