@@ -1518,8 +1518,8 @@ To do the update in-place, use the data's name symbol instead of the name direct
  v:!3
  @[v;1;7]
 0 7 2
- v
-!3   / original assignment unchanged
+ v / original assignment unchanged
+!3
  @[`v;1;7]
 `v
  v
