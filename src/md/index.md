@@ -374,9 +374,9 @@ Taking zero elements of a list generates an empty list of the type of the first 
 
 ```kc
  1 2 6_"abracadabra"
-"b"
-"raca"
-"dabra"
+b
+raca
+dabra
 ```
 
 ### Floor `_:` **floor**
