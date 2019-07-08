@@ -1313,7 +1313,7 @@ You can't assign the result of `\lc` directly (ie `a: \lc` doesn't work). But yo
 
 ```kc
  {(x;@x)} @ . "\\lc"
-("afile.txt";"yet another file")!29 50j
+(,"k";"test.csv";"test.k";"test.txt";"testfile")!211392 12 4 12 24j
 `a
 ```
 
