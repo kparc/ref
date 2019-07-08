@@ -925,7 +925,7 @@ A function with implicit `xyz` args can be distinguished from a dict by ensuring
 
 ```kc
  @{a:1;a*x}
-value error: a
+value error: x
  @{;a:1;a*x}
 `1
 ```
