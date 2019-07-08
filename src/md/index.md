@@ -1445,24 +1445,24 @@ Get all rows of `t` where `c` is true.
 
 ```kc
  t: +`a`b!(1 2 3;4 5 6)
- #[t; :a>1]
+ #[:a>1;t]
 a b
 - -
 2 5
 3 6
 
-  / But since there are just two arguments,
-  / we can use # as an infix verb:
+ / But since there are just two arguments,
+ / we can use # as an infix verb:
 
- t # :a>1
+ (:a>1)#t
 a b
 - -
 2 5
 3 6
 
- t # :(a>1)&(b<6)
-,{a:2;b:5}
- t # :(a>1)&(b<5)
+ (:(a>1)&(b<6)) # t
++{a:,2;b:,5}
+ (:(a>1)&(b<5)) # t
 +{a:!0;b:!0}
 ```
 
