@@ -1208,6 +1208,7 @@ A table can also be considered as a flipped dict of lists, where each list is of
 You can access rows or columns of the table by indexing using the row number or column key:
 
 ```kc
+ t: ({a:1;b:2};{a:3;b:4})
  t[1]~{a:3;b:4}
 1
  t[`b]~2 4
@@ -1250,12 +1251,8 @@ a b
 - -
 1 2
 3 6
-```
 
-Note t is not updated in-place:
-
-```kc
- t
+ t / t not updated in-place
 a b
 - -
 1 2
