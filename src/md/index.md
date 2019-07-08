@@ -1620,19 +1620,6 @@ Or (modified version of [Arthur's](https://groups.google.com/d/msg/shaktidb/6JLp
 "aec"
 ```
 
-## Boolean checks **bool**
-
-### `` `ascii `` **`ascii**
-
-Are all characters in the string in the [ASCII set](https://en.wikipedia.org/wiki/ASCII#Character_set)?
-
-```kc
- `ascii @ "123"
-1
- `ascii @ "∞"
-0
-```
-
 ## Datetimes **datetime**
 
 A datetime looks like this:
@@ -1931,3 +1918,14 @@ In addition to `` `b64 ``, there's `` `b58 ``, [used](https://groups.google.com/
  `b58 "helloworld"
 "6sBRWyteSSzHrs"
 ```
+
+Are all characters in the string in the [ASCII set](https://en.wikipedia.org/wiki/ASCII#Character_set)?
+
+```kc
+ `ascii @ "123"
+1
+ `ascii @ "∞"
+0
+```
+
+There is also a corresponding `` `utf8 `` verb.
