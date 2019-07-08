@@ -78,9 +78,9 @@ You can assign a value to a list index, or a dictionary key:
  d:{a:1;b:2}
  d[`a`c]:3 4
  d
-a|3
-b|2
-c|4
+a:3
+b:2
+c:4
 ```
 
 You can combine assignment with other verbs:
@@ -305,9 +305,9 @@ Catenate merges dicts (where keys collide, right overrides left):
 
 ```kc
  {a:1;b:2},{a:3;c:4}
-a|3
-b|2
-c|4
+a:3
+b:2
+c:4
 ```
 
 Tables are lists of dicts, so:
@@ -602,8 +602,8 @@ Pads with spaces on right-hand side, or truncates from right:
 "name"
 
  ${a:1 2;b:3}
-a|(,"1";,"2")
-b|,"3"
+a:(,"1";,"2")
+b:,"3"
 
  :: s:$+`a`b!(1 2;3 4)
 a b
@@ -949,8 +949,8 @@ Dicts are ordered:
 
 ```kc
  |{a:1;b:2}
-b|2
-a|1
+b:2
+a:1
 ```
 
 Recover the keys and values using `!:` and `.:`:
