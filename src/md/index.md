@@ -415,9 +415,9 @@ You can also draw or deal from a list:
 
 ```kc
  3 ? "abcd"
-"daa"
+"bdb"
  -3 ? "abcd"
-"acb"
+"cab"
 ```
 
 ### Unique `?:` **unique**
@@ -1145,20 +1145,20 @@ Uniform distribution `rand i` or `i rand i`:
 
 ```kc
  rand 3
-0.7502717 0.8107001 0.8145892
+0.5 0.9078156 0.269656
  3 rand 10
-7 3 9
+5 5 1
 ```
 
 Normal distribution `rand -i`:
 
 ```kc
  `m @ rand -5
-1.207587
-0.5333917
-0.3390071
--0.2990315
-0.8556685
+1.157194e-13
+-0.5821508
+1.846709
+-1.075539
+0.890081
 ```
 
 ### Bar `i'` **bar**
