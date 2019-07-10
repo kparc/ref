@@ -10,7 +10,8 @@ const k = (i='') => {
         .split('\n')
         .map(m => m.trim())
         .filter(f => f.length)
-    while (s.length && !s[0].includes('© shakti')) s.shift()
+    //while (s.length && !s[0].includes('© shakti')) s.shift()
+    while (s.length && !s[s.length - 1].length) s.pop()
     i.length && s.shift()
     return s.join('\n')
 }
