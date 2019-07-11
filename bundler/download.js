@@ -27,7 +27,7 @@ get('https://api.anaconda.org/package/shaktidb/shakti/files', {
     )
     .then(url => 'https:' + url)
     .then(url => console.log(`downloading k from ${url}`) || url)
-    .then(url => ex(`curl -LGs "${url}" | tar -jxf - "bin/k"`))
+    .then(url => ex(`curl -m 10 -LGs "${url}" | tar -jxf - "bin/k"`))
     .then(nothing => console.log('done'))
     .then(nothing => process.exit(0))
     .catch(e => console.error(e) || process.exit(1)) 

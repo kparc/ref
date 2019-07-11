@@ -10,14 +10,15 @@
 #define BSZ 8192
 
 S a[] = {"./k", NULL};
+C alt = 4;
 
 I p(I i, I o, fd_set *r, S b) {
     I sz;
     if (FD_ISSET(i, r)) {
         sz = read(i, b, BSZ);
-        if (sz > 0) {
-            write(o, b, sz);
-        } else if (sz < 0) R1;
+        if (sz > 0) write(o, b, sz);
+        else if (sz < 0) R1;
+        else write(o, &alt, 1);
     }
     R0;
 }

@@ -15,7 +15,7 @@ loadLang(['q'])
 
 module.exports = function(html) {
     var $ = ch.load(html)
-    var text = k('\\h')
+    var text = k('\\h ')
 
     // get rid of trailing whitespace
     text = text.split('\n').map(s => s.trimRight()).join('\n')
