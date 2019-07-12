@@ -9,7 +9,7 @@
 
 #define BSZ 8192
 
-S a[] = {"./k", NULL};
+S USAGE = "usage: %s <command>\n";
 C alt = 4;
 
 I p(I i, I o, fd_set *r, S b) {
@@ -28,6 +28,7 @@ I main(I argc, S* argv) {
     fd_set r;
     struct termios ts;
     C b[BSZ];
+    X(argc < 2, fprintf(stderr, USAGE, argv[0]), 1)
     m = posix_openpt(O_RDWR);
     grantpt(m);
     unlockpt(m);
@@ -39,11 +40,11 @@ I main(I argc, S* argv) {
     if (!pid) {
         // child process
         close(m);
-        DO(3,close(i);dup(s))
+        DO(3,dup2(s,i))
         close(s);
         setsid();
         ioctl(0, TIOCSCTTY, 1);
-        execvp(a[0], a);
+        execvp(argv[1], argv + 1);
     } else {
         // parent process
         close(s);

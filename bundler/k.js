@@ -2,7 +2,7 @@ const execSync = require('child_process').execSync
 const os = require('os').platform()
 
 const k = (i='') => {
-    let s = execSync('./pty', {
+    let s = execSync(`./pty ${os=='darwin'?'':'./'}k`, {
         cwd: process.cwd() + '/bundler/bin',
         input: i,
         encoding: 'utf8'
