@@ -1,8 +1,8 @@
 const execSync = require('child_process').execSync
 const os = require('os').platform()
 
-const k = (i='') => {
-    let s = execSync(`./pty ${os=='darwin'?'':'./'}k`, {
+const linux = (i='') => {
+    let s = execSync(`./pty ./k`, {
         cwd: process.cwd() + '/bundler/bin',
         input: i,
         encoding: 'utf8'
@@ -14,4 +14,19 @@ const k = (i='') => {
     return s.join('\n')
 }
 
-module.exports = k
+const osx = (i='') => {
+    const cmd = 'script -q /dev/null "./k" | cat'//'script -qc "./k" /dev/null | cat'
+    let s = execSync(cmd, {
+        cwd: process.cwd() + '/bundler/bin',
+        input: i + '\n',
+        encoding: 'utf8'
+    })
+        .split('\n')
+        .map(m => m.trim())
+    while (s.length && !s[0].includes('© shakti')) s.shift()
+    i.length && s.shift()
+    while (s.length && !s[s.length - 1].length) s.pop()
+    return s.join('\n')
+}
+
+module.exports = os === 'darwin' ? osx : linux
