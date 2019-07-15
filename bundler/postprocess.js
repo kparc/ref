@@ -33,7 +33,7 @@ module.exports = function(html) {
     }
 
     // invoke syntax highlighter, but only on the input lines    
-    $('code.language-kc').each((k, v) => $(v).replaceWith(
+    $('code.language-kc, code.language-kc-no-tests').each((k, v) => $(v).replaceWith(
         $(v)
             .text()
             .split('\n')
