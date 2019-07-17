@@ -4,14 +4,14 @@ const os = require('os').platform()
 const linux = (i='') => {
     let s = execSync(`./pty ./k`, {
         cwd: process.cwd() + '/bundler/bin',
-        input: i,
+        input: i + '\n',
         encoding: 'utf8'
     })
         .split('\n')
         .map(m => m.trim())
-    while (s.length && !s[s.length - 1].length) s.pop()
+    //while (s.length && !s[s.length - 1].length) s.pop()
     i.length && s.shift()
-    return s.join('\n')
+    return s.join('\n').trimEnd('\n')
 }
 
 const osx = (i='') => {
@@ -25,8 +25,8 @@ const osx = (i='') => {
         .map(m => m.trim())
     while (s.length && !s[0].includes('© shakti')) s.shift()
     i.length && s.shift()
-    while (s.length && !s[s.length - 1].length) s.pop()
-    return s.join('\n')
+    //while (s.length && !s[s.length - 1].length) s.pop()
+    return s.join('\n').trimEnd('\n')
 }
 
 module.exports = os === 'darwin' ? osx : linux

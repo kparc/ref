@@ -1,6 +1,3 @@
-// i was too lazy to implement library extensions the way library authors wanted me to
-// "доработал рашпилем"
-
 const ch = require('cheerio')
 const _ = require('lodash')
 const prism = require('prismjs')
@@ -15,7 +12,7 @@ loadLang(['q'])
 
 module.exports = function(html) {
     var $ = ch.load(html)
-    var text = k('\\h ')
+    var text = k('\\h')
 
     // get rid of trailing whitespace
     text = text.split('\n').map(s => s.trimRight()).join('\n')
@@ -29,21 +26,21 @@ module.exports = function(html) {
     if (snippets.length) {
         console.error(snippets)
         // uncomment the following line to make the build fail if errors were detected
-        //throw "invalid snippets detected"
+        throw "invalid snippets detected"
     }
 
     // invoke syntax highlighter, but only on the input lines    
-    $('code.language-kc, code.language-kc-no-tests').each((k, v) => $(v).replaceWith(
+    $('code.language-kc, code.language-kc-no-tests, code.language-kc-nyi').each((k, v) => $(v).replaceWith(
         $(v)
             .text()
             .split('\n')
             .map(s => {
                 if(!s.length)
                     return s
-                return s[0] == ' ' 
+                return s[0] == '•' 
                     ? `<code class="language-q in">${prism.highlight(s.slice(1), prism.languages.q, 'q')}</code>`
-                    : `<code class="language-q out">${prism.highlight(s, prism.languages.q, 'q')}</code>`
-                    // : `<code class="out">${s}</code>`
+                    // : `<code class="language-q out">${prism.highlight(s, prism.languages.q, 'q')}</code>`
+                    : `<code class="language-q out">${s}</code>`
             })
             .join('\n')
         || $.html($(v))

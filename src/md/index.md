@@ -5,9 +5,9 @@ Force the monadic case by applying a `:` suffix.
 Force the dyadic case by putting the verb in parentheses:
 
 ```kc
- @1
+•@1
 `i
- (@)1
+•(@)1
 1@
 ```
 
@@ -16,34 +16,34 @@ Monadic and dyadic versions of a character are **different verbs** - it's not ju
 For example, with a bracket call with one argument, the monadic verb will work fine, while the dyadic verb will project:
 
 ```kc
- @:["abc"]
+•@:["abc"]
 `c
- @["abc"]
+•@["abc"]
 "abc"@
 ```
 
 For dyadic verbs, `x` is on the left and `y` is on the right:
 
 ```kc
- 1,2
+•1,2
 1 2
- ,[1;2]
+•,[1;2]
 1 2
 ```
 
 Project over the first argument by omitting it entirely:
 
 ```kc
- @[;1] "abc"
+•@[;1] "abc"
 "b"
 ```
 
 Triadic versions of a verb are the same as the dyadic version (except for [`cond`](#cond)):
 
 ```kc
- (?) . ("abcb"; "b")
+•(?) . ("abcb"; "b")
 1
- (?) . ("abcb"; 1; "d")
+•(?) . ("abcb"; 1; "d")
 "adbcb"
 ```
 
@@ -70,14 +70,14 @@ f: { {x*x} reusedtempdata }
 You can assign a value to a list index, or a dictionary key:
 
 ```kc
- a:!3
- a[1]:4
- a
+•a:!3
+•a[1]:4
+•a
 0 4 2
 
- d:{a:1;b:2}
- d[`a`c]:3 4
- d
+•d:{a:1;b:2}
+•d[`a`c]:3 4
+•d
 a:3
 b:2
 c:4
@@ -86,18 +86,18 @@ c:4
 You can combine assignment with other verbs:
 
 ```kc
- a:1
- a+:1
- a
+•a:1
+•a+:1
+•a
 2
 
- l:()
- l,:1 2 3
- l
+•l:()
+•l,:1 2 3
+•l
 1 2 3
 
- l[0],:0
- l
+•l[0],:0
+•l
 1 0
 2
 3
@@ -106,7 +106,7 @@ You can combine assignment with other verbs:
 Assign doesn't appear to be callable with square brackets; in fact the parse tree suggests it has an unconventional evaluation order:
 
 ```kc
- `p "I[0]:4"
+•`p "I[0]:4"
 ::
 (`I;0)
 4
@@ -117,33 +117,33 @@ Under normal bracket precedence, you'd lose info about where to assign to before
 ### Add `+` **add**
 
 ```kc-no-tests
- {a:1}+{a:2}
+•{a:1}+{a:2}
 {a:3}
- {a:1}+{b:2}
+•{a:1}+{b:2}
 a|1
 b|2
 
- "a"+`c$25
+•"a"+`c$25
 "z"
 ```
 
 ### Flip `+:` **flip**
 
 ```kc
-  ("a";"bc")
+• ("a";"bc")
 "a"
 "bc"
 
- +("a";"bc")
+•+("a";"bc")
 ab
 ac
 
- +(1 2 3;4 5)
+•+(1 2 3;4 5)
 1 4
 2 5
 3 Ø
 
- *++("##";"###")
+•*++("##";"###")
 "## "
 ```
 
@@ -152,27 +152,27 @@ ac
 First of an empty list is null of the type of the list:
 
 ```kc
- *0#,1
+•*0#,1
 Ø
 ```
 
 ### Divide by `%` **divideby**
 
 ```kc
- 1 % 2
+•1 % 2
 0.5
 ```
 
 ### Min `&` **min**
 
 ```kc
- 2 & 1
+•2 & 1
 1
- 2 & 1 3
+•2 & 1 3
 1 2
- 1 3 & 2
+•1 3 & 2
 1 2
- 1 3 & 2 0
+•1 3 & 2 0
 1 0
 ```
 
@@ -183,23 +183,23 @@ First of an empty list is null of the type of the list:
 Generate an ascending list of numbers, where the number of times number *i* appears is equal to the number at position *i* of the input list.
 
 ```kc
- &1 0 2 1
+•&1 0 2 1
 ^0 2 2 3
 ```
 
 ### Up `<:` **up**
 
 ```kc
- < "abracadabra"
+•< "abracadabra"
 ?0 3 5 7 10 1 8 4 6 2 9
- s@<s: "abracadabra"
+•s@<s: "abracadabra"
 "aaaaabbcdrr"
 ```
 
 ### Equal `=` **equal**
 
 ```kc
- 1=1f
+•1=1f
 1
 ```
 
@@ -208,7 +208,7 @@ Generate an ascending list of numbers, where the number of times number *i* appe
 With a list, get back the indices at which each unique element appears:
 
 ```kc
- ="abracadabra"
+•="abracadabra"
 a|0 3 5 7 10
 b|1 8
 c|,4
@@ -221,41 +221,41 @@ r|2 9
 Test whether data is identical. Can handle nested structures.
 
 ```kc
- (1;"c";(;{a:2}))~(1;"c";(;{a:2}))
+•(1;"c";(;{a:2}))~(1;"c";(;{a:2}))
 1
 ```
 
 With one value different in the nested structure:
 
 ```kc
- (1;"c";(;{a:2}))~(1;"c";(;{a:1}))
+•(1;"c";(;{a:2}))~(1;"c";(;{a:1}))
 0
 ```
 
 Unlike [equal `=`](#equal), match compares types:
 
 ```kc
- 1~1f
+•1~1f
 0
 ```
 
 ### Not `~:` **not**
 
 ```kc
- ~3
+•~3
 0
- ~~3
+•~~3
 1
 ```
 
 ### Enumerate `!:` **enum**
 
 ```kc
- !3
+•!3
 !3
- ,/!3
+•,/!3
 0 1 2
- !2 3
+•!2 3
 ^0 0 0 1 1 1
 0 1 2 0 1 2
 ```
@@ -263,7 +263,7 @@ Unlike [equal `=`](#equal), match compares types:
 Given a dict, get its keys:
 
 ```kc
- ! {a:1;b:2}
+•! {a:1;b:2}
 `a`b
 ```
 
@@ -272,20 +272,20 @@ Given a dict, get its keys:
 Joins two atoms. Prepends/appends an atom to a list. Merges lists.
 
 ```kc
- 1,2
+•1,2
 1 2
- 1 2,3
+•1 2,3
 1 2 3
- 1,2 3
+•1,2 3
 1 2 3
- 1 2,3 4
+•1 2,3 4
 1 2 3 4
 ```
 
 If you want to make a list nested in the output, enlist it first:
 
 ```kc
- 1,,2 3
+•1,,2 3
 1
 2 3
 ```
@@ -293,7 +293,7 @@ If you want to make a list nested in the output, enlist it first:
 Catenate merges dicts (where keys collide, right overrides left):
 
 ```kc
- {a:1;b:2},{a:3;c:4}
+•{a:1;b:2},{a:3;c:4}
 a:3
 b:2
 c:4
@@ -302,9 +302,9 @@ c:4
 Tables are lists of dicts, so:
 
 ```kc
- t:+{a:,1}
- u:+{a:,2}
- t,u
+•t:+{a:,1}
+•u:+{a:,2}
+•t,u
 a
 -
 1
@@ -316,64 +316,64 @@ a
 Generate a dictionary from lists of keys and values:
 
 ```kc
- `k @ `a`b!1 2
+•`k @ `a`b!1 2
 "{a:1;b:2}"
 ```
 
 ### Except `^` **except**
 
 ```kc
- (!4)^1
+•(!4)^1
 0 2 3
- (!4)^1 3
+•(!4)^1 3
 0 2
- "abracadabra" ^ "bc"
+•"abracadabra" ^ "bc"
 "araadara"
 ```
 
 ### Sort ascending `^:` **asc**
 
 ```kc
- ^1 3 4 2
+•^1 3 4 2
 ^1 2 3 4
 ```
 
 ### Take `#` **take**
 
 ```kc
- 3#"abracadabra"
+•3#"abracadabra"
 "abr"
 ```
 
 Given a filter function (returns `1` or `0` given `x`):
 
 ```kc
- (2\)#!9
+•(2\)#!9
 1 3 5 7
- {~2\x}#!9      
+•{~2\x}#!9      
 0 2 4 6 8
 ```
 
 Taking zero elements of a list generates an empty list of the type of the first element of the list (or if the list is empty, the type of the list):
 
 ```kc
- 0#(1;`a)
+•0#(1;`a)
 !0
- 0#!0
+•0#!0
 !0
 ```
 
 ### Drop `_` **drop**
 
 ```kc
- 4_"abracadabra"
+•4_"abracadabra"
 "cadabra"
 ```
 
 `I_` is cut:
 
 ```kc
- 1 2 6_"abracadabra"
+•1 2 6_"abracadabra"
 b
 raca
 dabra
@@ -382,50 +382,50 @@ dabra
 ### Floor `_:` **floor**
 
 ```kc
- _ 1.23 -1.23 0
+•_ 1.23 -1.23 0
 1 -2 0
 ```
 
 ### Find `?` **find**
 
 ```kc
- 2 3 1 4 0 ? 3
+•2 3 1 4 0 ? 3
 1
- 2 3 1 4 0 ? 3 1 0
+•22 3 1 4 0 ? 3 1 0
 1 2 4
 ```
 
 `i?` is draw (with replacement), `-i?` is deal (without replacement):
 
 ```kc-nyi
- ^ 9 ? 9
+•^ 22 9 ? 9
 ^1 3 5 5 6 6 7 7 8
- ^ -9 ? 9
+•2^ -9 ? 9
 ^?0 1 2 3 4 5 6 7 8
 
- 10 ? 9
+•10 ? 9
 1 0 1 7 3 6 2 2 5 0
- -10 ? 9
+•-10 ? 9
 -10 ? 9
-    ^
+•   ^
 length error
 ```
 
 You can also draw or deal from a list:
 
 ```kc
- 3 ? "abcd"
+•3 ? "abcd"
 "bdb"
- -3 ? "abcd"
+•-3 ? "abcd"
 "cab"
 ```
 
 ### Unique `?:` **unique**
 
 ```kc
- ? "abracadabra"
+•? "abracadabra"
 ?"abrcd"
- ? ("hi"; 1 2 3; `a`b; 0; "hi"; `a`b; 1 2; 0)
+•? ("hi"; 1 2 3; `a`b; 0; "hi"; `a`b; 1 2; 0)
 "hi"
 1 2 3
 `a`b
@@ -438,72 +438,72 @@ You can also draw or deal from a list:
 With an atom, applies that atom to the left function:
 
 ```kc
- (1+) @ 2
+•(1+) @ 2
 3
 ```
 
 With a list, applies each element of that list to the function ('shallow' application, ie doesn't go beyond `x` of `xyz`):
 
 ```kc
- (1+) @ 2 4 7
+•(1+) @ 2 4 7
 3 5 8
 ```
 
 ### Apply `.` **apply**
 
 ```kc
- {z,x,y} . `a`b`c
+•{z,x,y} . `a`b`c
 `c`a`b
 ```
 
 Apply can also be used to 'drill' into a data structure in a similar way to bracket indexing. For example:
 
 ```kc
- :: m: 3 3 # !9
+•:: m: 3 3 # !9
 0 1 2
 3 4 5
 6 7 8
 
- m[1]
+•m[1]
 3 4 5
 
- m . ,1
+•m . ,1
 3 4 5
 
- m[1 2]
-3 4 5
-6 7 8
-
- m . ,1 2
+•m[1 2]
 3 4 5
 6 7 8
 
-  / Atoms at x and y positions
- m[1; 2]
+•m . ,1 2
+3 4 5
+6 7 8
+
+• / Atoms at x and y positions
+•m[1; 2]
 5
- m . 1 2
+•m . 1 2
 5
 ```
 
 ### Value `.:` **value**
 
 ```kc
- . "1+2"
+•. "1+2"
 3
 
- d:1
- . "d+:1"
- d
+•d:1
+•. "d+:1"
+•d
 2
 
- . {a:1;b:2}
+•. {a:1;b:2}
 1 2
 
- . :x+y
+•. :x+y
 (+;`x;`y)
 ":x+y"
 
- . {x+y+a:1}
+•. {x+y+a:1}
 (+;`x;(+;`y;(::;`a;1)))
 "{x+y+a:1}"
 `
@@ -514,33 +514,33 @@ Apply can also be used to 'drill' into a data structure in a similar way to brac
 ### Cast `$` (with a non-string) **cast**
 
 ```kc
- "YMD"$0
+•"YMD"$0
 2024Y
 2024-01M
 2024-01-01
 
- (`Y`M`D$0)~"YMD"$0
+•(`Y`M`D$0)~"YMD"$0
 1
 
- `c $ 65+!3
+•`c $ 65+!3
 "ABC"
 ```
 
 However, casting chars to ints/floats/etc is more like a parse than a cast:
 
 ```kc
- `i$"123"
+•`i$"123"
 123
- `i$"ABC"
+•`i$"ABC"
 Ø
 ```
 
 If you want ASCII numbers of characters:
 
 ```kc
- 0+"ABC"
+•0+"ABC"
 65 66 67
- 0f+"ABC"
+•0f+"ABC"
 65 66 67f
 ```
 
@@ -549,32 +549,32 @@ If you want ASCII numbers of characters:
 Pads with spaces on right-hand side, or truncates from right:
 
 ```kc
- 4$"abc"
+•4$"abc"
 "abc "
- 2$"abc"
+•2$"abc"
 "ab"
 ```
 
 ### String `$:` **/string(?= )/**
 
 ```kc
- $1
+•$1
 ,"1"
 
- $`name
+•$`name
 "name"
 
- ${a:1 2;b:3}
+•${a:1 2;b:3}
 a:(,"1";,"2")
 b:,"3"
 
- :: s:$+`a`b!(1 2;3 4)
+•:: s:$+`a`b!(1 2;3 4)
 a b
 - -
 1 3
 2 4
 
- s[0][`a]
+•s[0][`a]
 ,"1"
 ```
 
@@ -587,9 +587,9 @@ There should be no spaces between an adverb and the expression on its left-hand 
 Adverbs can be called in some similar ways to verbs:
 
 ```kc
- +/ 1 2 3
+•+/ 1 2 3
 6
- (/ (+)) 1 2 3
+•(/ (+)) 1 2 3
 6
 ```
 
@@ -600,9 +600,9 @@ But expect differences when trying to use adverbs as verbs, due to their many ov
 Make a function apply to each element of its input lists, rather than the list itself.
 
 ```kc
- "~" , "abc"
+•"~" , "abc"
 "~abc"
- "~" ,' "abc"
+•"~" ,' "abc"
 ~a
 ~b
 ~c
@@ -611,11 +611,11 @@ Make a function apply to each element of its input lists, rather than the list i
 'Each' will apply to pairings of its input lists:
 
 ```kc
- "ab" ,' "cd"
+•"ab" ,' "cd"
 ac
 bd
 
- {x,y,z}'["ab";"cd";"ef"]
+•{x,y,z}'["ab";"cd";"ef"]
 ace
 bdf
 ```
@@ -625,14 +625,14 @@ bdf
 n f/x
 
 ```kc
- 3 {x+1}/10
+•3 {x+1}/10
 13
 ```
 
 p f/x
 
 ```kc
- {4>#x} {x,"k"}/"o"
+•{4>#x} {x,"k"}/"o"
 "okkk"
 ```
 
@@ -641,14 +641,14 @@ p f/x
 n f\x
 
 ```kc
- 3 {x+1}\10
+•3 {x+1}\10
 10 11 12 13
 ```
 
 p f\x
 
 ```kc
- {4>#x} {x,"k"}\"o"
+•{4>#x} {x,"k"}\"o"
 "o"
 "ok"
 "okk"
@@ -660,15 +660,15 @@ p f\x
 The null chosen for the first pairing is of the type of the first member of the list.
 
 ```kc
- {y,x}': !3
+•{y,x}': !3
 Ø 0
 0 1
 1 2
- {y,x}': 1.0 2.1 4.7
+•{y,x}': 1.0 2.1 4.7
 ø 1
 1 2.1
 2.1 4.7
- {y,x}': ("a";1;`ok)
+•{y,x}': ("a";1;`ok)
 " a"
 ("a";1)
 (1;`ok)
@@ -677,16 +677,16 @@ The null chosen for the first pairing is of the type of the first member of the 
 Specify a number to seed the scan:
 
 ```kc
- +':!5
+•+':!5
 0 1 3 5 7
- 8+':!5
+•8+':!5
 8 1 3 5 7
 ```
 
 `':` can also provide a 'sliding window' of size `x` over `y`:
 
 ```kc
- 3': !5
+•3': !5
 0 1 2
 1 2 3
 2 3 4
@@ -697,10 +697,10 @@ Specify a number to seed the scan:
 Compare to each:
 
 ```kc
- "ab" ,' "cd"
+•"ab" ,' "cd"
 ac
 bd
- "ab" ,/: "cd"
+•"ab" ,/: "cd"
 abc
 abd
 ```
@@ -708,7 +708,7 @@ abd
 ### Each left `\:` **eachleft**
 
 ```kc
- "ab" ,\: "cd"
+•"ab" ,\: "cd"
 acd
 bcd
 ```
@@ -720,28 +720,28 @@ The following work with **lists of strings**.
 Prepend the separator to `/:`, [without a space in between](https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ).
 
 ```kc
- "-"/: ("la";"li";"lu";"le";"lo")
+•"-"/: ("la";"li";"lu";"le";"lo")
 "la-li-lu-le-lo"
 ```
 
 With empty symbol as 'separator', appends a carriage return and newline to each string and joins. (This is also known as 'sS' or 'string from String', with capitalisation following the k7 convention of lower for atom, upper for list of atoms of same type).
 
 ```kc
- `/: ("ab";"cd")
+•`/: ("ab";"cd")
 "ab\r\ncd\r\n"
 ```
 
 With three characters instead of just a separator, prepends/appends the first and last:
 
 ```kc
- "(;)"/: (,:' "abcd")
+•"(;)"/: (,:' "abcd")
 "(a;b;c;d)"
 ```
 
 That means 'join' can't be used for multi-character separators, but you can always do this ([source](https://groups.google.com/d/msg/shaktidb/ttIdJiWx9xI/hiTjuX7_BAAJ)):
 
 ```kc
- {y,x,z}[", "]/$`ab`cd`ef
+•{y,x,z}[", "]/$`ab`cd`ef
 "ab, cd, ef"
 ```
 
@@ -750,7 +750,7 @@ That means 'join' can't be used for multi-character separators, but you can alwa
 Prepend the separator to `\:`, [without a space in between](https://groups.google.com/d/msg/shaktidb/FRNnOgPgZWA/so4euXj7AAAJ).
 
 ```kc
- "-"\: "la-li-lu-le-lo"
+•"-"\: "la-li-lu-le-lo"
 la
 li
 lu
@@ -761,10 +761,10 @@ lo
 With empty symbol as 'separator', splits on newlines, including (if present) at the end of the last word. (This is also known as 'Ss' or 'String from string'.)
 
 ```kc
- `\: "ab\ncd\n"
+•`\: "ab\ncd\n"
 ab
 cd
- `\: "ab\ncd"
+•`\: "ab\ncd"
 ab
 cd
 ```
@@ -776,16 +776,16 @@ Mnemonic tip: read 'sv' in k evaluation order, ie right to left.
 Convert a vector of numbers from a specified base into base 10:
 
 ```kc
- 2/: 1 0 1 0
+•2/: 1 0 1 0
 10
 ```
 
 Zero is represented as an empty integer list `!0`, not `0`:
 
 ```kc-nyi
- 10/: !0
+•10/: !0
 0
- 10/: 0
+•10/: 0
 { {z+y*x} / [0;x;y] }
      ^
 class error
@@ -798,16 +798,16 @@ Mnemonic tip: read 'vs' in k evaluation order, ie right to left.
 Convert a number from base 10 into a specified base:
 
 ```kc
- 10\: 1000
+•10\: 1000
 1 0 0 0
- 2\: 10
+•2\: 10
 1 0 1 0
 ```
 
 Conversion of zero into a base may be surprising (empty list), but is consistent:
 
 ```kc
- 10\: 0
+•10\: 0
 !0
 ```
 
@@ -830,9 +830,9 @@ Names are also known as symbols.
 All of `1.0`, `.5`, `1.`, `1f` are valid float literals.
 
 ```kc
- Ø=ø
+•Ø=ø
 1
- Ø~ø
+•Ø~ø
 0
 ```
 
@@ -841,22 +841,22 @@ All of `1.0`, `.5`, `1.`, `1f` are valid float literals.
 Although two lists may be zero length, and have the same type, they may not be the same:
 
 ```kc
- (@()) = @0 2 # 0
+•(@()) = @0 2 # 0
 1
- (#()) = #0 2 # 0
+•(#()) = #0 2 # 0
 1
- () ~ 0 2 # 0
+•() ~ 0 2 # 0
 0
 ```
 
 The 'extra dimensions' can matter for matrix multiplication:
 
 ```kc-nyi
- () $ (0 2 # 0)
+•() $ (0 2 # 0)
 0#,ø ø
- (!0) $ (0 2 # 0)
+•(!0) $ (0 2 # 0)
 0 0f
- (0 2 # 0) $ !0
+•(0 2 # 0) $ !0
 (0 2 # 0) $ !0
           ^
 length error
@@ -865,27 +865,27 @@ length error
 Empty list `()` is the same as `0 0#""`, but not `0#""` or `0 0 0#""`:
 
 ```kc
- 0#""
+•0#""
 ""
- 0 0#""
+•0 0#""
 ()
- ()~0 0#""
+•()~0 0#""
 1
- ()~0 0 0#""
+•()~0 0 0#""
 0
 ```
 
 `` (2;3.4;`c) `` (or any list of atoms, functions etc) can also be written `` 2,3.4,`c ``:
 
 ```kc
- (2;3.4;`c)~2,3.4,`c
+•(2;3.4;`c)~2,3.4,`c
 1
 ```
 
 But it breaks down when you include nested lists such as strings:
 
 ```kc
- 2,"hi",`c
+•2,"hi",`c
 2
 "h"
 "i"
@@ -897,7 +897,7 @@ But it breaks down when you include nested lists such as strings:
 Dicts are ordered:
 
 ```kc
- |{a:1;b:2}
+•|{a:1;b:2}
 b:2
 a:1
 ```
@@ -905,9 +905,9 @@ a:1
 Recover the keys and values using `!:` and `.:`:
 
 ```kc
- !{a:1;b:2}
+•!{a:1;b:2}
 `a`b
- .{a:1;b:2}
+•.{a:1;b:2}
 1 2
 ```
 
@@ -916,17 +916,17 @@ Recover the keys and values using `!:` and `.:`:
 Functions can call themselves by using their own name in their definition. Naive example:
 
 ```kc
- factorial: {$[x<2;1;x*factorial[x-1]]}
- factorial 4
+•factorial: {$[x<2;1;x*factorial[x-1]]}
+•factorial 4
 24
 ```
 
 A function with implicit `xyz` args can be distinguished from a dict by ensuring the body does not start with an assignment (eg start with `;` or, in scripts, a newline):
 
 ```kc
- @{a:1;a*x}
+•@{a:1;a*x}
 value error: x
- @{;a:1;a*x}
+•@{;a:1;a*x}
 `1
 ```
 
@@ -935,10 +935,10 @@ value error: x
 Exprs can be executed on tables, eg:
 
 ```kc
- t: +`a`b!(1 2 3;4 5 6)
- t :a>1
+•t: +`a`b!(1 2 3;4 5 6)
+•t :a>1
 0 1 1
- t@&t :a>1
+•t@&t :a>1
 a b
 - -
 2 5
@@ -952,51 +952,51 @@ Some expr functionality is NYI. For more info, see [this forum post](https://gro
 ### `in` **/in(?= within)/**
 
 ```kc
- `c`d in `a`b`c
+•`c`d in `a`b`c
 1 0
 
- "abcz" in "abracadabra"
+•"abcz" in "abracadabra"
 1 1 1 0
 
- 2 5 in !5
+•2 5 in !5
 1 0
- 2 5 in (1 2; 2 5; 2 4)
+•2 5 in (1 2; 2 5; 2 4)
 1
- 2 5 in (1 2; 2 4)
+•2 5 in (1 2; 2 4)
 0
 ```
 
 ### `within` **within**
 
 ```kc
- `p within `A`z
+•`p within `A`z
 1
- `p within `A`Z
+•`p within `A`Z
 0
 ```
 
 Includes lower bound, excludes upper bound:
 
 ```kc
- 1 within 1 2
+•1 within 1 2
 1
- 2 within 1 2
+•2 within 1 2
 0
- 1 2 3 within 1 3
+•1 2 3 within 1 3
 1 1 0
 ```
 
 ### `like` **like**
 
 ```kc
- "abc" like "*b?"
+•"abc" like "*b?"
 1
- "abcd" like "*b?"
+•"abcd" like "*b?"
 0
 
- (,"1") like "[0-3]"
+•(,"1") like "[0-3]"
 1
- (,"4") like "[0-3]"
+•(,"4") like "[0-3]"
 0
 ```
 
@@ -1005,7 +1005,7 @@ Includes lower bound, excludes upper bound:
 Counts of each item in the list.
 
 ```kc
- freq "alibaba"
+•freq "alibaba"
 a|3
 b|2
 i|1
@@ -1015,7 +1015,7 @@ l|1
 ### `find` **find**
 
 ```kc
- "abracadabra" find "bra"
+•"abracadabra" find "bra"
 1 3
 8 3
 ```
@@ -1023,14 +1023,14 @@ l|1
 ### Sort ascending `[f]asc` **[f]asc**
 
 ```kc
- asc "abracadabra"
+•asc "abracadabra"
 ^"aaaaabbcdrr"
 ```
 
 ### Sort descending `[f]dsc` **[f]dsc**
 
 ```kc
- dsc "abracadabra"
+•dsc "abracadabra"
 "rrdcbbaaaaa"
 ```
 
@@ -1039,7 +1039,7 @@ l|1
 Turn a table into a keyed table:
 
 ```kc
- `a`c key ({a:1;b:2;c:3};{a:4;b:5;c:6})
+•`a`c key ({a:1;b:2;c:3};{a:4;b:5;c:6})
 a c|b
 - -|-
 1 3|2
@@ -1051,9 +1051,9 @@ a c|b
 ### Absolute value `abs` **abs**
 
 ```kc
- abs 1.23
+•abs 1.23
 1.23
- abs -1.23
+•abs -1.23
 1.23
 ```
 
@@ -1062,7 +1062,7 @@ a c|b
 Generates permutation indices.
 
 ```kc
- prm 3
+•prm 3
 ?0 1 2
 ?1 0 2
 ?1 2 0
@@ -1074,7 +1074,7 @@ Generates permutation indices.
 ### Combinations **cmb**
 
 ```kc
- 2 cmb 3
+•2 cmb 3
 0 1
 0 2
 1 2
@@ -1085,20 +1085,20 @@ Generates permutation indices.
 Monadic: natural logarithm, ie the power you'd need to raise *e* by to get `x`.
 
 ```kc
- log 2
+•log 2
 0.6931472
- log (exp 1)
+•log (exp 1)
 1f
- (exp 1) exp (log 2)
+•(exp 1) exp (log 2)
 2f
 ```
 
 Dyadic: logarithm, ie the number you'd need to raise the left number to to get the right number.
 
 ```kc
- 2 log 2
+•2 log 2
 1f
- 2 log 4
+•2 log 4
 2f
 ```
 
@@ -1107,20 +1107,20 @@ Dyadic: logarithm, ie the number you'd need to raise the left number to to get t
 Monadic: *e* to the power of `x`.
 
 ```kc
- exp 1
+•exp 1
 2.718282
- exp 2
+•exp 2
 7.389056
- (exp 1) exp 2
+•(exp 1) exp 2
 7.389056
 ```
 
 Dyadic: left to the power of right.
 
 ```kc
- 2 exp 4
+•2 exp 4
 16f
- 2 exp -1
+•2 exp -1
 0.5
 ```
 
@@ -1129,16 +1129,16 @@ Dyadic: left to the power of right.
 Uniform distribution `rand i` or `i rand i`:
 
 ```kc
- rand 3
+•rand 3
 0.5 0.9078156 0.269656
- 3 rand 10
+•3 rand 10
 5 5 1
 ```
 
 Normal distribution `rand -i`:
 
 ```kc
- `m @ rand -5
+•`m @ rand -5
 1.157194e-13
 -0.5821508
 1.846709
@@ -1151,25 +1151,25 @@ Normal distribution `rand -i`:
 Round down to the nearest `i`.
 
 ```kc
- 5'9
+•5'9
 5
- 5'10
+•5'10
 10
 ```
 
 ### Integer division `i/` **div**
 
 ```kc
- 5/9
+•5/9
 1
- 5/10
+•5/10
 2
 ```
 
 ### Mod `i\` **mod**
 
 ```kc
- 2\!10
+•2\!10
 0 1 0 1 0 1 0 1 0 1
 ```
 
@@ -1182,11 +1182,11 @@ The value in the middle if the data was sorted.
 If the count of the data is even, return the value on the right of the middle.
 
 ```kc
- med !3
+•med !3
 1
- med !4
+•med !4
 2
- med 2 3 1
+•med 2 3 1
 2
 ```
 
@@ -1199,21 +1199,21 @@ A table is a list of dicts where each dict has the same keys in the same order.
 A table can also be considered as a flipped dict of lists, where each list is of equal length.
 
 ```kc
- t: ({a:1;b:2};{a:3;b:4})
- u: +`a`b!(1 3;2 4)
- t~u
+•t: ({a:1;b:2};{a:3;b:4})
+•u: +`a`b!(1 3;2 4)
+•t~u
 1
 ```
 
 You can access rows or columns of the table by indexing using the row number or column key:
 
 ```kc
- t: ({a:1;b:2};{a:3;b:4})
- t[1]~{a:3;b:4}
+•t: ({a:1;b:2};{a:3;b:4})
+•t[1]~{a:3;b:4}
 1
- t[`b]~2 4
+•t[`b]~2 4
 1
- t[1;`a]~3
+•t[1;`a]~3
 1
 ```
 
@@ -1222,17 +1222,17 @@ Key tables are dictionaries where the rows of one table map to the rows of anoth
 You can also use `key` to set the key columns after creation.
 
 ```kc
- k: ({a:1;c:3}; {a:4;c:6})
- v: ({b:2};{b:5})
- kt: k!v
- kt~(+{a:1 4;c:3 6})!+{b:2 5}
+•k: ({a:1;c:3}; {a:4;c:6})
+•v: ({b:2};{b:5})
+•kt: k!v
+•kt~(+{a:1 4;c:3 6})!+{b:2 5}
 1
- @kt
+•@kt
 `a
 
- t: ({a:1;b:2;c:3};{a:4;b:5;c:6})
- tk: `a`c key t
- tk~kt
+•t: ({a:1;b:2;c:3};{a:4;b:5;c:6})
+•tk: `a`c key t
+•tk~kt
 1
 ```
 
@@ -1245,14 +1245,14 @@ kt[{a:4;c:6}]  / {b:5}
 ### KSQL {ksql}
 
 ```kc
- t: ({a:1;b:2};{a:3;b:4})
- update b:a*2 from t
+•t: ({a:1;b:2};{a:3;b:4})
+•update b:a*2 from t
 a b
 - -
 1 2
 3 6
 
- t / t not updated in-place
+•t / t not updated in-place
 a b
 - -
 1 2
@@ -1262,20 +1262,20 @@ a b
 Use `by` to group rows or aggregations:
 
 ```kc
- :: t: ({a:1;b:2;c:3};{a:2;b:3;c:4};{a:1;b:4;c:5})
+•:: t: ({a:1;b:2;c:3};{a:2;b:3;c:4};{a:1;b:4;c:5})
 a b c
 - - -
 1 2 3
 2 3 4
 1 4 5
 
- select by a from t
+•select by a from t
 a|
 -|--------------
 1|+{b:2 4;c:3 5}
 2|+{b:,3;c:,4}
 
- select sum b by a from t
+•select sum b by a from t
 a|b
 -|-
 1|6
@@ -1287,7 +1287,7 @@ a|b
 Access any shell command by putting a `\` in front of it:
 
 ```kc-no-tests
- \seq 3
+•\seq 3
 1
 2
 3
@@ -1296,7 +1296,7 @@ Access any shell command by putting a `\` in front of it:
 ### List files `\lf` **\lf**
 
 ```kc-no-tests
- \lf
+•\lf
 afile.txt
 yet another file
 ```
@@ -1304,15 +1304,15 @@ yet another file
 ### List character counts `\lc` **\lc**
 
 ```kc-no-tests
- \lc
+•\lc
 afile.txt       |29
 yet another file|50
 ```
 
 You can't assign the result of `\lc` directly (ie `a: \lc` doesn't work). But you *can* capture its output and see that it is in fact a dictionary:
 
-```kc
- {(x;@x)} @ . "\\lc"
+```kc-no-tests
+•{(x;@x)} @ . "\\lc"
 (,"k";"test.csv";"test.k";"test.txt";"testfile")!211392 12 4 12 24j
 `a
 ```
@@ -1320,7 +1320,7 @@ You can't assign the result of `\lc` directly (ie `a: \lc` doesn't work). But yo
 ### List line counts `\ll` **\ll**
 
 ```kc-no-tests
- \ll
+•\ll
 afile.txt       |1
 yet another file|3
 ```
@@ -1347,7 +1347,7 @@ Given the following in `test.csv`:
 We can read it in as lists of type `inf` respectively and separator `,`:
 
 ```kc-nyi
- ("inf";",")0:"test.csv"
+•("inf";",")0:"test.csv"
 1 3
 `ABC`DEF
 1.23 4567.89
@@ -1358,19 +1358,19 @@ The filename can be given as `` `test.csv `` instead of `"test.csv"` (one char s
 We can also write lists of strings to a file (verify output using a text editor):
 
 ```kc
- "test.txt" 0: ("hello";"world")
+•"test.txt" 0: ("hello";"world")
 ```
 
 And that includes saving tables to CSV, if we first convert the table to a list of strings:
 
 ```kc
- "test.csv" 0: `csv @ +{a:1 2; b:3 4}
+•"test.csv" 0: `csv @ +{a:1 2; b:3 4}
 ```
 
 You can also use `0:` to deserialise in-memory lists of strings with a common separator. [Arthur's example](https://groups.google.com/d/msg/shaktidb/vE4ffjndxik/rYF6K78oBQAJ):
 
 ```kc
-  ("ii";"|")0:("2|3";"3|4";"4|5")
+• ("ii";"|")0:("2|3";"3|4";"4|5")
 2 3 4
 3 4 5
 ```
@@ -1380,8 +1380,8 @@ Keep in mind it's reading the data into columns, not rows. The first row of the 
 ### Read/write bytes `1:` **read/write byte**
 
 ```kc
- "testfile" 1: 0x0123456789abcdef
- 1: "testfile"
+•"testfile" 1: 0x0123456789abcdef
+•1: "testfile"
 0x0123456789abcdef
 ```
 
@@ -1396,9 +1396,9 @@ $ hexdump -C testfile
 And to break down what's happening in the 'prompt' example from the official tutorial, ie:
 
 ```kc-nyi
- name: 1: ("" 1: "What is your name? ")
+•name: 1: ("" 1: "What is your name? ")
 What is your name? Me
- name
+•name
 "Me"
 ```
 
@@ -1411,15 +1411,15 @@ On the last point: if just writing to stdout, make sure to put a semicolon at th
 ### Read/write data `2:` **read/write data**
 
 ```kc
- "testfile" 2: (1 2 3 4)
- 2: "testfile"
+•"testfile" 2: (1 2 3 4)
+•2: "testfile"
 1 2 3 4
 ```
 
 You can see what `testfile` looks like in bytes with `1:`:
 
 ```kc
- 1: "testfile"
+•1: "testfile"
 0x000000070400000001000000020000000300000004000000
 ```
 
@@ -1431,9 +1431,9 @@ Then in another k process, set up a connection to the first k process, send it c
 
 ```kc-nyi
 2019-04-18 15:45:55 2core 1gb avx2 © shakti l2.0 test
- conn: 3: 1234
- conn 4: "life: 42"
- conn 4: "life"
+•conn: 3: 1234
+•conn 4: "life: 42"
+•conn 4: "life"
 42
 ```
 
@@ -1444,25 +1444,25 @@ Then in another k process, set up a connection to the first k process, send it c
 Get all rows of `t` where `c` is true.
 
 ```kc
- t: +`a`b!(1 2 3;4 5 6)
- #[:a>1;t]
+•t: +`a`b!(1 2 3;4 5 6)
+•#[:a>1;t]
 a b
 - -
 2 5
 3 6
 
- / But since there are just two arguments,
- / we can use # as an infix verb:
+•/ But since there are just two arguments,
+•/ we can use # as an infix verb:
 
- (:a>1)#t
+•(:a>1)#t
 a b
 - -
 2 5
 3 6
 
- (:(a>1)&(b<6)) # t
+•(:(a>1)&(b<6)) # t
 +{a:,2;b:,5}
- (:(a>1)&(b<5)) # t
+•(:(a>1)&(b<5)) # t
 +{a:!0;b:!0}
 ```
 
@@ -1471,8 +1471,8 @@ a b
 Via [Arthur](https://groups.google.com/d/msg/shaktidb/77qVfIc5ecU/eSRy8izkAQAJ):
 
 ```kc
- t:+`b!2 3
- _[t;();`b! :b+1]
+•t:+`b!2 3
+•_[t;();`b! :b+1]
 b
 -
 3
@@ -1486,12 +1486,12 @@ Insert `y` into `x` at index `i`.
 If an element was at that index before, move it right.
 
 ```kc
- ?[!3;2;`abc]
+•?[!3;2;`abc]
 0
 1
 `abc
 2
- ?[!3;2;"abc"]
+•?[!3;2;"abc"]
 0
 1
 "a"
@@ -1506,23 +1506,23 @@ If an element was at that index before, move it right.
 Apply function f to the elements at each `i` of `x` (with argument `y`, if f is dyadic).
 
 ```kc
- @[!3; 0 2; 1+]
+•@[!3; 0 2; 1+]
 1 1 3
- @[!3; 0 2; +; 2 7]
+•@[!3; 0 2; +; 2 7]
 2 1 9
 ```
 
 To do the update in-place, use the data's name symbol instead of the name directly (`` `name `` vs `name`).
 
 ```kc
- v:!3
- @[v;1;7]
+•v:!3
+•@[v;1;7]
 0 7 2
- v / original assignment unchanged
+•v / original assignment unchanged
 !3
- @[`v;1;7]
+•@[`v;1;7]
 `v
- v
+•v
 0 7 2
 ```
 
@@ -1535,49 +1535,49 @@ Think of dmend as 'deep' or 'drill' amend - it's similar to amend in the same wa
 Apply `f` to slices 0 and 2 on the first 'depth' level down:
 
 ```kc
- .[!3; ,0 2; 7]
+•.[!3; ,0 2; 7]
 7 1 7
 ```
 
 Apply to rows or specific elements of a matrix:
 
 ```kc
- :: m: 3 3 # !9
+•:: m: 3 3 # !9
 0 1 2
 3 4 5
 6 7 8
 
-  / Row 1:
+• / Row 1:
 
- .[m; ,1; 1+]
+•.[m; ,1; 1+]
 0 1 2
 4 5 6
 6 7 8
 
-  / Row 1, element 2:
+• / Row 1, element 2:
 
- .[m; 1 2; 1+]
+•.[m; 1 2; 1+]
 0 1 2
 3 4 6
 6 7 8
 
-  / Row 0, elements 1 and 2:
+• / Row 0, elements 1 and 2:
 
- .[m; (0; 1 2); 1+]
+•.[m; (0; 1 2); 1+]
 0 2 3
 3 4 5
 6 7 8
 
-  / In each of rows 1 and 2, elements 1 and 2:
+• / In each of rows 1 and 2, elements 1 and 2:
 
- .[m; (1 2; 1 2); 1+]
+•.[m; (1 2; 1 2); 1+]
 0 1 2
 3 5 6
 6 8 9
 
-  / In all rows, elements 1 and 2:
+• / In all rows, elements 1 and 2:
 
- .[m; (; 1 2); 1+]
+•.[m; (; 1 2); 1+]
 0 2 3
 3 5 6
 6 8 9
@@ -1588,19 +1588,19 @@ Apply to rows or specific elements of a matrix:
 If the true expression is returned, the false expression never executes (and vice versa):
 
 ```kc
- a:1;b:1
- $[1;a+:1;b+:1]; (a;b)
+•a:1;b:1
+•$[1;a+:1;b+:1]; (a;b)
 2 1
- $[0;a+:1;b+:1]; (a;b)
+•$[0;a+:1;b+:1]; (a;b)
 2 2
 ```
 
 [Unlike other triadics](#Verb), triadic `$` is not the same as dyadic `$`:
 
 ```kc-nyi
- ($) . (`n; "a")
+•($) . (`n; "a")
 `a
- ($) . (1; "a"; "b")
+•($) . (1; "a"; "b")
 ($) . (1; "a"; "b")
     ^
 nyi error
@@ -1609,14 +1609,14 @@ nyi error
 Simulate a vector cond:
 
 ```kc
- {$[x;y;z]}'[1 0 1; "abc"; "def"]
+•{$[x;y;z]}'[1 0 1; "abc"; "def"]
 "aec"
 ```
 
 Or (modified version of [Arthur's](https://groups.google.com/d/msg/shaktidb/6JLpGPE-bfM/mlAzxcrgAQAJ) - no `$` needed!):
 
 ```kc
- {(+(z;y))@'x}[1 0 1;"abc";"def"]
+•{(+(z;y))@'x}[1 0 1;"abc";"def"]
 "aec"
 ```
 
@@ -1625,7 +1625,7 @@ Or (modified version of [Arthur's](https://groups.google.com/d/msg/shaktidb/6JLp
 A datetime looks like this:
 
 ```kc
- 2019-05-04T13:13:12.313 /.z.T
+•2019-05-04T13:13:12.313 /.z.T
 2019-05-04T13:13:12.313
 ```
 
@@ -1634,22 +1634,22 @@ Datetime literals are [designed](https://groups.google.com/forum/#!topic/shaktid
 Dates start from `2024-01-01`:
 
 ```kc
- `D $ 0
+•`D $ 0
 2024-01-01
 ```
 
 '0' is Monday. Get the day of the week with `7 mod`.
 
 ```kc
- d:`Mon`Tue`Wed`Thu`Fri`Sat`Sun
- d @ 7\2024-01-01
+•d:`Mon`Tue`Wed`Thu`Fri`Sat`Sun
+•d @ 7\2024-01-01
 `Mon
 ```
 
 You can also use duration literals (requires short-form code), and do date arithmetic:
 
 ```kc
- 2024-01-01 + 2m
+•2024-01-01 + 2m
 2024-03-01
 ```
 
@@ -1670,15 +1670,15 @@ Datetime and duration names:
 Convert to/from/between datetimes and durations using `$`. It takes a name or string (short version only):
 
 ```kc
- `year $ .z.t / .z.t doesn't contain year
+•`year $ .z.t / .z.t doesn't contain year
 0y
- `Y    $ .z.D
+•`Y    $ .z.D
 2019Y
- `Y    $ .z.D+.z.t
+•`Y    $ .z.D+.z.t
 2019Y
- `y    $ 2019
+•`y    $ 2019
 2019y
- "y"   $ 2019
+•"y"   $ 2019
 2019y
 ```
 
@@ -1707,7 +1707,7 @@ Convert to with `` `x@data `` or `` `x data `` or `` `x[data] ``, where `` `x ``
 #### Parse `` `p `` **`p**
 
 ```kc
- `p @ "5*!3"
+•`p @ "5*!3"
 *
 5
 (!:;3)
@@ -1716,7 +1716,7 @@ Convert to with `` `x@data `` or `` `x data `` or `` `x[data] ``, where `` `x ``
 A parse tree can be executed with `.`:
 
 ```kc
- . `p @ "5*!3"
+•. `p @ "5*!3"
 0 5 10
 ```
 
@@ -1727,10 +1727,10 @@ The parser enlists names (and lists of names) to indicate they should not be eva
 Examples:
 
 ```kc
- e: "1;.1;`n;\"c\";1 2;1. 2.;`n`o;\"chars\";"
- e,:":;v;1+2;+/1 2;{x+2*y};a:1;:a+2*b; /comment;\\h"
+•e: "1;.1;`n;\"c\";1 2;1. 2.;`n`o;\"chars\";"
+•e,:":;v;1+2;+/1 2;{x+2*y};a:1;:a+2*b; /comment;\\h"
 
- {`string`parsetree`type!(x;`p x;@`p x)}' ";"\: e
+•{`string`parsetree`type!(x;`p x;@`p x)}' ";"\: e
 string    parsetree   type
 --------- ----------- ----
 1         1           `i
@@ -1773,34 +1773,34 @@ Convert from with `` `x?serialdata ``.
 #### Binary `` ` `` **/\`(?=\`j)/**
 
 ```kc
- ` "a"
+•` "a"
 0x0161
- ` `a
+•` `a
 0x0f6100
- ` 10
+•` 10
 0x070a000000
 ```
 
 #### JSON `` `j `` **/\`j(?=\`k)/**
 
 ```kc
- `j ({a:1;b:2};{a:"x";b:`z})
+•`j ({a:1;b:2};{a:"x";b:`z})
 "[{\"a\":1,\"b\":2},{\"a\":\"x\",\"b\":\"z\"}]"
 ```
 
 #### KSON `` `k `` **/\`k(?=\`csv)/**
 
 ```kc
- `k 2*!3
+•`k 2*!3
 "0 2 4"
- `k ({a:1;b:2};{a:"x";b:`z})
+•`k ({a:1;b:2};{a:"x";b:`z})
 "+{a:(1;\"x\");b:(2;`z)}"
 ```
 
 #### `` `csv `` **`csv**
 
 ```kc
- `csv ? ("a,b";"1,2";"3,4")
+•`csv ? ("a,b";"1,2";"3,4")
 a b
 - -
 1 2
@@ -1820,10 +1820,10 @@ isatom:{x~*x}
 Use the identity function, `::`:
 
 ```kc
- a:1+2  / no output
- :: a:1+2
+•a:1+2  / no output
+•:: a:1+2
 3
- @(::)
+•@(::)
 `1
 ```
 
@@ -1832,31 +1832,31 @@ Use the identity function, `::`:
 For characters, it's just `""`:
 
 ```kc
- #""
+•#""
 0
- @""
+•@""
 `c
 ```
 
 For integers and floats, use `!`:
 
 ```kc
- @!0
+•@!0
 `i
- #!0
+•#!0
 0
- @!.0
+•@!.0
 `f
- #!.0
+•#!.0
 0
 ```
 
 For other types, take 0 elements of an atom of that type (may be a better way?). For example, for names:
 
 ```kc
- @0#`
+•@0#`
 `n
- #0#`
+•#0#`
 0
 ```
 
@@ -1917,16 +1917,16 @@ So you can also use `.z.x` to identify whether a script was run in its own right
 In addition to `` `b64 ``, there's `` `b58 ``, [used](https://groups.google.com/d/msg/shaktidb/0yq21rHOacU/1wdeAGHFAAAJ) in the `` `bad `` implementation:
 
 ```kc
- `b58 "helloworld"
+•`b58 "helloworld"
 "6sBRWyteSSzHrs"
 ```
 
 Are all characters in the string in the [ASCII set](https://en.wikipedia.org/wiki/ASCII#Character_set)?
 
 ```kc
- `ascii @ "123"
+•`ascii @ "123"
 1
- `ascii @ "∞"
+•`ascii @ "∞"
 0
 ```
 
