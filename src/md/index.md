@@ -75,7 +75,7 @@ You can assign a value to a list index, or a dictionary key:
 •a
 0 4 2
 
-•d:{a:1;b:2}
+•d:`a`b!1 2
 •d[`a`c]:3 4
 •d
 a:3
@@ -263,7 +263,7 @@ Unlike [equal `=`](#equal), match compares types:
 Given a dict, get its keys:
 
 ```kc
-•! {a:1;b:2}
+•! `a`b!1 2
 `a`b
 ```
 
@@ -293,7 +293,7 @@ If you want to make a list nested in the output, enlist it first:
 Catenate merges dicts (where keys collide, right overrides left):
 
 ```kc
-•{a:1;b:2},{a:3;c:4}
+•(`a`b!1 2),(`a`c!3 4)
 a:3
 b:2
 c:4
@@ -302,8 +302,8 @@ c:4
 Tables are lists of dicts, so:
 
 ```kc
-•t:+{a:,1}
-•u:+{a:,2}
+•t:+`a!,1
+•u:+`a!,2
 •t,u
 a
 -
@@ -313,7 +313,7 @@ a
 
 ### Key `!` **key**
 
-Generate a dictionary from lists of keys and values:
+Generate /a dictionary from lists of keys and values:
 
 ```kc
 •`k @ `a`b!1 2
@@ -413,7 +413,7 @@ length error
 
 You can also draw or deal from a list:
 
-```kc
+```kc-no-tests
 •3 ? "abcd"
 "bdb"
 •-3 ? "abcd"
@@ -458,7 +458,7 @@ With a list, applies each element of that list to the function ('shallow' applic
 
 Apply can also be used to 'drill' into a data structure in a similar way to bracket indexing. For example:
 
-```kc
+```kc-no-tests
 •:: m: 3 3 # !9
 0 1 2
 3 4 5
@@ -496,19 +496,14 @@ Apply can also be used to 'drill' into a data structure in a similar way to brac
 •d
 2
 
-•. {a:1;b:2}
+•.`a`b!1 2
 1 2
 
-•. :x+y
-(+;`x;`y)
-":x+y"
+•. {:x+y}
+{:x+y}
 
 •. {x+y+a:1}
-(+;`x;(+;`y;(::;`a;1)))
-"{x+y+a:1}"
-`
-`x`y
-,`a
+{x+y+a:1}
 ```
 
 ### Cast `$` (with a non-string) **cast**
@@ -564,7 +559,7 @@ Pads with spaces on right-hand side, or truncates from right:
 •$`name
 "name"
 
-•${a:1 2;b:3}
+•$`a`b!(1 2;3)
 a:(,"1";,"2")
 b:,"3"
 
@@ -897,7 +892,7 @@ But it breaks down when you include nested lists such as strings:
 Dicts are ordered:
 
 ```kc
-•|{a:1;b:2}
+•|`a`b!1 2
 b:2
 a:1
 ```
@@ -905,9 +900,9 @@ a:1
 Recover the keys and values using `!:` and `.:`:
 
 ```kc
-•!{a:1;b:2}
+•!`a`b!1 2
 `a`b
-•.{a:1;b:2}
+•.`a`b!1 2
 1 2
 ```
 
@@ -919,15 +914,6 @@ Functions can call themselves by using their own name in their definition. Naive
 •factorial: {$[x<2;1;x*factorial[x-1]]}
 •factorial 4
 24
-```
-
-A function with implicit `xyz` args can be distinguished from a dict by ensuring the body does not start with an assignment (eg start with `;` or, in scripts, a newline):
-
-```kc
-•@{a:1;a*x}
-value error: x
-•@{;a:1;a*x}
-`1
 ```
 
 ### Expressions **expr**
@@ -1039,7 +1025,7 @@ l|1
 Turn a table into a keyed table:
 
 ```kc
-•`a`c key ({a:1;b:2;c:3};{a:4;b:5;c:6})
+•`a`c key (`a`b`c!1 2 3;`a`b`c!4 5 6)
 a c|b
 - -|-
 1 3|2
@@ -1128,7 +1114,7 @@ Dyadic: left to the power of right.
 
 Uniform distribution `rand i` or `i rand i`:
 
-```kc
+```kc-no-tests
 •rand 3
 0.5 0.9078156 0.269656
 •3 rand 10
@@ -1137,7 +1123,7 @@ Uniform distribution `rand i` or `i rand i`:
 
 Normal distribution `rand -i`:
 
-```kc
+```kc-no-tests
 •`m @ rand -5
 1.157194e-13
 -0.5821508
@@ -1199,8 +1185,8 @@ A table is a list of dicts where each dict has the same keys in the same order.
 A table can also be considered as a flipped dict of lists, where each list is of equal length.
 
 ```kc
-•t: ({a:1;b:2};{a:3;b:4})
-•u: +`a`b!(1 3;2 4)
+•t:(`a`b!1 2;`a`b!3 4)
+•u:+`a`b!(1 3;2 4)
 •t~u
 1
 ```
@@ -1208,8 +1194,8 @@ A table can also be considered as a flipped dict of lists, where each list is of
 You can access rows or columns of the table by indexing using the row number or column key:
 
 ```kc
-•t: ({a:1;b:2};{a:3;b:4})
-•t[1]~{a:3;b:4}
+•t:(`a`b!1 2;`a`b!3 4)
+•t[1]~`a`b!3 4
 1
 •t[`b]~2 4
 1
@@ -1222,16 +1208,16 @@ Key tables are dictionaries where the rows of one table map to the rows of anoth
 You can also use `key` to set the key columns after creation.
 
 ```kc
-•k: ({a:1;c:3}; {a:4;c:6})
-•v: ({b:2};{b:5})
+•k:(`a`c!1 3;`a`c!4 6)
+•v:(`b!2;`b!5)
 •kt: k!v
-•kt~(+{a:1 4;c:3 6})!+{b:2 5}
+•kt~(+`a`c!(1 4;3 6))!+`b!2 5
 1
 •@kt
 `a
 
-•t: ({a:1;b:2;c:3};{a:4;b:5;c:6})
-•tk: `a`c key t
+•t:(`a`b`c!1 2 3;`a`b`c!4 5 6)
+•tk:`a`c key t
 •tk~kt
 1
 ```
@@ -1239,13 +1225,13 @@ You can also use `key` to set the key columns after creation.
 Access rows of the value table by indexing into the keytable:
 
 ```kc
-kt[{a:4;c:6}]  / {b:5}
+kt[`a`c!4 6]  / {b:5}
 ```
 
 ### KSQL {ksql}
 
-```kc
-•t: ({a:1;b:2};{a:3;b:4})
+```kc-no-tests
+•t:+`a`b!(1 3;2 4)
 •update b:a*2 from t
 a b
 - -
@@ -1262,7 +1248,7 @@ a b
 Use `by` to group rows or aggregations:
 
 ```kc
-•:: t: ({a:1;b:2;c:3};{a:2;b:3;c:4};{a:1;b:4;c:5})
+•t:+`a`b`c!(1 2 1;2 3 4;3 4 5);t
 a b c
 - - -
 1 2 3
@@ -1364,7 +1350,7 @@ We can also write lists of strings to a file (verify output using a text editor)
 And that includes saving tables to CSV, if we first convert the table to a list of strings:
 
 ```kc
-•"test.csv" 0: `csv @ +{a:1 2; b:3 4}
+•"test.csv" 0: `csv @ (+`a`b!(1 2;3 4))
 ```
 
 You can also use `0:` to deserialise in-memory lists of strings with a common separator. [Arthur's example](https://groups.google.com/d/msg/shaktidb/vE4ffjndxik/rYF6K78oBQAJ):
@@ -1423,7 +1409,7 @@ You can see what `testfile` looks like in bytes with `1:`:
 0x000000070400000001000000020000000300000004000000
 ```
 
-### Inter-process communication `3:` and `4:` **conn/set**
+### Inter-process communication `3:` and `4:` **set/conn**
 
 Start a k process running with port 1234 (that's `k -p 1234`).
 
@@ -1451,8 +1437,8 @@ a b
 2 5
 3 6
 
-•/ But since there are just two arguments,
-•/ we can use # as an infix verb:
+• / But since there are just two arguments,
+• / we can use # as an infix verb:
 
 •(:a>1)#t
 a b
@@ -1470,7 +1456,7 @@ a b
 
 Via [Arthur](https://groups.google.com/d/msg/shaktidb/77qVfIc5ecU/eSRy8izkAQAJ):
 
-```kc
+```kc-no-tests
 •t:+`b!2 3
 •_[t;();`b! :b+1]
 b
@@ -1784,7 +1770,7 @@ Convert from with `` `x?serialdata ``.
 #### JSON `` `j `` **/\`j(?=\`k)/**
 
 ```kc
-•`j ({a:1;b:2};{a:"x";b:`z})
+•`j(+`a`b!(1,"x";2,`z))
 "[{\"a\":1,\"b\":2},{\"a\":\"x\",\"b\":\"z\"}]"
 ```
 
@@ -1793,7 +1779,7 @@ Convert from with `` `x?serialdata ``.
 ```kc
 •`k 2*!3
 "0 2 4"
-•`k ({a:1;b:2};{a:"x";b:`z})
+•`k(+`a`b!(1,"x";2,`z))
 "+{a:(1;\"x\");b:(2;`z)}"
 ```
 
@@ -1867,13 +1853,13 @@ Start k with argument `-v`:
 ```
 (base) chris@chris-VirtualBox:~$ k
 2019-06-08 13:39:07 2core 4gb avx2 © shakti l2.0 test
- {a:1;b:2}
-a|1
-b|2
+ `a`b!1 2
+a:1
+b:2
 
 (base) chris@chris-VirtualBox:~$ k -v
 2019-06-08 13:39:07 2core 4gb avx2 © shakti l2.0 test
- {a:1;b:2}
+ `a`b!1 2
 {a:1;b:2}
 ```
 
