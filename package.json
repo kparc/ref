@@ -30,7 +30,7 @@
         "grunt-gh-pages": "^3.1.0",
         "lodash": "^4.17.19",
         "moment": "^2.24.0",
-        "prismjs": "^1.23.0",
+        "prismjs": "^1.24.0",
         "pug": "^2.0.3",
         "rehype-stringify": "^6.0.0",
         "remark-parse": "^6.0.3",
